@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAS PORTAL</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">BAS PORTAL</div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
+                    <i class="fa-solid fa-network-wired"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html" class="nav-link" data-target="havalimani">
+                    <i class="fa-solid fa-plane-departure"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link" data-target="eshot">
+                    <i class="fa-solid fa-bus"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link active" data-target="tramvay">
+                    <i class="fa-solid fa-train-tram"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link" data-target="izban">
+                    <i class="fa-solid fa-train"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link" data-target="vapur">
+                    <i class="fa-solid fa-ship"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link" data-target="metro">
+                    <i class="fa-solid fa-subway"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link" data-target="kgm">
+                    <i class="fa-solid fa-road"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+</ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div id="tramvay" class="tab-pane active">
+            <header>
+                <h1>İzmir Tramvayı Analizi</h1>
+                <p class="subtitle">Karşıyaka, Konak ve Çiğli Hatları Toplam Yolcu Trafiği (2020 - 2024)</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">2024 Toplam Biniş</div>
+                    <div class="stat-value">33,5M</div>
+                    <div class="stat-change change-up">Rekor Yıl</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">En Yoğun Hat (2024)</div>
+                    <div class="stat-value">Konak</div>
+                    <div class="stat-change change-up">22,46M Yolcu</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">2022 Sıçraması</div>
+                    <div class="stat-value">33,1M</div>
+                    <div class="stat-change change-up">▲ 45% (2021'e göre)</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card full-width">
+                    <h2>Yıllara Göre Toplam Yolcu Sayısı (Milyon)</h2>
+                    <div class="chart-container" style="height: 420px;">
+                        <canvas id="tramvayYillikChart"></canvas>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <h2>2024 Hat Bazında Yolcu Dağılımı</h2>
+                    <div class="chart-container" style="height: 380px;">
+                        <canvas id="tramvayHatChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="card full-width" style="text-align: center;">
+                    <h2>İzmir Raylı Sistemler Haritası</h2>
+                    <img src="harita.jpg" alt="İzmir Raylı Sistemler Haritası" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/tramvay.js"></script>
+</body>
+</html>

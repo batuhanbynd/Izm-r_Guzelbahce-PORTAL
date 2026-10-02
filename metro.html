@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAS PORTAL</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">BAS PORTAL</div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
+                    <i class="fa-solid fa-network-wired"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html" class="nav-link" data-target="havalimani">
+                    <i class="fa-solid fa-plane-departure"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link" data-target="eshot">
+                    <i class="fa-solid fa-bus"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link" data-target="tramvay">
+                    <i class="fa-solid fa-train-tram"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link" data-target="izban">
+                    <i class="fa-solid fa-train"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link" data-target="vapur">
+                    <i class="fa-solid fa-ship"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link active" data-target="metro">
+                    <i class="fa-solid fa-subway"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link" data-target="kgm">
+                    <i class="fa-solid fa-road"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+</ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div id="metro" class="tab-pane active">
+            <header>
+                <h1>İzmir Metro A.Ş. Toplam Biniş Analizi</h1>
+                <p class="subtitle">Yıllık Toplam Biniş Sayıları (2020 - 2024)</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">2024 Toplam Biniş</div>
+                    <div class="stat-value">127,4M</div>
+                    <div class="stat-change change-up">▲ 1.5% (2023'e göre)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">5 Yıllık Toplam</div>
+                    <div class="stat-value">534,3M</div>
+                    <div class="stat-change change-up">▲ 71% (2020-2024)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">En Yüksek Büyüme</div>
+                    <div class="stat-value">%54,2</div>
+                    <div class="stat-change change-up">2021 → 2022</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                <div class="card full-width">
+                    <h2>Yıllık Toplam Biniş Sayıları</h2>
+                    <div class="chart-container" style="height: 450px;">
+                        <canvas id="metroChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="card full-width" style="text-align: center;">
+                    <h2>İzmir Raylı Sistemler Haritası</h2>
+                    <img src="harita.jpg" alt="İzmir Raylı Sistemler Haritası" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/metro.js"></script>
+</body>
+</html>

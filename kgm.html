@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAS PORTAL</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">BAS PORTAL</div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
+                    <i class="fa-solid fa-network-wired"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html" class="nav-link" data-target="havalimani">
+                    <i class="fa-solid fa-plane-departure"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link" data-target="eshot">
+                    <i class="fa-solid fa-bus"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link" data-target="tramvay">
+                    <i class="fa-solid fa-train-tram"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link" data-target="izban">
+                    <i class="fa-solid fa-train"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link" data-target="vapur">
+                    <i class="fa-solid fa-ship"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link" data-target="metro">
+                    <i class="fa-solid fa-subway"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link active" data-target="kgm">
+                    <i class="fa-solid fa-road"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+</ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div id="kgm" class="tab-pane active">
+            <header>
+                <h1>KGM 2. Bölge Devlet Yolları</h1>
+                <p class="subtitle">2025 Yıllık Ortalama Günlük Trafik (YOGT) Hacim Haritası Özeti</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Toplam Günlük Trafik</div>
+                    <div class="stat-value">209.260</div>
+                    <div class="stat-change change-up">5 Güzergah Toplamı</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">En Yoğun Güzergah</div>
+                    <div class="stat-value">G.Bahçe-Menderes</div>
+                    <div class="stat-change change-up">76.779 Taşıt/Gün</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Ağır Taşıt Oranı</div>
+                    <div class="stat-value">%10,2</div>
+                    <div class="stat-change change-up">Ortalama</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card full-width">
+                    <h2>Güzergahlara Göre Günlük Trafik (Hafif ve Ağır Taşıt)</h2>
+                    <div class="chart-container" style="height: 400px;">
+                        <canvas id="kgmBarChart"></canvas>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <h2>Toplam Trafik Hacmi Dağılımı</h2>
+                    <div class="chart-container" style="height: 380px;">
+                        <canvas id="kgmPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Güzelbahçe Yolları Bilgi Kartları -->
+            <h2 style="margin-top: 2rem; font-size: 1.8rem; font-weight: 800;">Güzelbahçe Ulaşım Altyapısı</h2>
+            <p class="subtitle" style="margin-bottom: 1rem;">İlçeyi İzmir geneline bağlayan ve iç ulaşımı sağlayan temel karayolları analizleri</p>
+            
+            <div class="info-grid">
+                <!-- 1. Otoyol -->
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-highway"></i> 1. İzmir - Çeşme Otoyolu (O-32)</h3>
+                    <ul>
+                        <li><strong>Güzergah Tipi:</strong> Güzelbahçe Geçişi</li>
+                        <li><strong>Şerit Yapısı:</strong> 2x3 (3 gidiş, 3 geliş) ve acil emniyet şeritli otoyol standardı.</li>
+                        <li><strong>Şerit Başına Kapasite:</strong> İdeal koşullarda 2.000 - 2.400 otomobil eşdeğeri/saat.</li>
+                        <li><strong>Toplam Kapasite:</strong> Tek yönde saatte 6.000 - 7.200 araç. Günlük bazda 80.000 - 100.000 araçlık yüksek trafik hacmi için tasarlanmıştır.</li>
+                    </ul>
+                </div>
+
+                <!-- 2. Devlet Yolu -->
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-road"></i> 2. D.300 Devlet Yolu (Mithatpaşa Cd.)</h3>
+                    <ul>
+                        <li><strong>Güzergah Tipi:</strong> Eski Çeşme Yolu / Sahil Kesimi</li>
+                        <li><strong>Şerit Yapısı:</strong> İlçe merkezinde 2x1 veya bazı bölünmüş noktalarda 2x2 şeritli ana arter.</li>
+                        <li><strong>Durum & Tıkanıklık:</strong> Özellikle hafta sonları liman çevresi ve balık hali bölgesindeki yoğunluk sebebiyle teorik sınırına (şerit başına 1.200 - 1.500 araç/saat) ulaşıp tıkanma noktasına gelmektedir.</li>
+                    </ul>
+                </div>
+
+                <!-- 3. Alternatif Bulvar -->
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-route"></i> 3. Yeni 75. Yıl Cumhuriyet Bulvarı</h3>
+                    <ul>
+                        <li><strong>Güzergah Tipi:</strong> Alternatif Dağ Yolu</li>
+                        <li><strong>Şerit Yapısı:</strong> 24,5 metre genişliğinde, 2x2 (çift gidiş, çift geliş) bölünmüş yol.</li>
+                        <li><strong>Kapasite Katkısı:</strong> D.300 / Mithatpaşa Caddesi'nin kapasite yetersizliğini çözmek amacıyla inşa edilmiştir. Sahil yolundaki günlük trafik yükünü önemli ölçüde hafifleterek iç ulaşımdaki kapasiteyi yaklaşık iki katına çıkarmıştır.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Yeni Kapasite ve Yoğunluk Grafikleri -->
+            <div class="dashboard-grid">
+                <div class="card full-width">
+                    <h2>Günlük Araç Hacmi ve Güvenli Kapasite Karşılaştırması (Araç/Gün)</h2>
+                    <div class="chart-container" style="height: 450px;">
+                        <canvas id="kgmCapacityChart"></canvas>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <h2>Yoğunluk / Kapasite Doluluk Oranı (V/C %)</h2>
+                    <div class="chart-container" style="height: 450px;">
+                        <canvas id="kgmDensityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kaynakça Bölümü -->
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                    <i class="fa-solid fa-book-open" style="font-size: 1.5rem; color: var(--accent-1);"></i>
+                    <div>
+                        <h4 style="margin: 0; font-size: 1.1rem; color: var(--text-main);">Veri Kaynağı (Kaynakça)</h4>
+                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); margin-top: 0.3rem;">Karayolları Genel Müdürlüğü (KGM) 2025 Yılı 2. Bölge Trafik Hacim Haritası</p>
+                    </div>
+                </div>
+                <a href="https://www.kgm.gov.tr/SiteCollectionDocuments/KGMdocuments/Trafik/trafikhacimharitasi/2025HacimHaritalari/Bolge2.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s;">
+                    <i class="fa-solid fa-file-pdf"></i> Resmi Raporu Görüntüle
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/kgm.js"></script>
+</body>
+</html>

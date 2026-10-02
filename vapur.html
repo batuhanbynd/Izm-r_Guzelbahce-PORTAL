@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAS PORTAL</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">BAS PORTAL</div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
+                    <i class="fa-solid fa-network-wired"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html" class="nav-link" data-target="havalimani">
+                    <i class="fa-solid fa-plane-departure"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link" data-target="eshot">
+                    <i class="fa-solid fa-bus"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link" data-target="tramvay">
+                    <i class="fa-solid fa-train-tram"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link" data-target="izban">
+                    <i class="fa-solid fa-train"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link active" data-target="vapur">
+                    <i class="fa-solid fa-ship"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link" data-target="metro">
+                    <i class="fa-solid fa-subway"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link" data-target="kgm">
+                    <i class="fa-solid fa-road"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+</ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div id="vapur" class="tab-pane active">
+            <header>
+                <h1>İzdeniz Vapur Hatları Analizi</h1>
+                <p class="subtitle">17 Vapur Hattı — Günlük Toplam Yolcu Sayıları (2020 / 2025 / 2030 Projeksiyonu)</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">2020 Günlük Toplam</div>
+                    <div class="stat-value">107.314</div>
+                    <div class="stat-change change-up">17 Hat</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">2025 Günlük Toplam</div>
+                    <div class="stat-value">125.414</div>
+                    <div class="stat-change change-up">▲ 16,9%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">2030 Projeksiyon</div>
+                    <div class="stat-value">147.842</div>
+                    <div class="stat-change change-up">▲ 17,9%</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card full-width">
+                    <h2>En Yoğun 10 Hat — Günlük Yolcu Karşılaştırması (2020 / 2025 / 2030)</h2>
+                    <div class="chart-container" style="height: 480px;">
+                        <canvas id="vapurTop10Chart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>2025 Hat Dağılımı (En Yoğun 8 Hat)</h2>
+                    <div class="chart-container">
+                        <canvas id="vapurPieChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>2020 → 2030 En Çok Büyüyen 5 Hat (%)</h2>
+                    <div class="chart-container">
+                        <canvas id="vapurGrowthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/vapur.js"></script>
+</body>
+</html>

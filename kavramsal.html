@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAS PORTAL</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">BAS PORTAL</div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link active" data-target="kavramsal">
+                    <i class="fa-solid fa-network-wired"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html" class="nav-link" data-target="havalimani">
+                    <i class="fa-solid fa-plane-departure"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link" data-target="eshot">
+                    <i class="fa-solid fa-bus"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link" data-target="tramvay">
+                    <i class="fa-solid fa-train-tram"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link" data-target="izban">
+                    <i class="fa-solid fa-train"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link" data-target="vapur">
+                    <i class="fa-solid fa-ship"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link" data-target="metro">
+                    <i class="fa-solid fa-subway"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link" data-target="kgm">
+                    <i class="fa-solid fa-road"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+</ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- KAVRAMSAL DİYAGRAM TAB -->
+        <div id="kavramsal" class="tab-pane active">
+            <header>
+                <h1>İzmir Ulaşım Ağı — Diyagramlar</h1>
+                <p class="subtitle">Tüm ulaşım modlarının ilişkisel ağ yapısı, yolcu akış haritası ve hiyerarşik görünümü</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Toplam Ulaşım Modu</div>
+                    <div class="stat-value">7</div>
+                    <div class="stat-change change-up">Aktif Sistem</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Yıllık Toplam Yolcu</div>
+                    <div class="stat-value">~446M</div>
+                    <div class="stat-change change-up">İzmir Geneli</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Entegre Aktarma Noktası</div>
+                    <div class="stat-value">12+</div>
+                    <div class="stat-change change-up">Çoklu Mod</div>
+                </div>
+            </div>
+
+            <!-- Diagram Selector -->
+            <div class="diagram-selector">
+                <button class="diagram-btn active" data-diagram="flow">🌊 Yolcu Akış Diyagramı</button>
+                <button class="diagram-btn" data-diagram="network">🔗 Ağ Topolojisi</button>
+                <button class="diagram-btn" data-diagram="hierarchy">🌳 Hiyerarşik Yapı</button>
+                <button class="diagram-btn" data-diagram="matrix">📊 İlişki Matrisi</button>
+            </div>
+
+            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                <!-- Flow Diagram -->
+                <div id="diag-flow" class="card full-width diagram-panel active">
+                    <h2><i class="fa-solid fa-water" style="color: var(--accent-1);"></i> Yolcu Akış Diyagramı</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">Her ulaşım modunun yıllık yolcu kapasitesi oransal akış kalınlığı ile gösterilmektedir.</p>
+                    <div class="diagram-container" id="flowDiagramContainer"></div>
+                </div>
+
+                <!-- Network Topology -->
+                <div id="diag-network" class="card full-width diagram-panel">
+                    <h2><i class="fa-solid fa-circle-nodes" style="color: var(--accent-2);"></i> Ağ Topoloji Haritası</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">Ulaşım modları arasındaki fiziksel bağlantılar ve aktarma noktaları.</p>
+                    <div class="diagram-container" id="networkDiagramContainer"></div>
+                </div>
+
+                <!-- Hierarchy Tree -->
+                <div id="diag-hierarchy" class="card full-width diagram-panel">
+                    <h2><i class="fa-solid fa-sitemap" style="color: var(--accent-3);"></i> Hiyerarşik Organizasyon Ağacı</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">İzmir Büyükşehir Belediyesi altındaki ulaşım yönetim yapısı.</p>
+                    <div class="diagram-container" id="hierarchyDiagramContainer"></div>
+                </div>
+
+                <!-- Relation Matrix -->
+                <div id="diag-matrix" class="card full-width diagram-panel">
+                    <h2><i class="fa-solid fa-table-cells" style="color: var(--success);"></i> Aktarma İlişki Matrisi</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">Hangi ulaşım modları arasında doğrudan aktarma yapılabildiğini gösteren etkileşim matrisi.</p>
+                    <div class="diagram-container" id="matrixDiagramContainer"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/kavramsal.js"></script>
+</body>
+</html>

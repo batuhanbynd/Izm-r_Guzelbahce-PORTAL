@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAS PORTAL</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">BAS PORTAL</div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#" class="nav-link active" data-target="kavramsal">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    Diyagram
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-target="havalimani">
+                    <i class="fa-solid fa-plane-departure"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-target="eshot">
+                    <i class="fa-solid fa-bus"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-target="tramvay">
+                    <i class="fa-solid fa-train-tram"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-target="izban">
+                    <i class="fa-solid fa-train"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-target="vapur">
+                    <i class="fa-solid fa-ship"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-target="metro">
+                    <i class="fa-solid fa-subway"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-target="karsilastirma">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-target="kgm">
+                    <i class="fa-solid fa-road"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        
+        <!-- HAVALİMANI TAB -->
+        <div id="havalimani" class="tab-pane">
+            <header>
+                <h1>Adnan Menderes Analizi</h1>
+                <p class="subtitle">Aylık Yolcu Trafiği Gelişimi (Ocak - Ağustos 2026)</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Toplam Yolcu (8 Aylık 2026)</div>
+                    <div class="stat-value">8.925.405</div>
+                    <div class="stat-change change-up">▲ 7.5% (2025'e göre)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">İç Hatlar Toplamı</div>
+                    <div class="stat-value">5.560.681</div>
+                    <div class="stat-change change-up">▲ 13.6%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Dış Hatlar Toplamı</div>
+                    <div class="stat-value">3.364.724</div>
+                    <div class="stat-change change-down">▼ -1.4%</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card full-width">
+                    <h2>Aylık Toplam Yolcu Trafiği (2025 vs 2026)</h2>
+                    <div class="chart-container">
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>Kümülatif Büyüme (Ocak - Ağustos)</h2>
+                    <div class="chart-container">
+                        <canvas id="cumulativeChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>Aylara Göre İç/Dış Hat Dağılımı (2026)</h2>
+                    <div class="chart-container">
+                        <canvas id="splitChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card full-width" style="margin-top: 2rem; margin-bottom: 2rem;">
+                <h2><i class="fa-solid fa-route" style="color:var(--accent-1); margin-right: 10px;"></i> Havalimanından Güzelbahçe'ye Geliş Güzergahı</h2>
+                <div class="transport-path">
+                    <div class="path-step">
+                        <div class="step-icon" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: #38bdf8;"><i class="fa-solid fa-plane-arrival"></i></div>
+                        <div class="step-info">
+                            <span class="step-title">Adnan Menderes Havalimanı</span>
+                            <span class="step-desc">Başlangıç</span>
+                        </div>
+                    </div>
+                    <div class="path-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="path-step">
+                        <div class="step-icon" style="background: rgba(234, 88, 12, 0.2); color: #ea580c; border-color: #ea580c;"><i class="fa-solid fa-train-subway"></i></div>
+                        <div class="step-info">
+                            <span class="step-title">İZBAN</span>
+                            <span class="step-desc">Kuzey Yönü</span>
+                        </div>
+                    </div>
+                    <div class="path-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="path-step">
+                        <div class="step-icon"><i class="fa-solid fa-right-left"></i></div>
+                        <div class="step-info">
+                            <span class="step-title">Hilal / Halkapınar</span>
+                            <span class="step-desc">Aktarma</span>
+                        </div>
+                    </div>
+                    <div class="path-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="path-step">
+                        <div class="step-icon" style="background: rgba(16, 185, 129, 0.2); color: #10b981; border-color: #10b981;"><i class="fa-solid fa-subway"></i></div>
+                        <div class="step-info">
+                            <span class="step-title">İzmir Metro</span>
+                            <span class="step-desc">F. Altay Yönü</span>
+                        </div>
+                    </div>
+                    <div class="path-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="path-step">
+                        <div class="step-icon"><i class="fa-solid fa-right-left"></i></div>
+                        <div class="step-info">
+                            <span class="step-title">Fahrettin Altay Aktarma Mrk.</span>
+                            <span class="step-desc">Otobüs Aktarma</span>
+                        </div>
+                    </div>
+                    <div class="path-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="path-step">
+                        <div class="step-icon" style="background: rgba(234, 179, 8, 0.2); color: #eab308; border-color: #eab308;"><i class="fa-solid fa-bus"></i></div>
+                        <div class="step-info">
+                            <span class="step-title">ESHOT 8 / 9</span>
+                            <span class="step-desc">Güzelbahçe Yönü</span>
+                        </div>
+                    </div>
+                    <div class="path-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    
+                    <div class="path-step end">
+                        <div class="step-icon" style="background: rgba(248, 113, 113, 0.2); color: #f87171; border-color: #f87171;"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="step-info">
+                            <span class="step-title">Güzelbahçe</span>
+                            <span class="step-desc">Varış</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESHOT TAB -->
+        <div id="eshot" class="tab-pane">
+            <header>
+                <h1>ESHOT Otobüs Verileri</h1>
+                <p class="subtitle">Aylık Günlük Ortalama Biniş İstatistikleri (Ocak - Aralık)</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">En Yüksek Günlük Ort.</div>
+                    <div class="stat-value">719.559</div>
+                    <div class="stat-change change-up">Şubat</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">En Düşük Günlük Ort.</div>
+                    <div class="stat-value">100.704</div>
+                    <div class="stat-change change-down">Nisan</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Yıllık Ortalama</div>
+                    <div class="stat-value">377.650</div>
+                    <div class="stat-change change-up">Günlük</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card full-width">
+                    <h2>Günlük Ortalama Biniş Sayısı (Aylara Göre)</h2>
+                    <div class="chart-container" style="height: 420px;">
+                        <canvas id="eshotGunlukChart"></canvas>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <h2>Otobüs Başına Günlük Ortalama Biniş Sayısı</h2>
+                    <div class="chart-container" style="height: 420px;">
+                        <canvas id="eshotOtobusChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card full-width">
+                    <h2>Özel Hat İncelemeleri</h2>
+                    <div class="route-accordion" id="eshotAccordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <div class="accordion-title">
+                                    <h3>Hat No: 8 - GÜZELBAHÇE - FAHRETTİN ALTAY AKTARMA MERKEZİ</h3>
+                                    <span>GÜZERGAH : SEFERİHİSAR KAVŞAĞI-MİTHAT PAŞA CAD. - 9 EYLÜL HASTANESİ (Görüntülemek için tıklayınız)</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
+                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
+                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                                <strong>ESHOT 8 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:00</strong>, son kalkış <strong>00:30</strong>. Otobüsler ortalama <strong>21 - 22 dakika</strong> aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş <strong>100 sefer</strong> yapıyor.
+                                            </p>
+                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/8/288" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
+                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                        <img src="8.jpg.png" alt="8 Numaralı Hat Görseli">
+                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                    </div>
+
+                                    <div class="stops-container">
+                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 8 NO'lu Hattın Geçtiği Duraklar (64 Durak)</h3>
+                                        <div class="stops-timeline">
+                                            <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Güzelbahçe</span><span class="stop-id">#50371</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Güzelbahçe Meydan</span><span class="stop-id">#50362</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">3. Stad</span><span class="stop-id">#50357</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">4. Güzelbahçe Sağlık Ocağı</span><span class="stop-id">#50363</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">5. Okul Durağı</span><span class="stop-id">#50365</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">6. Asır</span><span class="stop-id">#50367</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">7. Bankacılar Sitesi</span><span class="stop-id">#50369</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">8. Dr. Güngör Özbek A. L.</span><span class="stop-id">#52083</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">9. Sarmaşık</span><span class="stop-id">#52029</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">10. Vadi</span><span class="stop-id">#52032</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">11. Güzeltepe</span><span class="stop-id">#52033</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">12. Ata</span><span class="stop-id">#52035</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">13. Uğur Koleji</span><span class="stop-id">#52037</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">14. Çiçek Mezatı</span><span class="stop-id">#50388</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">15. Benzin İstasyonu</span><span class="stop-id">#50386</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">16. Otoban Kavşağı</span><span class="stop-id">#50384</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">17. Konutlar</span><span class="stop-id">#50382</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">18. Çiçek</span><span class="stop-id">#50464</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">19. Seferihisar Kavşak</span><span class="stop-id">#50380</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">20. Altmışıncı Yıl Anadolu Lisesi</span><span class="stop-id">#50092</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">21. Liman</span><span class="stop-id">#50090</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">22. Briketçi</span><span class="stop-id">#50088</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">23. Eczane</span><span class="stop-id">#50086</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">24. Anıt</span><span class="stop-id">#50084</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">25. Yemişçi</span><span class="stop-id">#50082</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">26. Kirazlı</span><span class="stop-id">#50080</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">27. Karaca</span><span class="stop-id">#50124</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">28. Şahin</span><span class="stop-id">#50076</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">29. Baydar</span><span class="stop-id">#50074</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">30. Camcı</span><span class="stop-id">#50126</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">31. Balıkçı Kahvesi</span><span class="stop-id">#50072</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">32. Maltepe</span><span class="stop-id">#50070</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">33. Pina</span><span class="stop-id">#50068</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">34. Liman Reis</span><span class="stop-id">#50066</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">35. Sıdıka Akdemir Rehberlik ve Araştırma Merkezi</span><span class="stop-id">#50064</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">36. Çeşme</span><span class="stop-id">#50062</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">37. Halk Plajı</span><span class="stop-id">#50060</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">38. İstihkam</span><span class="stop-id">#50058</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">39. Subay Gazinosu</span><span class="stop-id">#50054</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">40. Lojmanlar</span><span class="stop-id">#50052</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">41. Pertev Bey</span><span class="stop-id">#50050</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">42. İstihkam Okulu</span><span class="stop-id">#50048</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">43. Narlıdere Kaymakamlık</span><span class="stop-id">#50046</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">44. Narlıdere Belediye</span><span class="stop-id">#50044</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">45. Şehitlik</span><span class="stop-id">#50042</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">46. Siteler</span><span class="stop-id">#50040</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">47. Köprübaşı</span><span class="stop-id">#50038</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">48. Uludağ</span><span class="stop-id">#50036</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">49. Narlıdere Cami</span><span class="stop-id">#50034</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">50. Narlıdere İtfaiye</span><span class="stop-id">#50032</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">51. Balcı</span><span class="stop-id">#50030</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">52. Güzel Sanatlar Fakültesi</span><span class="stop-id">#50028</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">53. İzsu</span><span class="stop-id">#50026</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">54. Kantar</span><span class="stop-id">#50024</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">55. Dokuz Eylül</span><span class="stop-id">#50022</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">56. Dokuz Eylül Hastanesi İstasyon</span><span class="stop-id">#50020</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">57. Hoca</span><span class="stop-id">#50018</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">58. Çağdaş İstasyon</span><span class="stop-id">#50016</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">59. İş Bankası Evleri</span><span class="stop-id">#50014</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">60. Molla Kuyusu</span><span class="stop-id">#50012</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">61. Balçova İstasyon</span><span class="stop-id">#50010</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">62. Beyaz</span><span class="stop-id">#50008</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">63. Fahrettin Altay Meydan 3</span><span class="stop-id">#51826</span></div></div>
+                                            <div class="stop-item end-node"><div class="stop-content"><span class="stop-name">64. Fahrettin Altay Aktarma Merkezi</span><span class="stop-id">#51929</span></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <div class="accordion-title">
+                                    <h3>Hat No: 9 - ÖZZÜMRÜT EVLERİ – SİTELER</h3>
+                                    <span>GÜZERGAH : MİTHATPAŞA CAD. - ISTIKBAL CAD. (Görüntülemek için tıklayınız)</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
+                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
+                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                                <strong>ESHOT 9 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:35</strong>, son kalkış <strong>20:20</strong>. Otobüsler ortalama <strong>2 saat</strong> aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş <strong>16 sefer</strong> yapıyor.
+                                            </p>
+                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/9/288#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
+                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                        <img src="9.jpg.png" alt="9 Numaralı Hat Görseli">
+                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                    </div>
+
+                                    <div class="stops-container">
+                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 9 NO'lu Hattın Geçtiği Duraklar (50 Durak)</h3>
+                                        <div class="stops-timeline">
+                                            <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Öz Zümrütevleri</span><span class="stop-id">#51259</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Manolya</span><span class="stop-id">#51246</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">3. Orkide</span><span class="stop-id">#51244</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">4. Öz Zümrütevleri Giriş</span><span class="stop-id">#51242</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">5. Güzelbahçe Sanayi</span><span class="stop-id">#52179</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">6. Bulgun</span><span class="stop-id">#51258</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">7. Güzelbahçe Sanayi</span><span class="stop-id">#52178</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">8. Bahçe Arası</span><span class="stop-id">#51240</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">9. Tekne Atölyesi</span><span class="stop-id">#51236</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">10. Fidanlık</span><span class="stop-id">#51238</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">11. Konutlar</span><span class="stop-id">#50383</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">12. Çeşme Otoban Kavşağı</span><span class="stop-id">#50385</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">13. Hakkı Oğuz Tabaoğlu İlkokulu</span><span class="stop-id">#50361</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">14. Sarmaşık</span><span class="stop-id">#52029</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">15. Vadi</span><span class="stop-id">#52032</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">16. Güzeltepe</span><span class="stop-id">#52033</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">17. Ata</span><span class="stop-id">#52035</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">18. Uğur Koleji</span><span class="stop-id">#52037</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">19. Karaoğlu</span><span class="stop-id">#50391</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">20. Florya</span><span class="stop-id">#52440</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">21. Çardak Kahve</span><span class="stop-id">#50393</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">22. Yelki Üçyol</span><span class="stop-id">#50467</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">23. Köşe</span><span class="stop-id">#50469</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">24. Tokatlıoğlu</span><span class="stop-id">#50471</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">25. Belediye</span><span class="stop-id">#50473</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">26. Güzel Konak</span><span class="stop-id">#52048</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">27. Taşev</span><span class="stop-id">#52046</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">28. Yamaç</span><span class="stop-id">#52044</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">29. Göksu</span><span class="stop-id">#52042</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">30. Değirmen</span><span class="stop-id">#52040</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">31. Teras Evler</span><span class="stop-id">#50745</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">32. Güzelbahçe İMKB Mesleki ve Teknik Anadolu Lisesi</span><span class="stop-id">#50740</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">33. Akgün Sitesi</span><span class="stop-id">#50734</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">34. Güzelbahçe</span><span class="stop-id">#50371</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">35. Güzelbahçe Meydan</span><span class="stop-id">#50362</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">36. Belediye</span><span class="stop-id">#50356</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">37. Uğur Mumcu</span><span class="stop-id">#50338</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">38. Fırın</span><span class="stop-id">#50336</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">39. Fabrika</span><span class="stop-id">#50334</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">40. Yaka Giriş</span><span class="stop-id">#50332</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">41. Güzelbahçe Kaymakamlık</span><span class="stop-id">#50330</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">42. Pazar Yeri</span><span class="stop-id">#50328</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">43. Eczane</span><span class="stop-id">#50083</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">44. Liman</span><span class="stop-id">#50085</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">45. Altmışıncı Yıl Anadolu Lisesi</span><span class="stop-id">#50089</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">46. Fidanlık</span><span class="stop-id">#50091</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">47. Elif</span><span class="stop-id">#50093</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">48. Şehit Üsteğmen Deveci</span><span class="stop-id">#50095</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">49. Siteler Sahil</span><span class="stop-id">#51535</span></div></div>
+                                            <div class="stop-item end-node"><div class="stop-content"><span class="stop-name">50. Siteler Son Durak</span><span class="stop-id">#51536</span></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <div class="accordion-title">
+                                    <h3>Hat No: 28 - KAVACIK – GÜZELBAHÇE</h3>
+                                    <span>GÜZERGAH : PAYAMLI - KÜÇÜKKAYA KÖYÜ (Görüntülemek için tıklayınız)</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
+                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
+                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                                <strong>ESHOT 28 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:50</strong>, son kalkış <strong>18:20</strong>. Otobüsler ortalama <strong>4 saat</strong> aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş <strong>8 - 9 sefer</strong> yapıyor.
+                                            </p>
+                                            <a href="https://www.eshot.gov.tr/en/TransportationTimetable/28/289#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
+                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                        <img src="28.jpg.png" alt="28 Numaralı Hat Görseli">
+                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                    </div>
+
+                                    <div class="stops-container">
+                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 28 NO'lu Hattın Geçtiği Duraklar (25 Durak)</h3>
+                                        <div class="stops-timeline">
+                                            <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Kavacık</span><span class="stop-id">#50722</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Orkide</span><span class="stop-id">#50708</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">3. Kavacık Giriş</span><span class="stop-id">#52639</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">4. Kavacık Restoran</span><span class="stop-id">#52637</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">5. Kavacık Bağ</span><span class="stop-id">#52635</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">6. Payamlı Bağ</span><span class="stop-id">#52632</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">7. Payamlı Kısıklar</span><span class="stop-id">#52630</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">8. Payamlı Manzara</span><span class="stop-id">#52213</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">9. Payamlı Vadi</span><span class="stop-id">#52021</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">10. Kayapınarı</span><span class="stop-id">#52020</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">11. Payamlı</span><span class="stop-id">#50700</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">12. Payamlı Giriş</span><span class="stop-id">#52016</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">13. Manzara</span><span class="stop-id">#52018</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">14. Payamlı Orman</span><span class="stop-id">#52662</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">15. Payamlı Restoran</span><span class="stop-id">#52660</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">16. Payamlı Zeytinlik</span><span class="stop-id">#52658</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">17. Payamlı Çam</span><span class="stop-id">#52656</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">18. Küçükkaya Köyü</span><span class="stop-id">#50702</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">19. Panaroma Evleri</span><span class="stop-id">#52603</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">20. Küçükkaya Pansiyon</span><span class="stop-id">#52601</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">21. Küçükkaya Yol Ayrımı</span><span class="stop-id">#52599</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">22. Küçükkaya Manzara</span><span class="stop-id">#52181</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">23. Tepe</span><span class="stop-id">#52289</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">24. Güzelbahçe Vali Kazım Paşa Ortaokulu</span><span class="stop-id">#51954</span></div></div>
+                                            <div class="stop-item end-node"><div class="stop-content"><span class="stop-name">25. Güzelbahçe</span><span class="stop-id">#50371</span></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <div class="accordion-title">
+                                    <h3>Hat No: 82 - SİTELER - FAHRETTİN ALTAY AKTARMA MERKEZİ</h3>
+                                    <span>GÜZERGAH : MİTHATPAŞA CAD. - NARLIDERE - 9 EYLÜL HASTANESİ (Görüntülemek için tıklayınız)</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
+                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
+                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                                <strong>ESHOT 82 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:00</strong>, son kalkış <strong>00:25</strong>. Otobüsler ortalama <strong>30 dakika</strong> aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş <strong>60 sefer</strong> yapıyor.
+                                            </p>
+                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/82/288#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
+                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                        <img src="82.jpg.png" alt="82 Numaralı Hat Görseli">
+                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                    </div>
+
+                                    <div class="stops-container">
+                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 82 NO'lu Hattın Geçtiği Duraklar (71 Durak)</h3>
+                                        <div class="stops-timeline">
+                                            <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Siteler Son Durak</span><span class="stop-id">#51536</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Siteler Muhtarlık</span><span class="stop-id">#50524</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">3. Şehit Üsteğmen Deveci</span><span class="stop-id">#50098</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">4. Elif</span><span class="stop-id">#50096</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">5. Fidanlık</span><span class="stop-id">#50094</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">6. Seferihisar Kavşak</span><span class="stop-id">#50379</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">7. Konutlar</span><span class="stop-id">#50383</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">8. Çeşme Otoban Kavşağı</span><span class="stop-id">#50385</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">9. Hakkı Oğuz Tabaoğlu İlkokulu</span><span class="stop-id">#50361</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">10. Ünlü</span><span class="stop-id">#50370</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">11. Şehit Kemal</span><span class="stop-id">#50374</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">12. Asır</span><span class="stop-id">#50368</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">13. Okul Durağı</span><span class="stop-id">#50366</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">14. Sağlık Ocağı</span><span class="stop-id">#50364</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">15. Stad</span><span class="stop-id">#50372</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">16. Güzelbahçe</span><span class="stop-id">#50371</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">17. Güzelbahçe Meydan</span><span class="stop-id">#50362</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">18. Belediye</span><span class="stop-id">#50356</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">19. Uğur Mumcu</span><span class="stop-id">#50338</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">20. Fırın</span><span class="stop-id">#50336</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">21. Fabrika</span><span class="stop-id">#50334</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">22. Garahayıt</span><span class="stop-id">#52004</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">23. Yaka Üçyol</span><span class="stop-id">#50345</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">24. Şemikler</span><span class="stop-id">#50350</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">25. Yaka Muhtarlık</span><span class="stop-id">#50348</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">26. Yaka Üçyol</span><span class="stop-id">#50346</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">27. Garahayıt</span><span class="stop-id">#52003</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">28. Yaka Giriş</span><span class="stop-id">#50332</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">29. Güzelbahçe Kaymakamlık</span><span class="stop-id">#50330</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">30. Pazar Yeri</span><span class="stop-id">#50328</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">31. Anıt</span><span class="stop-id">#50084</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">32. Yemişçi</span><span class="stop-id">#50082</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">33. Kirazlı</span><span class="stop-id">#50080</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">34. Karaca</span><span class="stop-id">#50124</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">35. Şahin</span><span class="stop-id">#50076</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">36. Baydar</span><span class="stop-id">#50074</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">37. Camcı</span><span class="stop-id">#50126</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">38. Balıkçı Kahvesi</span><span class="stop-id">#50072</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">39. Maltepe</span><span class="stop-id">#50070</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">40. Pina</span><span class="stop-id">#50068</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">41. Liman Reis</span><span class="stop-id">#50066</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">42. Sıdıka Akdemir Rehberlik ve Araştırma Merkezi</span><span class="stop-id">#50064</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">43. Çeşme</span><span class="stop-id">#50062</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">44. Halk Plajı</span><span class="stop-id">#50060</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">45. İstihkam</span><span class="stop-id">#50058</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">46. Subay Gazinosu</span><span class="stop-id">#50054</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">47. Lojmanlar</span><span class="stop-id">#50052</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">48. Pertev Bey</span><span class="stop-id">#50050</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">49. İstihkam Okulu</span><span class="stop-id">#50048</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">50. Narlıdere Kaymakamlık</span><span class="stop-id">#50046</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">51. Narlıdere Belediye</span><span class="stop-id">#50044</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">52. Şehitlik</span><span class="stop-id">#50042</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">53. Siteler</span><span class="stop-id">#50040</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">54. Köprübaşı</span><span class="stop-id">#50038</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">55. Uludağ</span><span class="stop-id">#50036</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">56. Narlıdere Cami</span><span class="stop-id">#50034</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">57. Narlıdere İtfaiye</span><span class="stop-id">#50032</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">58. Balcı</span><span class="stop-id">#50030</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">59. Güzel Sanatlar Fakültesi</span><span class="stop-id">#50028</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">60. İzsu</span><span class="stop-id">#50026</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">61. Kantar</span><span class="stop-id">#50024</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">62. Dokuz Eylül</span><span class="stop-id">#50022</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">63. Dokuz Eylül Hastanesi İstasyon</span><span class="stop-id">#50020</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">64. Hoca</span><span class="stop-id">#50018</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">65. Çağdaş İstasyon</span><span class="stop-id">#50016</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">66. İş Bankası Evleri</span><span class="stop-id">#50014</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">67. Molla Kuyusu</span><span class="stop-id">#50012</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">68. Balçova İstasyon</span><span class="stop-id">#50010</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">69. Beyaz</span><span class="stop-id">#50008</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">70. Fahrettin Altay Meydan 9</span><span class="stop-id">#50004</span></div></div>
+                                            <div class="stop-item end-node"><div class="stop-content"><span class="stop-name">71. Fahrettin Altay Aktarma Merkezi</span><span class="stop-id">#51931</span></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <div class="accordion-title">
+                                    <h3>Hat No: 762 - GÜZELBAHÇE - URLA</h3>
+                                    <span>GÜZERGAH : YELKİ - DADAŞKENT (Görüntülemek için tıklayınız)</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
+                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
+                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                                <strong>ESHOT 762 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:40</strong>, son kalkış <strong>16:30</strong>. Seferler ortalama <strong>2 saat</strong> aralıklarla düzenlenmekte olup, gün içinde ortalama gidiş-dönüş <strong>6 sefer</strong> yapıyor.
+                                            </p>
+                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/762/288#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
+                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                        <img src="762.jpg.png" alt="762 Numaralı Hat Görseli">
+                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                    </div>
+
+                                    <div class="stops-container">
+                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 762 NO'lu Hattın Geçtiği Duraklar (52 Durak)</h3>
+                                        <div class="stops-timeline">
+                                            <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Güzelbahçe</span><span class="stop-id">#50371</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Güzelbahçe Meydan</span><span class="stop-id">#50362</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">3. Stad</span><span class="stop-id">#50357</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">4. Güzelbahçe Sağlık Ocağı</span><span class="stop-id">#50363</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">5. Okul Durağı</span><span class="stop-id">#50365</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">6. Asır</span><span class="stop-id">#50367</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">7. Bankacılar Sitesi</span><span class="stop-id">#50369</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">8. Çeşme Otoban Kavşağı</span><span class="stop-id">#50385</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">9. Hakkı Oğuz Tabaoğlu İlkokulu</span><span class="stop-id">#50361</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">10. Sarmaşık</span><span class="stop-id">#52029</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">11. Vadi</span><span class="stop-id">#52032</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">12. Güzelbahçe Halk E.M.</span><span class="stop-id">#52084</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">13. Çelik</span><span class="stop-id">#52086</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">14. Güzelbahçe İMKB Mesleki ve Teknik Anadolu Lisesi</span><span class="stop-id">#50741</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">15. Teras Evler</span><span class="stop-id">#50744</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">16. Değirmen</span><span class="stop-id">#52039</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">17. Göksu</span><span class="stop-id">#52041</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">18. Yamaç</span><span class="stop-id">#52043</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">19. Taşev</span><span class="stop-id">#52045</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">20. Güzel Konak</span><span class="stop-id">#52047</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">21. Sağlık Ocağı</span><span class="stop-id">#50475</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">22. Şehit Abdullah Tayyip Olçok Anadolu İmam Hatip Lisesi</span><span class="stop-id">#52013</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">23. Yelki Saha</span><span class="stop-id">#50489</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">24. Şehit İlhami Yılmaz</span><span class="stop-id">#50487</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">25. Güzelbahçe Kolej</span><span class="stop-id">#52054</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">26. Yelki Kavşak</span><span class="stop-id">#50485</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">27. Mermerci</span><span class="stop-id">#51942</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">28. Çamlı Villaları</span><span class="stop-id">#50403</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">29. Çamlı Papatya</span><span class="stop-id">#50405</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">30. Çamlı Merkez</span><span class="stop-id">#50407</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">31. Yaka</span><span class="stop-id">#52069</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">32. Çamlıköy</span><span class="stop-id">#52675</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">33. Çamtepe</span><span class="stop-id">#52067</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">34. Dadaşkent</span><span class="stop-id">#52071</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">35. Dört Mevsim</span><span class="stop-id">#52088</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">36. Vadi</span><span class="stop-id">#52072</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">37. Manzara</span><span class="stop-id">#52074</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">38. Ada</span><span class="stop-id">#52076</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">39. Begonya</span><span class="stop-id">#52078</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">40. Urla Egiad Ortaokulu</span><span class="stop-id">#52107</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">41. Kütük Minare Cami</span><span class="stop-id">#52108</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">42. Kütük Minare Cami</span><span class="stop-id">#52109</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">43. Urla Egiad Ortaokulu</span><span class="stop-id">#52106</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">44. Urla Stadı</span><span class="stop-id">#51221</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">45. Urla Merkez</span><span class="stop-id">#50583</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">46. Emniyet</span><span class="stop-id">#50591</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">47. Şehit Kemal İlkokulu</span><span class="stop-id">#50597</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">48. Çeşme</span><span class="stop-id">#50599</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">49. Urla Sanayi 3</span><span class="stop-id">#50863</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">50. Urla Sanayi 2</span><span class="stop-id">#50861</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">51. Urla Sanat</span><span class="stop-id">#50855</span></div></div>
+                                            <div class="stop-item end-node"><div class="stop-content"><span class="stop-name">52. Urla</span><span class="stop-id">#50605</span></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <div class="accordion-title">
+                                    <h3>Hat No: 684 - URLA - FAHRETTİN ALTAY AKTARMA MERKEZİ EKSPRES</h3>
+                                    <span>GÜZERGAH : URLA DEVLET HASTANESİ - ÇEVREYOLU (Görüntülemek için tıklayınız)</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                            </div>
+                            <div class="accordion-content">
+                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
+                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
+                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                                <strong>ESHOT 684 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:00</strong>, son kalkış <strong>21:20</strong>. Otobüsler ortalama <strong>25 dakika</strong> aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş <strong>70 sefer</strong> yapıyor.
+                                            </p>
+                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/684/288#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
+                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                        <img src="684.jpg.png" alt="684 Numaralı Hat Görseli">
+                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                    </div>
+
+                                    <div class="stops-container">
+                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 684 NO'lu Hattın Geçtiği Duraklar (17 Durak)</h3>
+                                        <div class="stops-timeline">
+                                            <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Urla</span><span class="stop-id">#50605</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Urla Sanat</span><span class="stop-id">#50854</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">3. Urla Devlet Hastanesi</span><span class="stop-id">#51060</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">4. Urla Sanayi 1</span><span class="stop-id">#50860</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">5. Golf</span><span class="stop-id">#50602</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">6. Çeşme</span><span class="stop-id">#50600</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">7. Şehit Kemal İlkokulu</span><span class="stop-id">#50598</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">8. Emniyet</span><span class="stop-id">#50592</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">9. Eski Pazar Yeri</span><span class="stop-id">#50590</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">10. Urla Vergi Dairesi</span><span class="stop-id">#52689</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">11. Yeşil Yol</span><span class="stop-id">#50576</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">12. Yakamoz</span><span class="stop-id">#50122</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">13. İzmir Cengiz Aytmatov Sosyal Bilimler Lisesi</span><span class="stop-id">#50114</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">14. Kahveler</span><span class="stop-id">#50108</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">15. Çeşme Otoban Kavşağı</span><span class="stop-id">#50385</span></div></div>
+                                            <div class="stop-item"><div class="stop-content"><span class="stop-name">16. Fahrettin Altay Meydan 9</span><span class="stop-id">#50004</span></div></div>
+                                            <div class="stop-item end-node"><div class="stop-content"><span class="stop-name">17. Fahrettin Altay Aktarma Merkezi</span><span class="stop-id">#51938</span></div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- TRAMVAY TAB -->
+        <div id="tramvay" class="tab-pane">
+            <header>
+                <h1>İzmir Tramvayı Analizi</h1>
+                <p class="subtitle">Karşıyaka, Konak ve Çiğli Hatları Toplam Yolcu Trafiği (2020 - 2024)</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">2024 Toplam Biniş</div>
+                    <div class="stat-value">33,5M</div>
+                    <div class="stat-change change-up">Rekor Yıl</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">En Yoğun Hat (2024)</div>
+                    <div class="stat-value">Konak</div>
+                    <div class="stat-change change-up">22,46M Yolcu</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">2022 Sıçraması</div>
+                    <div class="stat-value">33,1M</div>
+                    <div class="stat-change change-up">▲ 45% (2021'e göre)</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card full-width">
+                    <h2>Yıllara Göre Toplam Yolcu Sayısı (Milyon)</h2>
+                    <div class="chart-container" style="height: 420px;">
+                        <canvas id="tramvayYillikChart"></canvas>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <h2>2024 Hat Bazında Yolcu Dağılımı</h2>
+                    <div class="chart-container" style="height: 380px;">
+                        <canvas id="tramvayHatChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="card full-width" style="text-align: center;">
+                    <h2>İzmir Raylı Sistemler Haritası</h2>
+                    <img src="harita.jpg" alt="İzmir Raylı Sistemler Haritası" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+                </div>
+            </div>
+        </div>
+
+        <!-- İZBAN TAB -->
+        <div id="izban" class="tab-pane">
+            <header>
+                <h1>İZBAN Yolcu Trafiği (2010 - 2015)</h1>
+                <p class="subtitle">İzmir Banliyö Sistemi Yıllık Kullanım İstatistikleri</p>
+            </header>
+            
+            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                <div class="card full-width">
+                    <h2>Yıllık Yolcu Sayıları Karşılaştırması</h2>
+                    <div class="chart-container" style="height: 450px;">
+                        <canvas id="izbanChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ulaşım Haritası -->
+            <div class="card full-width" style="margin-top: 2rem; text-align: center;">
+                <h2>İzmir Raylı Sistemler Haritası</h2>
+                <img src="harita.jpg" alt="İzmir Raylı Sistem Haritası" style="max-width: 100%; border-radius: 12px; margin-top: 1rem; border: 1px solid rgba(255,255,255,0.1);">
+
+            </div>
+        </div>
+
+        <!-- VAPUR TAB -->
+        <div id="vapur" class="tab-pane">
+            <header>
+                <h1>İzdeniz Vapur Hatları Analizi</h1>
+                <p class="subtitle">17 Vapur Hattı — Günlük Toplam Yolcu Sayıları (2020 / 2025 / 2030 Projeksiyonu)</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">2020 Günlük Toplam</div>
+                    <div class="stat-value">107.314</div>
+                    <div class="stat-change change-up">17 Hat</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">2025 Günlük Toplam</div>
+                    <div class="stat-value">125.414</div>
+                    <div class="stat-change change-up">▲ 16,9%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">2030 Projeksiyon</div>
+                    <div class="stat-value">147.842</div>
+                    <div class="stat-change change-up">▲ 17,9%</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card full-width">
+                    <h2>En Yoğun 10 Hat — Günlük Yolcu Karşılaştırması (2020 / 2025 / 2030)</h2>
+                    <div class="chart-container" style="height: 480px;">
+                        <canvas id="vapurTop10Chart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>2025 Hat Dağılımı (En Yoğun 8 Hat)</h2>
+                    <div class="chart-container">
+                        <canvas id="vapurPieChart"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>2020 → 2030 En Çok Büyüyen 5 Hat (%)</h2>
+                    <div class="chart-container">
+                        <canvas id="vapurGrowthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- METRO TAB -->
+        <div id="metro" class="tab-pane">
+            <header>
+                <h1>İzmir Metro A.Ş. Toplam Biniş Analizi</h1>
+                <p class="subtitle">Yıllık Toplam Biniş Sayıları (2020 - 2024)</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">2024 Toplam Biniş</div>
+                    <div class="stat-value">127,4M</div>
+                    <div class="stat-change change-up">▲ 1.5% (2023'e göre)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">5 Yıllık Toplam</div>
+                    <div class="stat-value">534,3M</div>
+                    <div class="stat-change change-up">▲ 71% (2020-2024)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">En Yüksek Büyüme</div>
+                    <div class="stat-value">%54,2</div>
+                    <div class="stat-change change-up">2021 → 2022</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                <div class="card full-width">
+                    <h2>Yıllık Toplam Biniş Sayıları</h2>
+                    <div class="chart-container" style="height: 450px;">
+                        <canvas id="metroChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="card full-width" style="text-align: center;">
+                    <h2>İzmir Raylı Sistemler Haritası</h2>
+                    <img src="harita.jpg" alt="İzmir Raylı Sistemler Haritası" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+                </div>
+            </div>
+        </div>
+
+        <!-- ULAŞIM KARŞILAŞTIRMASI TAB -->
+        <div id="karsilastirma" class="tab-pane">
+            <header>
+                <h1>Tüm Toplu Ulaşım Ağları Karşılaştırması</h1>
+                <p class="subtitle">İzmir Geneli Yıllık Toplam Yolcu Dağılımı (Tahmini Toplam: ~446,2 Milyon)</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">En Çok Kullanılan</div>
+                    <div class="stat-value">ESHOT</div>
+                    <div class="stat-change change-up">137,8M Yolcu</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">İkinci Sırada</div>
+                    <div class="stat-value">Metro</div>
+                    <div class="stat-change change-up">127,4M Yolcu</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Raylı Sistemler Toplamı</div>
+                    <div class="stat-value">262M</div>
+                    <div class="stat-change change-up">%58,7 Pay</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h2>2024 Biniş Dağılımı (Pasta Grafik)</h2>
+                    <div class="chart-container">
+                        <canvas id="karsilastirmaPie"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2>Hat Bazında Karşılaştırma</h2>
+                    <div class="chart-container">
+                        <canvas id="karsilastirmaBar"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KGM TAB -->
+        <div id="kgm" class="tab-pane">
+            <header>
+                <h1>KGM 2. Bölge Devlet Yolları</h1>
+                <p class="subtitle">2025 Yıllık Ortalama Günlük Trafik (YOGT) Hacim Haritası Özeti</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Toplam Günlük Trafik</div>
+                    <div class="stat-value">209.260</div>
+                    <div class="stat-change change-up">5 Güzergah Toplamı</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">En Yoğun Güzergah</div>
+                    <div class="stat-value">G.Bahçe-Menderes</div>
+                    <div class="stat-change change-up">76.779 Taşıt/Gün</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Ağır Taşıt Oranı</div>
+                    <div class="stat-value">%10,2</div>
+                    <div class="stat-change change-up">Ortalama</div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card full-width">
+                    <h2>Güzergahlara Göre Günlük Trafik (Hafif ve Ağır Taşıt)</h2>
+                    <div class="chart-container" style="height: 400px;">
+                        <canvas id="kgmBarChart"></canvas>
+                    </div>
+                </div>
+                <div class="card full-width">
+                    <h2>Toplam Trafik Hacmi Dağılımı</h2>
+                    <div class="chart-container" style="height: 380px;">
+                        <canvas id="kgmPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KAVRAMSAL DİYAGRAM TAB -->
+        <div id="kavramsal" class="tab-pane active">
+            <header>
+                <h1>İzmir Ulaşım Ağı — Kavramsal Diyagramlar</h1>
+                <p class="subtitle">Tüm ulaşım modlarının ilişkisel ağ yapısı, yolcu akış haritası ve hiyerarşik görünümü</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Toplam Ulaşım Modu</div>
+                    <div class="stat-value">7</div>
+                    <div class="stat-change change-up">Aktif Sistem</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Yıllık Toplam Yolcu</div>
+                    <div class="stat-value">~446M</div>
+                    <div class="stat-change change-up">İzmir Geneli</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Entegre Aktarma Noktası</div>
+                    <div class="stat-value">12+</div>
+                    <div class="stat-change change-up">Çoklu Mod</div>
+                </div>
+            </div>
+
+            <!-- Diagram Selector -->
+            <div class="diagram-selector">
+                <button class="diagram-btn active" data-diagram="flow">🌊 Yolcu Akış Diyagramı</button>
+                <button class="diagram-btn" data-diagram="network">🔗 Ağ Topolojisi</button>
+                <button class="diagram-btn" data-diagram="hierarchy">🌳 Hiyerarşik Yapı</button>
+                <button class="diagram-btn" data-diagram="matrix">📊 İlişki Matrisi</button>
+            </div>
+
+            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                <!-- Flow Diagram -->
+                <div id="diag-flow" class="card full-width diagram-panel active">
+                    <h2><i class="fa-solid fa-water" style="color: var(--accent-1);"></i> Yolcu Akış Diyagramı</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">Her ulaşım modunun yıllık yolcu kapasitesi oransal akış kalınlığı ile gösterilmektedir.</p>
+                    <div class="diagram-container" id="flowDiagramContainer"></div>
+                </div>
+
+                <!-- Network Topology -->
+                <div id="diag-network" class="card full-width diagram-panel">
+                    <h2><i class="fa-solid fa-circle-nodes" style="color: var(--accent-2);"></i> Ağ Topoloji Haritası</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">Ulaşım modları arasındaki fiziksel bağlantılar ve aktarma noktaları.</p>
+                    <div class="diagram-container" id="networkDiagramContainer"></div>
+                </div>
+
+                <!-- Hierarchy Tree -->
+                <div id="diag-hierarchy" class="card full-width diagram-panel">
+                    <h2><i class="fa-solid fa-sitemap" style="color: var(--accent-3);"></i> Hiyerarşik Organizasyon Ağacı</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">İzmir Büyükşehir Belediyesi altındaki ulaşım yönetim yapısı.</p>
+                    <div class="diagram-container" id="hierarchyDiagramContainer"></div>
+                </div>
+
+                <!-- Relation Matrix -->
+                <div id="diag-matrix" class="card full-width diagram-panel">
+                    <h2><i class="fa-solid fa-table-cells" style="color: var(--success);"></i> Aktarma İlişki Matrisi</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">Hangi ulaşım modları arasında doğrudan aktarma yapılabildiğini gösteren etkileşim matrisi.</p>
+                    <div class="diagram-container" id="matrixDiagramContainer"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+<!-- Tab Switching (sadece bu tek sayfalık görünüm için) -->
+<script>
+    const navLinks = document.querySelectorAll('.nav-link');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            navLinks.forEach(l => l.classList.remove('active'));
+            tabPanes.forEach(t => t.classList.remove('active'));
+            link.classList.add('active');
+            const targetId = link.getAttribute('data-target');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+</script>
+
+<!-- Ortak Chart.js Konfigürasyon -->
+<script src="js/chart-config.js"></script>
+
+<!-- Image Modal -->
+<div id="imageModal" class="image-modal">
+    <span class="close-modal" onclick="closeImageModal()">&times;</span>
+    <div class="modal-content-wrapper" id="modalContentWrapper">
+        <img class="modal-content" id="modalImage" alt="Güzergah Haritası">
+    </div>
+    <div class="modal-controls">
+        <button onclick="zoomModalImage(1.2)" title="Büyüt"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+        <button onclick="zoomModalImage(0.8)" title="Küçült"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+        <button onclick="zoomModalImage('reset')" title="Sıfırla"><i class="fa-solid fa-compress"></i></button>
+    </div>
+</div>
+
+<!-- Panzoom Library for dragging and zooming -->
+<script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+
+<script>
+    let pzInstance = null;
+
+    function openImageModal(imgSrc) {
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImage");
+        const wrapper = document.getElementById("modalContentWrapper");
+        
+        modal.style.display = "block";
+        modalImg.src = imgSrc;
+
+        // Reset previous panzoom instance if exists
+        if (pzInstance) {
+            pzInstance.destroy();
+        }
+
+        // Initialize Panzoom
+        pzInstance = Panzoom(modalImg, {
+            maxScale: 10,
+            minScale: 0.5,
+            startScale: 1,
+            cursor: 'grab'
+        });
+
+        // Add wheel event listener for zooming
+        modal.addEventListener('wheel', pzInstance.zoomWithWheel);
+    }
+
+    function closeImageModal() {
+        const modal = document.getElementById("imageModal");
+        modal.style.display = "none";
+        if (pzInstance) {
+            pzInstance.destroy();
+            pzInstance = null;
+        }
+    }
+
+    function zoomModalImage(scaleFactor) {
+        if (pzInstance) {
+            if (scaleFactor === 'reset') {
+                pzInstance.reset();
+            } else {
+                pzInstance.zoom(pzInstance.getScale() * scaleFactor);
+            }
+        }
+    }
+</script>
+
+<!-- Kategori Bazlı Grafik Scriptleri -->
+<script src="js/havalimani.js"></script>
+<script src="js/eshot.js"></script>
+<script src="js/tramvay.js"></script>
+<script src="js/izban.js"></script>
+<script src="js/vapur.js"></script>
+<script src="js/metro.js"></script>
+<script src="js/karsilastirma.js"></script>
+<script src="js/kgm.js"></script>
+<script src="js/kavramsal.js"></script>
+</body>
+</html>
