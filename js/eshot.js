@@ -92,4 +92,6 @@
             }
         }
     });
+
+    // Nüfus grafiği iptal edildi (Doğrulanabilir kesin kaynak sunulamadığı için)
 })();
