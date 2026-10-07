@@ -8,11 +8,12 @@
         "Güzelbahçe - Urla", 
         "Çeşme - Urla Yönü", 
         "Güzelbahçe - Menderes", 
-        "Çeşme Tarafı"
+        "Çeşme Tarafı",
+        "Otoyol Ayr. (300-01)"
     ];
-    const kgmHafif = [60448, 34159, 15955, 70657, 6644];
-    const kgmAgir = [6471, 4846, 2557, 6122, 1401];
-    const kgmToplam = [66919, 39005, 18512, 76779, 8045];
+    const kgmHafif = [60448, 34159, 15955, 70657, 6644, 14670];
+    const kgmAgir = [6471, 4846, 2557, 6122, 1401, 394];
+    const kgmToplam = [66919, 39005, 18512, 76779, 8045, 15064];
 
     // KGM Bar Chart (Stacked)
     const ctxKgmBar = getCtx('kgmBarChart');
@@ -71,7 +72,8 @@
                     'rgba(56, 189, 248, 0.85)',
                     'rgba(16, 185, 129, 0.85)',
                     'rgba(244, 114, 182, 0.85)',
-                    'rgba(251, 191, 36, 0.85)'
+                    'rgba(251, 191, 36, 0.85)',
+                    'rgba(167, 139, 250, 0.85)'
                 ],
                 borderColor: 'rgba(30, 41, 59, 1)',
                 borderWidth: 3,
@@ -87,7 +89,7 @@
                     ...tooltipConfig,
                     callbacks: {
                         label: function(ctx) {
-                            const pct = ((ctx.parsed / 209260) * 100).toFixed(1);
+                            const pct = ((ctx.parsed / 224324) * 100).toFixed(1);
                             return ctx.label + ': ' + new Intl.NumberFormat('tr-TR').format(ctx.parsed) + ' (%' + pct + ')';
                         }
                     }
@@ -100,7 +102,7 @@
     // ==========================================
     // Güzelbahçe Özel Grafikler
     // ==========================================
-    const gbLabels = ["İzmir-Çeşme Otoyolu (O-32)", "75. Yıl Cumhuriyet Bulvarı", "Mithatpaşa Cd. (Sahil Yolu)"];
+    const gbLabels = ["İzmir-Çeşme Otoyolu (O-32)", "75. Yıl Cumhuriyet Bulvarı", "Mithatpaşa Cd. (Sahil Yolu)", "Otoyol Bağlantı Yolu"];
     
     // Grafik 1: Kapasite Karşılaştırması (Bar)
     const ctxGbCapacity = getCtx('kgmCapacityChart');
@@ -111,19 +113,19 @@
             datasets: [
                 {
                     label: 'Rutin Hacim',
-                    data: [45000, 15000, 18000],
+                    data: [45000, 15000, 18000, 15064],
                     backgroundColor: 'rgba(52, 211, 153, 0.85)', // Success color
                     borderRadius: 4
                 },
                 {
                     label: 'Yaz/Pik Hacim',
-                    data: [115000, 38000, 26000],
+                    data: [115000, 38000, 26000, 25000],
                     backgroundColor: 'rgba(248, 113, 113, 0.85)', // Danger color
                     borderRadius: 4
                 },
                 {
                     label: 'Teorik Kapasite',
-                    data: [130000, 45000, 25000],
+                    data: [130000, 45000, 25000, 30000],
                     backgroundColor: 'rgba(148, 163, 184, 0.5)', // Muted gray
                     borderColor: 'rgba(148, 163, 184, 1)',
                     borderWidth: 1,
@@ -165,13 +167,13 @@
             datasets: [
                 {
                     label: 'Rutin Doluluk (%)',
-                    data: [35, 33, 72],
+                    data: [35, 33, 72, 50],
                     backgroundColor: 'rgba(56, 189, 248, 0.85)', // Accent-1
                     borderRadius: 4
                 },
                 {
                     label: 'Yaz/Pik Doluluk (%)',
-                    data: [88, 84, 104],
+                    data: [88, 84, 104, 83],
                     backgroundColor: function(context) {
                         const index = context.dataIndex;
                         const value = context.dataset.data[index];

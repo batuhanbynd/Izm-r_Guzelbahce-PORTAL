@@ -1,0 +1,156 @@
+
+
+================ PAGE: index.html ================
+
+H1: Adnan Menderes Analizi
+P: Aylık Yolcu Trafiği Gelişimi (Ocak - Ağustos 2026)
+DIV: Toplam Yolcu (8 Aylık 2026)
+DIV: 8.925.405
+DIV: İç Hatlar Toplamı
+DIV: 5.560.681
+DIV: Dış Hatlar Toplamı
+DIV: 3.364.724
+H2: Aylık Toplam Yolcu Trafiği (2025 vs 2026)
+H2: Kümülatif Büyüme (Ocak - Ağustos)
+H2: Aylara Göre İç/Dış Hat Dağılımı (2026)
+H2: Adnan Menderes Havalimanı → Güzelbahçe Ulaşım Alternatifleri
+P: Havalimanından Güzelbahçe'ye toplu taşıma ile ulaşmak için tercih edebileceğiniz 3 farklı alternatif güzergah:
+H3: Alternatif 1: Raylı Sistem (En Hızlı ve Trafiksiz)
+H3: Alternatif 2: Ekspres Otobüs (Az Aktarma)
+H3: Alternatif 3: Körfez Rotası (Vapur Keyfi)
+
+
+================ PAGE: kavramsal.html ================
+
+H1: İzmir Ulaşım Ağı — Diyagramlar
+P: Tüm ulaşım modlarının ilişkisel ağ yapısı, yolcu akış haritası ve hiyerarşik görünümü
+DIV: Toplam Ulaşım Modu
+DIV: 7
+DIV: Yıllık Toplam Yolcu
+DIV: ~446M
+DIV: Entegre Aktarma Noktası
+DIV: 12+
+H2: Yolcu Akış Diyagramı
+P: Her ulaşım modunun yıllık yolcu kapasitesi oransal akış kalınlığı ile gösterilmektedir.
+H2: Ağ Topoloji Haritası
+P: Ulaşım modları arasındaki fiziksel bağlantılar ve aktarma noktaları.
+H2: Hiyerarşik Organizasyon Ağacı
+P: İzmir Büyükşehir Belediyesi altındaki ulaşım yönetim yapısı.
+H2: Aktarma İlişki Matrisi
+P: Hangi ulaşım modları arasında doğrudan aktarma yapılabildiğini gösteren etkileşim matrisi.
+
+
+================ PAGE: eshot.html ================
+
+H1: ESHOT Otobüs Verileri
+P: Aylık Günlük Ortalama Biniş İstatistikleri (Ocak - Aralık)
+DIV: En Yüksek Günlük Ort.
+DIV: 719.559
+DIV: En Düşük Günlük Ort.
+DIV: 100.704
+DIV: Yıllık Ortalama
+DIV: 377.650
+H2: Günlük Ortalama Biniş Sayısı (Aylara Göre)
+H2: Otobüs Başına Günlük Ortalama Biniş Sayısı
+H2: Özel Hat İncelemeleri
+H3: Hat No: 8 - GÜZELBAHÇE - FAHRETTİN ALTAY AKTARMA MERKEZİ
+P: ESHOT 8 Numaralı Hat Bilgisi: İlk kalkış 06:00, son kalkış 00:30. Otobüsler ortalama 21 - 22 dakika aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş 100 sefer yapıyor.
+H3: 8 NO'lu Hat – Durak Ulaşım Çapları (Coverage Area)
+P: Aşağıdaki haritada her durak noktası etrafındaki 400 metrelik yürüme mesafesi yarıçapı gösterilmektedir.
+H3: 8 NO'lu Hattın Geçtiği Duraklar (64 Durak)
+H3: Hat No: 9 - ÖZZÜMRÜT EVLERİ – SİTELER
+P: ESHOT 9 Numaralı Hat Bilgisi: İlk kalkış 06:35, son kalkış 20:20. Otobüsler ortalama 2 saat aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş 16 sefer yapıyor.
+H3: 9 NO'lu Hat – Durak Ulaşım Çapları (Coverage Area)
+P: Aşağıdaki haritada her durak noktası etrafındaki 400 metrelik yürüme mesafesi yarıçapı gösterilmektedir.
+H3: 9 NO'lu Hattın Geçtiği Duraklar (50 Durak)
+H3: Hat No: 28 - KAVACIK – GÜZELBAHÇE
+P: ESHOT 28 Numaralı Hat Bilgisi: İlk kalkış 06:50, son kalkış 18:20. Otobüsler ortalama 4 saat aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş 8 - 9 sefer yapıyor.
+H3: 28 NO'lu Hat – Durak Ulaşım Çapları (Coverage Area)
+P: Aşağıdaki haritada her durak noktası etrafındaki 400 metrelik yürüme mesafesi yarıçapı gösterilmektedir.
+H3: 28 NO'lu Hattın Geçtiği Duraklar (25 Durak)
+H3: Hat No: 82 - SİTELER - FAHRETTİN ALTAY AKTARMA MERKEZİ
+P: ESHOT 82 Numaralı Hat Bilgisi: İlk kalkış 06:00, son kalkış 00:25. Otobüsler ortalama 30 dakika aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş 60 sefer yapıyor.
+H3: 82 NO'lu Hat – Durak Ulaşım Çapları (Coverage Area)
+P: Aşağıdaki haritada her durak noktası etrafındaki 400 metrelik yürüme mesafesi yarıçapı gösterilmektedir.
+H3: 82 NO'lu Hattın Geçtiği Duraklar (71 Durak)
+H3: Hat No: 762 - GÜZELBAHÇE - URLA
+P: ESHOT 762 Numaralı Hat Bilgisi: İlk kalkış 06:40, son kalkış 16:30. Seferler ortalama 2 saat aralıklarla düzenlenmekte olup, gün içinde ortalama gidiş-dönüş 6 sefer yapıyor.
+H3: 762 NO'lu Hat – Durak Ulaşım Çapları (Coverage Area)
+P: Aşağıdaki haritada her durak noktası etrafındaki 400 metrelik yürüme mesafesi yarıçapı gösterilmektedir.
+H3: 762 NO'lu Hattın Geçtiği Duraklar (52 Durak)
+H3: Hat No: 684 - URLA - FAHRETTİN ALTAY AKTARMA MERKEZİ EKSPRES
+P: ESHOT 684 Numaralı Hat Bilgisi: İlk kalkış 06:00, son kalkış 21:20. Otobüsler ortalama 25 dakika aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş 70 sefer yapıyor.
+H3: 684 NO'lu Hat – Durak Ulaşım Çapları (Coverage Area)
+P: Aşağıdaki haritada her durak noktası etrafındaki 400 metrelik yürüme mesafesi yarıçapı gösterilmektedir.
+H3: 684 NO'lu Hattın Geçtiği Duraklar (17 Durak)
+
+
+================ PAGE: izban.html ================
+
+H1: İZBAN Yolcu Trafiği (2010 - 2015)
+P: İzmir Banliyö Sistemi Yıllık Kullanım İstatistikleri
+H2: Yıllık Yolcu Sayıları Karşılaştırması
+H2: İzmir Raylı Sistemler Haritası
+P: Lütfen sohbete attığınız harita fotoğrafını masaüstündeki bu klasörün içine harita.jpg adıyla kaydedin.
+
+
+================ PAGE: kgm.html ================
+
+H1: KGM 2. Bölge Devlet Yolları
+P: 2025 Yıllık Ortalama Günlük Trafik (YOGT) Hacim Haritası Özeti
+DIV: Toplam Günlük Trafik
+DIV: 224.324
+DIV: En Yoğun Güzergah
+DIV: G.Bahçe - Menderes
+DIV: Ağır Taşıt Oranı
+DIV: %9,7
+H2: Güzergahlara Göre Günlük Trafik (Hafif ve Ağır Taşıt)
+H2: Toplam Trafik Hacmi Dağılımı
+H2: Güzelbahçe Ulaşım Altyapısı
+P: İlçeyi İzmir geneline bağlayan ve iç ulaşımı sağlayan temel karayolları analizleri
+H3: 1. İzmir - Çeşme Otoyolu (O-32)
+LI: Güzergah Tipi: Güzelbahçe Geçişi
+LI: Şerit Yapısı: 2x3 (3 gidiş, 3 geliş) ve acil emniyet şeritli otoyol standardı.
+LI: Şerit Başına Kapasite: İdeal koşullarda 2.000 - 2.400 otomobil eşdeğeri/saat.
+LI: Toplam Kapasite: Tek yönde saatte 6.000 - 7.200 araç. Günlük bazda 80.000 - 100.000 araçlık yüksek trafik hacmi için tasarlanmıştır.
+H3: 2. D.300 Devlet Yolu (Mithatpaşa Cd.)
+LI: Güzergah Tipi: Eski Çeşme Yolu / Sahil Kesimi
+LI: Şerit Yapısı: İlçe merkezinde 2x1 veya bazı bölünmüş noktalarda 2x2 şeritli ana arter.
+LI: Durum & Tıkanıklık: Özellikle hafta sonları liman çevresi ve balık hali bölgesindeki yoğunluk sebebiyle teorik sınırına (şerit başına 1.200 - 1.500 araç/saat) ulaşıp tıkanma noktasına gelmektedir.
+H3: 3. Yeni 75. Yıl Cumhuriyet Bulvarı
+LI: Güzergah Tipi: Alternatif Dağ Yolu
+LI: Şerit Yapısı: 24,5 metre genişliğinde, 2x2 (çift gidiş, çift geliş) bölünmüş yol.
+LI: Kapasite Katkısı: D.300 / Mithatpaşa Caddesi'nin kapasite yetersizliğini çözmek amacıyla inşa edilmiştir. Sahil yolundaki günlük trafik yükünü önemli ölçüde hafifleterek iç ulaşımdaki kapasiteyi yaklaşık iki katına çıkarmıştır.
+H3: 4. 300-01 Otoyol Bağlantı Yolu
+LI: Güzergah Tipi: Otoyol Ayrımı - Güzelbahçe Girişi (9 KM)
+LI: Fonksiyon: Çeşme Otoyolu'ndan Güzelbahçe ve Urla bölgelerine geçişi sağlayan toplayıcı-dağıtıcı bağlantı yolu.
+H4: KGM Resmi Trafik Hacim Verisi (YOGT)
+P: KGM 2. Bölge istatistiklerine göre, bu 9 km'lik otoyol ayrım kesiminden günlük ortalama 15 bin araç Güzelbahçe yönüne giriş/çıkış yapmaktadır.
+H2: Günlük Araç Hacmi ve Güvenli Kapasite Karşılaştırması (Araç/Gün)
+H2: Yoğunluk / Kapasite Doluluk Oranı (V/C %)
+H4: Veri Kaynağı (Kaynakça)
+P: Karayolları Genel Müdürlüğü (KGM) 2025 Yılı 2. Bölge Trafik Hacim Haritası
+
+
+================ PAGE: karsilastirma.html ================
+
+H1: Tüm Toplu Ulaşım Ağları Karşılaştırması
+P: İzmir Geneli Yıllık Toplam Yolcu Dağılımı (Tahmini Toplam: ~446,2 Milyon)
+DIV: En Çok Kullanılan
+DIV: ESHOT
+DIV: İkinci Sırada
+DIV: Metro
+DIV: Raylı Sistemler Toplamı
+DIV: 262M
+H2: 2024 Biniş Dağılımı (Pasta Grafik)
+H2: Hat Bazında Karşılaştırma
+
+
+================ PAGE: isbirlikleri.html ================
+
+H1: İşbirliklerimiz
+P: Portal verilerine katkı sağlayan kurum ve kişiler
+H2: Karayolları Genel Müdürlüğü (KGM)
+P: Güzelbahçe çalışmamız kapsamında ulaşım ve karayolu altyapısına ilişkin veri ve bilgi alışverişi konusunda KGM 24. Şube Şefliği ile görüşmeler gerçekleştirilmiştir.
+H2: Teşekkürler
+P: Bu portalın geliştirilmesinde sağladıkları veri desteği ve işbirliği için tüm paydaşlarımıza teşekkür ederiz. Katkılarınız sayesinde İzmir ulaşım verilerini daha anlamlı ve erişilebilir hale getiriyoruz.

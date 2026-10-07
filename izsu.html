@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAS PORTAL - İZSU Su Kaynakları</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">BAS PORTAL</div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="kavramsal.html" class="nav-link"><i class="fa-solid fa-network-wired"></i> Diyagramlar</a></li>
+            <li class="nav-item"><a href="index.html" class="nav-link"><i class="fa-solid fa-plane-departure"></i> Adnan Menderes</a></li>
+            <li class="nav-item"><a href="eshot.html" class="nav-link"><i class="fa-solid fa-bus"></i> ESHOT</a></li>
+            <li class="nav-item"><a href="tramvay.html" class="nav-link"><i class="fa-solid fa-train-tram"></i> Tramvay</a></li>
+            <li class="nav-item"><a href="izban.html" class="nav-link"><i class="fa-solid fa-train"></i> İZBAN</a></li>
+            <li class="nav-item"><a href="vapur.html" class="nav-link"><i class="fa-solid fa-ship"></i> Vapur (İzdeniz)</a></li>
+            <li class="nav-item"><a href="metro.html" class="nav-link"><i class="fa-solid fa-subway"></i> İzmir Metro</a></li>
+            <li class="nav-item"><a href="karsilastirma.html" class="nav-link"><i class="fa-solid fa-chart-pie"></i> Ulaşım Karşılaştırması</a></li>
+            <li class="nav-item"><a href="kgm.html" class="nav-link"><i class="fa-solid fa-road"></i> KGM Karayolları</a></li>
+            <li class="nav-item"><a href="izsu.html" class="nav-link active"><i class="fa-solid fa-droplet"></i> İZSU Su Kaynakları</a></li>
+            <li class="nav-item"><a href="isbirlikleri.html" class="nav-link"><i class="fa-solid fa-handshake"></i> İşbirliklerimiz</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+            <style>
+                /* Lightbox Styles */
+                .lightbox {
+                    display: none;
+                    position: fixed;
+                    z-index: 9999;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba(0, 0, 0, 0.9);
+                    overflow: auto;
+                    justify-content: center;
+                    align-items: center;
+                    backdrop-filter: blur(5px);
+                }
+                .lightbox.active {
+                    display: flex;
+                }
+                .lightbox-content {
+                    max-width: 90%;
+                    max-height: 90vh;
+                    object-fit: contain;
+                    border: 2px solid #38bdf8;
+                    border-radius: 8px;
+                    box-shadow: 0 0 30px rgba(56, 189, 248, 0.5);
+                    cursor: grab;
+                    transition: transform 0.3s ease;
+                }
+                .lightbox-content:active {
+                    cursor: grabbing;
+                }
+                .lightbox-close {
+                    position: absolute;
+                    top: 20px;
+                    right: 40px;
+                    color: #fff;
+                    font-size: 40px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    z-index: 10000;
+                }
+                .lightbox-close:hover {
+                    color: #f43f5e;
+                }
+                .lightbox-zoom-controls {
+                    position: absolute;
+                    bottom: 30px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: flex;
+                    gap: 15px;
+                    background: rgba(15, 23, 42, 0.8);
+                    padding: 10px 20px;
+                    border-radius: 30px;
+                    border: 1px solid rgba(255,255,255,0.2);
+                }
+                .lightbox-btn {
+                    background: transparent;
+                    border: none;
+                    color: white;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    padding: 5px 10px;
+                    transition: 0.2s;
+                }
+                .lightbox-btn:hover {
+                    color: #38bdf8;
+                }
+            </style>
+        </head>
+        <body>
+            <div id="imageLightbox" class="lightbox">
+                <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+                <img class="lightbox-content" id="lightboxImg">
+                <div class="lightbox-zoom-controls">
+                    <button class="lightbox-btn" onclick="zoomLightbox(-0.2)"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+                    <button class="lightbox-btn" onclick="resetZoomLightbox()"><i class="fa-solid fa-compress"></i></button>
+                    <button class="lightbox-btn" onclick="zoomLightbox(0.2)"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                </div>
+            </div>
+            
+            <script>
+                let currentZoom = 1;
+                let isDragging = false;
+                let startX, startY;
+                let translateX = 0, translateY = 0;
+
+                const img = document.getElementById('lightboxImg');
+                const lightbox = document.getElementById('imageLightbox');
+
+                function openLightbox(imgSrc) {
+                    lightbox.classList.add('active');
+                    img.src = imgSrc;
+                    resetZoomLightbox();
+                }
+                function closeLightbox() {
+                    lightbox.classList.remove('active');
+                }
+                
+                function updateTransform() {
+                    img.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
+                }
+
+                function zoomLightbox(change) {
+                    currentZoom += change;
+                    if (currentZoom < 0.5) currentZoom = 0.5;
+                    if (currentZoom > 5) currentZoom = 5;
+                    updateTransform();
+                }
+                
+                function resetZoomLightbox() {
+                    currentZoom = 1;
+                    translateX = 0;
+                    translateY = 0;
+                    img.style.transition = 'transform 0.3s ease';
+                    updateTransform();
+                    // Remove transition after reset so dragging is smooth
+                    setTimeout(() => { img.style.transition = 'none'; }, 300);
+                }
+
+                // Mouse Wheel Zoom
+                img.addEventListener('wheel', function(e) {
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomLightbox(0.2); // Zoom in
+                    } else {
+                        zoomLightbox(-0.2); // Zoom out
+                    }
+                });
+
+                // Mouse Drag to Pan
+                img.addEventListener('mousedown', function(e) {
+                    e.preventDefault();
+                    isDragging = true;
+                    startX = e.clientX - translateX;
+                    startY = e.clientY - translateY;
+                    img.style.cursor = 'grabbing';
+                    img.style.transition = 'none'; // Disable transition during drag
+                });
+
+                window.addEventListener('mousemove', function(e) {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    translateX = e.clientX - startX;
+                    translateY = e.clientY - startY;
+                    updateTransform();
+                });
+
+                window.addEventListener('mouseup', function() {
+                    isDragging = false;
+                    img.style.cursor = 'grab';
+                });
+            </script>
+            <div class="stats-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+                <div class="stat-card" style="background: linear-gradient(135deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); border: 1px solid rgba(56,189,248,0.3); border-radius: 16px; padding: 1.8rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5); backdrop-filter: blur(12px); position: relative; overflow: hidden; transition: transform 0.3s ease;">
+                    <div style="position: absolute; top: -20px; right: -20px; opacity: 0.1; font-size: 6rem; color: #38bdf8;"><i class="fa-solid fa-water"></i></div>
+                    <div class="stat-label" style="font-size: 1.1rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Balçova Barajı Doluluk</div>
+                    <div class="stat-value" style="font-size: 2.8rem; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(56,189,248,0.4); margin-bottom: 0.5rem;">%48,20</div>
+                    <div class="stat-change change-up" style="display: inline-flex; align-items: center; gap: 5px; background: rgba(56,189,248,0.15); color: #38bdf8; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 0.9rem;"><i class="fa-solid fa-chart-line"></i> Aktif Doluluk Oranı</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); border: 1px solid rgba(52,211,153,0.3); border-radius: 16px; padding: 1.8rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5); backdrop-filter: blur(12px); position: relative; overflow: hidden; transition: transform 0.3s ease;">
+                    <div style="position: absolute; top: -20px; right: -20px; opacity: 0.1; font-size: 6rem; color: #34d399;"><i class="fa-solid fa-glass-water"></i></div>
+                    <div class="stat-label" style="font-size: 1.1rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Kullanılabilir Su</div>
+                    <div class="stat-value" style="font-size: 2.5rem; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(52,211,153,0.4); margin-bottom: 0.5rem;">3,674 M</div>
+                    <div class="stat-change change-up" style="display: inline-flex; align-items: center; gap: 5px; background: rgba(52,211,153,0.15); color: #34d399; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 0.9rem;"><i class="fa-solid fa-droplet"></i> Milyon Metreküp</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); border: 1px solid rgba(251,191,36,0.3); border-radius: 16px; padding: 1.8rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5); backdrop-filter: blur(12px); position: relative; overflow: hidden; transition: transform 0.3s ease;">
+                    <div style="position: absolute; top: -20px; right: -20px; opacity: 0.1; font-size: 6rem; color: #fbbf24;"><i class="fa-solid fa-faucet-drip"></i></div>
+                    <div class="stat-label" style="font-size: 1.1rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Yerel Kaynak (Küçükkaya)</div>
+                    <div class="stat-value" style="font-size: 2.8rem; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(251,191,36,0.4); margin-bottom: 0.5rem;">265 Kişi</div>
+                    <div class="stat-change change-up" style="display: inline-flex; align-items: center; gap: 5px; background: rgba(251,191,36,0.15); color: #fbbf24; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 0.9rem;"><i class="fa-solid fa-users"></i> Ek Kapasite Sağlandı</div>
+                </div>
+            </div>
+
+            <div class="charts-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+                <div class="chart-card" style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); grid-column: 1 / -1;">
+                    <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.2rem;">Su Üretim Grafiği (Baraj Doluluk Analizi)</h3>
+                    <div style="height: 400px; display: flex; justify-content: center; align-items: center;">
+                        <canvas id="su1Chart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card" style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.2rem;">Balçova Barajı Hacim Analizi (Milyon m³)</h3>
+                    <div style="height: 250px; display: flex; justify-content: center; align-items: center;">
+                        <canvas id="balcovaChart"></canvas>
+                    </div>
+                    <div style="margin-top: 15px; text-align: center; color: #cbd5e1; font-size: 0.95rem; background: rgba(14, 165, 233, 0.1); padding: 10px; border-radius: 8px; border: 1px solid rgba(14, 165, 233, 0.2);">
+                        <strong><i class="fa-solid fa-droplet" style="color: #0ea5e9;"></i> Kullanılabilir Su:</strong> 3.674 Milyon m³ <br>
+                        <span style="font-size: 0.85rem; color: #94a3b8;">(Toplam Su: 3.811 Milyon m³ | Maks. Hacim: 7.759 Milyon m³)</span>
+                    </div>
+                </div>
+                <div class="chart-card" style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.2rem;">Su Kaynakları Dağılımı (Türlerine Göre)</h3>
+                    <div style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                        <canvas id="kaynakChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="section-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem; margin-top: 2rem;">
+                <div style="background: rgba(56, 189, 248, 0.15); padding: 12px; border-radius: 12px; color: #38bdf8;">
+                    <i class="fa-solid fa-list-check" style="font-size: 1.5rem;"></i>
+                </div>
+                <div>
+                    <h2 style="margin: 0; font-size: 1.6rem; color: #f8fafc;">Güzelbahçe ve İzmir Bölgesel Su Kaynakları Listesi</h2>
+                    <p style="margin: 0; color: #94a3b8; font-size: 0.95rem;">Aktif kullanılan yüzeysel ve yeraltı su kaynaklarının detaylı dökümü</p>
+                </div>
+            </div>
+
+            <div style="background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; overflow: hidden; margin-bottom: 4rem; box-shadow: 0 10px 40px rgba(0,0,0,0.3); backdrop-filter: blur(10px);">
+                <table style="width: 100%; border-collapse: collapse; color: #f1f5f9;">
+                    <thead>
+                        <tr style="background: linear-gradient(90deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));">
+                            <th style="padding: 18px 25px; text-align: left; color: #38bdf8; border-bottom: 2px solid rgba(56, 189, 248, 0.3); font-weight: 700; letter-spacing: 0.5px; width: 20%;">KAYNAK</th>
+                            <th style="padding: 18px 25px; text-align: left; color: #38bdf8; border-bottom: 2px solid rgba(56, 189, 248, 0.3); font-weight: 700; letter-spacing: 0.5px; width: 15%;">TÜRÜ</th>
+                            <th style="padding: 18px 25px; text-align: left; color: #38bdf8; border-bottom: 2px solid rgba(56, 189, 248, 0.3); font-weight: 700; letter-spacing: 0.5px; width: 25%;">GÜZELBAHÇE İLE İLİŞKİSİ</th>
+                            <th style="padding: 18px 25px; text-align: left; color: #38bdf8; border-bottom: 2px solid rgba(56, 189, 248, 0.3); font-weight: 700; letter-spacing: 0.5px; width: 40%;">GÜNCEL DURUM / PLANLAMA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Yüzeysel Kaynaklar -->
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(56, 189, 248, 0.05)'; this.style.transform='scale(1.002)'" onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
+                            <td style="padding: 18px 25px; font-weight: 600; font-size: 1.05rem;"><i class="fa-solid fa-water" style="color: #60a5fa; margin-right: 12px; font-size: 1.1rem;"></i>Balçova Barajı</td>
+                            <td style="padding: 18px 25px;"><span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 10px rgba(59,130,246,0.1);">Baraj</span></td>
+                            <td style="padding: 18px 25px; color: #e2e8f0;">Doğrudan İlişkili</td>
+                            <td style="padding: 18px 25px; color: #94a3b8; line-height: 1.6;">Güzelbahçe'nin de içinde bulunduğu eski metropol su sisteminin ana kaynaklarından biri.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(56, 189, 248, 0.05)'; this.style.transform='scale(1.002)'" onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
+                            <td style="padding: 18px 25px; font-weight: 600; font-size: 1.05rem;"><i class="fa-solid fa-water" style="color: #60a5fa; margin-right: 12px; font-size: 1.1rem;"></i>Tahtalı Barajı</td>
+                            <td style="padding: 18px 25px;"><span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 10px rgba(59,130,246,0.1);">Baraj</span></td>
+                            <td style="padding: 18px 25px; color: #e2e8f0;">Bölgesel Kaynak</td>
+                            <td style="padding: 18px 25px; color: #94a3b8; line-height: 1.6;">İzmir'in ana bölgesel içme suyu kaynağı, ortak sisteme su sağlamaktadır.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(56, 189, 248, 0.05)'; this.style.transform='scale(1.002)'" onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
+                            <td style="padding: 18px 25px; font-weight: 600; font-size: 1.05rem;"><i class="fa-solid fa-water" style="color: #60a5fa; margin-right: 12px; font-size: 1.1rem;"></i>Gördes Barajı</td>
+                            <td style="padding: 18px 25px;"><span style="background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 10px rgba(59,130,246,0.1);">Baraj</span></td>
+                            <td style="padding: 18px 25px; color: #e2e8f0;">Bölgesel Kaynak</td>
+                            <td style="padding: 18px 25px; color: #94a3b8; line-height: 1.6;">Ortak sisteme bağlı; Güzelbahçe'ye özel değil, dönemsel olarak kullanılıyor.</td>
+                        </tr>
+
+                        <!-- Yeraltı Kaynaklar -->
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(52, 211, 153, 0.05)'; this.style.transform='scale(1.002)'" onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
+                            <td style="padding: 18px 25px; font-weight: 600; font-size: 1.05rem;"><i class="fa-solid fa-arrow-down-up-across-line" style="color: #34d399; margin-right: 12px; font-size: 1.1rem;"></i>Güzelbahçe Küçükkaya</td>
+                            <td style="padding: 18px 25px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 10px rgba(16,185,129,0.1);">Yerel Kuyu</span></td>
+                            <td style="padding: 18px 25px;"><span style="color: #34d399; font-weight: bold; background: rgba(52,211,153,0.1); padding: 4px 10px; border-radius: 6px;">Doğrudan İlçe İçi</span></td>
+                            <td style="padding: 18px 25px; color: #94a3b8; line-height: 1.6;">2023'te açılan yeni içme suyu kuyusu ile yaklaşık 265 kişiye alternatif lokal kaynak.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.3s ease;" onmouseover="this.style.background='rgba(52, 211, 153, 0.05)'; this.style.transform='scale(1.002)'" onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
+                            <td style="padding: 18px 25px; font-weight: 600; font-size: 1.05rem;"><i class="fa-solid fa-droplet" style="color: #34d399; margin-right: 12px; font-size: 1.1rem;"></i>Göksu Kuyuları</td>
+                            <td style="padding: 18px 25px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 10px rgba(16,185,129,0.1);">Yeraltı Suyu</span></td>
+                            <td style="padding: 18px 25px; color: #e2e8f0;">Ortak Sistem</td>
+                            <td style="padding: 18px 25px; color: #94a3b8; line-height: 1.6;">Güzelbahçe'nin de dahil olduğu ortak İzmir su sisteminde kullanılmaktadır.</td>
+                        </tr>
+                        <tr style="transition: all 0.3s ease;" onmouseover="this.style.background='rgba(52, 211, 153, 0.05)'; this.style.transform='scale(1.002)'" onmouseout="this.style.background='transparent'; this.style.transform='scale(1)'">
+                            <td style="padding: 18px 25px; font-weight: 600; font-size: 1.05rem;"><i class="fa-solid fa-layer-group" style="color: #34d399; margin-right: 12px; font-size: 1.1rem;"></i>Halkapınar & Sarıkız & Buca-Sarnıç</td>
+                            <td style="padding: 18px 25px;"><span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; box-shadow: 0 2px 10px rgba(16,185,129,0.1);">Yeraltı Suyu</span></td>
+                            <td style="padding: 18px 25px; color: #e2e8f0;">Bölgesel Kaynak</td>
+                            <td style="padding: 18px 25px; color: #94a3b8; line-height: 1.6;">2026 boyunca İzmir'in ortak sistemine üretim sağlayan bölgesel yeraltı su kaynaklarıdır.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Gallery Section -->
+            <div class="section-header" style="display: flex; align-items: center; gap: 15px; margin-bottom: 1.5rem;">
+                <div style="background: rgba(244, 63, 94, 0.15); padding: 12px; border-radius: 12px; color: #f43f5e;">
+                    <i class="fa-solid fa-camera-retro" style="font-size: 1.5rem;"></i>
+                </div>
+                <div>
+                    <h2 style="margin: 0; font-size: 1.6rem; color: #f8fafc;">Bölgesel Su Altyapısı Ek Görselleri</h2>
+                    <p style="margin: 0; color: #94a3b8; font-size: 0.95rem;">Görsellerin üzerine tıklayarak büyütebilir, mouse tekerleğiyle yakınlaştırıp sürükleyerek inceleyebilirsiniz.</p>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-bottom: 4rem;">
+                
+                <div class="gallery-card" onclick="openLightbox('su4.jpg.png')" style="cursor: pointer; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.4); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(56, 189, 248, 0.25)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.4)';">
+                    <div style="height: 380px; overflow: hidden; position: relative; background: #000;">
+                        <img src="su4.jpg.png" alt="Su Altyapısı 4" style="width: 100%; height: 100%; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);" onmouseover="this.style.transform='scale(1.08)';" onmouseout="this.style.transform='scale(1)';">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(15,23,42,0.8); padding: 20px; border-radius: 50%; border: 2px solid #38bdf8; color: #38bdf8; opacity: 0; transition: opacity 0.3s ease;" class="zoom-icon"><i class="fa-solid fa-expand" style="font-size: 2.2rem;"></i></div>
+                    </div>
+                    <div style="padding: 1.5rem; background: linear-gradient(0deg, rgba(15,23,42,1) 0%, rgba(30,41,59,0) 100%);">
+                        <h4 style="margin: 0 0 0.6rem 0; color: #f1f5f9; font-size: 1.3rem;"><i class="fa-solid fa-pump-water" style="color: #38bdf8; margin-right: 10px;"></i>Terfi İstasyonu ve Pompa Dağılımı</h4>
+                        <p style="margin: 0; color: #cbd5e1; font-size: 1rem; line-height: 1.5;">Yeraltı kaynaklarından çekilen suyun bölgesel depolara iletimini sağlayan merkez.</p>
+                    </div>
+                </div>
+
+                <div class="gallery-card" onclick="openLightbox('su3.jpg.jpg')" style="cursor: pointer; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.4); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(56, 189, 248, 0.25)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.4)';">
+                    <div style="height: 380px; overflow: hidden; position: relative; background: #000;">
+                        <img src="su3.jpg.jpg" alt="Su Altyapısı 3" style="width: 100%; height: 100%; object-fit: contain; image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);" onmouseover="this.style.transform='scale(1.08)';" onmouseout="this.style.transform='scale(1)';">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(15,23,42,0.8); padding: 20px; border-radius: 50%; border: 2px solid #38bdf8; color: #38bdf8; opacity: 0; transition: opacity 0.3s ease;" class="zoom-icon"><i class="fa-solid fa-expand" style="font-size: 2.2rem;"></i></div>
+                    </div>
+                    <div style="padding: 1.5rem; background: linear-gradient(0deg, rgba(15,23,42,1) 0%, rgba(30,41,59,0) 100%);">
+                        <h4 style="margin: 0 0 0.6rem 0; color: #f1f5f9; font-size: 1.3rem;"><i class="fa-solid fa-water-ladder" style="color: #38bdf8; margin-right: 10px;"></i>Baraj Havzası Genel Görünüm</h4>
+                        <p style="margin: 0; color: #cbd5e1; font-size: 1rem; line-height: 1.5;">Yüzeysel su toplama havzalarının mevsimsel doluluk durumu ve tesis profili.</p>
+                    </div>
+                </div>
+
+                <style>
+                    .gallery-card:hover .zoom-icon { opacity: 1 !important; transform: translate(-50%, -50%) scale(1.1); }
+                </style>
+            </div>ak sistemine üretim sağlayan bölgesel yeraltı su kaynaklarıdır.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            
+            <div style="font-size: 0.85rem; color: var(--text-muted); text-align: right; padding-bottom: 20px;">
+                <p>Veri Kaynağı: İZSU Günlük Su Üretimi & Açık Veri Portalı (05 Ekim 2026)</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/izsu.js"></script>
+</body>
+</html>
