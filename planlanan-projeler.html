@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAS PORTAL - Planlanan Projeler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Professional Premium Card Styles */
+        .premium-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(56, 189, 248, 0.15), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .premium-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px -5px rgba(56, 189, 248, 0.3);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+
+        .premium-card:hover::before {
+            opacity: 1;
+        }
+
+        .premium-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Purpose Cards with distinct colors */
+        .purpose-card-1 { border-color: rgba(56, 189, 248, 0.3); }
+        .purpose-card-1:hover { box-shadow: 0 15px 35px -5px rgba(56, 189, 248, 0.3); border-color: rgba(56, 189, 248, 0.6); }
+        .purpose-card-1::before { background: radial-gradient(circle at center, rgba(56, 189, 248, 0.15), transparent 60%); }
+
+        .purpose-card-2 { border-color: rgba(16, 185, 129, 0.3); }
+        .purpose-card-2:hover { box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.3); border-color: rgba(16, 185, 129, 0.6); }
+        .purpose-card-2::before { background: radial-gradient(circle at center, rgba(16, 185, 129, 0.15), transparent 60%); }
+
+        .purpose-card-3 { border-color: rgba(244, 114, 182, 0.3); }
+        .purpose-card-3:hover { box-shadow: 0 15px 35px -5px rgba(244, 114, 182, 0.3); border-color: rgba(244, 114, 182, 0.6); }
+        .purpose-card-3::before { background: radial-gradient(circle at center, rgba(244, 114, 182, 0.15), transparent 60%); }
+
+        /* Stage Cards glowing header */
+        .stage-box {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .stage-box:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .stage-header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(90deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.5s ease;
+        }
+
+        .stage-box:hover .stage-header {
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.15), rgba(15, 23, 42, 0.9));
+        }
+
+        /* Animation delays */
+        . { animation-delay: 0.1s; }
+        . { animation-delay: 0.2s; }
+        . { animation-delay: 0.3s; }
+        . { animation-delay: 0.4s; }
+        . { animation-delay: 0.5s; }
+        . { animation-delay: 0.6s; }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pulse-badge {
+            animation: pulse-glow 2s infinite;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+    </style>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏢</text></svg>">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="brand">BAS PORTAL</div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
+                    <i class="fa-solid fa-network-wired"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html" class="nav-link" data-target="havalimani">
+                    <i class="fa-solid fa-plane-departure"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link" data-target="eshot">
+                    <i class="fa-solid fa-bus"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link" data-target="tramvay">
+                    <i class="fa-solid fa-train-tram"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link" data-target="izban">
+                    <i class="fa-solid fa-train"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link" data-target="vapur">
+                    <i class="fa-solid fa-ship"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link" data-target="metro">
+                    <i class="fa-solid fa-subway"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link" data-target="kgm">
+                    <i class="fa-solid fa-road"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link" data-target="izsu">
+                    <i class="fa-solid fa-droplet"></i>
+                    İZSU Su Kaynakları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="planlanan-projeler.html" class="nav-link active" data-target="planlanan">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Planlanan Projeler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="isbirlikleri.html" class="nav-link" data-target="isbirlikleri">
+                    <i class="fa-solid fa-handshake"></i>
+                    İşbirliklerimiz
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div id="planlanan" class="tab-pane active">
+            <header>
+                <h1><i class="fa-solid fa-layer-group" style="color: var(--accent-1); margin-right: 10px;"></i>75. Yıl Cumhuriyet Bulvarı Projesi</h1>
+                <p class="subtitle">Sahil şeridi ile iç kesimler arasında paralel uzanan yeni ulaşım aksı</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Toplam Uzunluk</div>
+                    <div class="stat-value">4.25 KM</div>
+                    <div class="stat-change change-up">3 Etaplı Hat</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Planlanan Genişlik</div>
+                    <div class="stat-value">25 M</div>
+                    <div class="stat-change change-up">24.5m - 25m arası</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Tamamlanan Bölüm</div>
+                    <div class="stat-value">1.5 KM</div>
+                    <div class="stat-change change-up">1. Etap Hizmete Açıldı</div>
+                </div>
+            </div>
+
+            <!-- Proje Amaçları -->
+            <div class="card full-width" style="margin-bottom: 2rem;">
+                <h2><i class="fa-solid fa-bullseye"></i> Projenin Temel Amaçları</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <div class="premium-card purpose-card-1 ">
+                        <h3 style="color: var(--accent-1); margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-car-side"></i> Trafiği Rahatlatmak
+                        </h3>
+                        <p style="color: var(--text-muted); margin-bottom: 0;">Sahil yolu trafiğini hafifleterek, bölgedeki araç yoğunluğunu azaltmak ve akıcı bir trafik sağlamak.</p>
+                    </div>
+                    <div class="premium-card purpose-card-2 ">
+                        <h3 style="color: var(--success); margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-link"></i> Kesintisiz Bağlantı
+                        </h3>
+                        <p style="color: var(--text-muted); margin-bottom: 0;">Sahil şeridi ile iç kesimler arasında güçlü bir ulaşım aksı oluşturarak kesintisiz bağlantı sunmak.</p>
+                    </div>
+                    <div class="premium-card purpose-card-3 ">
+                        <h3 style="color: var(--accent-3); margin-top: 0; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-water"></i> Altyapı & Taşkın Önleme
+                        </h3>
+                        <p style="color: var(--text-muted); margin-bottom: 0;">Yol çalışması ile eş zamanlı olarak altyapıyı yenilemek ve bölgede yaşanabilecek taşkınları önlemek.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Etaplar -->
+            <div class="card full-width">
+                <h2><i class="fa-solid fa-map"></i> Proje Etapları ve Uygulama Durumu</h2>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Proje genel fiziki görünüm ve toplam 3 etap üzerinden planlanmış olup, etaplara ait güncel durumlar ve alan görselleri aşağıda sunulmaktadır.</p>
+
+                <!-- Fiziki Görünüm -->
+                <div class="stage-box ">
+                    <div class="stage-header">
+                        <div>
+                            <h3 style="margin: 0; font-size: 1.3rem; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fa-solid fa-eye" style="color: var(--accent-1);"></i> Fiziki Görünüm
+                            </h3>
+                            <p style="color: var(--text-muted); margin: 0.5rem 0 0 0; font-size: 0.95rem;">
+                                Projenin genel hatları ve fiziki durumu
+                            </p>
+                        </div>
+                    </div>
+                    <div style="padding: 0; text-align: center; background: rgba(15, 23, 42, 0.8);">
+                        <div class="interactive-image-container" onclick="openImageModal('fiziki.jpg')" style="width: 100%; display: block; border-radius: 0;">
+                            <img src="fiziki.jpg" alt="Fiziki Görünüm" style="width: 100%; height: auto; display: block; image-rendering: high-quality; border-radius: 0;">
+                            <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> Büyüt</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1. Etap -->
+                <div class="stage-box ">
+                    <div class="stage-header" style="background: linear-gradient(90deg, rgba(16, 185, 129, 0.15), rgba(15, 23, 42, 0.9));">
+                        <div>
+                            <h3 style="margin: 0; font-size: 1.3rem; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem;">
+                                1. Etap <span class="pulse-badge" style="font-size: 0.9rem; background: var(--success); color: #000; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 800; margin-left: 0.5rem;">Tamamlandı</span>
+                            </h3>
+                            <p style="color: var(--text-muted); margin: 0.5rem 0 0 0; font-size: 0.95rem;">
+                                <i class="fa-solid fa-location-dot" style="color: var(--accent-1);"></i> Yalı Mahallesi: İstikbal Caddesi ile Seferihisar Caddesi arası (1.5 km)
+                            </p>
+                        </div>
+                    </div>
+                    <div style="padding: 0; text-align: center; background: rgba(15, 23, 42, 0.8);">
+                        <div class="interactive-image-container" onclick="openImageModal('etap1.jpg')" style="width: 100%; display: block; border-radius: 0;">
+                            <img src="etap1.jpg" alt="1. Etap" style="width: 100%; height: auto; display: block; image-rendering: high-quality; border-radius: 0;">
+                            <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> Büyüt</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Etap -->
+                <div class="stage-box ">
+                    <div class="stage-header">
+                        <div>
+                            <h3 style="margin: 0; font-size: 1.3rem; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem;">
+                                2. Etap <span style="font-size: 0.9rem; background: rgba(255, 255, 255, 0.1); color: var(--text-main); padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 600; margin-left: 0.5rem; border: 1px solid rgba(255,255,255,0.2);">Planlanıyor</span>
+                            </h3>
+                            <p style="color: var(--text-muted); margin: 0.5rem 0 0 0; font-size: 0.95rem;">
+                                <i class="fa-solid fa-location-dot" style="color: var(--accent-1);"></i> Güzergah ve detaylar eklenecek
+                            </p>
+                        </div>
+                    </div>
+                    <div style="padding: 0; text-align: center; background: rgba(15, 23, 42, 0.8);">
+                        <div class="interactive-image-container" onclick="openImageModal('etap2.jpg')" style="width: 100%; display: block; border-radius: 0;">
+                            <img src="etap2.jpg" alt="2. Etap" style="width: 100%; height: auto; display: block; image-rendering: high-quality; border-radius: 0;">
+                            <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> Büyüt</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Etap -->
+                <div class="stage-box ">
+                    <div class="stage-header">
+                        <div>
+                            <h3 style="margin: 0; font-size: 1.3rem; color: var(--text-main); display: flex; align-items: center; gap: 0.5rem;">
+                                3. Etap <span style="font-size: 0.9rem; background: rgba(255, 255, 255, 0.1); color: var(--text-main); padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 600; margin-left: 0.5rem; border: 1px solid rgba(255,255,255,0.2);">Planlanıyor</span>
+                            </h3>
+                            <p style="color: var(--text-muted); margin: 0.5rem 0 0 0; font-size: 0.95rem;">
+                                <i class="fa-solid fa-location-dot" style="color: var(--accent-1);"></i> Güzergah ve detaylar eklenecek
+                            </p>
+                        </div>
+                    </div>
+                    <div style="padding: 0; text-align: center; background: rgba(15, 23, 42, 0.8);">
+                        <div class="interactive-image-container" onclick="openImageModal('etap3.jpg')" style="width: 100%; display: block; border-radius: 0;">
+                            <img src="etap3.jpg" alt="3. Etap" style="width: 100%; height: auto; display: block; image-rendering: high-quality; border-radius: 0;">
+                            <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> Büyüt</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal" onclick="closeImageModal()">&times;</span>
+        <div class="modal-content-wrapper">
+            <img class="modal-content" id="modalImage">
+        </div>
+        <div class="modal-controls">
+            <button onclick="zoomOut()" title="Uzaklaştır"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+            <button onclick="resetZoom()" title="Sıfırla"><i class="fa-solid fa-expand"></i></button>
+            <button onclick="zoomIn()" title="Yakınlaştır"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+        </div>
+    </div>
+
+    <script>
+        let currentZoom = 1;
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById("modalImage");
+
+        function openImageModal(src) {
+            modal.style.display = "block";
+            modalImg.src = src;
+            resetZoom();
+        }
+
+        function closeImageModal() {
+            modal.style.display = "none";
+            resetZoom();
+        }
+
+        function zoomIn() {
+            currentZoom += 0.2;
+            applyZoom();
+        }
+
+        function zoomOut() {
+            if (currentZoom > 0.4) {
+                currentZoom -= 0.2;
+                applyZoom();
+            }
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            modalImg.style.transform = `scale(${currentZoom})`;
+            modalImg.style.transition = 'transform 0.3s ease';
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && modal.style.display === "block") {
+                closeImageModal();
+            }
+        });
+    </script>
+</body>
+</html>
