@@ -25,7 +25,7 @@
         {ay: "Ağustos", top25: 8305813, top26: 8925405}
     ];
 
-    // 1. Aylık Toplam Chart
+    // 1. Aylık toplam yolcu: önceki yıl gri, içinde bulunulan yıl vurgulu
     const ctxMonthly = getCtx('monthlyChart');
     if (ctxMonthly) new Chart(ctxMonthly, {
         type: 'bar',
@@ -35,28 +35,26 @@
                 {
                     label: '2025',
                     data: aylikData.map(d => d.top25),
-                    backgroundColor: 'rgba(56, 189, 248, 0.8)',
-                    borderRadius: 6,
-                    barPercentage: 0.6
+                    birim: 'yolcu',
+                    backgroundColor: NOTR_RENK.onceki
                 },
                 {
                     label: '2026',
                     data: aylikData.map(d => d.top26),
-                    backgroundColor: 'rgba(129, 140, 248, 0.9)',
-                    borderRadius: 6,
-                    barPercentage: 0.6
+                    birim: 'yolcu',
+                    backgroundColor: MOD_RENK.havalimani
                 }
             ]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { position: 'top' }, tooltip: tooltipConfig },
-            scales: { y: yAxisConfig, x: { grid: { display: false } } },
+            plugins: { legend: { position: 'top' } },
+            scales: { y: degerEkseni('Aylık yolcu'), x: kategoriEkseni },
             interaction: { mode: 'index', intersect: false }
         }
     });
 
-    // 2. Kümülatif Büyüme (Line Chart)
+    // 2. Kümülatif yolcu (çizgi, dolgusuz: iki yıl arasındaki fark net okunur)
     const ctxCum = getCtx('cumulativeChart');
     if (ctxCum) new Chart(ctxCum, {
         type: 'line',
@@ -64,34 +62,31 @@
             labels: kümülatifData.map(d => d.ay),
             datasets: [
                 {
-                    label: '2025 Kümülatif',
+                    label: '2025 (kümülatif)',
                     data: kümülatifData.map(d => d.top25),
-                    borderColor: 'rgba(56, 189, 248, 0.8)',
-                    backgroundColor: 'rgba(56, 189, 248, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
+                    birim: 'yolcu',
+                    borderColor: NOTR_RENK.onceki,
+                    backgroundColor: NOTR_RENK.onceki,
+                    borderDash: [5, 4]
                 },
                 {
-                    label: '2026 Kümülatif',
+                    label: '2026 (kümülatif)',
                     data: kümülatifData.map(d => d.top26),
-                    borderColor: 'rgba(244, 114, 182, 0.9)',
-                    backgroundColor: 'rgba(244, 114, 182, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
+                    birim: 'yolcu',
+                    borderColor: MOD_RENK.havalimani,
+                    backgroundColor: MOD_RENK.havalimani
                 }
             ]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { position: 'top' }, tooltip: tooltipConfig },
-            scales: { y: yAxisConfig, x: { grid: { color: 'rgba(255, 255, 255, 0.05)' } } },
+            plugins: { legend: { position: 'top' } },
+            scales: { y: degerEkseni('Toplam yolcu'), x: kategoriEkseni },
             interaction: { mode: 'index', intersect: false }
         }
     });
 
-    // 3. İç/Dış Hat Split (Stacked Bar for 2026)
+    // 3. 2026 iç/dış hat dağılımı (yığılmış çubuk)
     const ctxSplit = getCtx('splitChart');
     if (ctxSplit) new Chart(ctxSplit, {
         type: 'bar',
@@ -99,25 +94,26 @@
             labels: aylikData.map(d => d.ay),
             datasets: [
                 {
-                    label: 'İç Hat',
+                    label: 'İç hat',
                     data: aylikData.map(d => d.ic26),
-                    backgroundColor: 'rgba(16, 185, 129, 0.8)',
-                    borderRadius: {topLeft: 0, topRight: 0, bottomLeft: 6, bottomRight: 6}
+                    birim: 'yolcu',
+                    backgroundColor: MOD_RENK.havalimani,
+                    borderRadius: 0
                 },
                 {
-                    label: 'Dış Hat',
+                    label: 'Dış hat',
                     data: aylikData.map(d => d.dis26),
-                    backgroundColor: 'rgba(251, 191, 36, 0.8)',
-                    borderRadius: {topLeft: 6, topRight: 6, bottomLeft: 0, bottomRight: 0}
+                    birim: 'yolcu',
+                    backgroundColor: '#5eead4'
                 }
             ]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { position: 'top' }, tooltip: tooltipConfig },
+            plugins: { legend: { position: 'top' } },
             scales: {
-                x: { stacked: true, grid: { display: false } },
-                y: { ...yAxisConfig, stacked: true }
+                x: { ...kategoriEkseni, stacked: true },
+                y: degerEkseni('Aylık yolcu', { stacked: true })
             },
             interaction: { mode: 'index', intersect: false }
         }

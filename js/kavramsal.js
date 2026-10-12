@@ -5,13 +5,13 @@
 (function () {
     // ---- DATA ----
     const modlar = [
-        { id: 'eshot', ad: 'ESHOT', yolcu: 137842250, ikon: '🚌', renk: '#f472b6', renkAlpha: 'rgba(244, 114, 182, 0.6)' },
-        { id: 'metro', ad: 'İzmir Metro', yolcu: 127400000, ikon: '🚇', renk: '#818cf8', renkAlpha: 'rgba(129, 140, 248, 0.6)' },
-        { id: 'izban', ad: 'İZBAN', yolcu: 101086308, ikon: '🚆', renk: '#fbbf24', renkAlpha: 'rgba(251, 191, 36, 0.6)' },
-        { id: 'vapur', ad: 'Vapur (İzdeniz)', yolcu: 46397340, ikon: '⛴️', renk: '#38bdf8', renkAlpha: 'rgba(56, 189, 248, 0.6)' },
-        { id: 'tramvay_konak', ad: 'Konak Tramvayı', yolcu: 22465062, ikon: '🚊', renk: '#34d399', renkAlpha: 'rgba(52, 211, 153, 0.6)' },
-        { id: 'tramvay_karsiyaka', ad: 'Karşıyaka Tramvayı', yolcu: 11065052, ikon: '🚋', renk: '#10b981', renkAlpha: 'rgba(16, 185, 129, 0.6)' },
-        { id: 'havaalani', ad: 'Adnan Menderes', yolcu: 8925405, ikon: '✈️', renk: '#a78bfa', renkAlpha: 'rgba(167, 139, 250, 0.6)' }
+        { id: 'eshot', ad: 'ESHOT', yolcu: 137842250, ikon: '', renk: '#f472b6', renkAlpha: 'rgba(244, 114, 182, 0.6)' },
+        { id: 'metro', ad: 'İzmir Metro', yolcu: 127400000, ikon: '', renk: '#818cf8', renkAlpha: 'rgba(129, 140, 248, 0.6)' },
+        { id: 'izban', ad: 'İZBAN', yolcu: 101086308, ikon: '', renk: '#fbbf24', renkAlpha: 'rgba(251, 191, 36, 0.6)' },
+        { id: 'vapur', ad: 'Vapur (İzdeniz)', yolcu: 46397340, ikon: '', renk: '#38bdf8', renkAlpha: 'rgba(56, 189, 248, 0.6)' },
+        { id: 'tramvay_konak', ad: 'Konak Tramvayı', yolcu: 22465062, ikon: '', renk: '#34d399', renkAlpha: 'rgba(52, 211, 153, 0.6)' },
+        { id: 'tramvay_karsiyaka', ad: 'Karşıyaka Tramvayı', yolcu: 11065052, ikon: '', renk: '#10b981', renkAlpha: 'rgba(16, 185, 129, 0.6)' },
+        { id: 'havaalani', ad: 'Adnan Menderes', yolcu: 8925405, ikon: '', renk: '#a78bfa', renkAlpha: 'rgba(167, 139, 250, 0.6)' }
     ];
 
     const toplamYolcu = modlar.reduce((s, m) => s + m.yolcu, 0);
@@ -82,7 +82,9 @@
 
     // ---- HELPERS ----
     function fmt(v) { return new Intl.NumberFormat('tr-TR').format(v); }
-    function fmtM(v) { return (v / 1000000).toFixed(1) + 'M'; }
+    // Simgeler Font Awesome yazı tipinden çizilir (satır içi stil, genel CSS kuralını ezer)
+    const IKON_STIL = 'font-family: "Font Awesome 6 Free"; font-weight: 900;';
+    function fmtM(v) { return (v / 1000000).toLocaleString('tr-TR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' mn'; }
 
     function createSVG(container, w, h) {
         const ns = 'http://www.w3.org/2000/svg';
@@ -238,7 +240,8 @@
                 x: node.x, y: node.y - 5,
                 'text-anchor': 'middle',
                 'dominant-baseline': 'middle',
-                'font-size': Math.max(16, nodeR * 0.6),
+                'font-size': Math.max(16, nodeR * 0.5),
+                style: IKON_STIL,
                 fill: '#fff'
             });
             icon.textContent = node.ikon;
@@ -263,7 +266,7 @@
             g.appendChild(val);
 
             // Percentage
-            const pct = ((node.yolcu / toplamYolcu) * 100).toFixed(1);
+            const pct = ((node.yolcu / toplamYolcu) * 100).toLocaleString('tr-TR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
             const pctText = svgEl('text', {
                 x: node.x, y: node.y + nodeR + 47,
                 'text-anchor': 'middle', fill: node.renk,
@@ -286,7 +289,7 @@
         const legend = document.createElement('div');
         legend.className = 'diagram-legend';
         legend.innerHTML = modlar.map(m =>
-            `<div class="legend-item"><div class="legend-dot" style="background:${m.renk}"></div>${m.ikon} ${m.ad} — ${fmtM(m.yolcu)}</div>`
+            `<div class="legend-item"><div class="legend-dot" style="background:${m.renk}"></div><span class="fa-solid" aria-hidden="true">${m.ikon}</span> ${m.ad} — ${fmtM(m.yolcu)}</div>`
         ).join('');
         container.appendChild(legend);
     }
@@ -444,7 +447,9 @@
                 x: pos.x, y: pos.y + 2,
                 'text-anchor': 'middle',
                 'dominant-baseline': 'middle',
-                'font-size': Math.max(18, r * 0.55)
+                'font-size': Math.max(18, r * 0.45),
+                style: IKON_STIL,
+                fill: '#fff'
             });
             icon.textContent = m.ikon;
             g.appendChild(icon);
@@ -463,7 +468,8 @@
                 'text-anchor': 'middle', fill: '#94a3b8',
                 'font-size': '10', 'font-weight': '600'
             });
-            sub.textContent = fmtM(m.yolcu) + '/yıl';
+            // Havalimanı verisi yıllık değil, Ocak–Ağustos 2026 dönemine ait
+            sub.textContent = fmtM(m.yolcu) + (m.id === 'havaalani' ? ' (Oca–Ağu)' : '/yıl');
             g.appendChild(sub);
 
             // Click to navigate to tab
@@ -500,39 +506,39 @@
 
         // Hierarchy data
         const tree = {
-            ad: 'İzmir Büyükşehir Belediyesi', ikon: '🏛️', renk: '#818cf8',
+            ad: 'İzmir Büyükşehir Belediyesi', ikon: '', renk: '#818cf8',
             alt: 'Ulaşım Ana Planı',
             children: [
                 {
-                    ad: 'Karayolu Ulaşımı', ikon: '🛣️', renk: '#f472b6',
-                    alt: '~347M Yolcu/Yıl',
+                    ad: 'Karayolu Ulaşımı', ikon: '', renk: '#f472b6',
+                    alt: '~347 mn yolcu/yıl',
                     children: [
-                        { ad: 'ESHOT Otobüs', ikon: '🚌', renk: '#f472b6', alt: '137.8M Yolcu', detail: '1.050+ Hat' },
-                        { ad: 'KGM Karayolları', ikon: '🚗', renk: '#a78bfa', alt: '209.260 Taşıt/Gün', detail: '5 Güzergah' }
+                        { ad: 'ESHOT Otobüs', ikon: '', renk: '#f472b6', alt: '137,8 mn yolcu', detail: '1.050+ Hat' },
+                        { ad: 'KGM Karayolları', ikon: '', renk: '#a78bfa', alt: '209.260 Taşıt/Gün', detail: '5 Güzergah' }
                     ]
                 },
                 {
-                    ad: 'Raylı Sistemler', ikon: '🚊', renk: '#38bdf8',
-                    alt: '~262M Yolcu/Yıl',
+                    ad: 'Raylı Sistemler', ikon: '', renk: '#38bdf8',
+                    alt: '~262 mn yolcu/yıl',
                     children: [
-                        { ad: 'İzmir Metro', ikon: '🚇', renk: '#818cf8', alt: '127.4M Yolcu', detail: '1 Hat, 17 İstasyon' },
-                        { ad: 'İZBAN', ikon: '🚆', renk: '#fbbf24', alt: '101.1M Yolcu', detail: '2 Yön, 41 İstasyon' },
-                        { ad: 'Konak Tramvayı', ikon: '🚊', renk: '#34d399', alt: '22.5M Yolcu', detail: '12 İstasyon' },
-                        { ad: 'Karşıyaka Tramvayı', ikon: '🚋', renk: '#10b981', alt: '11.1M Yolcu', detail: '16 İstasyon' }
+                        { ad: 'İzmir Metro', ikon: '', renk: '#818cf8', alt: '127,4 mn yolcu', detail: '1 Hat, 17 İstasyon' },
+                        { ad: 'İZBAN', ikon: '', renk: '#fbbf24', alt: '101,1 mn yolcu', detail: '2 Yön, 41 İstasyon' },
+                        { ad: 'Konak Tramvayı', ikon: '', renk: '#34d399', alt: '22,5 mn yolcu', detail: '12 İstasyon' },
+                        { ad: 'Karşıyaka Tramvayı', ikon: '', renk: '#10b981', alt: '11,1 mn yolcu', detail: '16 İstasyon' }
                     ]
                 },
                 {
-                    ad: 'Deniz Ulaşımı', ikon: '⛴️', renk: '#38bdf8',
-                    alt: '~46.4M Yolcu/Yıl',
+                    ad: 'Deniz Ulaşımı', ikon: '', renk: '#38bdf8',
+                    alt: '~46,4 mn yolcu/yıl',
                     children: [
-                        { ad: 'İzdeniz Vapur', ikon: '⛴️', renk: '#38bdf8', alt: '46.4M Yolcu', detail: '17 Hat' }
+                        { ad: 'İzdeniz Vapur', ikon: '', renk: '#38bdf8', alt: '46,4 mn yolcu', detail: '17 Hat' }
                     ]
                 },
                 {
-                    ad: 'Hava Ulaşımı', ikon: '✈️', renk: '#a78bfa',
-                    alt: '~8.9M Yolcu/Yıl',
+                    ad: 'Hava Ulaşımı', ikon: '', renk: '#a78bfa',
+                    alt: '~8,9 mn yolcu (Oca–Ağu 2026)',
                     children: [
-                        { ad: 'Adnan Menderes', ikon: '✈️', renk: '#a78bfa', alt: '8.9M Yolcu', detail: 'İç + Dış Hat' }
+                        { ad: 'Adnan Menderes', ikon: '', renk: '#a78bfa', alt: '8,9 mn yolcu (Oca–Ağu 2026)', detail: 'İç + Dış Hat' }
                     ]
                 }
             ]
@@ -572,7 +578,9 @@
             // Icon
             const ikon = svgEl('text', {
                 x: x - w / 2 + 18, y: y + (h / 2) + 4,
-                'font-size': isRoot ? '22' : '18',
+                'font-size': isRoot ? '18' : '15',
+                style: IKON_STIL,
+                fill: node.renk,
                 'dominant-baseline': 'middle'
             });
             ikon.textContent = node.ikon;

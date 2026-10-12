@@ -9,86 +9,46 @@
 
     // Günlük Ortalama Biniş Chart
     const ctxEG = getCtx('eshotGunlukChart');
-    const egGradient = ctxEG?.createLinearGradient(0, 0, 0, 400);
-    egGradient?.addColorStop(0, 'rgba(56, 189, 248, 0.9)');
-    egGradient?.addColorStop(1, 'rgba(56, 189, 248, 0.2)');
-
     if (ctxEG) new Chart(ctxEG, {
         type: 'bar',
         data: {
             labels: eshotAylar,
             datasets: [{
-                label: 'Günlük Ort. Biniş',
+                label: 'Günlük ortalama biniş',
                 data: eshotGunluk,
-                backgroundColor: egGradient,
-                borderRadius: 8,
-                barPercentage: 0.7
+                birim: 'yolcu',
+                backgroundColor: MOD_RENK.eshot
             }]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: tooltipConfig,
-                datalabels: {
-                    formatter: function(value) {
-                        return new Intl.NumberFormat('tr-TR').format(value);
-                    },
-                    font: { size: 11, weight: 'bold' }
-                }
-            },
+            plugins: { legend: { display: false } },
             scales: {
-                y: {
-                    ...yAxisConfig,
-                    ticks: {
-                        callback: function(value) {
-                            return (value / 1000).toFixed(0) + 'B';
-                        }
-                    }
-                },
-                x: { grid: { display: false } }
+                y: degerEkseni('Günlük ortalama biniş'),
+                x: kategoriEkseni
             }
         }
     });
 
     // Otobüs Başına Günlük Ort. Biniş Chart
     const ctxEO = getCtx('eshotOtobusChart');
-    const eoGradient = ctxEO?.createLinearGradient(0, 0, 0, 400);
-    eoGradient?.addColorStop(0, 'rgba(251, 191, 36, 0.9)');
-    eoGradient?.addColorStop(1, 'rgba(251, 191, 36, 0.2)');
-
     if (ctxEO) new Chart(ctxEO, {
         type: 'bar',
         data: {
             labels: eshotAylar,
             datasets: [{
-                label: 'Otobüs Başına Ort. Biniş',
+                label: 'Otobüs başına günlük ortalama biniş',
                 data: eshotOtobus,
-                backgroundColor: eoGradient,
-                borderRadius: 8,
-                barPercentage: 0.7
+                birim: 'yolcu',
+                backgroundColor: renkSaydam(MOD_RENK.eshot, 0.55)
             }]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: tooltipConfig,
-                datalabels: {
-                    formatter: function(value) {
-                        return value;
-                    },
-                    font: { size: 13, weight: 'bold' }
-                }
-            },
+            plugins: { legend: { display: false } },
             scales: {
-                y: {
-                    ...yAxisConfig,
-                    ticks: {
-                        callback: function(value) { return value; }
-                    }
-                },
-                x: { grid: { display: false } }
+                y: degerEkseni('Biniş / otobüs / gün'),
+                x: kategoriEkseni
             }
         }
     });

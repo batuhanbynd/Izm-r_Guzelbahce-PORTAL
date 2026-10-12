@@ -1,84 +1,35 @@
 document.addEventListener('DOMContentLoaded', function() {
-    Chart.register(ChartDataLabels);
 
-    // 0. Su Üretim / Baraj Doluluk Grafiği (su1.jpg.png yerine)
-    const ctxSu1 = document.getElementById('su1Chart').getContext('2d');
-    
+    // 0. Barajların aktif doluluk oranı (su1.jpg.png yerine)
     // Veriler: tahtalı 43, balçova 47, ürkmez 61, gördes 29, alaçatı 48
-    window.su1ChartInstance = new Chart(ctxSu1, {
+    // Güzelbahçe ile doğrudan ilişkili Balçova Barajı vurgulanır, diğerleri açık tonda
+    const barajlar = ['Tahtalı Barajı', 'Balçova Barajı', 'Ürkmez Barajı', 'Gördes Barajı', 'Alaçatı Barajı'];
+    const ctxSu1 = getCtx('su1Chart');
+    if (ctxSu1) window.su1ChartInstance = new Chart(ctxSu1, {
         type: 'bar',
         data: {
-            labels: ['Tahtalı Barajı', 'Balçova Barajı', 'Ürkmez Barajı', 'Gördes Barajı', 'Alaçatı Barajı'],
+            labels: barajlar,
             datasets: [{
-                label: 'Aktif Doluluk Oranı (%)',
+                label: 'Aktif doluluk oranı',
                 data: [43, 47, 61, 29, 48],
-                backgroundColor: [
-                    'rgba(56, 189, 248, 0.7)',
-                    'rgba(52, 211, 153, 0.7)',
-                    'rgba(251, 191, 36, 0.7)',
-                    'rgba(244, 63, 94, 0.7)',
-                    'rgba(167, 139, 250, 0.7)'
-                ],
-                borderColor: [
-                    'rgba(56, 189, 248, 1)',
-                    'rgba(52, 211, 153, 1)',
-                    'rgba(251, 191, 36, 1)',
-                    'rgba(244, 63, 94, 1)',
-                    'rgba(167, 139, 250, 1)'
-                ],
-                borderWidth: 2,
-                borderRadius: 8,
+                birim: 'yuzde',
+                backgroundColor: barajlar.map(b => b === 'Balçova Barajı' ? MOD_RENK.su : renkSaydam(MOD_RENK.su, 0.4)),
                 barPercentage: 0.6
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false // Etiketler zaten bar isimlerinde yazıyor
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return ' Doluluk: %' + context.raw;
-                        }
-                    }
-                },
-                datalabels: {
-                    color: '#fff',
-                    font: { weight: 'bold', size: 16 },
-                    anchor: 'end',
-                    align: 'bottom',
-                    formatter: (value) => {
-                        return '%' + value;
-                    }
-                }
-            },
+            plugins: { legend: { display: false } },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    grid: { color: 'rgba(255,255,255,0.05)' },
-                    ticks: { 
-                        color: '#94a3b8',
-                        callback: function(value) {
-                            return '%' + value;
-                        }
-                    }
-                },
-                x: {
-                    grid: { display: false },
-                    ticks: { color: '#e2e8f0', font: { size: 13, weight: '600' } }
-                }
+                y: yuzdeEkseni('Aktif doluluk', { max: 100 }),
+                x: { ...kategoriEkseni, ticks: { color: '#e2e8f0' } }
             }
         }
     });
 
 
     // 1. Balçova Barajı Hacim Analizi (Doughnut)
-    const ctxBalcova = document.getElementById('balcovaChart').getContext('2d');
-    
     // Veriler (Milyon m3)
     const maxHacim = 7.759;
     const toplamSu = 3.811;
@@ -86,24 +37,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const kullanilamayan = (toplamSu - kullanilabilir).toFixed(3);
     const bosHacim = (maxHacim - toplamSu).toFixed(3);
 
-    new Chart(ctxBalcova, {
+    const ctxBalcova = getCtx('balcovaChart');
+    if (ctxBalcova) new Chart(ctxBalcova, {
         type: 'doughnut',
         data: {
-            labels: ['Kullanılabilir Su', 'Kullanılamayan (Dip Suyu)', 'Boş Hacim'],
+            labels: ['Kullanılabilir su', 'Kullanılamayan (dip suyu)', 'Boş hacim'],
             datasets: [{
                 data: [kullanilabilir, kullanilamayan, bosHacim],
-                backgroundColor: [
-                    'rgba(14, 165, 233, 0.8)', // Mavi (Kullanılabilir)
-                    'rgba(99, 102, 241, 0.6)',  // Mor-Mavi (Dip suyu)
-                    'rgba(30, 41, 59, 0.5)'     // Koyu gri (Boş)
-                ],
-                borderColor: [
-                    'rgba(14, 165, 233, 1)',
-                    'rgba(99, 102, 241, 1)',
-                    'rgba(255, 255, 255, 0.1)'
-                ],
-                borderWidth: 1,
-                hoverOffset: 10
+                birim: 'm3',
+                backgroundColor: [MOD_RENK.su, '#1e40af', 'rgba(148, 163, 184, 0.2)'],
+                hoverOffset: 6
             }]
         },
         options: {
@@ -111,72 +54,52 @@ document.addEventListener('DOMContentLoaded', function() {
             maintainAspectRatio: false,
             cutout: '65%',
             plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: { color: '#cbd5e1', padding: 20, font: { family: "'Outfit', sans-serif" } }
-                },
+                legend: { position: 'bottom' },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            return ' ' + context.label + ': ' + context.raw + ' Milyon m³';
+                            return context.label + ': ' + formatBirimli(Number(context.raw), 'm3');
                         }
                     }
                 },
+                // Maksimum hacme göre pay; çok küçük dilimler yazılmaz
                 datalabels: {
-                    color: '#fff',
-                    font: { weight: 'bold', size: 14 },
-                    formatter: (value, context) => {
-                        if (value < 1) return '';
-                        let percentage = ((value / maxHacim) * 100).toFixed(1) + "%";
-                        return percentage;
-                    }
+                    display: function(ctx) { return Number(ctx.dataset.data[ctx.dataIndex]) >= 1; },
+                    color: '#f8fafc',
+                    anchor: 'center',
+                    align: 'center',
+                    font: { weight: '600', size: 13 },
+                    formatter: (value) => formatYuzde((Number(value) / maxHacim) * 100)
                 }
             }
         }
     });
 
-    // 2. Su Kaynakları Sayısal Dağılımı (Türlere Göre)
-    const ctxKaynak = document.getElementById('kaynakChart').getContext('2d');
-    
-    new Chart(ctxKaynak, {
-        type: 'polarArea',
+    // 2. Su kaynaklarının türlerine göre sayısı
+    // Kaynak ADEDİ gösterildiği için (üretim hacmi değil) basit çubuk kullanılır
+    const ctxKaynak = getCtx('kaynakChart');
+    if (ctxKaynak) new Chart(ctxKaynak, {
+        type: 'bar',
         data: {
             labels: ['Yüzeysel (Barajlar)', 'Yeraltı (Kuyular)'],
             datasets: [{
+                label: 'Kaynak sayısı',
                 data: [3, 5], // 3 baraj, 5 kuyu grubu
-                backgroundColor: [
-                    'rgba(59, 130, 246, 0.6)',  // Yüzeysel
-                    'rgba(16, 185, 129, 0.6)'   // Yeraltı
-                ],
-                borderColor: [
-                    'rgba(59, 130, 246, 1)',
-                    'rgba(16, 185, 129, 1)'
-                ],
-                borderWidth: 2
+                birim: 'adet',
+                backgroundColor: [MOD_RENK.su, '#14b8a6'],
+                barPercentage: 0.5
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            scales: {
-                r: {
-                    ticks: { display: false },
-                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                    angleLines: { color: 'rgba(255, 255, 255, 0.1)' }
-                }
-            },
             plugins: {
-                legend: {
-                    position: 'bottom',
-                    labels: { color: '#cbd5e1', padding: 20, font: { family: "'Outfit', sans-serif" } }
-                },
-                datalabels: {
-                    color: '#fff',
-                    font: { weight: 'bold', size: 16 },
-                    formatter: (value) => {
-                        return value + ' Kaynak';
-                    }
-                }
+                legend: { display: false },
+                datalabels: { formatter: (value) => value + ' kaynak' }
+            },
+            scales: {
+                y: degerEkseni('Kaynak sayısı', { ticks: { stepSize: 1, precision: 0 }, grace: '15%' }),
+                x: kategoriEkseni
             }
         }
     });

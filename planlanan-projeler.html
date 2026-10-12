@@ -19,9 +19,6 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(12px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            opacity: 0;
-            transform: translateY(20px);
         }
 
         .premium-card::before {
@@ -39,7 +36,6 @@
         }
 
         .premium-card:hover {
-            transform: translateY(-5px);
             box-shadow: 0 15px 35px -5px rgba(56, 189, 248, 0.3);
             border-color: rgba(56, 189, 248, 0.5);
         }
@@ -75,15 +71,11 @@
             overflow: hidden;
             transition: all 0.5s ease;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            opacity: 0;
-            transform: translateY(20px);
         }
 
         .stage-box:hover {
             border-color: rgba(56, 189, 248, 0.5);
             box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);
-            transform: translateY(-4px);
         }
 
         .stage-header {
@@ -117,7 +109,6 @@
         }
         
         .pulse-badge {
-            animation: pulse-glow 2s infinite;
             box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
         }
 
@@ -127,7 +118,7 @@
             100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
     </style>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏢</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 </head>
 <body>
 
@@ -221,17 +212,17 @@
             <div class="stats-row">
                 <div class="stat-card">
                     <div class="stat-label">Toplam Uzunluk</div>
-                    <div class="stat-value">4.25 KM</div>
+                    <div class="stat-value">4,25 km</div>
                     <div class="stat-change change-up">3 Etaplı Hat</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Planlanan Genişlik</div>
-                    <div class="stat-value">25 M</div>
-                    <div class="stat-change change-up">24.5m - 25m arası</div>
+                    <div class="stat-value">25 m</div>
+                    <div class="stat-change change-up">24,5–25 m arası</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Tamamlanan Bölüm</div>
-                    <div class="stat-value">1.5 KM</div>
+                    <div class="stat-value">1,5 km</div>
                     <div class="stat-change change-up">1. Etap Hizmete Açıldı</div>
                 </div>
             </div>
@@ -294,7 +285,7 @@
                                 1. Etap <span class="pulse-badge" style="font-size: 0.9rem; background: var(--success); color: #000; padding: 0.3rem 0.8rem; border-radius: 20px; font-weight: 800; margin-left: 0.5rem;">Tamamlandı</span>
                             </h3>
                             <p style="color: var(--text-muted); margin: 0.5rem 0 0 0; font-size: 0.95rem;">
-                                <i class="fa-solid fa-location-dot" style="color: var(--accent-1);"></i> Yalı Mahallesi: İstikbal Caddesi ile Seferihisar Caddesi arası (1.5 km)
+                                <i class="fa-solid fa-location-dot" style="color: var(--accent-1);"></i> Yalı Mahallesi: İstikbal Caddesi ile Seferihisar Caddesi arası (1,5 km)
                             </p>
                         </div>
                     </div>
@@ -408,5 +399,6 @@
             }
         });
     </script>
+    <script src="js/ui.js"></script>
 </body>
 </html>

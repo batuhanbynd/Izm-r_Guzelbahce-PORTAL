@@ -35,63 +35,51 @@
                 {
                     label: '2020',
                     data: vapurTop10.map(d => d.g2020),
-                    backgroundColor: 'rgba(56, 189, 248, 0.7)',
-                    borderRadius: 4,
-                    barPercentage: 0.75
+                    birim: 'yolcu',
+                    backgroundColor: NOTR_RENK.onceki,
+                    barPercentage: 0.8
                 },
                 {
                     label: '2025',
                     data: vapurTop10.map(d => d.g2025),
-                    backgroundColor: 'rgba(129, 140, 248, 0.85)',
-                    borderRadius: 4,
-                    barPercentage: 0.75
+                    birim: 'yolcu',
+                    backgroundColor: MOD_RENK.vapur,
+                    barPercentage: 0.8
                 },
                 {
-                    label: '2030',
+                    // Projeksiyon: açık dolgu + kenarlık, ölçülmüş verilerden ayrışsın
+                    label: '2030 (projeksiyon)',
                     data: vapurTop10.map(d => d.g2030),
-                    backgroundColor: 'rgba(244, 114, 182, 0.8)',
-                    borderRadius: 4,
-                    barPercentage: 0.75
+                    birim: 'yolcu',
+                    backgroundColor: renkSaydam(MOD_RENK.vapur, 0.2),
+                    borderColor: MOD_RENK.vapur,
+                    borderWidth: 1.5,
+                    barPercentage: 0.8
                 }
             ]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 10 } },
-                tooltip: tooltipConfig,
-                datalabels: { display: false }
-            },
+            plugins: { legend: { position: 'top' } },
             scales: {
-                y: {
-                    ...yAxisConfig,
-                    ticks: { callback: function(v) { return (v/1000).toFixed(0)+'B'; } }
-                },
-                x: { grid: { display: false }, ticks: { maxRotation: 45, minRotation: 30, font: { size: 10 } } }
+                y: degerEkseni('Günlük yolcu'),
+                x: { ...kategoriEkseni, ticks: { maxRotation: 45, minRotation: 30, font: { size: 10 } } }
             },
             interaction: { mode: 'index', intersect: false }
         }
     });
 
-    // Pie: 2025 Dağılım (Top 8 + Diğer)
+    // Halka: 2025 dağılımı (en yoğun 8 hat + diğer)
     const vapurSorted25 = [...vapurHatlar].sort((a,b) => b.g2025 - a.g2025);
     const vapurPieTop = vapurSorted25.slice(0, 8);
     const vapurPieOther = vapurSorted25.slice(8).reduce((s,d) => s + d.g2025, 0);
     const vapurPieLabels = vapurPieTop.map(d => d.kod + ' ' + d.hat);
-    vapurPieLabels.push('Diğer Hatlar');
+    vapurPieLabels.push('Diğer hatlar');
     const vapurPieData = vapurPieTop.map(d => d.g2025);
     vapurPieData.push(vapurPieOther);
-    const vapurPieColors = [
-        'rgba(129, 140, 248, 0.85)',
-        'rgba(56, 189, 248, 0.85)',
-        'rgba(244, 114, 182, 0.8)',
-        'rgba(16, 185, 129, 0.8)',
-        'rgba(251, 191, 36, 0.8)',
-        'rgba(239, 68, 68, 0.7)',
-        'rgba(168, 85, 247, 0.8)',
-        'rgba(20, 184, 166, 0.8)',
-        'rgba(100, 116, 139, 0.6)'
-    ];
+    // Tek renk ailesi: en yoğun hat en koyu, "diğer" gri
+    const vapurPieColors = vapurPieTop.map((d, i) => renkSaydam(MOD_RENK.vapur, 1 - i * 0.1));
+    vapurPieColors.push(NOTR_RENK.onceki);
 
     const ctxVP = getCtx('vapurPieChart');
     if (ctxVP) new Chart(ctxVP, {
@@ -100,33 +88,22 @@
             labels: vapurPieLabels,
             datasets: [{
                 data: vapurPieData,
+                birim: 'yolcu',
                 backgroundColor: vapurPieColors,
-                borderColor: 'rgba(30, 41, 59, 1)',
-                borderWidth: 3,
-                hoverOffset: 12
+                hoverOffset: 6
             }]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
             cutout: '60%',
             plugins: {
-                legend: { position: 'bottom', labels: { usePointStyle: true, padding: 10, font: { size: 10 }, color: '#f8fafc' } },
-                tooltip: {
-                    ...tooltipConfig,
-                    callbacks: {
-                        label: function(ctx) {
-                            const total = ctx.dataset.data.reduce((a,b) => a+b, 0);
-                            const pct = ((ctx.parsed / total)*100).toFixed(1);
-                            return ctx.label + ': ' + new Intl.NumberFormat('tr-TR').format(ctx.parsed) + ' (%' + pct + ')';
-                        }
-                    }
-                },
-                datalabels: { display: false }
+                legend: { position: 'bottom', labels: { padding: 10, font: { size: 10 } } },
+                tooltip: tooltipPayConfig
             }
         }
     });
 
-    // Growth Chart: 2020 -> 2030 en çok büyüyen 5 hat
+    // Büyüme: 2020 -> 2030 en çok büyüyen 5 hat
     const vapurGrowth = vapurHatlar.map(d => ({
         ...d,
         buyume: ((d.g2030 - d.g2020) / d.g2020 * 100).toFixed(1)
@@ -138,37 +115,19 @@
         data: {
             labels: vapurGrowth.map(d => d.kod + ' ' + d.hat),
             datasets: [{
-                label: 'Büyüme (%)',
+                label: '2020–2030 büyüme',
                 data: vapurGrowth.map(d => parseFloat(d.buyume)),
-                backgroundColor: [
-                    'rgba(16, 185, 129, 0.85)',
-                    'rgba(56, 189, 248, 0.85)',
-                    'rgba(129, 140, 248, 0.85)',
-                    'rgba(244, 114, 182, 0.8)',
-                    'rgba(251, 191, 36, 0.8)'
-                ],
-                borderRadius: 6
+                birim: 'yuzde',
+                backgroundColor: MOD_RENK.vapur,
+                barPercentage: 0.65
             }]
         },
         options: {
             indexAxis: 'y',
             responsive: true, maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                tooltip: tooltipConfig,
-                datalabels: {
-                    anchor: 'end',
-                    align: 'end',
-                    formatter: function(v) { return v + '%'; },
-                    font: { weight: 'bold', size: 13 },
-                    color: '#f8fafc'
-                }
-            },
+            plugins: { legend: { display: false } },
             scales: {
-                x: {
-                    grid: { color: 'rgba(255,255,255,0.05)' },
-                    ticks: { callback: function(v) { return v + '%'; } }
-                },
+                x: yuzdeEkseni('Büyüme (2020–2030)', { grace: '15%' }),
                 y: { grid: { display: false }, ticks: { font: { size: 10 } } }
             }
         }
