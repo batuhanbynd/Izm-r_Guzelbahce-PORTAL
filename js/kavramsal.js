@@ -739,7 +739,7 @@
         ids.forEach((id, i) => {
             const th = document.createElement('th');
             th.style.textAlign = 'center';
-            th.innerHTML = `<span style="font-size:1.3rem;">${ikonlar[i]}</span><br><span style="font-size:0.7rem; color:${renkler[i]};">${labels[i].split(' ')[0]}</span>`;
+            th.innerHTML = `<span class="fa-solid" aria-hidden="true" style="font-size:1.3rem;">${ikonlar[i]}</span><br><span style="font-size:0.7rem; color:${renkler[i]};">${labels[i].split(' ')[0]}</span>`;
             th.style.cursor = 'pointer';
             th.addEventListener('click', () => {
                 const target = tabMap[id];
@@ -756,7 +756,7 @@
             const tr = document.createElement('tr');
             const rowHeader = document.createElement('th');
             rowHeader.className = 'matrix-row-header';
-            rowHeader.innerHTML = `${ikonlar[ri]} <span style="color:${renkler[ri]};">${labels[ri]}</span>`;
+            rowHeader.innerHTML = `<span class="fa-solid" aria-hidden="true">${ikonlar[ri]}</span> <span style="color:${renkler[ri]};">${labels[ri]}</span>`;
             rowHeader.style.cursor = 'pointer';
             rowHeader.addEventListener('click', () => {
                 const target = tabMap[rowId];
