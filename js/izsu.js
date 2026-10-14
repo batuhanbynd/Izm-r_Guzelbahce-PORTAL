@@ -104,3 +104,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// 3. Su altyapısı metrajı (Word belgesindeki tablo): içme suyu 173, atıksu 134, yağmursuyu 13
+document.addEventListener('DOMContentLoaded', function() {
+    const turler = ['İçme suyu', 'Atıksu', 'Yağmursuyu'];
+    const metraj = [173, 134, 13];
+    const renkler = ['#0ea5e9', '#0f766e', '#7dd3fc'];
+    const toplam = metraj.reduce((a, b) => a + b, 0);
+
+    const ctxMetraj = getCtx('metrajChart');
+    if (ctxMetraj) new Chart(ctxMetraj, {
+        type: 'bar',
+        data: { labels: turler, datasets: [{ label: 'Metraj', data: metraj, backgroundColor: renkler, borderRadius: 10, barPercentage: 0.6 }] },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false }, datalabels: { formatter: (value) => formatSayi(value) } },
+            scales: { y: degerEkseni('Metraj', { grace: '15%' }), x: kategoriEkseni }
+        }
+    });
+
+    const ctxPay = getCtx('metrajPayChart');
+    if (ctxPay) new Chart(ctxPay, {
+        type: 'doughnut',
+        data: { labels: turler, datasets: [{ data: metraj, backgroundColor: renkler, hoverOffset: 6 }] },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '58%',
+            plugins: {
+                legend: { position: 'bottom' },
+                tooltip: { callbacks: { label: (c) => c.label + ': ' + formatSayi(c.raw) + ' (' + formatYuzde(c.raw / toplam * 100, 1) + ')' } },
+                datalabels: { display: (ctx) => ctx.dataset.data[ctx.dataIndex] / toplam >= 0.08, color: '#f8fafc', anchor: 'center', align: 'center', font: { weight: '600', size: 13 }, formatter: (value) => formatYuzde(value / toplam * 100, 1) }
+            }
+        }
+    });
+});

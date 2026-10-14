@@ -36,6 +36,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="dolmus.html" class="nav-link" data-target="dolmus">
+                    <i class="fa-solid fa-van-shuttle"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="tramvay.html" class="nav-link" data-target="tramvay">
                     <i class="fa-solid fa-train-tram"></i>
                     Tramvay
@@ -71,10 +77,22 @@
                     KGM Karayolları
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link" data-target="otopark">
+                    <i class="fa-solid fa-square-parking"></i>
+                    Otoparklar
+                </a>
+            </li>
                         <li class="nav-item">
                 <a href="izsu.html" class="nav-link" data-target="izsu">
                     <i class="fa-solid fa-droplet"></i>
                     İZSU Su Kaynakları
+                </a>
+            </li>
+                        <li class="nav-item">
+                <a href="elektrik.html" class="nav-link" data-target="elektrik">
+                    <i class="fa-solid fa-bolt"></i>
+                    Elektrik Altyapısı
                 </a>
             </li>
 
@@ -730,9 +748,45 @@
                 <h2><i class="fa-solid fa-map-location-dot" style="color: var(--accent-1);"></i> ESHOT Güzelbahçe Geneli Tüm Hatların Etki Çapı ve Kapsama Alanı</h2>
                 <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Aşağıdaki görselde, ESHOT otobüs ağının Güzelbahçe genelindeki hizmet yarıçapı, kapsama alanı ve tüm güzergahların oluşturduğu bütünleşik etki çapı detaylı olarak haritalandırılmıştır.</p>
                 <div style="padding: 0; text-align: center; background: rgba(15, 23, 42, 0.8); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1);">
-                    <div class="interactive-image-container" onclick="openImageModal('tüm.jpeg')" style="width: 100%; display: block; border-radius: 0;">
+                    <div class="interactive-image-container etiketli-harita" onclick="openImageModal('tüm.jpeg')" style="width: 100%; display: block; border-radius: 0;">
                         <img src="tüm.jpeg" alt="Tüm Hatların Etki Çapı" style="width: 100%; height: auto; display: block; image-rendering: high-quality; border-radius: 0;">
+                        <svg class="cizgiler" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="62.5" y1="13.6" x2="62.5" y2="26.2" stroke="#0f172a" stroke-width="2" vector-effect="non-scaling-stroke"/><line x1="17.25" y1="30.3" x2="33.1" y2="41.3" stroke="#0f172a" stroke-width="2" vector-effect="non-scaling-stroke"/><line x1="73.6" y1="48.4" x2="68.85" y2="39.35" stroke="#0f172a" stroke-width="2" vector-effect="non-scaling-stroke"/><line x1="13.15" y1="74.6" x2="32.5" y2="80.6" stroke="#0f172a" stroke-width="2" vector-effect="non-scaling-stroke"/><line x1="59.1" y1="83.9" x2="50.9" y2="85.9" stroke="#0f172a" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
+                        <span class="harita-pin" style="left: 62.5%; top: 26.2%;"></span>
+                        <div class="harita-not" style="left: 56%; top: 2.3%; width: 19.75%; border-left: 6px solid transparent; border-image: linear-gradient(#e3262b 50%, #e040e0 50%) 1;"><div class="hn-hat">HAT 8 · HAT 82</div><div class="hn-deger dakika">21–22 / 30 dk</div><div class="hn-guzergah">Mithatpaşa Cd. → F. Altay Aktarma</div></div>
+                        <span class="harita-pin" style="left: 33.1%; top: 41.3%;"></span>
+                        <div class="harita-not" style="left: 1.6%; top: 19%; width: 15.65%; border-left-color: #2e9b3a;"><div class="hn-hat">HAT 9</div><div class="hn-deger saat">2 saat</div><div class="hn-guzergah">Özzümrüt Evleri – Siteler</div></div>
+                        <span class="harita-pin" style="left: 68.85%; top: 39.35%;"></span>
+                        <div class="harita-not" style="left: 73.6%; top: 48.4%; width: 15.65%; border-left-color: #5b2bd0;"><div class="hn-hat">HAT 684</div><div class="hn-deger dakika">25 dk</div><div class="hn-guzergah">Urla → F. Altay · ekspres</div></div>
+                        <span class="harita-pin" style="left: 32.5%; top: 80.6%;"></span>
+                        <div class="harita-not" style="left: 1.6%; top: 63.3%; width: 11.55%; border-left-color: #e8c400;"><div class="hn-hat">HAT 762</div><div class="hn-deger saat">2 saat</div><div class="hn-guzergah">Yelki – Dadaşkent</div></div>
+                        <span class="harita-pin" style="left: 50.9%; top: 85.9%;"></span>
+                        <div class="harita-not" style="left: 59.1%; top: 72.7%; width: 15.15%; border-left-color: #2268b0;"><div class="hn-hat">HAT 28</div><div class="hn-deger saat">4 saat</div><div class="hn-guzergah">Payamlı – Küçükkaya Köyü</div></div>
                         <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> Büyüt</div>
+                    </div>
+                    <div class="hat-anahtari">
+                        <span><i class="cizgi" style="background:#e3262b"></i>Hat 8 · 21–22 dk</span>
+                        <span><i class="cizgi" style="background:#e040e0"></i>Hat 82 · 30 dk</span>
+                        <span><i class="cizgi" style="background:#5b2bd0"></i>Hat 684 · 25 dk</span>
+                        <span><i class="cizgi" style="background:#2e9b3a"></i>Hat 9 · 2 saat</span>
+                        <span><i class="cizgi" style="background:#e8c400"></i>Hat 762 · 2 saat</span>
+                        <span><i class="cizgi" style="background:#2268b0"></i>Hat 28 · 4 saat</span>
+                        <span><i class="daire"></i>400 m durak erişim alanı</span>
+                        <small>Not kutusu: ortalama sefer aralığı (lacivert: dakika, kırmızı: saat düzeyi)</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Verilerden elde edilen bulgular -->
+            <div class="card full-width" style="margin-top: 2rem;">
+                <h2><i class="fa-solid fa-lightbulb" style="color: var(--success);"></i> Verilerden Elde Edilen Bulgular</h2>
+                <div class="bulgu-blok">
+                    <p class="bulgu-baslik"><i class="fa-solid fa-bus"></i> Otobüsler</p>
+                    <div class="bulgu-akisi">
+                        <div class="bulgu-kutu veri"><span class="etiket"><i class="fa-solid fa-database"></i> Veri</span><p>Hat 8, 82, 684: 21–22 dk / 30 dk / 25 dk; Hat 9, 28, 762: 2 saat / 4 saat / 2 saat sefer aralığı.</p></div>
+                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="bulgu-kutu analiz"><span class="etiket"><i class="fa-solid fa-magnifying-glass-chart"></i> Analiz</span><p>Kent merkezine bağlanan hatlar dakika, iç kesim hatları saat düzeyinde çalışmakta; iç kesim hatlarının son kalkışı 16:30–20:20 arasındadır.</p></div>
+                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="bulgu-kutu bulgu"><span class="etiket"><i class="fa-solid fa-lightbulb"></i> Bulgu</span><p>Toplu taşıma hizmet düzeyi kıyı–iç kesim ayrımında belirgin biçimde farklılaşmakta; iç kesimlerde otobüs erişimi zaman açısından kısıtlıdır.</p></div>
                     </div>
                 </div>
             </div>

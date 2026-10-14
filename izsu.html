@@ -20,13 +20,16 @@
             <li class="nav-item"><a href="kavramsal.html" class="nav-link"><i class="fa-solid fa-network-wired"></i> Diyagramlar</a></li>
             <li class="nav-item"><a href="index.html" class="nav-link"><i class="fa-solid fa-plane-departure"></i> Adnan Menderes</a></li>
             <li class="nav-item"><a href="eshot.html" class="nav-link"><i class="fa-solid fa-bus"></i> ESHOT</a></li>
+            <li class="nav-item"><a href="dolmus.html" class="nav-link"><i class="fa-solid fa-van-shuttle"></i> Dolmuş</a></li>
             <li class="nav-item"><a href="tramvay.html" class="nav-link"><i class="fa-solid fa-train-tram"></i> Tramvay</a></li>
             <li class="nav-item"><a href="izban.html" class="nav-link"><i class="fa-solid fa-train"></i> İZBAN</a></li>
             <li class="nav-item"><a href="vapur.html" class="nav-link"><i class="fa-solid fa-ship"></i> Vapur (İzdeniz)</a></li>
             <li class="nav-item"><a href="metro.html" class="nav-link"><i class="fa-solid fa-subway"></i> İzmir Metro</a></li>
             <li class="nav-item"><a href="karsilastirma.html" class="nav-link"><i class="fa-solid fa-chart-pie"></i> Ulaşım Karşılaştırması</a></li>
             <li class="nav-item"><a href="kgm.html" class="nav-link"><i class="fa-solid fa-road"></i> KGM Karayolları</a></li>
+            <li class="nav-item"><a href="otoparklar.html" class="nav-link"><i class="fa-solid fa-square-parking"></i> Otoparklar</a></li>
             <li class="nav-item"><a href="izsu.html" class="nav-link active"><i class="fa-solid fa-droplet"></i> İZSU Su Kaynakları</a></li>
+            <li class="nav-item"><a href="elektrik.html" class="nav-link"><i class="fa-solid fa-bolt"></i> Elektrik Altyapısı</a></li>
             
             <li class="nav-item">
                 <a href="planlanan-projeler.html" class="nav-link" data-target="planlanan">
@@ -305,6 +308,43 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Su Altyapısı Metrajı -->
+            <div class="bolum-baslik">
+                <div class="ikon" style="background: rgba(14, 165, 233, 0.15); color: #0ea5e9;"><i class="fa-solid fa-ruler-combined"></i></div>
+                <div>
+                    <h2>Su Altyapısı Metrajı</h2>
+                    <p>Güzelbahçe içme suyu, atıksu ve yağmursuyu altyapısının metrajı ve dağılımı</p>
+                </div>
+            </div>
+
+            <div class="charts-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                <div class="tablo-kutu" style="grid-column: 1 / -1;">
+                    <table class="veri-tablosu">
+                        <thead><tr><th>Altyapı Türü</th><th class="sayi">Metraj</th><th class="sayi">Oran (%)</th></tr></thead>
+                        <tbody>
+                            <tr><td><span class="legend-dot" style="display: inline-block; background: #0ea5e9; margin-right: 10px; vertical-align: middle;"></span>İçme Suyu</td><td class="sayi">173</td><td class="sayi">54,1</td></tr>
+                            <tr><td><span class="legend-dot" style="display: inline-block; background: #0f766e; margin-right: 10px; vertical-align: middle;"></span>Atıksu</td><td class="sayi">134</td><td class="sayi">41,9</td></tr>
+                            <tr><td><span class="legend-dot" style="display: inline-block; background: #7dd3fc; margin-right: 10px; vertical-align: middle;"></span>Yağmursuyu</td><td class="sayi">13</td><td class="sayi">4,1</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="chart-card" style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.2rem;">Metraj Karşılaştırması</h3>
+                    <div style="height: 300px;"><canvas id="metrajChart"></canvas></div>
+                </div>
+                <div class="chart-card" style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color);">
+                    <h3 style="margin-bottom: 1rem; color: var(--text-color); font-size: 1.2rem;">Metraj Dağılımı (%)</h3>
+                    <div style="height: 300px;"><canvas id="metrajPayChart"></canvas></div>
+                </div>
+                <div class="gallery-card" onclick="openLightbox('su_altyapi_hatlari.jpg')" style="grid-column: 1 / -1; cursor: pointer; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.4);">
+                    <div style="padding: 1rem 1.25rem; color: #f8fafc; font-weight: 600; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-map-location-dot" style="color: #38bdf8;"></i> Altyapı Hatları Harita Görünümü</div>
+                    <div style="position: relative; background: #000;">
+                        <img src="su_altyapi_hatlari.jpg" alt="Güzelbahçe su altyapı hatları harita görünümü" style="width: 100%; height: auto; display: block;" loading="lazy">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(15,23,42,0.8); padding: 20px; border-radius: 50%; border: 2px solid #38bdf8; color: #38bdf8; opacity: 0; transition: opacity 0.3s ease;" class="zoom-icon"><i class="fa-solid fa-expand" style="font-size: 2.2rem;"></i></div>
+                    </div>
+                </div>
             </div>
 
             <!-- Gallery Section -->

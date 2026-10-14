@@ -145,6 +145,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="dolmus.html" class="nav-link" data-target="dolmus">
+                    <i class="fa-solid fa-van-shuttle"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="tramvay.html" class="nav-link" data-target="tramvay">
                     <i class="fa-solid fa-train-tram"></i>
                     Tramvay
@@ -181,9 +187,21 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link" data-target="otopark">
+                    <i class="fa-solid fa-square-parking"></i>
+                    Otoparklar
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="izsu.html" class="nav-link" data-target="izsu">
                     <i class="fa-solid fa-droplet"></i>
                     İZSU Su Kaynakları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link" data-target="elektrik">
+                    <i class="fa-solid fa-bolt"></i>
+                    Elektrik Altyapısı
                 </a>
             </li>
             <li class="nav-item">
@@ -337,6 +355,75 @@
                     </div>
                 </div>
 
+            </div>
+
+            <!-- Planlanan Metro Hattı -->
+            <header id="planlanan-metro" style="margin-top: 3.5rem;">
+                <h1><i class="fa-solid fa-train-subway" style="color: var(--danger); margin-right: 10px;"></i>Planlanan Metro Hattı</h1>
+                <p class="subtitle">Narlıdere'den sonra planlanan raylı sistem hattı ve durakları</p>
+            </header>
+
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label">Planlanan Uzunluk</div>
+                    <div class="stat-value">13,6 km</div>
+                    <div class="stat-change change-up">Narlıdere'den sonra</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Planlanan İstasyon</div>
+                    <div class="stat-value">11</div>
+                    <div class="stat-change change-up">İstasyon</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Mevcut Raylı Sistem İstasyonu</div>
+                    <div class="stat-value">Yok</div>
+                    <div class="stat-change change-down">Güzelbahçe'de</div>
+                </div>
+            </div>
+
+            <div class="card full-width" style="margin-bottom: 2rem;">
+                <h2><i class="fa-solid fa-route" style="color: var(--danger);"></i> Planlanan Duraklar</h2>
+                <p style="color: var(--text-muted); margin: -0.75rem 0 0.5rem;">Güzelbahçe'de raylı sistem istasyonu bulunmamaktadır; en yakın metroya ESHOT ile ulaşım sağlanmaktadır. Planlanan metro hattı Narlıdere'den sonra 13,6 kilometre uzunluğunda olacak; 11 istasyon yapılması planlanmaktadır.</p>
+                <div class="istasyon-hatti">
+                    <div class="ist">Pertev Bey</div>
+                    <div class="ist">Lojmanlar</div>
+                    <div class="ist">Liman Reis</div>
+                    <div class="ist">Maltepe</div>
+                    <div class="ist">Anıt</div>
+                    <div class="ist">Güzelbahçe İskele</div>
+                    <div class="ist">Yalı</div>
+                    <div class="ist">Seferihisar Kavşağı</div>
+                    <div class="ist">Siteler</div>
+                    <div class="ist">Çamlıçay</div>
+                </div>
+            </div>
+
+            <div class="card full-width">
+                <h2><i class="fa-solid fa-map-location-dot" style="color: var(--accent-1);"></i> Planlanan İstasyonlar ve Erişilebilirlik</h2>
+                    <figure class="harita-figur">
+                        <figcaption><i class="fa-solid fa-location-dot"></i> Planlanan istasyon konumları</figcaption>
+                        <div class="interactive-image-container" onclick="openImageModal('metro_planlanan_istasyonlar.png')">
+                            <img src="metro_planlanan_istasyonlar.png" alt="Planlanan metro istasyonlarının konumları" loading="lazy">
+                            <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> Büyüt</div>
+                        </div>
+                    </figure>
+                <div class="harita-ikili" style="margin-top: 1.5rem;">
+                    <figure class="harita-figur">
+                        <figcaption><i class="fa-solid fa-circle-nodes"></i> Erişilebilirlik <small>(3 km çap)</small></figcaption>
+                        <div class="interactive-image-container" onclick="openImageModal('metro_erisilebilirlik_3km.png')">
+                            <img src="metro_erisilebilirlik_3km.png" alt="Planlanan istasyonlara erişilebilirlik, 3 km çap" loading="lazy">
+                            <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> Büyüt</div>
+                        </div>
+                    </figure>
+                    <figure class="harita-figur">
+                        <figcaption><i class="fa-solid fa-circle-nodes"></i> Erişilebilirlik <small>(5 km çap)</small></figcaption>
+                        <div class="interactive-image-container" onclick="openImageModal('metro_erisilebilirlik_5km.png')">
+                            <img src="metro_erisilebilirlik_5km.png" alt="Planlanan istasyonlara erişilebilirlik, 5 km çap" loading="lazy">
+                            <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> Büyüt</div>
+                        </div>
+                    </figure>
+                </div>
+                <p style="margin: 1.25rem 0 0; color: var(--text-muted); font-size: 0.95rem;"><i class="fa-solid fa-circle-info" style="color: var(--accent-1); margin-right: 6px;"></i>İzmir raylı sistemler haritası ve metro biniş verileri için <a href="metro.html" style="color: var(--accent-1);">İzmir Metro</a> sekmesine bakınız.</p>
             </div>
         </div>
     </main>

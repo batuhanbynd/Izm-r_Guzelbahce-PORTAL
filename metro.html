@@ -36,6 +36,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="dolmus.html" class="nav-link" data-target="dolmus">
+                    <i class="fa-solid fa-van-shuttle"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="tramvay.html" class="nav-link" data-target="tramvay">
                     <i class="fa-solid fa-train-tram"></i>
                     Tramvay
@@ -71,10 +77,22 @@
                     KGM Karayolları
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link" data-target="otopark">
+                    <i class="fa-solid fa-square-parking"></i>
+                    Otoparklar
+                </a>
+            </li>
                         <li class="nav-item">
                 <a href="izsu.html" class="nav-link" data-target="izsu">
                     <i class="fa-solid fa-droplet"></i>
                     İZSU Su Kaynakları
+                </a>
+            </li>
+                        <li class="nav-item">
+                <a href="elektrik.html" class="nav-link" data-target="elektrik">
+                    <i class="fa-solid fa-bolt"></i>
+                    Elektrik Altyapısı
                 </a>
             </li>
 
@@ -127,6 +145,58 @@
                     </div>
                 </div>
                 
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-train-subway" style="color: var(--danger);"></i> Güzelbahçe ve Planlanan Metro Hattı</h2>
+                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;"><i class="fa-solid fa-circle-info" style="color: var(--accent-1); margin-right: 8px;"></i>Güzelbahçe'de raylı sistem istasyonu bulunmamaktadır; en yakın metroya ESHOT ile ulaşım sağlanmaktadır. Planlanan metro hattı Narlıdere'den sonra <strong>13,6 kilometre</strong> uzunluğunda olacak; <strong>11 istasyon</strong> yapılması planlanmaktadır.</p>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border-bottom: 3px solid var(--danger);"><div style="font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 4px;">13,6 km</div><div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Planlanan hat uzunluğu (Narlıdere sonrası)</div></div>
+                        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border-bottom: 3px solid var(--accent-2);"><div style="font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 4px;">11</div><div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Planlanan istasyon sayısı</div></div>
+                        <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border-bottom: 3px solid var(--accent-1);"><div style="font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 4px;">Yok</div><div style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Güzelbahçe'de mevcut raylı sistem istasyonu</div></div>
+                    </div>
+                    <h3 style="display: flex; align-items: center; gap: 10px; color: var(--text-main); font-size: 1.1rem; margin: 0;"><i class="fa-solid fa-route" style="color: var(--danger);"></i> Planlanan Duraklar</h3>
+                    <div class="istasyon-hatti">
+                        <div class="ist">Pertev Bey</div>
+                        <div class="ist">Lojmanlar</div>
+                        <div class="ist">Liman Reis</div>
+                        <div class="ist">Maltepe</div>
+                        <div class="ist">Anıt</div>
+                        <div class="ist">Güzelbahçe İskele</div>
+                        <div class="ist">Yalı</div>
+                        <div class="ist">Seferihisar Kavşağı</div>
+                        <div class="ist">Siteler</div>
+                        <div class="ist">Çamlıçay</div>
+                    </div>
+                </div>
+
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-map-location-dot" style="color: var(--accent-1);"></i> Planlanan İstasyonlar ve Erişilebilirlik</h2>
+                        <figure class="harita-figur">
+                            <figcaption><i class="fa-solid fa-location-dot"></i> Planlanan istasyon konumları</figcaption>
+                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                <img src="metro_planlanan_istasyonlar.png" alt="Planlanan metro istasyonlarının konumları" loading="lazy">
+                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                            </div>
+                        </figure>
+                    <div class="harita-ikili" style="margin-top: 1.5rem;">
+                        <figure class="harita-figur">
+                            <figcaption><i class="fa-solid fa-circle-nodes"></i> Erişilebilirlik <small>(3 km çap)</small></figcaption>
+                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                <img src="metro_erisilebilirlik_3km.png" alt="Planlanan istasyonlara erişilebilirlik, 3 km çap" loading="lazy">
+                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                            </div>
+                        </figure>
+                        <figure class="harita-figur">
+                            <figcaption><i class="fa-solid fa-circle-nodes"></i> Erişilebilirlik <small>(5 km çap)</small></figcaption>
+                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                <img src="metro_erisilebilirlik_5km.png" alt="Planlanan istasyonlara erişilebilirlik, 5 km çap" loading="lazy">
+                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+
                 <div class="card full-width" style="text-align: center;">
                     <h2>İzmir Raylı Sistemler Haritası</h2>
                     <img src="harita.jpg" alt="İzmir Raylı Sistemler Haritası" style="max-width: 100%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
@@ -134,6 +204,41 @@
             </div>
         </div>
     </main>
+
+
+    <!-- Görsel büyütme penceresi -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-modal" onclick="closeImageModal()">&times;</span>
+        <div class="modal-content-wrapper" id="modalContentWrapper">
+            <img class="modal-content" id="modalImage" alt="Harita">
+        </div>
+        <div class="modal-controls">
+            <button onclick="zoomModalImage(1.2)" title="Büyüt"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+            <button onclick="zoomModalImage(0.8)" title="Küçült"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+            <button onclick="zoomModalImage('reset')" title="Sıfırla"><i class="fa-solid fa-compress"></i></button>
+        </div>
+    </div>
+    <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
+    <script>
+        let pzInstance = null;
+        function openImageModal(imgSrc) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+            modal.style.display = "block";
+            modalImg.src = imgSrc;
+            if (pzInstance) pzInstance.destroy();
+            pzInstance = Panzoom(modalImg, { maxScale: 10, minScale: 0.5, startScale: 1, cursor: 'grab' });
+            modal.addEventListener('wheel', pzInstance.zoomWithWheel);
+        }
+        function closeImageModal() {
+            document.getElementById("imageModal").style.display = "none";
+            if (pzInstance) { pzInstance.destroy(); pzInstance = null; }
+        }
+        function zoomModalImage(scale) {
+            if (!pzInstance) return;
+            if (scale === 'reset') pzInstance.reset(); else pzInstance.zoom(pzInstance.getScale() * scale);
+        }
+    </script>
 
     <script src="js/chart-config.js"></script>
     <script src="js/metro.js"></script>
