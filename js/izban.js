@@ -12,86 +12,42 @@
         {yil: "2015", toplam: 101086308, buyume: 16.9}
     ];
 
+    // Çubuk: yıllık yolcu (sol eksen) · Çizgi: yıllık büyüme (sağ eksen)
     const ctxIzban = getCtx('izbanChart');
-    
-    // Gradient for Bar Chart
-    const izbanGradient = ctxIzban?.createLinearGradient(0, 0, 0, 400);
-    izbanGradient?.addColorStop(0, 'rgba(56, 189, 248, 0.9)');
-    izbanGradient?.addColorStop(1, 'rgba(56, 189, 248, 0.2)');
-
     if (ctxIzban) new Chart(ctxIzban, {
         type: 'bar',
         data: {
             labels: izbanData.map(d => d.yil),
             datasets: [
                 {
-                    label: 'Yıllık Büyüme Oranı (%)',
+                    label: 'Yıllık büyüme (sağ eksen)',
                     data: izbanData.map(d => d.buyume),
+                    birim: 'yuzde',
                     type: 'line',
                     yAxisID: 'y1',
-                    borderColor: 'rgba(244, 114, 182, 1)',
-                    backgroundColor: 'rgba(244, 114, 182, 0.2)',
-                    borderWidth: 4,
-                    pointRadius: 6,
-                    pointBackgroundColor: '#0f172a',
-                    pointBorderWidth: 3,
-                    pointHoverRadius: 8,
-                    tension: 0.3
+                    order: 0,
+                    borderColor: '#e2e8f0',
+                    backgroundColor: '#e2e8f0',
+                    pointBackgroundColor: '#0f172a'
                 },
                 {
-                    label: 'Toplam Yolcu',
+                    label: 'Toplam yolcu (sol eksen)',
                     data: izbanData.map(d => d.toplam),
+                    birim: 'yolcu',
                     yAxisID: 'y',
-                    backgroundColor: izbanGradient,
-                    borderRadius: 8,
-                    borderWidth: 0,
-                    barPercentage: 0.7,
-                    categoryPercentage: 0.8
+                    order: 1,
+                    backgroundColor: MOD_RENK.izban,
+                    barPercentage: 0.7
                 }
             ]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: { 
-                legend: { position: 'top', labels: { usePointStyle: true, boxWidth: 10 } }, 
-                tooltip: {
-                    ...tooltipConfig,
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                if (context.datasetIndex === 0) {
-                                    label += context.parsed.y + '%';
-                                } else {
-                                    label += new Intl.NumberFormat('tr-TR').format(context.parsed.y);
-                                }
-                            }
-                            return label;
-                        }
-                    }
-                } 
-            },
-            scales: { 
-                y: { 
-                    ...yAxisConfig,
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                },
-                y1: {
-                    type: 'linear',
-                    display: true,
-                    position: 'right',
-                    grid: { drawOnChartArea: false },
-                    ticks: {
-                        callback: function(value) { return value + '%'; },
-                        color: '#94a3b8'
-                    }
-                },
-                x: { grid: { display: false } } 
+            plugins: { legend: { position: 'top' } },
+            scales: {
+                y: degerEkseni('Yıllık yolcu', { position: 'left' }),
+                y1: yuzdeEkseni('Yıllık büyüme', { position: 'right', grid: { drawOnChartArea: false } }),
+                x: kategoriEkseni
             },
             interaction: { mode: 'index', intersect: false }
         }

@@ -4,10 +4,10 @@
 
 (function() {
     const kgmGuzergahlar = [
-        "Narlıdere - Güzelbahçe", 
-        "Güzelbahçe - Urla", 
-        "Çeşme - Urla Yönü", 
-        "Güzelbahçe - Menderes", 
+        "Narlıdere - Güzelbahçe",
+        "Güzelbahçe - Urla",
+        "Çeşme - Urla Yönü",
+        "Güzelbahçe - Menderes",
         "Çeşme Tarafı",
         "Otoyol Ayr. (300-01)"
     ];
@@ -15,7 +15,7 @@
     const kgmAgir = [6471, 4846, 2557, 6122, 1401, 394];
     const kgmToplam = [66919, 39005, 18512, 76779, 8045, 15064];
 
-    // KGM Bar Chart (Stacked)
+    // Hafif / ağır taşıt (yığılmış çubuk): ağır taşıt vurgulu
     const ctxKgmBar = getCtx('kgmBarChart');
     if (ctxKgmBar) new Chart(ctxKgmBar, {
         type: 'bar',
@@ -23,78 +23,57 @@
             labels: kgmGuzergahlar,
             datasets: [
                 {
-                    label: 'Hafif Taşıt',
+                    label: 'Hafif taşıt',
                     data: kgmHafif,
-                    backgroundColor: 'rgba(56, 189, 248, 0.85)',
-                    borderRadius: {topLeft: 0, topRight: 0, bottomLeft: 4, bottomRight: 4}
+                    birim: 'tasit',
+                    backgroundColor: NOTR_RENK.ikincil,
+                    borderRadius: 0
                 },
                 {
-                    label: 'Ağır Taşıt',
+                    label: 'Ağır taşıt',
                     data: kgmAgir,
-                    backgroundColor: 'rgba(244, 114, 182, 0.85)',
-                    borderRadius: {topLeft: 4, topRight: 4, bottomLeft: 0, bottomRight: 0}
+                    birim: 'tasit',
+                    backgroundColor: MOD_RENK.karayolu
                 }
             ]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'top', labels: { usePointStyle: true, color: '#f8fafc' } },
-                tooltip: tooltipConfig,
-                datalabels: {
-                    formatter: function(value) { return new Intl.NumberFormat('tr-TR').format(value); },
-                    font: { size: 11, weight: 'bold' },
-                    color: '#0f172a'
-                }
-            },
+            plugins: { legend: { position: 'top' } },
             scales: {
-                x: { stacked: true, grid: { display: false } },
-                y: { 
-                    stacked: true, 
-                    ...yAxisConfig, 
-                    ticks: { callback: function(value) { return (value/1000).toFixed(0) + 'B'; } }
-                }
+                x: { ...kategoriEkseni, stacked: true },
+                y: degerEkseni('Taşıt/gün (YOGT)', { stacked: true })
             },
             interaction: { mode: 'index', intersect: false }
         }
     });
 
-    // KGM Pie Chart
+    // Güzergahlara göre toplam YOGT: kesimler ayrı ölçümler olduğu için
+    // pay (pasta) yerine büyükten küçüğe sıralı çubukla gösterilir
+    const sira = kgmToplam.map((v, i) => i).sort((a, b) => kgmToplam[b] - kgmToplam[a]);
     const ctxKgmPie = getCtx('kgmPieChart');
     if (ctxKgmPie) new Chart(ctxKgmPie, {
-        type: 'doughnut',
+        type: 'bar',
         data: {
-            labels: kgmGuzergahlar,
+            labels: sira.map(i => kgmGuzergahlar[i]),
             datasets: [{
-                data: kgmToplam,
-                backgroundColor: [
-                    'rgba(129, 140, 248, 0.85)',
-                    'rgba(56, 189, 248, 0.85)',
-                    'rgba(16, 185, 129, 0.85)',
-                    'rgba(244, 114, 182, 0.85)',
-                    'rgba(251, 191, 36, 0.85)',
-                    'rgba(167, 139, 250, 0.85)'
-                ],
-                borderColor: 'rgba(30, 41, 59, 1)',
-                borderWidth: 3,
-                hoverOffset: 12
+                label: 'Toplam (YOGT)',
+                data: sira.map(i => kgmToplam[i]),
+                birim: 'tasit',
+                backgroundColor: MOD_RENK.karayolu,
+                barPercentage: 0.7
             }]
         },
         options: {
+            indexAxis: 'y',
             responsive: true, maintainAspectRatio: false,
-            cutout: '60%',
             plugins: {
-                legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15, color: '#f8fafc' } },
-                tooltip: {
-                    ...tooltipConfig,
-                    callbacks: {
-                        label: function(ctx) {
-                            const pct = ((ctx.parsed / 224324) * 100).toFixed(1);
-                            return ctx.label + ': ' + new Intl.NumberFormat('tr-TR').format(ctx.parsed) + ' (%' + pct + ')';
-                        }
-                    }
-                },
-                datalabels: { display: false }
+                legend: { display: false },
+                datalabels: { formatter: function(value) { return formatSayi(value); } }
+            },
+            scales: {
+                x: degerEkseni('Taşıt/gün', { grace: '25%' }),
+                y: { grid: { display: false } }
             }
         }
     });
@@ -103,7 +82,10 @@
     // Güzelbahçe Özel Grafikler
     // ==========================================
     const gbLabels = ["İzmir-Çeşme Otoyolu (O-32)", "75. Yıl Cumhuriyet Bulvarı", "Mithatpaşa Cd. (Sahil Yolu)", "Otoyol Bağlantı Yolu"];
-    
+    const RUTIN = '#fdba74';
+    const PIK = '#ea580c';
+    const ASIM = '#ef4444';
+
     // Grafik 1: Kapasite Karşılaştırması (Bar)
     const ctxGbCapacity = getCtx('kgmCapacityChart');
     if (ctxGbCapacity) new Chart(ctxGbCapacity, {
@@ -112,51 +94,60 @@
             labels: gbLabels,
             datasets: [
                 {
-                    label: 'Rutin Hacim',
+                    label: 'Rutin hacim',
                     data: [45000, 15000, 18000, 15064],
-                    backgroundColor: 'rgba(52, 211, 153, 0.85)', // Success color
-                    borderRadius: 4
+                    birim: 'tasit',
+                    backgroundColor: RUTIN
                 },
                 {
-                    label: 'Yaz/Pik Hacim',
+                    label: 'Yaz/pik hacim',
                     data: [115000, 38000, 26000, 25000],
-                    backgroundColor: 'rgba(248, 113, 113, 0.85)', // Danger color
-                    borderRadius: 4
+                    birim: 'tasit',
+                    backgroundColor: PIK
                 },
                 {
-                    label: 'Teorik Kapasite',
+                    // Kapasite bir sınır değeri olduğu için içi boş çubukla gösterilir
+                    label: 'Teorik kapasite',
                     data: [130000, 45000, 25000, 30000],
-                    backgroundColor: 'rgba(148, 163, 184, 0.5)', // Muted gray
-                    borderColor: 'rgba(148, 163, 184, 1)',
-                    borderWidth: 1,
-                    borderRadius: 4
+                    birim: 'tasit',
+                    backgroundColor: 'transparent',
+                    borderColor: '#cbd5e1',
+                    borderWidth: 1.5,
+                    borderDash: [4, 3]
                 }
             ]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'top', labels: { usePointStyle: true, color: '#f8fafc' } },
-                tooltip: tooltipConfig,
-                datalabels: {
-                    formatter: function(value) { return new Intl.NumberFormat('tr-TR').format(value); },
-                    font: { size: 10, weight: 'bold' },
-                    color: '#fff',
-                    rotation: -90,
-                    align: 'start',
-                    anchor: 'end'
-                }
-            },
+            plugins: { legend: { position: 'top' } },
             scales: {
-                x: { grid: { display: false } },
-                y: { 
-                    ...yAxisConfig,
-                    ticks: { callback: function(value) { return (value/1000).toFixed(0) + 'B'; } }
-                }
+                x: kategoriEkseni,
+                y: degerEkseni('Taşıt/gün')
             },
             interaction: { mode: 'index', intersect: false }
         }
     });
+
+    // %100 kapasite çizgisi (V/C grafiği için küçük eklenti)
+    const kapasiteCizgisi = {
+        id: 'kapasiteCizgisi',
+        afterDatasetsDraw(chart) {
+            const y = chart.scales.y.getPixelForValue(100);
+            const { left, right } = chart.chartArea;
+            const c = chart.ctx;
+            c.save();
+            c.strokeStyle = 'rgba(248, 250, 252, 0.7)';
+            c.lineWidth = 1;
+            c.setLineDash([6, 4]);
+            c.beginPath(); c.moveTo(left, y); c.lineTo(right, y); c.stroke();
+            c.setLineDash([]);
+            c.fillStyle = '#e2e8f0';
+            c.font = "600 11px 'Outfit', sans-serif";
+            c.textAlign = 'right';
+            c.fillText('Kapasite (%100)', right, y - 6);
+            c.restore();
+        }
+    };
 
     // Grafik 2: Doluluk Oranı (V/C %)
     const ctxGbDensity = getCtx('kgmDensityChart');
@@ -166,55 +157,43 @@
             labels: gbLabels,
             datasets: [
                 {
-                    label: 'Rutin Doluluk (%)',
+                    label: 'Rutin doluluk',
                     data: [35, 33, 72, 50],
-                    backgroundColor: 'rgba(56, 189, 248, 0.85)', // Accent-1
-                    borderRadius: 4
+                    birim: 'yuzde',
+                    backgroundColor: RUTIN
                 },
                 {
-                    label: 'Yaz/Pik Doluluk (%)',
+                    label: 'Yaz/pik doluluk',
                     data: [88, 84, 104, 83],
+                    birim: 'yuzde',
                     backgroundColor: function(context) {
-                        const index = context.dataIndex;
-                        const value = context.dataset.data[index];
-                        return value > 100 ? 'rgba(239, 68, 68, 0.9)' : 'rgba(251, 191, 36, 0.85)'; // Red if over 100%, yellow otherwise
-                    },
-                    borderRadius: 4
+                        const value = context.dataset.data[context.dataIndex];
+                        return value > 100 ? ASIM : PIK;
+                    }
                 }
             ]
         },
         options: {
             responsive: true, maintainAspectRatio: false,
             plugins: {
-                legend: { position: 'top', labels: { usePointStyle: true, color: '#f8fafc' } },
+                legend: { position: 'top' },
                 tooltip: {
-                    ...tooltipConfig,
                     callbacks: {
                         label: function(ctx) {
-                            let label = ctx.dataset.label || '';
-                            if (label) { label += ': '; }
-                            label += '%' + ctx.parsed.y;
-                            if (ctx.parsed.y > 100) label += ' (Kapasite Aşımı!)';
+                            let label = (ctx.dataset.label || '') + ': ' + formatYuzde(ctx.parsed.y);
+                            if (ctx.parsed.y > 100) label += ' (kapasitenin üzerinde)';
                             return label;
                         }
                     }
-                },
-                datalabels: {
-                    formatter: function(value) { return '%' + value; },
-                    font: { size: 12, weight: 'bold' },
-                    color: '#fff'
                 }
             },
             scales: {
-                x: { grid: { display: false } },
-                y: { 
-                    ...yAxisConfig,
-                    max: 120, // To give room for 104%
-                    ticks: { callback: function(value) { return '%' + value; } }
-                }
+                x: kategoriEkseni,
+                y: yuzdeEkseni('Hacim / kapasite (V/C)', { max: 120 }) // %104 değerine yer açmak için
             },
             interaction: { mode: 'index', intersect: false }
-        }
+        },
+        plugins: [kapasiteCizgisi]
     });
 
 })();
