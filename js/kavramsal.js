@@ -59,11 +59,7 @@
 
     function navigateToTab(tabId) {
         if (!tabId) return;
-        let page = tabId + '.html';
-        if (tabId === 'havalimani') {
-            page = 'index.html';
-        }
-        window.location.href = page;
+        window.location.href = tabId + '.html';
     }
 
     // ---- DIAGRAM SELECTOR ----
@@ -92,9 +88,50 @@
         svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
         svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
         svg.style.width = '100%';
+        svg.style.minWidth = w + 'px';
         svg.style.height = h + 'px';
         container.appendChild(svg);
+        kaydirmaIpucu(container);
         return svg;
+    }
+
+    // Kutuya sığmayan diyagram için klavyeyle de kaydırılabilen bölge ve kısa ipucu
+    function kaydirmaIpucu(container) {
+        let ipucu = container.previousElementSibling;
+        if (!ipucu || !ipucu.classList.contains('diagram-ipucu')) {
+            ipucu = document.createElement('p');
+            ipucu.className = 'diagram-ipucu';
+            ipucu.innerHTML = '<i class="fa-solid fa-arrows-left-right" aria-hidden="true"></i> Diyagramın tamamı için kutuyu yatay kaydırın.';
+            container.parentElement.insertBefore(ipucu, container);
+        }
+        const kart = container.closest('.card');
+        const baslik = kart && kart.querySelector('h2');
+        function denetle() {
+            const tasiyor = container.scrollWidth > container.clientWidth + 2;
+            ipucu.hidden = !tasiyor;
+            // Geniş diyagram ilk göründüğünde ortadan (kök düğümden) başlar
+            if (tasiyor && !container.dataset.ortalandi) {
+                container.dataset.ortalandi = '1';
+                container.scrollLeft = (container.scrollWidth - container.clientWidth) / 2;
+            }
+            if (tasiyor) {
+                container.setAttribute('tabindex', '0');
+                container.setAttribute('role', 'region');
+                container.setAttribute('aria-label', (baslik ? baslik.textContent.trim() : 'Diyagram') + ' (yatay kaydırılabilir)');
+            } else {
+                container.removeAttribute('tabindex');
+                container.removeAttribute('role');
+                container.removeAttribute('aria-label');
+            }
+        }
+        requestAnimationFrame(denetle);
+        if (!container.dataset.ipucu) {
+            container.dataset.ipucu = '1';
+            window.addEventListener('resize', denetle);
+            document.querySelectorAll('.diagram-btn').forEach(function (b) {
+                b.addEventListener('click', function () { requestAnimationFrame(denetle); });
+            });
+        }
     }
 
     function svgEl(tag, attrs) {
@@ -205,7 +242,7 @@
         const centerText2 = svgEl('text', {
             x: cx, y: cy + 5,
             'text-anchor': 'middle', fill: '#94a3b8',
-            'font-size': '11', 'font-weight': '600'
+            'font-size': '12', 'font-weight': '600'
         });
         centerText2.textContent = 'ULAŞIM AĞI';
         centerGroup.appendChild(centerText2);
@@ -251,7 +288,7 @@
             const label = svgEl('text', {
                 x: node.x, y: node.y + nodeR + 18,
                 'text-anchor': 'middle', fill: '#f8fafc',
-                'font-size': '11', 'font-weight': '700'
+                'font-size': '12', 'font-weight': '700'
             });
             label.textContent = node.ad;
             g.appendChild(label);
@@ -260,7 +297,7 @@
             const val = svgEl('text', {
                 x: node.x, y: node.y + nodeR + 33,
                 'text-anchor': 'middle', fill: '#94a3b8',
-                'font-size': '10', 'font-weight': '600'
+                'font-size': '12', 'font-weight': '600'
             });
             val.textContent = fmtM(node.yolcu) + ' yolcu';
             g.appendChild(val);
@@ -270,7 +307,7 @@
             const pctText = svgEl('text', {
                 x: node.x, y: node.y + nodeR + 47,
                 'text-anchor': 'middle', fill: node.renk,
-                'font-size': '10', 'font-weight': '800'
+                'font-size': '12', 'font-weight': '800'
             });
             pctText.textContent = '%' + pct;
             g.appendChild(pctText);
@@ -397,7 +434,7 @@
             const label = svgEl('text', {
                 x: hub.x, y: hub.y + 25,
                 'text-anchor': 'middle', fill: '#fbbf24',
-                'font-size': '9', 'font-weight': '700',
+                'font-size': '12', 'font-weight': '700',
                 'letter-spacing': '0.5'
             });
             label.textContent = hub.ad;
@@ -466,7 +503,7 @@
             const sub = svgEl('text', {
                 x: pos.x, y: pos.y + r + 35,
                 'text-anchor': 'middle', fill: '#94a3b8',
-                'font-size': '10', 'font-weight': '600'
+                'font-size': '12', 'font-weight': '600'
             });
             // Havalimanı verisi yıllık değil, Ocak–Ağustos 2026 dönemine ait
             sub.textContent = fmtM(m.yolcu) + (m.id === 'havaalani' ? ' (Oca–Ağu)' : '/yıl');
@@ -501,7 +538,7 @@
         if (!container) return;
         container.innerHTML = '';
 
-        const W = 1600, H = 820;
+        const W = 1800, H = 540;
         const svg = createSVG(container, W, H);
 
         // Hierarchy data
@@ -546,7 +583,7 @@
 
         // Layout params — generous spacing
         const levelH = 200;
-        const nodeW = 180, nodeH = 68;
+        const nodeW = 212, nodeH = 70;
         const rootY = 40;
 
         function drawNode(x, y, node, isRoot) {
@@ -590,7 +627,7 @@
             const title = svgEl('text', {
                 x: x - w / 2 + (isRoot ? 50 : 42), y: y + (isRoot ? 28 : 24),
                 fill: '#f8fafc',
-                'font-size': isRoot ? '15' : '12.5',
+                'font-size': isRoot ? '16' : '13',
                 'font-weight': '700'
             });
             title.textContent = node.ad;
@@ -601,7 +638,7 @@
                 const sub = svgEl('text', {
                     x: x - w / 2 + (isRoot ? 50 : 42), y: y + (isRoot ? 50 : 44),
                     fill: '#94a3b8',
-                    'font-size': isRoot ? '12' : '10',
+                    'font-size': isRoot ? '13' : '12',
                     'font-weight': '600'
                 });
                 sub.textContent = node.alt;
@@ -613,7 +650,7 @@
                 const det = svgEl('text', {
                     x: x - w / 2 + 42, y: y + 60,
                     fill: node.renk,
-                    'font-size': '9',
+                    'font-size': '12',
                     'font-weight': '700'
                 });
                 det.textContent = node.detail;
@@ -657,7 +694,7 @@
 
         // Place ALL Level 2 nodes evenly across full width
         const l2Y = rootY + levelH * 2;
-        const l2Margin = 100;
+        const l2Margin = 120;
         const l2Count = allL2.length;
         const l2Spacing = (W - l2Margin * 2) / (l2Count - 1);
         const l2Positions = allL2.map((item, i) => ({
@@ -739,7 +776,7 @@
         ids.forEach((id, i) => {
             const th = document.createElement('th');
             th.style.textAlign = 'center';
-            th.innerHTML = `<span class="fa-solid" aria-hidden="true" style="font-size:1.3rem;">${ikonlar[i]}</span><br><span style="font-size:0.7rem; color:${renkler[i]};">${labels[i].split(' ')[0]}</span>`;
+            th.innerHTML = `<span class="fa-solid" aria-hidden="true" style="font-size:1.3rem;">${ikonlar[i]}</span><br><span style="font-size:0.8rem; color:${renkler[i]};">${labels[i].split(' ')[0]}</span>`;
             th.style.cursor = 'pointer';
             th.addEventListener('click', () => {
                 const target = tabMap[id];

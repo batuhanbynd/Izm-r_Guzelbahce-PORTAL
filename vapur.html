@@ -3,116 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAS PORTAL</title>
+    <title>Vapur (İzdeniz) | BAS PORTAL</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 </head>
 <body>
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="brand">BAS PORTAL</div>
+        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <nav aria-label="Sayfalar">
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
-                    <i class="fa-solid fa-network-wired"></i>
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                     Diyagramlar
                 </a>
             </li>
             <li class="nav-item">
-                <a href="index.html" class="nav-link" data-target="havalimani">
-                    <i class="fa-solid fa-plane-departure"></i>
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
                     Adnan Menderes
                 </a>
             </li>
             <li class="nav-item">
-                <a href="eshot.html" class="nav-link" data-target="eshot">
-                    <i class="fa-solid fa-bus"></i>
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
                     ESHOT
                 </a>
             </li>
             <li class="nav-item">
-                <a href="dolmus.html" class="nav-link" data-target="dolmus">
-                    <i class="fa-solid fa-van-shuttle"></i>
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
                     Dolmuş
                 </a>
             </li>
             <li class="nav-item">
-                <a href="tramvay.html" class="nav-link" data-target="tramvay">
-                    <i class="fa-solid fa-train-tram"></i>
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
                     Tramvay
                 </a>
             </li>
             <li class="nav-item">
-                <a href="izban.html" class="nav-link" data-target="izban">
-                    <i class="fa-solid fa-train"></i>
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
                     İZBAN
                 </a>
             </li>
             <li class="nav-item">
-                <a href="vapur.html" class="nav-link active" data-target="vapur">
-                    <i class="fa-solid fa-ship"></i>
+                <a href="vapur.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
                     Vapur (İzdeniz)
                 </a>
             </li>
             <li class="nav-item">
-                <a href="metro.html" class="nav-link" data-target="metro">
-                    <i class="fa-solid fa-subway"></i>
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
                     İzmir Metro
                 </a>
             </li>
             <li class="nav-item">
-                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
-                    <i class="fa-solid fa-chart-pie"></i>
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
                     Ulaşım Karşılaştırması
                 </a>
             </li>
             <li class="nav-item">
-                <a href="kgm.html" class="nav-link" data-target="kgm">
-                    <i class="fa-solid fa-road"></i>
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
                     KGM Karayolları
                 </a>
             </li>
             <li class="nav-item">
-                <a href="otoparklar.html" class="nav-link" data-target="otopark">
-                    <i class="fa-solid fa-square-parking"></i>
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
                     Otoparklar
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="izsu.html" class="nav-link" data-target="izsu">
-                    <i class="fa-solid fa-droplet"></i>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
                     İZSU Su Kaynakları
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="elektrik.html" class="nav-link" data-target="elektrik">
-                    <i class="fa-solid fa-bolt"></i>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
                     Elektrik Altyapısı
                 </a>
             </li>
-
             <li class="nav-item">
-                <a href="planlanan-projeler.html" class="nav-link" data-target="planlanan">
-                    <i class="fa-solid fa-layer-group"></i>
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
                     Planlanan Projeler
                 </a>
             </li>
             <li class="nav-item">
-                <a href="isbirlikleri.html" class="nav-link" data-target="isbirlikleri">
-                    <i class="fa-solid fa-handshake"></i>
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
                     İşbirliklerimiz
                 </a>
             </li>
-</ul>
+        </ul>
+        </nav>
     </aside>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" id="icerik" tabindex="-1">
         <div id="vapur" class="tab-pane active">
             <header>
                 <h1>İzdeniz Vapur Hatları Analizi</h1>
@@ -140,7 +148,7 @@
             <div class="dashboard-grid">
                 <div class="card full-width">
                     <h2>En Yoğun 10 Hat — Günlük Yolcu Karşılaştırması (2020 / 2025 / 2030)</h2>
-                    <div class="chart-container" style="height: 480px;">
+                    <div class="chart-container y-480">
                         <canvas id="vapurTop10Chart"></canvas>
                     </div>
                 </div>

@@ -3,179 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAS PORTAL</title>
+    <title>KGM Karayolları | BAS PORTAL</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 </head>
 <body>
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="brand">BAS PORTAL</div>
+        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <nav aria-label="Sayfalar">
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
-                    <i class="fa-solid fa-network-wired"></i>
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                     Diyagramlar
                 </a>
             </li>
             <li class="nav-item">
-                <a href="index.html" class="nav-link" data-target="havalimani">
-                    <i class="fa-solid fa-plane-departure"></i>
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
                     Adnan Menderes
                 </a>
             </li>
             <li class="nav-item">
-                <a href="eshot.html" class="nav-link" data-target="eshot">
-                    <i class="fa-solid fa-bus"></i>
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
                     ESHOT
                 </a>
             </li>
             <li class="nav-item">
-                <a href="dolmus.html" class="nav-link" data-target="dolmus">
-                    <i class="fa-solid fa-van-shuttle"></i>
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
                     Dolmuş
                 </a>
             </li>
             <li class="nav-item">
-                <a href="tramvay.html" class="nav-link" data-target="tramvay">
-                    <i class="fa-solid fa-train-tram"></i>
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
                     Tramvay
                 </a>
             </li>
             <li class="nav-item">
-                <a href="izban.html" class="nav-link" data-target="izban">
-                    <i class="fa-solid fa-train"></i>
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
                     İZBAN
                 </a>
             </li>
             <li class="nav-item">
-                <a href="vapur.html" class="nav-link" data-target="vapur">
-                    <i class="fa-solid fa-ship"></i>
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
                     Vapur (İzdeniz)
                 </a>
             </li>
             <li class="nav-item">
-                <a href="metro.html" class="nav-link" data-target="metro">
-                    <i class="fa-solid fa-subway"></i>
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
                     İzmir Metro
                 </a>
             </li>
             <li class="nav-item">
-                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
-                    <i class="fa-solid fa-chart-pie"></i>
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
                     Ulaşım Karşılaştırması
                 </a>
             </li>
             <li class="nav-item">
-                <a href="kgm.html" class="nav-link active" data-target="kgm">
-                    <i class="fa-solid fa-road"></i>
+                <a href="kgm.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
                     KGM Karayolları
                 </a>
             </li>
             <li class="nav-item">
-                <a href="otoparklar.html" class="nav-link" data-target="otopark">
-                    <i class="fa-solid fa-square-parking"></i>
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
                     Otoparklar
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="izsu.html" class="nav-link" data-target="izsu">
-                    <i class="fa-solid fa-droplet"></i>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
                     İZSU Su Kaynakları
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="elektrik.html" class="nav-link" data-target="elektrik">
-                    <i class="fa-solid fa-bolt"></i>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
                     Elektrik Altyapısı
                 </a>
             </li>
-
             <li class="nav-item">
-                <a href="planlanan-projeler.html" class="nav-link" data-target="planlanan">
-                    <i class="fa-solid fa-layer-group"></i>
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
                     Planlanan Projeler
                 </a>
             </li>
             <li class="nav-item">
-                <a href="isbirlikleri.html" class="nav-link" data-target="isbirlikleri">
-                    <i class="fa-solid fa-handshake"></i>
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
                     İşbirliklerimiz
                 </a>
             </li>
-</ul>
+        </ul>
+        </nav>
     </aside>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" id="icerik" tabindex="-1">
         <div id="kgm" class="tab-pane active">
             <header>
                 <h1>KGM 2. Bölge Devlet Yolları</h1>
                 <p class="subtitle">2025 Yıllık Ortalama Günlük Trafik (YOGT) Hacim Haritası Özeti</p>
             </header>
 
-            <div class="stats-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
-                <div class="stat-card" style="background: linear-gradient(135deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); border: 1px solid rgba(56,189,248,0.3); border-radius: 16px; padding: 1.8rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5); backdrop-filter: blur(12px); position: relative; overflow: hidden; transition: transform 0.3s ease;">
-                    <div style="position: absolute; top: -20px; right: -20px; opacity: 0.1; font-size: 6rem;"><i class="fa-solid fa-car-side"></i></div>
-                    <div class="stat-label" style="font-size: 1.1rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Toplam Günlük Trafik</div>
-                    <div class="stat-value" style="font-size: 2.8rem; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(56,189,248,0.4); margin-bottom: 0.5rem;">224.324</div>
-                    <div class="stat-change change-up" style="display: inline-flex; align-items: center; gap: 5px; background: rgba(52,211,153,0.15); color: #34d399; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 0.9rem;"><i class="fa-solid fa-arrow-trend-up"></i> 6 Güzergah Toplamı</div>
+            <div class="stats-row">
+                <div class="stat-card ton-mavi">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-car-side" aria-hidden="true"></i></div>
+                    <div class="stat-label">Toplam Günlük Trafik</div>
+                    <div class="stat-value">224.324</div>
+                    <div class="stat-change ton-yesil"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> 6 Güzergah Toplamı</div>
                 </div>
-                <div class="stat-card" style="background: linear-gradient(135deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); border: 1px solid rgba(244,114,182,0.3); border-radius: 16px; padding: 1.8rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5); backdrop-filter: blur(12px); position: relative; overflow: hidden; transition: transform 0.3s ease;">
-                    <div style="position: absolute; top: -20px; right: -20px; opacity: 0.1; font-size: 6rem;"><i class="fa-solid fa-fire"></i></div>
-                    <div class="stat-label" style="font-size: 1.1rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">En Yoğun Güzergah</div>
-                    <div class="stat-value" style="font-size: 2.2rem; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(244,114,182,0.4); margin-bottom: 0.5rem;">G.Bahçe - Menderes</div>
-                    <div class="stat-change change-up" style="display: inline-flex; align-items: center; gap: 5px; background: rgba(244,114,182,0.15); color: #f472b6; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 0.9rem;"><i class="fa-solid fa-chart-simple"></i> 76.779 Taşıt/Gün</div>
+                <div class="stat-card ton-pembe">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-fire" aria-hidden="true"></i></div>
+                    <div class="stat-label">En Yoğun Güzergah</div>
+                    <div class="stat-value kucuk">G.Bahçe - Menderes</div>
+                    <div class="stat-change ton-pembe"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i> 76.779 Taşıt/Gün</div>
                 </div>
-                <div class="stat-card" style="background: linear-gradient(135deg, rgba(30,41,59,0.8), rgba(15,23,42,0.9)); border: 1px solid rgba(251,191,36,0.3); border-radius: 16px; padding: 1.8rem; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5); backdrop-filter: blur(12px); position: relative; overflow: hidden; transition: transform 0.3s ease;">
-                    <div style="position: absolute; top: -20px; right: -20px; opacity: 0.1; font-size: 6rem;"><i class="fa-solid fa-truck"></i></div>
-                    <div class="stat-label" style="font-size: 1.1rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem;">Ağır Taşıt Oranı</div>
-                    <div class="stat-value" style="font-size: 2.8rem; font-weight: 900; color: #fff; text-shadow: 0 2px 10px rgba(251,191,36,0.4); margin-bottom: 0.5rem;">%9,7</div>
-                    <div class="stat-change change-up" style="display: inline-flex; align-items: center; gap: 5px; background: rgba(251,191,36,0.15); color: #fbbf24; padding: 4px 10px; border-radius: 20px; font-weight: 600; font-size: 0.9rem;"><i class="fa-solid fa-scale-balanced"></i> Ortalama Yük</div>
+                <div class="stat-card ton-sari">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-truck" aria-hidden="true"></i></div>
+                    <div class="stat-label">Ağır Taşıt Oranı</div>
+                    <div class="stat-value">%9,7</div>
+                    <div class="stat-change ton-sari"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Ortalama Yük</div>
                 </div>
             </div>
 
             <div class="dashboard-grid">
                 <div class="card full-width">
                     <h2>Güzergahlara Göre Günlük Trafik (Hafif ve Ağır Taşıt)</h2>
-                    <div class="chart-container" style="height: 400px;">
+                    <div class="chart-container y-400">
                         <canvas id="kgmBarChart"></canvas>
                     </div>
                 </div>
                 <div class="card full-width">
                     <h2>Güzergahlara Göre Toplam Günlük Trafik (YOGT)</h2>
-                    <div class="chart-container" style="height: 380px;">
+                    <div class="chart-container y-380">
                         <canvas id="kgmPieChart"></canvas>
                     </div>
                 </div>
             </div>
 
             <!-- Şehir içi yollar -->
-            <div class="card full-width" style="margin-top: 2rem;">
-                <h2><i class="fa-solid fa-diagram-project" style="color: var(--accent-1);"></i> Şehir İçi Yollar</h2>
-                <p style="color: var(--text-muted); margin: -0.75rem 0 1.25rem;">Güzelbahçe şehir içi yol ağının harita görünümü</p>
-                        <figure class="harita-figur" style="max-width: 900px; margin: 0 auto;">
-                            <figcaption><i class="fa-solid fa-road"></i> Şehir içi yol ağı</figcaption>
+            <div class="card full-width ust-bosluk">
+                <h2><i class="fa-solid fa-diagram-project renk-mavi" aria-hidden="true"></i> Şehir İçi Yollar</h2>
+                <p class="kart-aciklama">Güzelbahçe şehir içi yol ağının harita görünümü</p>
+                        <figure class="harita-figur dar">
+                            <figcaption><i class="fa-solid fa-road" aria-hidden="true"></i> Şehir içi yol ağı</figcaption>
                             <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
                                 <img src="sehir_ici_yollar.png" alt="Güzelbahçe şehir içi yol ağı" loading="lazy">
-                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Haritayı Aç / Büyüt</div>
                             </div>
                         </figure>
             </div>
 
             <!-- Güzelbahçe Yolları Bilgi Kartları -->
-            <h2 style="margin-top: 2rem; font-size: 1.8rem; font-weight: 800;">Güzelbahçe Ulaşım Altyapısı</h2>
-            <p class="subtitle" style="margin-bottom: 1rem;">İlçeyi İzmir geneline bağlayan ve iç ulaşımı sağlayan temel karayolları analizleri</p>
+            <h2 class="ara-baslik">Güzelbahçe Ulaşım Altyapısı</h2>
+            <p class="subtitle">İlçeyi İzmir geneline bağlayan ve iç ulaşımı sağlayan temel karayolları analizleri</p>
             
             <div class="info-grid">
                 <!-- 1. Otoyol -->
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-highway"></i> 1. İzmir - Çeşme Otoyolu (O-32)</h3>
+                    <h3><i class="fa-solid fa-highway" aria-hidden="true"></i> 1. İzmir - Çeşme Otoyolu (O-32)</h3>
                     <ul>
                         <li><strong>Güzergah Tipi:</strong> Güzelbahçe Geçişi</li>
                         <li><strong>Şerit Yapısı:</strong> 2x3 (3 gidiş, 3 geliş) ve acil emniyet şeritli otoyol standardı.</li>
@@ -186,7 +194,7 @@
 
                 <!-- 2. Devlet Yolu -->
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-road"></i> 2. D.300 Devlet Yolu (Mithatpaşa Cd.)</h3>
+                    <h3><i class="fa-solid fa-road" aria-hidden="true"></i> 2. D.300 Devlet Yolu (Mithatpaşa Cd.)</h3>
                     <ul>
                         <li><strong>Güzergah Tipi:</strong> Eski Çeşme Yolu / Sahil Kesimi</li>
                         <li><strong>Şerit Yapısı:</strong> İlçe merkezinde 2x1 veya bazı bölünmüş noktalarda 2x2 şeritli ana arter.</li>
@@ -196,7 +204,7 @@
 
                 <!-- 3. Alternatif Bulvar -->
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-route"></i> 3. Yeni 75. Yıl Cumhuriyet Bulvarı</h3>
+                    <h3><i class="fa-solid fa-route" aria-hidden="true"></i> 3. Yeni 75. Yıl Cumhuriyet Bulvarı</h3>
                     <ul>
                         <li><strong>Güzergah Tipi:</strong> Alternatif Dağ Yolu</li>
                         <li><strong>Şerit Yapısı:</strong> 24,5 metre genişliğinde, 2x2 (çift gidiş, çift geliş) bölünmüş yol.</li>
@@ -206,38 +214,38 @@
 
                 <!-- 4. Bağlantı Yolu -->
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-code-merge"></i> 4. 300-01 Otoyol Bağlantı Yolu</h3>
+                    <h3><i class="fa-solid fa-code-merge" aria-hidden="true"></i> 4. 300-01 Otoyol Bağlantı Yolu</h3>
                     <ul>
                         <li><strong>Güzergah Tipi:</strong> Otoyol Ayrımı - Güzelbahçe Girişi (9 KM)</li>
                         <li><strong>Fonksiyon:</strong> Çeşme Otoyolu'ndan Güzelbahçe ve Urla bölgelerine geçişi sağlayan toplayıcı-dağıtıcı bağlantı yolu.</li>
                     </ul>
                     
                     <!-- KGM Resmi Trafik Verisi -->
-                    <div style="margin-top: 1.5rem; background: rgba(56, 189, 248, 0.05); padding: 1.2rem; border-radius: 10px; border: 1px solid rgba(56, 189, 248, 0.2);">
-                        <h4 style="color: var(--accent-1); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px; font-size: 1.1rem;">
-                            <i class="fa-solid fa-chart-line"></i> KGM Resmi Trafik Hacim Verisi (YOGT)
+                    <div class="vurgu-kutusu">
+                        <h4>
+                            <i class="fa-solid fa-chart-line" aria-hidden="true"></i> KGM Resmi Trafik Hacim Verisi (YOGT)
                         </h4>
                         
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px;">
-                            <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border-bottom: 3px solid var(--accent-1);">
-                                <div style="font-size: 1.4rem; font-weight: 800; color: #fff; margin-bottom: 4px;">15.064</div>
-                                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Toplam (YOGT)</div>
+                        <div class="mini-istatistik">
+                            <div class="mini-ist ton-mavi">
+                                <div class="deger">15.064</div>
+                                <div class="etiket">Toplam (YOGT)</div>
                             </div>
-                            <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border-bottom: 3px solid #818cf8;">
-                                <div style="font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 4px;">13.983</div>
-                                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Otomobil</div>
+                            <div class="mini-ist ton-mor">
+                                <div class="deger">13.983</div>
+                                <div class="etiket">Otomobil</div>
                             </div>
-                            <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border-bottom: 3px solid #34d399;">
-                                <div style="font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 4px;">687</div>
-                                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Hafif Ticari</div>
+                            <div class="mini-ist ton-yesil">
+                                <div class="deger">687</div>
+                                <div class="etiket">Hafif Ticari</div>
                             </div>
-                            <div style="background: rgba(15, 23, 42, 0.6); padding: 1rem; border-radius: 8px; text-align: center; border-bottom: 3px solid #fbbf24;">
-                                <div style="font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 4px;">394</div>
-                                <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Ağır Vasıta & Otobüs</div>
+                            <div class="mini-ist ton-sari">
+                                <div class="deger">394</div>
+                                <div class="etiket">Ağır Vasıta & Otobüs</div>
                             </div>
                         </div>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem; line-height: 1.5;">
-                            <i class="fa-solid fa-circle-info" style="color: var(--accent-1); margin-right: 5px;"></i> 
+                        <p class="not">
+                            <i class="fa-solid fa-circle-info" aria-hidden="true"></i> 
                             KGM 2. Bölge istatistiklerine göre, bu 9 km'lik otoyol ayrım kesiminden günlük ortalama 15 bin araç Güzelbahçe yönüne giriş/çıkış yapmaktadır.
                         </p>
                     </div>
@@ -248,13 +256,13 @@
             <div class="dashboard-grid">
                 <div class="card full-width">
                     <h2>Günlük Araç Hacmi ve Güvenli Kapasite Karşılaştırması (Araç/Gün)</h2>
-                    <div class="chart-container" style="height: 450px;">
+                    <div class="chart-container y-450">
                         <canvas id="kgmCapacityChart"></canvas>
                     </div>
                 </div>
                 <div class="card full-width">
                     <h2>Yoğunluk / Kapasite Doluluk Oranı (V/C %)</h2>
-                    <div class="chart-container" style="height: 450px;">
+                    <div class="chart-container y-450">
                         <canvas id="kgmDensityChart"></canvas>
                     </div>
                 </div>
@@ -262,81 +270,46 @@
 
 
             <!-- Verilerden elde edilen bulgular -->
-            <div class="card full-width" style="margin-top: 2rem;">
-                <h2><i class="fa-solid fa-lightbulb" style="color: var(--success);"></i> Verilerden Elde Edilen Bulgular</h2>
+            <div class="card full-width ust-bosluk">
+                <h2><i class="fa-solid fa-lightbulb renk-yesil" aria-hidden="true"></i> Verilerden Elde Edilen Bulgular</h2>
                 <div class="bulgu-blok">
-                    <p class="bulgu-baslik"><i class="fa-solid fa-road"></i> Karayolu trafik yükü</p>
+                    <p class="bulgu-baslik"><i class="fa-solid fa-road" aria-hidden="true"></i> Karayolu trafik yükü</p>
                     <div class="bulgu-akisi">
-                        <div class="bulgu-kutu veri"><span class="etiket"><i class="fa-solid fa-database"></i> Veri</span><p>2025 YOGT: Güzelbahçe - Menderes 76.779, Narlıdere - Güzelbahçe 66.919 taşıt/gün; ağır taşıt oranı %9,7.</p></div>
-                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right"></i></div>
-                        <div class="bulgu-kutu analiz"><span class="etiket"><i class="fa-solid fa-magnifying-glass-chart"></i> Analiz</span><p>En yüksek hacimler ilçeyi Menderes ve Narlıdere yönüne bağlayan kesimlerdedir; 300-01 bağlantısında 15.064 taşıtın 13.983'ü otomobildir.</p></div>
-                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right"></i></div>
-                        <div class="bulgu-kutu bulgu"><span class="etiket"><i class="fa-solid fa-lightbulb"></i> Bulgu</span><p>Karayolu trafiği ilçeyi çevre ilçelere bağlayan kesimlerde yoğunlaşmakta; bağlantı yolunda özel otomobil kullanımı baskın görünmektedir.</p></div>
+                        <div class="bulgu-kutu veri"><span class="etiket"><i class="fa-solid fa-database" aria-hidden="true"></i> Veri</span><p>2025 YOGT: Güzelbahçe - Menderes 76.779, Narlıdere - Güzelbahçe 66.919 taşıt/gün; ağır taşıt oranı %9,7.</p></div>
+                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></div>
+                        <div class="bulgu-kutu analiz"><span class="etiket"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i> Analiz</span><p>En yüksek hacimler ilçeyi Menderes ve Narlıdere yönüne bağlayan kesimlerdedir; 300-01 bağlantısında 15.064 taşıtın 13.983'ü otomobildir.</p></div>
+                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></div>
+                        <div class="bulgu-kutu bulgu"><span class="etiket"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Bulgu</span><p>Karayolu trafiği ilçeyi çevre ilçelere bağlayan kesimlerde yoğunlaşmakta; bağlantı yolunda özel otomobil kullanımı baskın görünmektedir.</p></div>
                     </div>
                 </div>
                 <div class="bulgu-blok">
-                    <p class="bulgu-baslik"><i class="fa-solid fa-water"></i> Sahil aksının kapasitesi</p>
+                    <p class="bulgu-baslik"><i class="fa-solid fa-water" aria-hidden="true"></i> Sahil aksının kapasitesi</p>
                     <div class="bulgu-akisi">
-                        <div class="bulgu-kutu veri"><span class="etiket"><i class="fa-solid fa-database"></i> Veri</span><p>Mithatpaşa Cd. V/C: rutin %72, yaz/pik %104; diğer akslarda yaz/pik %83–%88.</p></div>
-                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right"></i></div>
-                        <div class="bulgu-kutu analiz"><span class="etiket"><i class="fa-solid fa-magnifying-glass-chart"></i> Analiz</span><p>Yaz/pik dönemde dört akstan yalnızca sahil yolu teorik kapasiteyi aşmaktadır; paralel aks olan 75. Yıl Bulvarı'nın yalnızca 1. etabı tamamlanmıştır.</p></div>
-                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right"></i></div>
-                        <div class="bulgu-kutu bulgu"><span class="etiket"><i class="fa-solid fa-lightbulb"></i> Bulgu</span><p>Sahil aksı mevsimsel bir darboğazdır; 75. Yıl Cumhuriyet Bulvarı'nın 2. ve 3. etapları bu aksın yükü açısından önem taşımaktadır.</p></div>
+                        <div class="bulgu-kutu veri"><span class="etiket"><i class="fa-solid fa-database" aria-hidden="true"></i> Veri</span><p>Mithatpaşa Cd. V/C: rutin %72, yaz/pik %104; diğer akslarda yaz/pik %83–%88.</p></div>
+                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></div>
+                        <div class="bulgu-kutu analiz"><span class="etiket"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i> Analiz</span><p>Yaz/pik dönemde dört akstan yalnızca sahil yolu teorik kapasiteyi aşmaktadır; paralel aks olan 75. Yıl Bulvarı'nın yalnızca 1. etabı tamamlanmıştır.</p></div>
+                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></div>
+                        <div class="bulgu-kutu bulgu"><span class="etiket"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Bulgu</span><p>Sahil aksı mevsimsel bir darboğazdır; 75. Yıl Cumhuriyet Bulvarı'nın 2. ve 3. etapları bu aksın yükü açısından önem taşımaktadır.</p></div>
                     </div>
                 </div>
             </div>
 
             <!-- Kaynakça Bölümü -->
-            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
-                <div style="display: flex; align-items: center; gap: 0.8rem;">
-                    <i class="fa-solid fa-book-open" style="font-size: 1.5rem; color: var(--accent-1);"></i>
+            <div class="kaynak-kutusu">
+                <div class="kk-sol">
+                    <i class="fa-solid fa-book-open" aria-hidden="true"></i>
                     <div>
-                        <h4 style="margin: 0; font-size: 1.1rem; color: var(--text-main);">Veri Kaynağı (Kaynakça)</h4>
-                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); margin-top: 0.3rem;">Karayolları Genel Müdürlüğü (KGM) 2025 Yılı 2. Bölge Trafik Hacim Haritası</p>
+                        <h3>Veri Kaynağı (Kaynakça)</h3>
+                        <p>Karayolları Genel Müdürlüğü (KGM) 2025 Yılı 2. Bölge Trafik Hacim Haritası</p>
                     </div>
                 </div>
-                <a href="https://www.kgm.gov.tr/SiteCollectionDocuments/KGMdocuments/Trafik/trafikhacimharitasi/2025HacimHaritalari/Bolge2.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s;">
-                    <i class="fa-solid fa-file-pdf"></i> Resmi Raporu Görüntüle
+                <a href="https://www.kgm.gov.tr/SiteCollectionDocuments/KGMdocuments/Trafik/trafikhacimharitasi/2025HacimHaritalari/Bolge2.pdf" target="_blank" rel="noopener" class="dis-baglanti">
+                    <i class="fa-solid fa-file-pdf" aria-hidden="true"></i> Resmi Raporu Görüntüle
                 </a>
             </div>
 
         </div>
     </main>
-
-
-    <!-- Görsel büyütme penceresi -->
-    <div id="imageModal" class="image-modal">
-        <span class="close-modal" onclick="closeImageModal()">&times;</span>
-        <div class="modal-content-wrapper" id="modalContentWrapper">
-            <img class="modal-content" id="modalImage" alt="Harita">
-        </div>
-        <div class="modal-controls">
-            <button onclick="zoomModalImage(1.2)" title="Büyüt"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
-            <button onclick="zoomModalImage(0.8)" title="Küçült"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
-            <button onclick="zoomModalImage('reset')" title="Sıfırla"><i class="fa-solid fa-compress"></i></button>
-        </div>
-    </div>
-    <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
-    <script>
-        let pzInstance = null;
-        function openImageModal(imgSrc) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("modalImage");
-            modal.style.display = "block";
-            modalImg.src = imgSrc;
-            if (pzInstance) pzInstance.destroy();
-            pzInstance = Panzoom(modalImg, { maxScale: 10, minScale: 0.5, startScale: 1, cursor: 'grab' });
-            modal.addEventListener('wheel', pzInstance.zoomWithWheel);
-        }
-        function closeImageModal() {
-            document.getElementById("imageModal").style.display = "none";
-            if (pzInstance) { pzInstance.destroy(); pzInstance = null; }
-        }
-        function zoomModalImage(scale) {
-            if (!pzInstance) return;
-            if (scale === 'reset') pzInstance.reset(); else pzInstance.zoom(pzInstance.getScale() * scale);
-        }
-    </script>
 
     <script src="js/chart-config.js"></script>
     <script src="js/kgm.js"></script>

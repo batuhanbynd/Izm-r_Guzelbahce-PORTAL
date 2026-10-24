@@ -136,13 +136,13 @@
             const { left, right } = chart.chartArea;
             const c = chart.ctx;
             c.save();
-            c.strokeStyle = 'rgba(248, 250, 252, 0.7)';
+            c.strokeStyle = temaRengi('cizgi');
             c.lineWidth = 1;
             c.setLineDash([6, 4]);
             c.beginPath(); c.moveTo(left, y); c.lineTo(right, y); c.stroke();
             c.setLineDash([]);
-            c.fillStyle = '#e2e8f0';
-            c.font = "600 11px 'Outfit', sans-serif";
+            c.fillStyle = temaRengi('etiket');
+            c.font = "600 12px 'Outfit', sans-serif";
             c.textAlign = 'right';
             c.fillText('Kapasite (%100)', right, y - 6);
             c.restore();

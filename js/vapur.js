@@ -63,7 +63,7 @@
             plugins: { legend: { position: 'top' } },
             scales: {
                 y: degerEkseni('Günlük yolcu'),
-                x: { ...kategoriEkseni, ticks: { maxRotation: 45, minRotation: 30, font: { size: 10 } } }
+                x: { ...kategoriEkseni, ticks: { maxRotation: 45, minRotation: 30, font: { size: 12 } } }
             },
             interaction: { mode: 'index', intersect: false }
         }
@@ -97,7 +97,7 @@
             responsive: true, maintainAspectRatio: false,
             cutout: '60%',
             plugins: {
-                legend: { position: 'bottom', labels: { padding: 10, font: { size: 10 } } },
+                legend: { position: 'bottom', labels: { padding: 10, font: { size: 12 } } },
                 tooltip: tooltipPayConfig
             }
         }
@@ -128,7 +128,7 @@
             plugins: { legend: { display: false } },
             scales: {
                 x: yuzdeEkseni('Büyüme (2020–2030)', { grace: '15%' }),
-                y: { grid: { display: false }, ticks: { font: { size: 10 } } }
+                y: { grid: { display: false }, ticks: { font: { size: 12 } } }
             }
         }
     });

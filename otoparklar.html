@@ -3,137 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAS PORTAL - Otoparklar</title>
+    <title>Otoparklar | BAS PORTAL</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 </head>
 <body>
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="brand">BAS PORTAL</div>
+        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <nav aria-label="Sayfalar">
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
-                    <i class="fa-solid fa-network-wired"></i>
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                     Diyagramlar
                 </a>
             </li>
             <li class="nav-item">
-                <a href="index.html" class="nav-link" data-target="havalimani">
-                    <i class="fa-solid fa-plane-departure"></i>
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
                     Adnan Menderes
                 </a>
             </li>
             <li class="nav-item">
-                <a href="eshot.html" class="nav-link" data-target="eshot">
-                    <i class="fa-solid fa-bus"></i>
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
                     ESHOT
                 </a>
             </li>
             <li class="nav-item">
-                <a href="dolmus.html" class="nav-link" data-target="dolmus">
-                    <i class="fa-solid fa-van-shuttle"></i>
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
                     Dolmuş
                 </a>
             </li>
             <li class="nav-item">
-                <a href="tramvay.html" class="nav-link" data-target="tramvay">
-                    <i class="fa-solid fa-train-tram"></i>
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
                     Tramvay
                 </a>
             </li>
             <li class="nav-item">
-                <a href="izban.html" class="nav-link" data-target="izban">
-                    <i class="fa-solid fa-train"></i>
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
                     İZBAN
                 </a>
             </li>
             <li class="nav-item">
-                <a href="vapur.html" class="nav-link" data-target="vapur">
-                    <i class="fa-solid fa-ship"></i>
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
                     Vapur (İzdeniz)
                 </a>
             </li>
             <li class="nav-item">
-                <a href="metro.html" class="nav-link" data-target="metro">
-                    <i class="fa-solid fa-subway"></i>
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
                     İzmir Metro
                 </a>
             </li>
             <li class="nav-item">
-                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
-                    <i class="fa-solid fa-chart-pie"></i>
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
                     Ulaşım Karşılaştırması
                 </a>
             </li>
             <li class="nav-item">
-                <a href="kgm.html" class="nav-link" data-target="kgm">
-                    <i class="fa-solid fa-road"></i>
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
                     KGM Karayolları
                 </a>
             </li>
             <li class="nav-item">
-                <a href="otoparklar.html" class="nav-link active" data-target="otopark">
-                    <i class="fa-solid fa-square-parking"></i>
+                <a href="otoparklar.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
                     Otoparklar
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="izsu.html" class="nav-link" data-target="izsu">
-                    <i class="fa-solid fa-droplet"></i>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
                     İZSU Su Kaynakları
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="elektrik.html" class="nav-link" data-target="elektrik">
-                    <i class="fa-solid fa-bolt"></i>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
                     Elektrik Altyapısı
                 </a>
             </li>
-
             <li class="nav-item">
-                <a href="planlanan-projeler.html" class="nav-link" data-target="planlanan">
-                    <i class="fa-solid fa-layer-group"></i>
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
                     Planlanan Projeler
                 </a>
             </li>
             <li class="nav-item">
-                <a href="isbirlikleri.html" class="nav-link" data-target="isbirlikleri">
-                    <i class="fa-solid fa-handshake"></i>
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
                     İşbirliklerimiz
                 </a>
             </li>
-</ul>
+        </ul>
+        </nav>
     </aside>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" id="icerik" tabindex="-1">
         <div id="otopark" class="tab-pane active">
             <header>
                 <h1>Otoparklar</h1>
                 <p class="subtitle">Park Et ve Devam Et (P+R) ile Öp ve Geç (K+R) uygulamaları ve Güzelbahçe örnekleri</p>
             </header>
 
-            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+            <div class="dashboard-grid tek-sutun">
                 <div class="card full-width">
-                    <h2><i class="fa-solid fa-square-parking" style="color: var(--accent-1);"></i> Otopark Alanları</h2>
-                        <figure class="harita-figur" style="max-width: 900px; margin: 0 auto;">
-                            <figcaption><i class="fa-solid fa-map-location-dot"></i> Otopark alanları haritası</figcaption>
+                    <h2><i class="fa-solid fa-square-parking renk-mavi" aria-hidden="true"></i> Otopark Alanları</h2>
+                        <figure class="harita-figur dar">
+                            <figcaption><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Otopark alanları haritası</figcaption>
                             <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
                                 <img src="otopark_alanlari.png" alt="Güzelbahçe otopark alanları haritası" loading="lazy">
-                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Haritayı Aç / Büyüt</div>
                             </div>
                         </figure>
                 </div>
             </div>
 
             <div class="bolum-baslik">
-                <div class="ikon" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-1);"><i class="fa-solid fa-car-side"></i></div>
+                <div class="ikon ton-mavi" aria-hidden="true"><i class="fa-solid fa-car-side" aria-hidden="true"></i></div>
                 <div>
                     <h2>P+R ve K+R Nedir?</h2>
                     <p>Toplu taşıma aktarma noktalarında iki farklı araç kullanım biçimi</p>
@@ -141,16 +149,16 @@
             </div>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-square-parking"></i> Park and Ride (P+R) — Park Et ve Devam Et</h3>
-                    <p style="color: #e2e8f0; line-height: 1.6;">Sürücülerin kendi araçlarıyla (otomobil, motosiklet vb.) bir toplu taşıma aktarma merkezine (metro, tren, otobüs terminali) gelip araçlarını buradaki otoparka uzun süreli bırakması ve yolun geri kalanını toplu taşıma ile tamamlaması sistemidir.</p>
+                    <h3><i class="fa-solid fa-square-parking" aria-hidden="true"></i> Park and Ride (P+R) — Park Et ve Devam Et</h3>
+                    <p>Sürücülerin kendi araçlarıyla (otomobil, motosiklet vb.) bir toplu taşıma aktarma merkezine (metro, tren, otobüs terminali) gelip araçlarını buradaki otoparka uzun süreli bırakması ve yolun geri kalanını toplu taşıma ile tamamlaması sistemidir.</p>
                     <ul>
                         <li><strong>Amaç:</strong> Şehir merkezine giren araç sayısını azaltmak, otopark ve trafik kilitlenmesi sorunlarını çözmek.</li>
                         <li><strong>Nasıl Çalışır?</strong> Çevre yoluna yakın veya şehir çeperlerindeki metro/tren istasyonlarının yanına geniş otoparklar kurulur. Sürücü sabah aracını bırakır, metroya biner, akşam dönüşte aracını alıp eve döner.</li>
                     </ul>
                 </div>
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-car-on"></i> Kiss and Ride (K+R) — Öp ve Geç / Bırak ve Git</h3>
-                    <p style="color: #e2e8f0; line-height: 1.6;">Sürücülerin bir yolcuyu toplu taşıma istasyonuna sadece araçtan indirmek (veya istasyondan almak) amacıyla yanaştığı, duraklamaya izin veren ancak uzun süreli park etmeye kapalı olan özel cepler/alanlardır.</p>
+                    <h3><i class="fa-solid fa-car-on" aria-hidden="true"></i> Kiss and Ride (K+R) — Öp ve Geç / Bırak ve Git</h3>
+                    <p>Sürücülerin bir yolcuyu toplu taşıma istasyonuna sadece araçtan indirmek (veya istasyondan almak) amacıyla yanaştığı, duraklamaya izin veren ancak uzun süreli park etmeye kapalı olan özel cepler/alanlardır.</p>
                     <ul>
                         <li><strong>Amaç:</strong> İstasyon önlerindeki araç sirkülasyonunu düzenlemek, trafiğin tıkanmasını engellemek ve hızlı, güvenli bir yolcu indirme/bindirme alanı sağlamak.</li>
                         <li><strong>İsmin Kaynağı:</strong> "Sürücünün yolcuyu araçtan indirmeden önce öpüp uğurlaması" (Kiss &amp; Ride) esprili ifadesinden gelir.</li>
@@ -158,7 +166,7 @@
                 </div>
             </div>
 
-            <div class="tablo-kutu" style="margin-top: 2rem;">
+            <div class="tablo-kutu ust-bosluk">
                 <table class="veri-tablosu">
                     <thead><tr><th>Özellik</th><th>Park and Ride (P+R)</th><th>Kiss and Ride (K+R)</th></tr></thead>
                     <tbody>
@@ -171,85 +179,51 @@
             </div>
 
             <div class="bolum-baslik">
-                <div class="ikon" style="background: rgba(52, 211, 153, 0.15); color: var(--success);"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
                 <div>
                     <h2>Güzelbahçe'de Park and Ride (P+R) Örnekleri</h2>
                 </div>
             </div>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-ship"></i> Güzelbahçe Vapur İskelesi çevresi</h3>
-                    <p style="color: #e2e8f0; line-height: 1.6;">Güzelbahçe Vapur İskelesi çevresindeki açık otopark ve cepler en tipik yerel P+R örneğidir.</p>
+                    <h3><i class="fa-solid fa-ship" aria-hidden="true"></i> Güzelbahçe Vapur İskelesi çevresi</h3>
+                    <p>Güzelbahçe Vapur İskelesi çevresindeki açık otopark ve cepler en tipik yerel P+R örneğidir.</p>
                     <ul><li><strong>Nasıl Uygulanır?</strong> Yelki, Kahramandere veya Çamlı'dan kendi aracınızla (otomobil veya motosiklet) sahil yoluna inip aracınızı vapur iskelesi yakınındaki otoparka bırakırsınız. Ardından İZDENİZ vapuruyla Konak, Alsancak veya Karşıyaka'ya geçerek şehir içi trafiğine girmeden ulaşım sağlarsınız.</li></ul>
                 </div>
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-building"></i> Fahrettin Altay Aktarma çevresi</h3>
-                    <p style="color: #e2e8f0; line-height: 1.6;">Fahrettin Altay Aktarma çevresindeki otoparklar, Güzelbahçe'den merkeze gidenlerin sıklıkla kullandığı bölgesel P+R noktasıdır.</p>
+                    <h3><i class="fa-solid fa-building" aria-hidden="true"></i> Fahrettin Altay Aktarma çevresi</h3>
+                    <p>Fahrettin Altay Aktarma çevresindeki otoparklar, Güzelbahçe'den merkeze gidenlerin sıklıkla kullandığı bölgesel P+R noktasıdır.</p>
                     <ul><li><strong>Nasıl Uygulanır?</strong> Güzelbahçe'den otoyol veya sahil yolu üzerinden aracınızla Üçkuyular/Fahrettin Altay bölgesine gelip aracınızı aktarma merkezinin katlı otoparkına bırakırsınız. Yolun devamını İzmir Metrosu veya Tramvay ile tamamlarsınız.</li></ul>
                 </div>
             </div>
 
             <div class="bolum-baslik">
-                <div class="ikon" style="background: rgba(129, 140, 248, 0.15); color: var(--accent-2);"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="ikon ton-amber" aria-hidden="true"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
                 <div>
                     <h2>Güzelbahçe'de Kiss and Ride (K+R) Örnekleri</h2>
                 </div>
             </div>
             <div class="info-grid">
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-bus"></i> Güzelbahçe Meydan, Mithatpaşa Caddesi</h3>
-                    <p style="color: #e2e8f0; line-height: 1.6;">Güzelbahçe Meydan Mithatpaşa Caddesi üzerindeki ana ESHOT durak yanaşma cepleri K+R işlevi görür.</p>
+                    <h3><i class="fa-solid fa-bus" aria-hidden="true"></i> Güzelbahçe Meydan, Mithatpaşa Caddesi</h3>
+                    <p>Güzelbahçe Meydan Mithatpaşa Caddesi üzerindeki ana ESHOT durak yanaşma cepleri K+R işlevi görür.</p>
                     <ul><li><strong>Nasıl Uygulanır?</strong> Sabah saatlerinde bir aile ferdini ya da arkadaşınızı aracınızla Mithatpaşa Caddesi üzerindeki ana otobüs durağına getirirsiniz. Aracınızı park etmeden, yolcu indirme cebinde 30 saniye duraklayıp yolcunuzu uğurlarsınız (Kiss &amp; Ride) ve yolunuza devam edersiniz. Yolcunuz da Fahrettin Altay yönüne giden 8/984/321 gibi ESHOT otobüslerine biner.</li></ul>
                 </div>
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-school"></i> Özel Okullar ve Kampüs Girişleri</h3>
-                    <p style="color: #e2e8f0; line-height: 1.6;">Güzelbahçe genelinde (özellikle Seferihisar Yolu ve Kahramandere bölgesinde) yer alan kolej ve okul önlerindeki "Veli İndirme/Bindirme Cepleri" K+R mantığının en belirgin örneklerindendir. Araçlar park etmez, sadece öğrenciyi indirip alarak sirkülasyonu devam ettirir.</p>
+                    <h3><i class="fa-solid fa-school" aria-hidden="true"></i> Özel Okullar ve Kampüs Girişleri</h3>
+                    <p>Güzelbahçe genelinde (özellikle Seferihisar Yolu ve Kahramandere bölgesinde) yer alan kolej ve okul önlerindeki "Veli İndirme/Bindirme Cepleri" K+R mantığının en belirgin örneklerindendir. Araçlar park etmez, sadece öğrenciyi indirip alarak sirkülasyonu devam ettirir.</p>
                 </div>
             </div>
 
-            <div class="card full-width" style="margin-top: 2rem;">
-                <h2><i class="fa-solid fa-chart-line" style="color: var(--success);"></i> Park and Ride (P+R) Etkileri</h2>
+            <div class="card full-width ust-bosluk">
+                <h2><i class="fa-solid fa-chart-line renk-yesil" aria-hidden="true"></i> Park and Ride (P+R) Etkileri</h2>
                 <div class="bulgu-kutu bulgu">
-                    <span class="etiket"><i class="fa-solid fa-circle-check"></i> Olumlu Etkiler</span>
+                    <span class="etiket"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Olumlu Etkiler</span>
                     <p><strong>Mithatpaşa Caddesi ve Otoyol Yükünü Hafifletir:</strong> Kahramandere, Yelki ve Çamlı gibi iç kesimlerde oturan sürücülerin araçlarını Güzelbahçe Vapur İskelesi veya Urla/Çeşme otoyol bağlantı noktalarına yakın alanlarda bırakarak toplu taşımaya (vapur/express ESHOT) geçmesi, sahil aksındaki araç trafiğini doğrudan azaltır.</p>
                 </div>
             </div>
         </div>
     </main>
-
-    <!-- Görsel büyütme penceresi -->
-    <div id="imageModal" class="image-modal">
-        <span class="close-modal" onclick="closeImageModal()">&times;</span>
-        <div class="modal-content-wrapper" id="modalContentWrapper">
-            <img class="modal-content" id="modalImage" alt="Harita">
-        </div>
-        <div class="modal-controls">
-            <button onclick="zoomModalImage(1.2)" title="Büyüt"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
-            <button onclick="zoomModalImage(0.8)" title="Küçült"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
-            <button onclick="zoomModalImage('reset')" title="Sıfırla"><i class="fa-solid fa-compress"></i></button>
-        </div>
-    </div>
-    <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
-    <script>
-        let pzInstance = null;
-        function openImageModal(imgSrc) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("modalImage");
-            modal.style.display = "block";
-            modalImg.src = imgSrc;
-            if (pzInstance) pzInstance.destroy();
-            pzInstance = Panzoom(modalImg, { maxScale: 10, minScale: 0.5, startScale: 1, cursor: 'grab' });
-            modal.addEventListener('wheel', pzInstance.zoomWithWheel);
-        }
-        function closeImageModal() {
-            document.getElementById("imageModal").style.display = "none";
-            if (pzInstance) { pzInstance.destroy(); pzInstance = null; }
-        }
-        function zoomModalImage(scale) {
-            if (!pzInstance) return;
-            if (scale === 'reset') pzInstance.reset(); else pzInstance.zoom(pzInstance.getScale() * scale);
-        }
-    </script>
 
     <script src="js/chart-config.js"></script>
     <script src="js/ui.js"></script>
