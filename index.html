@@ -3,366 +3,270 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAS PORTAL</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <title>Genel Bakış | BAS PORTAL</title>
+    <meta name="description" content="Güzelbahçe ulaşım ve altyapı verilerinin özeti: toplu taşıma, karayolu trafiği, su ve elektrik altyapısı, planlanan projeler.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 </head>
 <body>
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="brand">BAS PORTAL</div>
+        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <nav aria-label="Sayfalar">
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
-                    <i class="fa-solid fa-network-wired"></i>
+                <a href="index.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                     Diyagramlar
                 </a>
             </li>
             <li class="nav-item">
-                <a href="index.html" class="nav-link active" data-target="havalimani">
-                    <i class="fa-solid fa-plane-departure"></i>
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
                     Adnan Menderes
                 </a>
             </li>
             <li class="nav-item">
-                <a href="eshot.html" class="nav-link" data-target="eshot">
-                    <i class="fa-solid fa-bus"></i>
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
                     ESHOT
                 </a>
             </li>
             <li class="nav-item">
-                <a href="dolmus.html" class="nav-link" data-target="dolmus">
-                    <i class="fa-solid fa-van-shuttle"></i>
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
                     Dolmuş
                 </a>
             </li>
             <li class="nav-item">
-                <a href="tramvay.html" class="nav-link" data-target="tramvay">
-                    <i class="fa-solid fa-train-tram"></i>
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
                     Tramvay
                 </a>
             </li>
             <li class="nav-item">
-                <a href="izban.html" class="nav-link" data-target="izban">
-                    <i class="fa-solid fa-train"></i>
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
                     İZBAN
                 </a>
             </li>
             <li class="nav-item">
-                <a href="vapur.html" class="nav-link" data-target="vapur">
-                    <i class="fa-solid fa-ship"></i>
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
                     Vapur (İzdeniz)
                 </a>
             </li>
             <li class="nav-item">
-                <a href="metro.html" class="nav-link" data-target="metro">
-                    <i class="fa-solid fa-subway"></i>
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
                     İzmir Metro
                 </a>
             </li>
             <li class="nav-item">
-                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
-                    <i class="fa-solid fa-chart-pie"></i>
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
                     Ulaşım Karşılaştırması
                 </a>
             </li>
             <li class="nav-item">
-                <a href="kgm.html" class="nav-link" data-target="kgm">
-                    <i class="fa-solid fa-road"></i>
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
                     KGM Karayolları
                 </a>
             </li>
             <li class="nav-item">
-                <a href="otoparklar.html" class="nav-link" data-target="otopark">
-                    <i class="fa-solid fa-square-parking"></i>
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
                     Otoparklar
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="izsu.html" class="nav-link" data-target="izsu">
-                    <i class="fa-solid fa-droplet"></i>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
                     İZSU Su Kaynakları
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="elektrik.html" class="nav-link" data-target="elektrik">
-                    <i class="fa-solid fa-bolt"></i>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
                     Elektrik Altyapısı
                 </a>
             </li>
-
             <li class="nav-item">
-                <a href="planlanan-projeler.html" class="nav-link" data-target="planlanan">
-                    <i class="fa-solid fa-layer-group"></i>
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
                     Planlanan Projeler
                 </a>
             </li>
             <li class="nav-item">
-                <a href="isbirlikleri.html" class="nav-link" data-target="isbirlikleri">
-                    <i class="fa-solid fa-handshake"></i>
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
                     İşbirliklerimiz
                 </a>
             </li>
-</ul>
+        </ul>
+        </nav>
     </aside>
 
     <!-- Main Content -->
-    <main class="main-content">
-        <div id="havalimani" class="tab-pane active">
-            <header>
-                <h1>Adnan Menderes Analizi</h1>
-                <p class="subtitle">Aylık Yolcu Trafiği Gelişimi (Ocak - Ağustos 2026)</p>
-            </header>
-
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-label">Toplam Yolcu (8 Aylık 2026)</div>
-                    <div class="stat-value">8.925.405</div>
-                    <div class="stat-change change-up">▲ %7,5 (2025'e göre)</div>
+    <main class="main-content" id="icerik" tabindex="-1">
+        <div id="genel-bakis" class="tab-pane active">
+            <div class="giris-ust">
+                <div class="giris-metin">
+                    <span class="ust-etiket"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> İzmir · Güzelbahçe</span>
+                    <h1>Güzelbahçe Ulaşım ve Altyapı Analizi</h1>
+                    <p>Bu sayfa, sitedeki ulaşım ve altyapı verilerinin kısa bir özetidir: toplu taşıma hatları, karayolu trafiği, su ve elektrik altyapısı ile planlanan projeler.</p>
+                    <p>Aşağıdaki her kart ilgili sayfaya bağlanır. Kartlardaki sayılar, o sayfalarda yer alan verilerin aynısıdır.</p>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">İç Hatlar Toplamı</div>
-                    <div class="stat-value">5.560.681</div>
-                    <div class="stat-change change-up">▲ %13,6</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Dış Hatlar Toplamı</div>
-                    <div class="stat-value">3.364.724</div>
-                    <div class="stat-change change-down">▼ %1,4</div>
-                </div>
+                <figure class="giris-gorsel">
+                    <div class="interactive-image-container" onclick="openImageModal('tüm.jpeg')">
+                        <img src="tüm.jpeg" alt="ESHOT hatlarının Güzelbahçe genelindeki etki çapı ve kapsama alanı">
+                        <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <figcaption>ESHOT hatlarının Güzelbahçe genelindeki etki çapı (ESHOT sayfasından)</figcaption>
+                </figure>
             </div>
 
-            <div class="dashboard-grid">
-                <div class="card full-width">
-                    <h2>Aylık Toplam Yolcu (2025 ve 2026, Ocak–Ağustos)</h2>
-                    <div class="chart-container">
-                        <canvas id="monthlyChart"></canvas>
-                    </div>
-                </div>
-                <div class="card">
-                    <h2>Kümülatif Yolcu (Ocak–Ağustos)</h2>
-                    <div class="chart-container">
-                        <canvas id="cumulativeChart"></canvas>
-                    </div>
-                </div>
-                <div class="card">
-                    <h2>Aylara Göre İç/Dış Hat Dağılımı (2026)</h2>
-                    <div class="chart-container">
-                        <canvas id="splitChart"></canvas>
-                    </div>
-                </div>
-            <!-- Adnan Menderes'ten Güzelbahçe'ye Nasıl Gidilir? -->
-            <div class="card full-width" style="margin-top: 2rem;">
-                <h2><i class="fa-solid fa-route"></i> Adnan Menderes Havalimanı → Güzelbahçe Ulaşım Alternatifleri</h2>
-                <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem;">
-                    Havalimanından Güzelbahçe'ye toplu taşıma ile ulaşmak için tercih edebileceğiniz 3 farklı alternatif güzergah:
-                </p>
-
-                <!-- Alternatif 1 -->
-                <h3 style="color: var(--accent-1); margin-bottom: 1rem; font-size: 1.1rem; border-left: 3px solid var(--accent-1); padding-left: 10px;">
-                    Alternatif 1: Raylı Sistem (En Hızlı ve Trafiksiz)
-                </h3>
-                <div class="transport-path" style="margin-bottom: 2.5rem;">
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.5); color: #38bdf8;">
-                            <i class="fa-solid fa-plane-arrival"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">Havalimanı</span>
-                            <span class="step-desc">Başlangıç</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.5); color: #34d399;">
-                            <i class="fa-solid fa-train"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">İZBAN</span>
-                            <span class="step-desc">Havalimanı İst.</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(251, 191, 36, 0.15); border-color: rgba(251, 191, 36, 0.5); color: #fbbf24;">
-                            <i class="fa-solid fa-right-left"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">Hilal Aktarma</span>
-                            <span class="step-desc">İZBAN → Metro</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(129, 140, 248, 0.15); border-color: rgba(129, 140, 248, 0.5); color: #818cf8;">
-                            <i class="fa-solid fa-subway"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">İzmir Metro</span>
-                            <span class="step-desc">F. Altay Yönü</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(244, 114, 182, 0.15); border-color: rgba(244, 114, 182, 0.5); color: #f472b6;">
-                            <i class="fa-solid fa-bus"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">ESHOT (8 / 82)</span>
-                            <span class="step-desc">F. Altay → Güzelbahçe</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(248, 113, 113, 0.15); border-color: rgba(248, 113, 113, 0.5); color: #f87171;">
-                            <i class="fa-solid fa-flag-checkered"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">Güzelbahçe</span>
-                            <span class="step-desc">Varış</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Alternatif 2 -->
-                <h3 style="color: var(--accent-1); margin-bottom: 1rem; font-size: 1.1rem; border-left: 3px solid var(--accent-1); padding-left: 10px;">
-                    Alternatif 2: Ekspres Otobüs (Az Aktarma)
-                </h3>
-                <div class="transport-path" style="margin-bottom: 2.5rem;">
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.5); color: #38bdf8;">
-                            <i class="fa-solid fa-plane-arrival"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">Havalimanı</span>
-                            <span class="step-desc">Başlangıç</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(244, 114, 182, 0.15); border-color: rgba(244, 114, 182, 0.5); color: #f472b6;">
-                            <i class="fa-solid fa-bus-simple"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">ESHOT 202</span>
-                            <span class="step-desc">Çevreyolu Ekspres</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(251, 191, 36, 0.15); border-color: rgba(251, 191, 36, 0.5); color: #fbbf24;">
-                            <i class="fa-solid fa-right-left"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">F. Altay Aktarma</span>
-                            <span class="step-desc">Otobüs Değişimi</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(244, 114, 182, 0.15); border-color: rgba(244, 114, 182, 0.5); color: #f472b6;">
-                            <i class="fa-solid fa-bus"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">ESHOT (8 / 82)</span>
-                            <span class="step-desc">Güzelbahçe Yönü</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(248, 113, 113, 0.15); border-color: rgba(248, 113, 113, 0.5); color: #f87171;">
-                            <i class="fa-solid fa-flag-checkered"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">Güzelbahçe</span>
-                            <span class="step-desc">Varış</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Alternatif 3 -->
-                <h3 style="color: var(--accent-1); margin-bottom: 1rem; font-size: 1.1rem; border-left: 3px solid var(--accent-1); padding-left: 10px;">
-                    Alternatif 3: Körfez Rotası (Vapur Keyfi)
-                </h3>
-                <div class="transport-path">
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.5); color: #38bdf8;">
-                            <i class="fa-solid fa-plane-arrival"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">Havalimanı</span>
-                            <span class="step-desc">Başlangıç</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.5); color: #34d399;">
-                            <i class="fa-solid fa-train"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">İZBAN</span>
-                            <span class="step-desc">Alsancak İst.</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.5); color: #38bdf8;">
-                            <i class="fa-solid fa-ship"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">Vapur</span>
-                            <span class="step-desc">Alsancak → Üçkuyular</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(244, 114, 182, 0.15); border-color: rgba(244, 114, 182, 0.5); color: #f472b6;">
-                            <i class="fa-solid fa-bus"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">ESHOT (8 / 82)</span>
-                            <span class="step-desc">Üçkuyular → Güzelbahçe</span>
-                        </div>
-                    </div>
-                    <div class="path-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="path-step">
-                        <div class="step-icon" style="background: rgba(248, 113, 113, 0.15); border-color: rgba(248, 113, 113, 0.5); color: #f87171;">
-                            <i class="fa-solid fa-flag-checkered"></i>
-                        </div>
-                        <div class="step-info">
-                            <span class="step-title">Güzelbahçe</span>
-                            <span class="step-desc">Varış</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="bolum-ust">
+                <h2>Öne çıkan veriler</h2>
+                <p>Ayrıntı için karta tıklayın</p>
+            </div>
+            <div class="kpi-izgarasi">
+                <a class="kpi ton-pembe" href="eshot.html">
+                    <span class="kpi-etiket"><i class="fa-solid fa-bus" aria-hidden="true"></i> ESHOT</span>
+                    <span class="kpi-deger">6 hat</span>
+                    <span class="kpi-alt">Ayrıntılı incelenen hat · Hat 8 ortalama 21–22 dakikada bir</span>
+                </a>
+                <a class="kpi ton-turuncu" href="kgm.html">
+                    <span class="kpi-etiket"><i class="fa-solid fa-road" aria-hidden="true"></i> KGM Karayolları</span>
+                    <span class="kpi-deger">224.324</span>
+                    <span class="kpi-alt">Taşıt/gün, 6 güzergah toplamı (2025 YOGT) · En yoğun: Güzelbahçe – Menderes 76.779</span>
+                </a>
+                <a class="kpi ton-su" href="vapur.html">
+                    <span class="kpi-etiket"><i class="fa-solid fa-ship" aria-hidden="true"></i> Vapur (İzdeniz)</span>
+                    <span class="kpi-deger">18.804</span>
+                    <span class="kpi-alt">V13 Güzelbahçe–Konak, 2025 günlük yolcu</span>
+                </a>
+                <a class="kpi ton-mavi" href="izsu.html">
+                    <span class="kpi-etiket"><i class="fa-solid fa-droplet" aria-hidden="true"></i> İZSU</span>
+                    <span class="kpi-deger">%48,20</span>
+                    <span class="kpi-alt">Balçova Barajı aktif doluluk · Kullanılabilir su 3,674 mn m³</span>
+                </a>
+                <a class="kpi ton-yesil" href="izsu.html">
+                    <span class="kpi-etiket"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i> Yerel kaynak</span>
+                    <span class="kpi-deger">265 kişi</span>
+                    <span class="kpi-alt">Küçükkaya içme suyu kuyusu: yaklaşık 265 kişiye alternatif yerel kaynak</span>
+                </a>
+                <a class="kpi ton-turuncu" href="elektrik.html">
+                    <span class="kpi-etiket"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Elektrik</span>
+                    <span class="kpi-deger">100 MVA</span>
+                    <span class="kpi-alt">Ana indirici trafo kapasitesi (154 → 34,5 kV)</span>
+                </a>
+                <a class="kpi ton-amber" href="planlanan-projeler.html">
+                    <span class="kpi-etiket"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 75. Yıl Cumhuriyet Bulvarı</span>
+                    <span class="kpi-deger">1,5 / 4,25 km</span>
+                    <span class="kpi-alt">Tamamlanan / toplam uzunluk · 1. etap hizmete açıldı</span>
+                </a>
+                <a class="kpi ton-kirmizi" href="planlanan-projeler.html#planlanan-metro">
+                    <span class="kpi-etiket"><i class="fa-solid fa-train-subway" aria-hidden="true"></i> Planlanan metro</span>
+                    <span class="kpi-deger">13,6 km</span>
+                    <span class="kpi-alt">Narlıdere'den sonra planlanan hat · 11 istasyon</span>
+                </a>
             </div>
 
+            <div class="bolum-ust">
+                <h2>Ulaşım</h2>
+                <p>Toplu taşıma, karayolu ve otopark verileri</p>
+            </div>
+            <div class="servis-izgarasi">
+                <a class="servis-karti ton-mor" href="havalimani.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i></span>
+                    <div><h3>Adnan Menderes <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Aylık yolcu trafiği ve havalimanından Güzelbahçe'ye ulaşım alternatifleri</p></div>
+                </a>
+                <a class="servis-karti ton-pembe" href="eshot.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-bus" aria-hidden="true"></i></span>
+                    <div><h3>ESHOT <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Aylık günlük ortalama biniş istatistikleri, hat güzergahları ve durak erişim çapları</p></div>
+                </a>
+                <a class="servis-karti ton-sari" href="dolmus.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-van-shuttle" aria-hidden="true"></i></span>
+                    <div><h3>Dolmuş <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Güzelbahçe'ye hizmet veren dolmuş güzergahları ve 800 m erişilebilirlik çapları</p></div>
+                </a>
+                <a class="servis-karti ton-yesil" href="tramvay.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-train-tram" aria-hidden="true"></i></span>
+                    <div><h3>Tramvay <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Karşıyaka, Konak ve Çiğli hatları toplam yolcu trafiği (2020 - 2024)</p></div>
+                </a>
+                <a class="servis-karti ton-sari" href="izban.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-train" aria-hidden="true"></i></span>
+                    <div><h3>İZBAN <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>İzmir banliyö sistemi yıllık kullanım istatistikleri (2010 - 2015)</p></div>
+                </a>
+                <a class="servis-karti ton-su" href="vapur.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-ship" aria-hidden="true"></i></span>
+                    <div><h3>Vapur (İzdeniz) <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>17 vapur hattı günlük yolcu sayıları (2020 / 2025 / 2030 projeksiyonu)</p></div>
+                </a>
+                <a class="servis-karti ton-mor" href="metro.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-subway" aria-hidden="true"></i></span>
+                    <div><h3>İzmir Metro <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Yıllık toplam biniş sayıları ve planlanan metro hattı</p></div>
+                </a>
+                <a class="servis-karti ton-mavi" href="karsilastirma.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i></span>
+                    <div><h3>Ulaşım Karşılaştırması <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Tüm toplu ulaşım ağlarının İzmir geneli yıllık yolcu dağılımı</p></div>
+                </a>
+                <a class="servis-karti ton-turuncu" href="kgm.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-road" aria-hidden="true"></i></span>
+                    <div><h3>KGM Karayolları <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>2025 yıllık ortalama günlük trafik (YOGT), kapasite ve doluluk karşılaştırması</p></div>
+                </a>
+                <a class="servis-karti ton-mavi" href="otoparklar.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-square-parking" aria-hidden="true"></i></span>
+                    <div><h3>Otoparklar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Park Et ve Devam Et (P+R) ile Öp ve Geç (K+R) uygulamaları ve Güzelbahçe örnekleri</p></div>
+                </a>
             </div>
 
-            <!-- Verilerden elde edilen bulgular -->
-            <div class="card full-width" style="margin-top: 2rem;">
-                <h2><i class="fa-solid fa-lightbulb" style="color: var(--success);"></i> Verilerden Elde Edilen Bulgular</h2>
-                <div class="bulgu-blok">
-                    <p class="bulgu-baslik"><i class="fa-solid fa-train-subway"></i> Raylı sistem ve havalimanı erişimi</p>
-                    <div class="bulgu-akisi">
-                        <div class="bulgu-kutu veri"><span class="etiket"><i class="fa-solid fa-database"></i> Veri</span><p>Havalimanı–Güzelbahçe arasında 3 toplu taşıma güzergahı; ilçede raylı sistem istasyonu yok.</p></div>
-                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right"></i></div>
-                        <div class="bulgu-kutu analiz"><span class="etiket"><i class="fa-solid fa-magnifying-glass-chart"></i> Analiz</span><p>Üç güzergahın tamamı aktarma içerir; son bağlantı her durumda ESHOT 8 / 82 hatlarıyla F. Altay veya Üçkuyular'dan sağlanır.</p></div>
-                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right"></i></div>
-                        <div class="bulgu-kutu bulgu"><span class="etiket"><i class="fa-solid fa-lightbulb"></i> Bulgu</span><p>İlçenin bölgesel erişimi otobüse ve aktarma merkezlerine bağımlıdır; raylı sistem ağına doğrudan bağlantı bulunmamaktadır.</p></div>
-                    </div>
-                </div>
+            <div class="bolum-ust">
+                <h2>Altyapı</h2>
+                <p>Su ve elektrik şebekeleri</p>
+            </div>
+            <div class="servis-izgarasi">
+                <a class="servis-karti ton-su" href="izsu.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-droplet" aria-hidden="true"></i></span>
+                    <div><h3>İZSU Su Kaynakları <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Baraj doluluk oranları, su kaynakları listesi ve su altyapısı metrajı</p></div>
+                </a>
+                <a class="servis-karti ton-turuncu" href="elektrik.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+                    <div><h3>Elektrik Altyapısı <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Trafo merkezleri, orta gerilim hatları ve dağıtım trafoları</p></div>
+                </a>
+            </div>
+
+            <div class="bolum-ust">
+                <h2>Planlama ve analiz</h2>
+                <p>Projeler, ilişki diyagramları ve katkı verenler</p>
+            </div>
+            <div class="servis-izgarasi">
+                <a class="servis-karti ton-amber" href="planlanan-projeler.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></span>
+                    <div><h3>Planlanan Projeler <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>75. Yıl Cumhuriyet Bulvarı etapları ve planlanan metro hattı</p></div>
+                </a>
+                <a class="servis-karti ton-mavi" href="kavramsal.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></span>
+                    <div><h3>Diyagramlar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Ulaşım modlarının ilişkisel ağ yapısı, yolcu akışı ve hiyerarşik görünümü</p></div>
+                </a>
+                <a class="servis-karti ton-yesil" href="isbirlikleri.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-handshake" aria-hidden="true"></i></span>
+                    <div><h3>İşbirliklerimiz <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Verilere katkı sağlayan kurum ve kişiler</p></div>
+                </a>
             </div>
         </div>
     </main>
 
-    <script src="js/chart-config.js"></script>
-    <script src="js/havalimani.js"></script>
     <script src="js/ui.js"></script>
 </body>
 </html>

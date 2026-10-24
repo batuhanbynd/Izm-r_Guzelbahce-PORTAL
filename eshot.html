@@ -3,116 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAS PORTAL</title>
+    <title>ESHOT Otobüs Hatları | BAS PORTAL</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 </head>
 <body>
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="brand">BAS PORTAL</div>
+        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <nav aria-label="Sayfalar">
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
-                    <i class="fa-solid fa-network-wired"></i>
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                     Diyagramlar
                 </a>
             </li>
             <li class="nav-item">
-                <a href="index.html" class="nav-link" data-target="havalimani">
-                    <i class="fa-solid fa-plane-departure"></i>
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
                     Adnan Menderes
                 </a>
             </li>
             <li class="nav-item">
-                <a href="eshot.html" class="nav-link active" data-target="eshot">
-                    <i class="fa-solid fa-bus"></i>
+                <a href="eshot.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
                     ESHOT
                 </a>
             </li>
             <li class="nav-item">
-                <a href="dolmus.html" class="nav-link" data-target="dolmus">
-                    <i class="fa-solid fa-van-shuttle"></i>
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
                     Dolmuş
                 </a>
             </li>
             <li class="nav-item">
-                <a href="tramvay.html" class="nav-link" data-target="tramvay">
-                    <i class="fa-solid fa-train-tram"></i>
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
                     Tramvay
                 </a>
             </li>
             <li class="nav-item">
-                <a href="izban.html" class="nav-link" data-target="izban">
-                    <i class="fa-solid fa-train"></i>
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
                     İZBAN
                 </a>
             </li>
             <li class="nav-item">
-                <a href="vapur.html" class="nav-link" data-target="vapur">
-                    <i class="fa-solid fa-ship"></i>
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
                     Vapur (İzdeniz)
                 </a>
             </li>
             <li class="nav-item">
-                <a href="metro.html" class="nav-link" data-target="metro">
-                    <i class="fa-solid fa-subway"></i>
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
                     İzmir Metro
                 </a>
             </li>
             <li class="nav-item">
-                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
-                    <i class="fa-solid fa-chart-pie"></i>
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
                     Ulaşım Karşılaştırması
                 </a>
             </li>
             <li class="nav-item">
-                <a href="kgm.html" class="nav-link" data-target="kgm">
-                    <i class="fa-solid fa-road"></i>
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
                     KGM Karayolları
                 </a>
             </li>
             <li class="nav-item">
-                <a href="otoparklar.html" class="nav-link" data-target="otopark">
-                    <i class="fa-solid fa-square-parking"></i>
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
                     Otoparklar
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="izsu.html" class="nav-link" data-target="izsu">
-                    <i class="fa-solid fa-droplet"></i>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
                     İZSU Su Kaynakları
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="elektrik.html" class="nav-link" data-target="elektrik">
-                    <i class="fa-solid fa-bolt"></i>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
                     Elektrik Altyapısı
                 </a>
             </li>
-
             <li class="nav-item">
-                <a href="planlanan-projeler.html" class="nav-link" data-target="planlanan">
-                    <i class="fa-solid fa-layer-group"></i>
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
                     Planlanan Projeler
                 </a>
             </li>
             <li class="nav-item">
-                <a href="isbirlikleri.html" class="nav-link" data-target="isbirlikleri">
-                    <i class="fa-solid fa-handshake"></i>
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
                     İşbirliklerimiz
                 </a>
             </li>
-</ul>
+        </ul>
+        </nav>
     </aside>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" id="icerik" tabindex="-1">
         <div id="eshot" class="tab-pane active">
             <header>
                 <h1>ESHOT Otobüs Verileri</h1>
@@ -140,13 +148,13 @@
             <div class="dashboard-grid">
                 <div class="card full-width">
                     <h2>Günlük Ortalama Biniş Sayısı (Aylara Göre)</h2>
-                    <div class="chart-container" style="height: 420px;">
+                    <div class="chart-container y-420">
                         <canvas id="eshotGunlukChart"></canvas>
                     </div>
                 </div>
                 <div class="card full-width">
                     <h2>Otobüs Başına Günlük Ortalama Biniş Sayısı</h2>
-                    <div class="chart-container" style="height: 420px;">
+                    <div class="chart-container y-420">
                         <canvas id="eshotOtobusChart"></canvas>
                     </div>
                 </div>
@@ -160,45 +168,45 @@
                                     <h3>Hat No: 8 - GÜZELBAHÇE - FAHRETTİN ALTAY AKTARMA MERKEZİ</h3>
                                     <span>GÜZERGAH : SEFERİHİSAR KAVŞAĞI-MİTHAT PAŞA CAD. - 9 EYLÜL HASTANESİ (Görüntülemek için tıklayınız)</span>
                                 </div>
-                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                                <i class="fa-solid fa-chevron-down accordion-icon" aria-hidden="true"></i>
                             </div>
                             <div class="accordion-content">
-                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
-                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
-                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                <div class="accordion-content-inner dikey">
+                                    <div class="route-info-box">
+                                        <div class="rib-satir">
+                                            <p class="rib-metin">
+                                                <i class="fa-solid fa-clock" aria-hidden="true"></i>
                                                 <strong>ESHOT 8 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:00</strong>, son kalkış <strong>00:30</strong>. Otobüsler ortalama <strong>21 - 22 dakika</strong> aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş <strong>100 sefer</strong> yapıyor.
                                             </p>
-                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/8/288" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
-                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/8/288" target="_blank" rel="noopener" class="dis-baglanti">
+                                                <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Harita ve Saatler (ESHOT)
                                             </a>
                                         </div>
                                     </div>
                                     <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
                                         <img src="8.jpg.png" alt="8 Numaralı Hat Görseli">
-                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Haritayı Aç / Büyüt</div>
                                     </div>
 
 
-                                    <div class="coverage-container" style="width: 100%; margin-top: 1rem;">
-                                        <h3 style="display: flex; align-items: center; gap: 10px; color: var(--text-main); font-size: 1.15rem; margin-bottom: 1rem;">
-                                            <i class="fa-solid fa-circle-nodes" style="color: var(--accent-2);"></i>
+                                    <div class="coverage-container">
+                                        <h3>
+                                            <i class="fa-solid fa-circle-nodes" aria-hidden="true"></i>
                                             8 NO'lu Hat – Durak Ulaşım Çapları (400 m)
                                         </h3>
-                                        <div style="background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 12px; padding: 1rem;">
-                                            <p style="margin: 0 0 1rem 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                                                <i class="fa-solid fa-info-circle" style="color: var(--accent-2); margin-right: 8px;"></i>
-                                                Aşağıdaki haritada her durak noktası etrafındaki <strong style="color: var(--accent-1);">400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
+                                        <div class="cap-kutu">
+                                            <p>
+                                                <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+                                                Aşağıdaki haritada her durak noktası etrafındaki <strong>400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
                                             </p>
-                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)" style="border-radius: 10px; overflow: hidden;">
-                                                <img src="8cap_v2.jpg" alt="8 Numaralı Hat Durak Ulaşım Çapları" style="width:100%; display:block;">
-                                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
+                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                                <img src="8cap_v2.jpg" alt="8 Numaralı Hat Durak Ulaşım Çapları">
+                                                <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="stops-container">
-                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 8 NO'lu Hattın Geçtiği Duraklar (64 Durak)</h3>
+                                        <h3><i class="fa-solid fa-route" aria-hidden="true"></i> 8 NO'lu Hattın Geçtiği Duraklar (64 Durak)</h3>
                                         <div class="stops-timeline">
                                             <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Güzelbahçe</span><span class="stop-id">#50371</span></div></div>
                                             <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Güzelbahçe Meydan</span><span class="stop-id">#50362</span></div></div>
@@ -275,45 +283,45 @@
                                     <h3>Hat No: 9 - ÖZZÜMRÜT EVLERİ – SİTELER</h3>
                                     <span>GÜZERGAH : MİTHATPAŞA CAD. - ISTIKBAL CAD. (Görüntülemek için tıklayınız)</span>
                                 </div>
-                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                                <i class="fa-solid fa-chevron-down accordion-icon" aria-hidden="true"></i>
                             </div>
                             <div class="accordion-content">
-                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
-                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
-                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                <div class="accordion-content-inner dikey">
+                                    <div class="route-info-box">
+                                        <div class="rib-satir">
+                                            <p class="rib-metin">
+                                                <i class="fa-solid fa-clock" aria-hidden="true"></i>
                                                 <strong>ESHOT 9 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:35</strong>, son kalkış <strong>20:20</strong>. Otobüsler ortalama <strong>2 saat</strong> aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş <strong>16 sefer</strong> yapıyor.
                                             </p>
-                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/9/288#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
-                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/9/288#" target="_blank" rel="noopener" class="dis-baglanti">
+                                                <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Harita ve Saatler (ESHOT)
                                             </a>
                                         </div>
                                     </div>
                                     <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
                                         <img src="9.jpg.png" alt="9 Numaralı Hat Görseli">
-                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Haritayı Aç / Büyüt</div>
                                     </div>
 
 
-                                    <div class="coverage-container" style="width: 100%; margin-top: 1rem;">
-                                        <h3 style="display: flex; align-items: center; gap: 10px; color: var(--text-main); font-size: 1.15rem; margin-bottom: 1rem;">
-                                            <i class="fa-solid fa-circle-nodes" style="color: var(--accent-2);"></i>
+                                    <div class="coverage-container">
+                                        <h3>
+                                            <i class="fa-solid fa-circle-nodes" aria-hidden="true"></i>
                                             9 NO'lu Hat – Durak Ulaşım Çapları (400 m)
                                         </h3>
-                                        <div style="background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 12px; padding: 1rem;">
-                                            <p style="margin: 0 0 1rem 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                                                <i class="fa-solid fa-info-circle" style="color: var(--accent-2); margin-right: 8px;"></i>
-                                                Aşağıdaki haritada her durak noktası etrafındaki <strong style="color: var(--accent-1);">400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
+                                        <div class="cap-kutu">
+                                            <p>
+                                                <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+                                                Aşağıdaki haritada her durak noktası etrafındaki <strong>400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
                                             </p>
-                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)" style="border-radius: 10px; overflow: hidden;">
-                                                <img src="9cap_v2.jpg" alt="9 Numaralı Hat Durak Ulaşım Çapları" style="width:100%; display:block;">
-                                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
+                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                                <img src="9cap_v2.jpg" alt="9 Numaralı Hat Durak Ulaşım Çapları">
+                                                <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="stops-container">
-                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 9 NO'lu Hattın Geçtiği Duraklar (50 Durak)</h3>
+                                        <h3><i class="fa-solid fa-route" aria-hidden="true"></i> 9 NO'lu Hattın Geçtiği Duraklar (50 Durak)</h3>
                                         <div class="stops-timeline">
                                             <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Öz Zümrütevleri</span><span class="stop-id">#51259</span></div></div>
                                             <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Manolya</span><span class="stop-id">#51246</span></div></div>
@@ -376,45 +384,45 @@
                                     <h3>Hat No: 28 - KAVACIK – GÜZELBAHÇE</h3>
                                     <span>GÜZERGAH : PAYAMLI - KÜÇÜKKAYA KÖYÜ (Görüntülemek için tıklayınız)</span>
                                 </div>
-                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                                <i class="fa-solid fa-chevron-down accordion-icon" aria-hidden="true"></i>
                             </div>
                             <div class="accordion-content">
-                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
-                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
-                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                <div class="accordion-content-inner dikey">
+                                    <div class="route-info-box">
+                                        <div class="rib-satir">
+                                            <p class="rib-metin">
+                                                <i class="fa-solid fa-clock" aria-hidden="true"></i>
                                                 <strong>ESHOT 28 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:50</strong>, son kalkış <strong>18:20</strong>. Otobüsler ortalama <strong>4 saat</strong> aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş <strong>8 - 9 sefer</strong> yapıyor.
                                             </p>
-                                            <a href="https://www.eshot.gov.tr/en/TransportationTimetable/28/289#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
-                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            <a href="https://www.eshot.gov.tr/en/TransportationTimetable/28/289#" target="_blank" rel="noopener" class="dis-baglanti">
+                                                <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Harita ve Saatler (ESHOT)
                                             </a>
                                         </div>
                                     </div>
                                     <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
                                         <img src="28.jpg.png" alt="28 Numaralı Hat Görseli">
-                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Haritayı Aç / Büyüt</div>
                                     </div>
 
 
-                                    <div class="coverage-container" style="width: 100%; margin-top: 1rem;">
-                                        <h3 style="display: flex; align-items: center; gap: 10px; color: var(--text-main); font-size: 1.15rem; margin-bottom: 1rem;">
-                                            <i class="fa-solid fa-circle-nodes" style="color: var(--accent-2);"></i>
+                                    <div class="coverage-container">
+                                        <h3>
+                                            <i class="fa-solid fa-circle-nodes" aria-hidden="true"></i>
                                             28 NO'lu Hat – Durak Ulaşım Çapları (400 m)
                                         </h3>
-                                        <div style="background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 12px; padding: 1rem;">
-                                            <p style="margin: 0 0 1rem 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                                                <i class="fa-solid fa-info-circle" style="color: var(--accent-2); margin-right: 8px;"></i>
-                                                Aşağıdaki haritada her durak noktası etrafındaki <strong style="color: var(--accent-1);">400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
+                                        <div class="cap-kutu">
+                                            <p>
+                                                <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+                                                Aşağıdaki haritada her durak noktası etrafındaki <strong>400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
                                             </p>
-                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)" style="border-radius: 10px; overflow: hidden;">
-                                                <img src="28cap_v2.jpg" alt="28 Numaralı Hat Durak Ulaşım Çapları" style="width:100%; display:block;">
-                                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
+                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                                <img src="28cap_v2.jpg" alt="28 Numaralı Hat Durak Ulaşım Çapları">
+                                                <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="stops-container">
-                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 28 NO'lu Hattın Geçtiği Duraklar (25 Durak)</h3>
+                                        <h3><i class="fa-solid fa-route" aria-hidden="true"></i> 28 NO'lu Hattın Geçtiği Duraklar (25 Durak)</h3>
                                         <div class="stops-timeline">
                                             <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Kavacık</span><span class="stop-id">#50722</span></div></div>
                                             <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Orkide</span><span class="stop-id">#50708</span></div></div>
@@ -452,45 +460,45 @@
                                     <h3>Hat No: 82 - SİTELER - FAHRETTİN ALTAY AKTARMA MERKEZİ</h3>
                                     <span>GÜZERGAH : MİTHATPAŞA CAD. - NARLIDERE - 9 EYLÜL HASTANESİ (Görüntülemek için tıklayınız)</span>
                                 </div>
-                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                                <i class="fa-solid fa-chevron-down accordion-icon" aria-hidden="true"></i>
                             </div>
                             <div class="accordion-content">
-                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
-                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
-                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                <div class="accordion-content-inner dikey">
+                                    <div class="route-info-box">
+                                        <div class="rib-satir">
+                                            <p class="rib-metin">
+                                                <i class="fa-solid fa-clock" aria-hidden="true"></i>
                                                 <strong>ESHOT 82 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:00</strong>, son kalkış <strong>00:25</strong>. Otobüsler ortalama <strong>30 dakika</strong> aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş <strong>60 sefer</strong> yapıyor.
                                             </p>
-                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/82/288#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
-                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/82/288#" target="_blank" rel="noopener" class="dis-baglanti">
+                                                <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Harita ve Saatler (ESHOT)
                                             </a>
                                         </div>
                                     </div>
                                     <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
                                         <img src="82.jpg.png" alt="82 Numaralı Hat Görseli">
-                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Haritayı Aç / Büyüt</div>
                                     </div>
 
 
-                                    <div class="coverage-container" style="width: 100%; margin-top: 1rem;">
-                                        <h3 style="display: flex; align-items: center; gap: 10px; color: var(--text-main); font-size: 1.15rem; margin-bottom: 1rem;">
-                                            <i class="fa-solid fa-circle-nodes" style="color: var(--accent-2);"></i>
+                                    <div class="coverage-container">
+                                        <h3>
+                                            <i class="fa-solid fa-circle-nodes" aria-hidden="true"></i>
                                             82 NO'lu Hat – Durak Ulaşım Çapları (400 m)
                                         </h3>
-                                        <div style="background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 12px; padding: 1rem;">
-                                            <p style="margin: 0 0 1rem 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                                                <i class="fa-solid fa-info-circle" style="color: var(--accent-2); margin-right: 8px;"></i>
-                                                Aşağıdaki haritada her durak noktası etrafındaki <strong style="color: var(--accent-1);">400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
+                                        <div class="cap-kutu">
+                                            <p>
+                                                <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+                                                Aşağıdaki haritada her durak noktası etrafındaki <strong>400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
                                             </p>
-                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)" style="border-radius: 10px; overflow: hidden;">
-                                                <img src="82cap_v2.jpg" alt="82 Numaralı Hat Durak Ulaşım Çapları" style="width:100%; display:block;">
-                                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
+                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                                <img src="82cap_v2.jpg" alt="82 Numaralı Hat Durak Ulaşım Çapları">
+                                                <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="stops-container">
-                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 82 NO'lu Hattın Geçtiği Duraklar (71 Durak)</h3>
+                                        <h3><i class="fa-solid fa-route" aria-hidden="true"></i> 82 NO'lu Hattın Geçtiği Duraklar (71 Durak)</h3>
                                         <div class="stops-timeline">
                                             <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Siteler Son Durak</span><span class="stop-id">#51536</span></div></div>
                                             <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Siteler Muhtarlık</span><span class="stop-id">#50524</span></div></div>
@@ -574,45 +582,45 @@
                                     <h3>Hat No: 762 - GÜZELBAHÇE - URLA</h3>
                                     <span>GÜZERGAH : YELKİ - DADAŞKENT (Görüntülemek için tıklayınız)</span>
                                 </div>
-                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                                <i class="fa-solid fa-chevron-down accordion-icon" aria-hidden="true"></i>
                             </div>
                             <div class="accordion-content">
-                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
-                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
-                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                <div class="accordion-content-inner dikey">
+                                    <div class="route-info-box">
+                                        <div class="rib-satir">
+                                            <p class="rib-metin">
+                                                <i class="fa-solid fa-clock" aria-hidden="true"></i>
                                                 <strong>ESHOT 762 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:40</strong>, son kalkış <strong>16:30</strong>. Seferler ortalama <strong>2 saat</strong> aralıklarla düzenlenmekte olup, gün içinde ortalama gidiş-dönüş <strong>6 sefer</strong> yapıyor.
                                             </p>
-                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/762/288#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
-                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/762/288#" target="_blank" rel="noopener" class="dis-baglanti">
+                                                <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Harita ve Saatler (ESHOT)
                                             </a>
                                         </div>
                                     </div>
                                     <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
                                         <img src="762.jpg.png" alt="762 Numaralı Hat Görseli">
-                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Haritayı Aç / Büyüt</div>
                                     </div>
 
 
-                                    <div class="coverage-container" style="width: 100%; margin-top: 1rem;">
-                                        <h3 style="display: flex; align-items: center; gap: 10px; color: var(--text-main); font-size: 1.15rem; margin-bottom: 1rem;">
-                                            <i class="fa-solid fa-circle-nodes" style="color: var(--accent-2);"></i>
+                                    <div class="coverage-container">
+                                        <h3>
+                                            <i class="fa-solid fa-circle-nodes" aria-hidden="true"></i>
                                             762 NO'lu Hat – Durak Ulaşım Çapları (400 m)
                                         </h3>
-                                        <div style="background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 12px; padding: 1rem;">
-                                            <p style="margin: 0 0 1rem 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                                                <i class="fa-solid fa-info-circle" style="color: var(--accent-2); margin-right: 8px;"></i>
-                                                Aşağıdaki haritada her durak noktası etrafındaki <strong style="color: var(--accent-1);">400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
+                                        <div class="cap-kutu">
+                                            <p>
+                                                <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+                                                Aşağıdaki haritada her durak noktası etrafındaki <strong>400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
                                             </p>
-                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)" style="border-radius: 10px; overflow: hidden;">
-                                                <img src="762cap_v2.jpg" alt="762 Numaralı Hat Durak Ulaşım Çapları" style="width:100%; display:block;">
-                                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
+                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                                <img src="762cap_v2.jpg" alt="762 Numaralı Hat Durak Ulaşım Çapları">
+                                                <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="stops-container">
-                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 762 NO'lu Hattın Geçtiği Duraklar (52 Durak)</h3>
+                                        <h3><i class="fa-solid fa-route" aria-hidden="true"></i> 762 NO'lu Hattın Geçtiği Duraklar (52 Durak)</h3>
                                         <div class="stops-timeline">
                                             <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Güzelbahçe</span><span class="stop-id">#50371</span></div></div>
                                             <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Güzelbahçe Meydan</span><span class="stop-id">#50362</span></div></div>
@@ -677,45 +685,45 @@
                                     <h3>Hat No: 684 - URLA - FAHRETTİN ALTAY AKTARMA MERKEZİ EKSPRES</h3>
                                     <span>GÜZERGAH : URLA DEVLET HASTANESİ - ÇEVREYOLU (Görüntülemek için tıklayınız)</span>
                                 </div>
-                                <i class="fa-solid fa-chevron-down accordion-icon"></i>
+                                <i class="fa-solid fa-chevron-down accordion-icon" aria-hidden="true"></i>
                             </div>
                             <div class="accordion-content">
-                                <div class="accordion-content-inner" style="flex-direction: column; align-items: center; gap: 1.5rem;">
-                                    <div class="route-info-box" style="background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-1); padding: 1.2rem; border-radius: 8px; width: 100%; text-align: left;">
-                                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-                                            <p style="margin: 0; color: var(--text-main); font-weight: 500; font-size: 1.1rem; line-height: 1.5; flex: 1; min-width: 300px;">
-                                                <i class="fa-solid fa-clock" style="color: var(--accent-1); margin-right: 10px; font-size: 1.2rem;"></i>
+                                <div class="accordion-content-inner dikey">
+                                    <div class="route-info-box">
+                                        <div class="rib-satir">
+                                            <p class="rib-metin">
+                                                <i class="fa-solid fa-clock" aria-hidden="true"></i>
                                                 <strong>ESHOT 684 Numaralı Hat Bilgisi:</strong> İlk kalkış <strong>06:00</strong>, son kalkış <strong>21:20</strong>. Otobüsler ortalama <strong>25 dakika</strong> aralık ile kalkıyor ve gün içinde ortalama gidiş-dönüş <strong>70 sefer</strong> yapıyor.
                                             </p>
-                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/684/288#" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: linear-gradient(135deg, var(--accent-1), #2563eb); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(56, 189, 248, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(56, 189, 248, 0.3)';">
-                                                <i class="fa-solid fa-map-location-dot"></i> Harita ve Saatler (ESHOT)
+                                            <a href="https://www.eshot.gov.tr/tr/UlasimSaatleri/684/288#" target="_blank" rel="noopener" class="dis-baglanti">
+                                                <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Harita ve Saatler (ESHOT)
                                             </a>
                                         </div>
                                     </div>
                                     <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
                                         <img src="684.jpg.png" alt="684 Numaralı Hat Görseli">
-                                        <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Haritayı Aç / Büyüt</div>
                                     </div>
 
 
-                                    <div class="coverage-container" style="width: 100%; margin-top: 1rem;">
-                                        <h3 style="display: flex; align-items: center; gap: 10px; color: var(--text-main); font-size: 1.15rem; margin-bottom: 1rem;">
-                                            <i class="fa-solid fa-circle-nodes" style="color: var(--accent-2);"></i>
+                                    <div class="coverage-container">
+                                        <h3>
+                                            <i class="fa-solid fa-circle-nodes" aria-hidden="true"></i>
                                             684 NO'lu Hat – Durak Ulaşım Çapları (400 m)
                                         </h3>
-                                        <div style="background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 12px; padding: 1rem;">
-                                            <p style="margin: 0 0 1rem 0; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                                                <i class="fa-solid fa-info-circle" style="color: var(--accent-2); margin-right: 8px;"></i>
-                                                Aşağıdaki haritada her durak noktası etrafındaki <strong style="color: var(--accent-1);">400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
+                                        <div class="cap-kutu">
+                                            <p>
+                                                <i class="fa-solid fa-info-circle" aria-hidden="true"></i>
+                                                Aşağıdaki haritada her durak noktası etrafındaki <strong>400 metrelik yürüme mesafesi yarıçapı</strong> gösterilmektedir.
                                             </p>
-                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)" style="border-radius: 10px; overflow: hidden;">
-                                                <img src="684cap_v2.jpg" alt="684 Numaralı Hat Durak Ulaşım Çapları" style="width:100%; display:block;">
-                                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
+                                            <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
+                                                <img src="684cap_v2.jpg" alt="684 Numaralı Hat Durak Ulaşım Çapları">
+                                                <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Ulaşım Çapı Haritasını Aç / Büyüt</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="stops-container">
-                                        <h3><i class="fa-solid fa-route" style="color:var(--accent-1);"></i> 684 NO'lu Hattın Geçtiği Duraklar (17 Durak)</h3>
+                                        <h3><i class="fa-solid fa-route" aria-hidden="true"></i> 684 NO'lu Hattın Geçtiği Duraklar (17 Durak)</h3>
                                         <div class="stops-timeline">
                                             <div class="stop-item start-node"><div class="stop-content"><span class="stop-name">1. Urla</span><span class="stop-id">#50605</span></div></div>
                                             <div class="stop-item"><div class="stop-content"><span class="stop-name">2. Urla Sanat</span><span class="stop-id">#50854</span></div></div>
@@ -744,12 +752,12 @@
             </div> <!-- End of dashboard-grid -->
 
             <!-- Tüm Hatlar Kapsama Alanı / Çapı -->
-            <div class="card full-width" style="margin-top: 2rem; margin-bottom: 2rem;">
-                <h2><i class="fa-solid fa-map-location-dot" style="color: var(--accent-1);"></i> ESHOT Güzelbahçe Geneli Tüm Hatların Etki Çapı ve Kapsama Alanı</h2>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Aşağıdaki görselde, ESHOT otobüs ağının Güzelbahçe genelindeki hizmet yarıçapı, kapsama alanı ve tüm güzergahların oluşturduğu bütünleşik etki çapı detaylı olarak haritalandırılmıştır.</p>
-                <div style="padding: 0; text-align: center; background: rgba(15, 23, 42, 0.8); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1);">
-                    <div class="interactive-image-container etiketli-harita" onclick="openImageModal('tüm.jpeg')" style="width: 100%; display: block; border-radius: 0;">
-                        <img src="tüm.jpeg" alt="Tüm Hatların Etki Çapı" style="width: 100%; height: auto; display: block; image-rendering: high-quality; border-radius: 0;">
+            <div class="card full-width ust-bosluk alt-bosluk">
+                <h2><i class="fa-solid fa-map-location-dot renk-mavi" aria-hidden="true"></i> ESHOT Güzelbahçe Geneli Tüm Hatların Etki Çapı ve Kapsama Alanı</h2>
+                <p class="kart-aciklama">Aşağıdaki görselde, ESHOT otobüs ağının Güzelbahçe genelindeki hizmet yarıçapı, kapsama alanı ve tüm güzergahların oluşturduğu bütünleşik etki çapı detaylı olarak haritalandırılmıştır.</p>
+                <div class="etiketli-kutu">
+                    <div class="interactive-image-container etiketli-harita tam" onclick="openImageModal('tüm.jpeg')">
+                        <img src="tüm.jpeg" alt="Tüm Hatların Etki Çapı">
                         <svg class="cizgiler" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="62.5" y1="13.6" x2="62.5" y2="26.2" stroke="#0f172a" stroke-width="2" vector-effect="non-scaling-stroke"/><line x1="17.25" y1="30.3" x2="33.1" y2="41.3" stroke="#0f172a" stroke-width="2" vector-effect="non-scaling-stroke"/><line x1="73.6" y1="48.4" x2="68.85" y2="39.35" stroke="#0f172a" stroke-width="2" vector-effect="non-scaling-stroke"/><line x1="13.15" y1="74.6" x2="32.5" y2="80.6" stroke="#0f172a" stroke-width="2" vector-effect="non-scaling-stroke"/><line x1="59.1" y1="83.9" x2="50.9" y2="85.9" stroke="#0f172a" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>
                         <span class="harita-pin" style="left: 62.5%; top: 26.2%;"></span>
                         <div class="harita-not" style="left: 56%; top: 2.3%; width: 19.75%; border-left: 6px solid transparent; border-image: linear-gradient(#e3262b 50%, #e040e0 50%) 1;"><div class="hn-hat">HAT 8 · HAT 82</div><div class="hn-deger dakika">21–22 / 30 dk</div><div class="hn-guzergah">Mithatpaşa Cd. → F. Altay Aktarma</div></div>
@@ -761,15 +769,15 @@
                         <div class="harita-not" style="left: 1.6%; top: 63.3%; width: 11.55%; border-left-color: #e8c400;"><div class="hn-hat">HAT 762</div><div class="hn-deger saat">2 saat</div><div class="hn-guzergah">Yelki – Dadaşkent</div></div>
                         <span class="harita-pin" style="left: 50.9%; top: 85.9%;"></span>
                         <div class="harita-not" style="left: 59.1%; top: 72.7%; width: 15.15%; border-left-color: #2268b0;"><div class="hn-hat">HAT 28</div><div class="hn-deger saat">4 saat</div><div class="hn-guzergah">Payamlı – Küçükkaya Köyü</div></div>
-                        <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i> Büyüt</div>
+                        <div class="image-overlay"><i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i> Büyüt</div>
                     </div>
                     <div class="hat-anahtari">
-                        <span><i class="cizgi" style="background:#e3262b"></i>Hat 8 · 21–22 dk</span>
-                        <span><i class="cizgi" style="background:#e040e0"></i>Hat 82 · 30 dk</span>
-                        <span><i class="cizgi" style="background:#5b2bd0"></i>Hat 684 · 25 dk</span>
-                        <span><i class="cizgi" style="background:#2e9b3a"></i>Hat 9 · 2 saat</span>
-                        <span><i class="cizgi" style="background:#e8c400"></i>Hat 762 · 2 saat</span>
-                        <span><i class="cizgi" style="background:#2268b0"></i>Hat 28 · 4 saat</span>
+                        <span><i class="cizgi" style="background: #e3262b;"></i>Hat 8 · 21–22 dk</span>
+                        <span><i class="cizgi" style="background: #e040e0;"></i>Hat 82 · 30 dk</span>
+                        <span><i class="cizgi" style="background: #5b2bd0;"></i>Hat 684 · 25 dk</span>
+                        <span><i class="cizgi" style="background: #2e9b3a;"></i>Hat 9 · 2 saat</span>
+                        <span><i class="cizgi" style="background: #e8c400;"></i>Hat 762 · 2 saat</span>
+                        <span><i class="cizgi" style="background: #2268b0;"></i>Hat 28 · 4 saat</span>
                         <span><i class="daire"></i>400 m durak erişim alanı</span>
                         <small>Not kutusu: ortalama sefer aralığı (lacivert: dakika, kırmızı: saat düzeyi)</small>
                     </div>
@@ -777,80 +785,21 @@
             </div>
 
             <!-- Verilerden elde edilen bulgular -->
-            <div class="card full-width" style="margin-top: 2rem;">
-                <h2><i class="fa-solid fa-lightbulb" style="color: var(--success);"></i> Verilerden Elde Edilen Bulgular</h2>
+            <div class="card full-width ust-bosluk">
+                <h2><i class="fa-solid fa-lightbulb renk-yesil" aria-hidden="true"></i> Verilerden Elde Edilen Bulgular</h2>
                 <div class="bulgu-blok">
-                    <p class="bulgu-baslik"><i class="fa-solid fa-bus"></i> Otobüsler</p>
+                    <p class="bulgu-baslik"><i class="fa-solid fa-bus" aria-hidden="true"></i> Otobüsler</p>
                     <div class="bulgu-akisi">
-                        <div class="bulgu-kutu veri"><span class="etiket"><i class="fa-solid fa-database"></i> Veri</span><p>Hat 8, 82, 684: 21–22 dk / 30 dk / 25 dk; Hat 9, 28, 762: 2 saat / 4 saat / 2 saat sefer aralığı.</p></div>
-                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right"></i></div>
-                        <div class="bulgu-kutu analiz"><span class="etiket"><i class="fa-solid fa-magnifying-glass-chart"></i> Analiz</span><p>Kent merkezine bağlanan hatlar dakika, iç kesim hatları saat düzeyinde çalışmakta; iç kesim hatlarının son kalkışı 16:30–20:20 arasındadır.</p></div>
-                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right"></i></div>
-                        <div class="bulgu-kutu bulgu"><span class="etiket"><i class="fa-solid fa-lightbulb"></i> Bulgu</span><p>Toplu taşıma hizmet düzeyi kıyı–iç kesim ayrımında belirgin biçimde farklılaşmakta; iç kesimlerde otobüs erişimi zaman açısından kısıtlıdır.</p></div>
+                        <div class="bulgu-kutu veri"><span class="etiket"><i class="fa-solid fa-database" aria-hidden="true"></i> Veri</span><p>Hat 8, 82, 684: 21–22 dk / 30 dk / 25 dk; Hat 9, 28, 762: 2 saat / 4 saat / 2 saat sefer aralığı.</p></div>
+                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></div>
+                        <div class="bulgu-kutu analiz"><span class="etiket"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i> Analiz</span><p>Kent merkezine bağlanan hatlar dakika, iç kesim hatları saat düzeyinde çalışmakta; iç kesim hatlarının son kalkışı 16:30–20:20 arasındadır.</p></div>
+                        <div class="bulgu-ok"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></div>
+                        <div class="bulgu-kutu bulgu"><span class="etiket"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Bulgu</span><p>Toplu taşıma hizmet düzeyi kıyı–iç kesim ayrımında belirgin biçimde farklılaşmakta; iç kesimlerde otobüs erişimi zaman açısından kısıtlıdır.</p></div>
                     </div>
                 </div>
             </div>
         </div> <!-- End of container -->
     </main>
-
-    <!-- Image Modal -->
-    <div id="imageModal" class="image-modal">
-        <span class="close-modal" onclick="closeImageModal()">&times;</span>
-        <div class="modal-content-wrapper" id="modalContentWrapper">
-            <img class="modal-content" id="modalImage" alt="Güzergah Haritası">
-        </div>
-        <div class="modal-controls">
-            <button onclick="zoomModalImage(1.2)" title="Büyüt"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
-            <button onclick="zoomModalImage(0.8)" title="Küçült"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
-            <button onclick="zoomModalImage('reset')" title="Sıfırla"><i class="fa-solid fa-compress"></i></button>
-        </div>
-    </div>
-
-    <!-- Panzoom Library for dragging and zooming -->
-    <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
-
-    <script>
-        let pzInstance = null;
-
-        function openImageModal(imgSrc) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("modalImage");
-            
-            modal.style.display = "block";
-            modalImg.src = imgSrc;
-
-            if (pzInstance) {
-                pzInstance.destroy();
-            }
-
-            pzInstance = Panzoom(modalImg, {
-                maxScale: 10,
-                minScale: 0.5,
-                startScale: 1,
-                cursor: 'grab'
-            });
-
-            modal.addEventListener('wheel', pzInstance.zoomWithWheel);
-        }
-
-        function closeImageModal() {
-            const modal = document.getElementById("imageModal");
-            modal.style.display = "none";
-            if (pzInstance) {
-                pzInstance.destroy();
-                pzInstance = null;
-            }
-        }
-
-        function zoomModalImage(scale) {
-            if (!pzInstance) return;
-            if (scale === 'reset') {
-                pzInstance.reset();
-            } else {
-                pzInstance.zoom(pzInstance.getScale() * scale);
-            }
-        }
-    </script>
 
     <script src="js/chart-config.js"></script>
     <script src="js/eshot.js"></script>

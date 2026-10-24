@@ -8,8 +8,9 @@
 
 | Sayfa | İçerik |
 |---|---|
+| [Genel Bakış](index.html) | Öne çıkan veriler ve tüm sayfalara giriş |
 | [Diyagramlar](kavramsal.html) | İzmir ulaşım ağı kavramsal diyagramları |
-| [Adnan Menderes](index.html) | Havalimanı yolcu trafiği analizi |
+| [Adnan Menderes](havalimani.html) | Havalimanı yolcu trafiği analizi |
 | [ESHOT](eshot.html) | Otobüs verileri |
 | [Tramvay](tramvay.html) | İzmir Tramvayı analizi |
 | [İZBAN](izban.html) | İZBAN yolcu trafiği (2010–2015) |

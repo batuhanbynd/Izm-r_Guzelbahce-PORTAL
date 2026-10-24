@@ -3,123 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAS PORTAL - Elektrik Altyapısı</title>
+    <title>Elektrik Altyapısı | BAS PORTAL</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 </head>
 <body>
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="brand">BAS PORTAL</div>
+        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <nav aria-label="Sayfalar">
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="kavramsal.html" class="nav-link" data-target="kavramsal">
-                    <i class="fa-solid fa-network-wired"></i>
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
                     Diyagramlar
                 </a>
             </li>
             <li class="nav-item">
-                <a href="index.html" class="nav-link" data-target="havalimani">
-                    <i class="fa-solid fa-plane-departure"></i>
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
                     Adnan Menderes
                 </a>
             </li>
             <li class="nav-item">
-                <a href="eshot.html" class="nav-link" data-target="eshot">
-                    <i class="fa-solid fa-bus"></i>
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
                     ESHOT
                 </a>
             </li>
             <li class="nav-item">
-                <a href="dolmus.html" class="nav-link" data-target="dolmus">
-                    <i class="fa-solid fa-van-shuttle"></i>
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
                     Dolmuş
                 </a>
             </li>
             <li class="nav-item">
-                <a href="tramvay.html" class="nav-link" data-target="tramvay">
-                    <i class="fa-solid fa-train-tram"></i>
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
                     Tramvay
                 </a>
             </li>
             <li class="nav-item">
-                <a href="izban.html" class="nav-link" data-target="izban">
-                    <i class="fa-solid fa-train"></i>
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
                     İZBAN
                 </a>
             </li>
             <li class="nav-item">
-                <a href="vapur.html" class="nav-link" data-target="vapur">
-                    <i class="fa-solid fa-ship"></i>
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
                     Vapur (İzdeniz)
                 </a>
             </li>
             <li class="nav-item">
-                <a href="metro.html" class="nav-link" data-target="metro">
-                    <i class="fa-solid fa-subway"></i>
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
                     İzmir Metro
                 </a>
             </li>
             <li class="nav-item">
-                <a href="karsilastirma.html" class="nav-link" data-target="karsilastirma">
-                    <i class="fa-solid fa-chart-pie"></i>
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
                     Ulaşım Karşılaştırması
                 </a>
             </li>
             <li class="nav-item">
-                <a href="kgm.html" class="nav-link" data-target="kgm">
-                    <i class="fa-solid fa-road"></i>
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
                     KGM Karayolları
                 </a>
             </li>
             <li class="nav-item">
-                <a href="otoparklar.html" class="nav-link" data-target="otopark">
-                    <i class="fa-solid fa-square-parking"></i>
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
                     Otoparklar
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="izsu.html" class="nav-link" data-target="izsu">
-                    <i class="fa-solid fa-droplet"></i>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
                     İZSU Su Kaynakları
                 </a>
             </li>
-                        <li class="nav-item">
-                <a href="elektrik.html" class="nav-link active" data-target="elektrik">
-                    <i class="fa-solid fa-bolt"></i>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
                     Elektrik Altyapısı
                 </a>
             </li>
-
             <li class="nav-item">
-                <a href="planlanan-projeler.html" class="nav-link" data-target="planlanan">
-                    <i class="fa-solid fa-layer-group"></i>
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
                     Planlanan Projeler
                 </a>
             </li>
             <li class="nav-item">
-                <a href="isbirlikleri.html" class="nav-link" data-target="isbirlikleri">
-                    <i class="fa-solid fa-handshake"></i>
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
                     İşbirliklerimiz
                 </a>
             </li>
-</ul>
+        </ul>
+        </nav>
     </aside>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" id="icerik" tabindex="-1">
         <div id="elektrik" class="tab-pane active">
             <header>
                 <h1>Elektrik Dağıtım Şebekesi ve Coğrafi Altyapı Analizi</h1>
                 <p class="subtitle">Trafo merkezleri, orta gerilim hatları ve dağıtım trafoları</p>
             </header>
 
-            <div class="stats-row" style="grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));">
+            <div class="stats-row dar-kartlar">
                 <div class="stat-card">
                     <div class="stat-label">Ana İndirici Kapasite</div>
                     <div class="stat-value">100 MVA</div>
@@ -142,54 +150,54 @@
                 </div>
             </div>
 
-            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+            <div class="dashboard-grid tek-sutun">
                 <div class="card full-width">
-                    <h2><i class="fa-solid fa-map-location-dot" style="color: #fb923c;"></i> Elektrik Dağıtım Şebekesi ve Trafo Konumları</h2>
-                    <p style="color: var(--text-muted); margin: -0.75rem 0 1.25rem;">Güzelbahçe bölgesi üzerindeki ana iletim hatlarını, trafo konumlarını ve sahil şeridi yeraltı kablo aksını coğrafi uydu haritası üzerinde göstermektedir.</p>
+                    <h2><i class="fa-solid fa-map-location-dot renk-turuncu" aria-hidden="true"></i> Elektrik Dağıtım Şebekesi ve Trafo Konumları</h2>
+                    <p class="kart-aciklama">Güzelbahçe bölgesi üzerindeki ana iletim hatlarını, trafo konumlarını ve sahil şeridi yeraltı kablo aksını coğrafi uydu haritası üzerinde göstermektedir.</p>
                         <figure class="harita-figur">
-                            <figcaption><i class="fa-solid fa-bolt"></i> Şebeke ve trafo konumları haritası</figcaption>
+                            <figcaption><i class="fa-solid fa-bolt" aria-hidden="true"></i> Şebeke ve trafo konumları haritası</figcaption>
                             <div class="interactive-image-container" onclick="openImageModal(this.querySelector('img').src)">
                                 <img src="elektrik_sebeke_haritasi.jpg" alt="Güzelbahçe elektrik dağıtım şebekesi ve trafo konumları" loading="lazy">
-                                <div class="image-overlay"><i class="fa-solid fa-expand"></i> Haritayı Aç / Büyüt</div>
+                                <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Haritayı Aç / Büyüt</div>
                             </div>
                         </figure>
                 </div>
 
                 <div class="card full-width">
-                    <h2><i class="fa-solid fa-diagram-project" style="color: #fb923c;"></i> Tek Hat Şeması</h2>
+                    <h2><i class="fa-solid fa-diagram-project renk-turuncu" aria-hidden="true"></i> Tek Hat Şeması</h2>
                     <div class="tek-hat">
                         <div class="th-dugum"><div class="th-ust">Giriş</div><div class="th-deger">154 kV</div><div class="th-alt">Yüksek gerilim</div></div>
-                        <div class="th-ok"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="th-ok"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></div>
                         <div class="th-dugum"><div class="th-ust">GZB-TM-154/34.5</div><div class="th-deger">2x50 MVA</div><div class="th-alt">Trafo · kapasite 100 MVA</div></div>
-                        <div class="th-ok"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="th-ok"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></div>
                         <div class="th-dugum"><div class="th-ust">Bara</div><div class="th-deger">34,5 kV</div><div class="th-alt">Orta gerilim</div></div>
                         <div class="th-kollar">
-                            <div class="th-kol"><span class="th-fider">GZB-OG-34.5KV-MITHAT</span><i class="fa-solid fa-arrow-right" style="color:#fb923c"></i><div class="th-dugum"><div class="th-ust">Binalı trafolar</div><div class="th-deger">1000 kVA</div><div class="th-alt">Kıyı konutları besleme</div></div><i class="fa-solid fa-arrow-right" style="color:#fb923c"></i><div class="th-dugum"><div class="th-ust">Sokak dağıtımı</div><div class="th-deger">220 / 380 V</div></div></div>
-                            <div class="th-kol"><span class="th-fider">GZB-OG-YELKI-NKL · ~3,2 km</span><i class="fa-solid fa-arrow-right" style="color:#fb923c"></i><div class="th-dugum"><div class="th-ust">Yelki DM</div><div class="th-deger">1250 kVA</div><div class="th-alt">Modüler hücreli</div></div><i class="fa-solid fa-arrow-right" style="color:#fb923c"></i><div class="th-dugum"><div class="th-ust">Sokak dağıtımı</div><div class="th-deger">220 / 380 V</div></div></div>
+                            <div class="th-kol"><span class="th-fider">GZB-OG-34.5KV-MITHAT</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><div class="th-dugum"><div class="th-ust">Binalı trafolar</div><div class="th-deger">1000 kVA</div><div class="th-alt">Kıyı konutları besleme</div></div><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><div class="th-dugum"><div class="th-ust">Sokak dağıtımı</div><div class="th-deger">220 / 380 V</div></div></div>
+                            <div class="th-kol"><span class="th-fider">GZB-OG-YELKI-NKL · ~3,2 km</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><div class="th-dugum"><div class="th-ust">Yelki DM</div><div class="th-deger">1250 kVA</div><div class="th-alt">Modüler hücreli</div></div><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><div class="th-dugum"><div class="th-ust">Sokak dağıtımı</div><div class="th-deger">220 / 380 V</div></div></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="card">
                     <h2>Trafo Kapasitesi (MVA)</h2>
-                    <div class="chart-container" style="height: 320px;"><canvas id="trafoKapasiteChart"></canvas></div>
+                    <div class="chart-container y-320"><canvas id="trafoKapasiteChart"></canvas></div>
                 </div>
                 <div class="card">
                     <h2>Hat Uzunluğu (km)</h2>
-                    <div class="chart-container" style="height: 320px;"><canvas id="hatUzunlukChart"></canvas></div>
+                    <div class="chart-container y-320"><canvas id="hatUzunlukChart"></canvas></div>
                 </div>
             </div>
 
             <div class="bolum-baslik">
-                <div class="ikon" style="background: rgba(251, 146, 60, 0.15); color: #fb923c;"><i class="fa-solid fa-bolt"></i></div>
+                <div class="ikon ton-turuncu" aria-hidden="true"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
                 <div>
                     <h2>Trafo Merkezleri ve Hat Varlıkları Envanteri</h2>
                     <p>Ana indirici merkez, orta gerilim hatları ve dağıtım trafolarına ait teknik bilgiler</p>
                 </div>
             </div>
-            <div class="info-grid" style="grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr));">
+            <div class="info-grid genis">
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-table-list"></i> Trafo Merkezi Kartı (Ana İndirici)</h3>
+                    <h3><i class="fa-solid fa-table-list" aria-hidden="true"></i> Trafo Merkezi Kartı (Ana İndirici)</h3>
                     <table class="kart-tablo">
                         <tr><td>Kod</td><td>GZB-TM-154/34.5</td></tr>
                         <tr><td>Tipi</td><td>Yüksek Gerilim İndirici Merkez</td></tr>
@@ -199,7 +207,7 @@
                     </table>
                 </div>
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-table-list"></i> Mithatpaşa OG Sahil Yeraltı Kablo Aksı</h3>
+                    <h3><i class="fa-solid fa-table-list" aria-hidden="true"></i> Mithatpaşa OG Sahil Yeraltı Kablo Aksı</h3>
                     <table class="kart-tablo">
                         <tr><td>Hat Kodu</td><td>GZB-OG-34.5KV-MITHAT</td></tr>
                         <tr><td>Tip / Kesit</td><td>3x(1x240 mm²) XLPE Yeraltı Kablosu</td></tr>
@@ -208,7 +216,7 @@
                     </table>
                 </div>
                 <div class="info-card">
-                    <h3><i class="fa-solid fa-table-list"></i> Yelki Beldesi OG Ana Besleme Hattı</h3>
+                    <h3><i class="fa-solid fa-table-list" aria-hidden="true"></i> Yelki Beldesi OG Ana Besleme Hattı</h3>
                     <table class="kart-tablo">
                         <tr><td>Hat Kodu</td><td>GZB-OG-YELKI-NKL</td></tr>
                         <tr><td>Tipi</td><td>Kısmen Yeraltı Kablo / Kısmen Havai Hat</td></tr>
@@ -216,8 +224,8 @@
                         <tr><td>İşlev</td><td>Ana İndiriciden Yelki DM'ye Enerji Aktarımı</td></tr>
                     </table>
                 </div>
-                <div class="info-card" style="grid-column: 1 / -1;">
-                    <h3><i class="fa-solid fa-table-list"></i> Dağıtım Trafoları</h3>
+                <div class="info-card full-width">
+                    <h3><i class="fa-solid fa-table-list" aria-hidden="true"></i> Dağıtım Trafoları</h3>
                     <table class="kart-tablo">
                         <tr><td>Özellik</td><td><strong>Beton Köşk / Binalı Trafo</strong></td><td><strong>DM / Dağıtım Binası</strong></td></tr>
                         <tr><td>Güç</td><td>1000 kVA (34.5 kV / 0.4 kV)</td><td>1250 kVA Modüler Hücreli</td></tr>
@@ -227,40 +235,6 @@
             </div>
         </div>
     </main>
-
-    <!-- Görsel büyütme penceresi -->
-    <div id="imageModal" class="image-modal">
-        <span class="close-modal" onclick="closeImageModal()">&times;</span>
-        <div class="modal-content-wrapper" id="modalContentWrapper">
-            <img class="modal-content" id="modalImage" alt="Harita">
-        </div>
-        <div class="modal-controls">
-            <button onclick="zoomModalImage(1.2)" title="Büyüt"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
-            <button onclick="zoomModalImage(0.8)" title="Küçült"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
-            <button onclick="zoomModalImage('reset')" title="Sıfırla"><i class="fa-solid fa-compress"></i></button>
-        </div>
-    </div>
-    <script src="https://unpkg.com/@panzoom/panzoom@4.5.1/dist/panzoom.min.js"></script>
-    <script>
-        let pzInstance = null;
-        function openImageModal(imgSrc) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("modalImage");
-            modal.style.display = "block";
-            modalImg.src = imgSrc;
-            if (pzInstance) pzInstance.destroy();
-            pzInstance = Panzoom(modalImg, { maxScale: 10, minScale: 0.5, startScale: 1, cursor: 'grab' });
-            modal.addEventListener('wheel', pzInstance.zoomWithWheel);
-        }
-        function closeImageModal() {
-            document.getElementById("imageModal").style.display = "none";
-            if (pzInstance) { pzInstance.destroy(); pzInstance = null; }
-        }
-        function zoomModalImage(scale) {
-            if (!pzInstance) return;
-            if (scale === 'reset') pzInstance.reset(); else pzInstance.zoom(pzInstance.getScale() * scale);
-        }
-    </script>
 
     <script src="js/chart-config.js"></script>
     <script src="js/elektrik.js"></script>
