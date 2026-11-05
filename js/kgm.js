@@ -181,7 +181,7 @@
                     callbacks: {
                         label: function(ctx) {
                             let label = (ctx.dataset.label || '') + ': ' + formatYuzde(ctx.parsed.y);
-                            if (ctx.parsed.y > 100) label += ' (kapasitenin üzerinde)';
+                            if (ctx.parsed.y > 100) label += ' ' + cevir('(kapasitenin üzerinde)');
                             return label;
                         }
                     }

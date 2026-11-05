@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katı Atık Yönetimi | BAS PORTAL</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
+    <script src="js/dil-en.js"></script>
+    <script src="js/dil.js"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <nav aria-label="Sayfalar">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
+                    Otoparklar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                    İZSU Su Kaynakları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="atiksu.html" class="nav-link">
+                    <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+                    Atık Su
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kati-atik.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                    Katı Atık
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                    Elektrik Altyapısı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                    Planlanan Projeler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                    İşbirliklerimiz
+                </a>
+            </li>
+        </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+        <main class="main-content" id="icerik" tabindex="-1">
+        <div id="kati-atik" class="tab-pane active">
+            <header>
+                <h1>Katı Atık Yönetimi</h1>
+                <p class="subtitle">Atık bileşenleri, toplama düzeni, ayrı toplanan atıklar, araç ve personel, maliyet ve tarife</p>
+            </header>
+
+            <div class="stats-row dar-kartlar">
+                <div class="stat-card ton-turuncu">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-dumpster" aria-hidden="true"></i></div>
+                    <div class="stat-label">2026 Beklenen Atık</div>
+                    <div class="stat-value kucuk">16.824 ton/yıl</div>
+                    <div class="stat-change ton-turuncu">2026'nın ilk 8 ayı baz alındı</div>
+                </div>
+                <div class="stat-card ton-amber">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-calendar-day" aria-hidden="true"></i></div>
+                    <div class="stat-label">Günlük Ortalama</div>
+                    <div class="stat-value kucuk">46,09 ton/gün</div>
+                    <div class="stat-change ton-amber">Urla Transfer İstasyonu verisi</div>
+                </div>
+                <div class="stat-card ton-mavi">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-coins" aria-hidden="true"></i></div>
+                    <div class="stat-label">Ton Başı Toplama Maliyeti</div>
+                    <div class="stat-value kucuk">3.158,77 TL</div>
+                    <div class="stat-change ton-mavi">Net sistem maliyeti / yıllık atık</div>
+                </div>
+                <div class="stat-card ton-yesil">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-people-group" aria-hidden="true"></i></div>
+                    <div class="stat-label">Nüfus (2025)</div>
+                    <div class="stat-value kucuk">39.474 kişi</div>
+                    <div class="stat-change ton-yesil">12 mahalle · yaklaşık 117 km²</div>
+                </div>
+            </div>
+
+            <!-- Görev dağılımı -->
+            <div class="card full-width alt-bosluk-k">
+                <h2><i class="fa-solid fa-route renk-turuncu ikon-bosluk" aria-hidden="true"></i>Atığın Yolu ve Görev Dağılımı</h2>
+                <div class="akis ton-turuncu">
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></span><span class="ak-ust">Kaynak</span><span class="ak-deger">Konut, işyeri, kamu</span><span class="ak-alt">12 mahalledeki tüm cadde ve sokaklar</span></div>
+                    <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-truck" aria-hidden="true"></i></span><span class="ak-ust">Toplama</span><span class="ak-deger">Güzelbahçe Belediyesi</span><span class="ak-alt">Haftanın 7 günü</span></div>
+                    <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-warehouse" aria-hidden="true"></i></span><span class="ak-ust">Aktarma · İBB</span><span class="ak-deger">Urla Transfer İstasyonu</span><span class="ak-alt">İlçe merkezine yaklaşık 15 km</span></div>
+                    <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-mountain" aria-hidden="true"></i></span><span class="ak-ust">Bertaraf · İBB</span><span class="ak-deger">Düzenli depolama</span><span class="ak-alt">2020 planında Harmandalı; bugünkü yeri gösteren resmî belge bulunamadı</span></div>
+                </div>
+                <div class="simge-izgarasi ust-bosluk-k">
+                    <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-faucet-drip" aria-hidden="true"></i></span><div><h3>İZSU Genel Müdürlüğü</h3><p>İçme suyu, yağmur suyu ve kanalizasyon</p></div></div>
+                    <div class="simge-karti ton-turuncu"><span class="sk-simge"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></span><div><h3>Güzelbahçe Belediyesi</h3><p>Evsel atığın kaynakta toplanması ve aktarma istasyonuna taşınması</p></div></div>
+                    <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-city" aria-hidden="true"></i></span><div><h3>İBB</h3><p>Aktarma (transfer) ve bertaraf</p></div></div>
+                    <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-kit-medical" aria-hidden="true"></i></span><div><h3>İBB</h3><p>Tıbbi atığın toplanması, taşınması ve bertarafı</p></div></div>
+                </div>
+            </div>
+
+            <!-- Atık bileşenleri -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Atık Karakterizasyonu: Kış ve Yaz</h2>
+                    <p>İzmir Entegre Atık Yönetim Planı (Ekim 2018), Güzelbahçe ilçesi atık bileşenleri (%)</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card full-width">
+                    <h2>Atık Bileşenlerinin Payı (%)</h2>
+                    <div class="chart-container y-400"><canvas id="bilesenChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Park-bahçe atıkları ve elektrikli-elektronik atık her iki dönemde %0,00. "Karışık" satırı kaynakta boş.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Biyobozunur ve Ambalaj Atığı (%)</h2>
+                    <div class="chart-container y-250"><canvas id="ambalajChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Ambalaj: kağıt-karton, cam, PET, plastik, metal.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Günlük Atık Miktarı (ton/gün)</h2>
+                    <div class="chart-container y-250"><canvas id="gunlukChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Bakanlık planı (2019-2020): yaz 34, kış 35, ortalama 35 ton/gün <span class="not-rozeti">doğrulanacak</span></p>
+                </div>
+            </div>
+
+            <!-- Ayrı toplama -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-su" aria-hidden="true"><i class="fa-solid fa-recycle" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Ayrı Toplanan Atıklar ve Sıfır Atık</h2>
+                    <p>Belediyenin 2022 faaliyet raporu ve sıfır atık uygulamaları</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Ayrı Toplanan Atıklar, 2022 (kg)</h2>
+                    <div class="chart-container y-300"><canvas id="ayriChart"></canvas></div>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-box-open renk-su ikon-bosluk" aria-hidden="true"></i>Ambalaj Atığı</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-su"><div class="deger">420,47 ton</div><div class="etiket">2022'de ayrı toplanan ambalaj atığı</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">~%3,3</div><div class="etiket">yılda ~12.775 ton belediye atığına oranı <span class="not-rozeti hesap">hesap</span></div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">2012</div><div class="etiket">ambalaj atığının ayrı toplanmaya başladığı yıl</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">12 mahalle</div><div class="etiket">düzenli ambalaj toplama</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Yıllar farklı olduğu için oran yalnızca büyüklük fikri verir.</p>
+                </div>
+            </div>
+            <div class="mini-istatistik genis ust-bosluk-k">
+                <div class="mini-ist ton-yesil"><div class="deger">31 okul</div><div class="etiket">"Sıfır Atık ve Geri Dönüşümün Önemi" eğitimi (2019-2020)</div></div>
+                <div class="mini-ist ton-pembe"><div class="deger">80</div><div class="etiket">giysi kumbarası sahada</div></div>
+                <div class="mini-ist ton-mor"><div class="deger">1 + 3</div><div class="etiket">1. sınıf atık getirme merkezi + mobil atık getirme merkezi</div></div>
+                <div class="mini-ist ton-su"><div class="deger">~%60</div><div class="etiket">nüfusa gezici toplama: hanelerden poşetle, haftada en az 1 kez</div></div>
+            </div>
+
+            <h2 class="ara-baslik">Atık Türleri ve Yönetimi</h2>
+            <div class="simge-izgarasi alt-bosluk-k">
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-box" aria-hidden="true"></i></span><div><h3>Ambalaj atığı</h3><p>Lisanslı firma; hanelerden haftada 1 gün poşetle (2014'ten beri)</p></div></div>
+                <div class="simge-karti ton-sari"><span class="sk-simge"><i class="fa-solid fa-battery-half" aria-hidden="true"></i></span><div><h3>Atık pil</h3><p>Okul, kurum ve muhtarlıklardaki kutulardan TAP'a</p></div></div>
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-bottle-droplet" aria-hidden="true"></i></span><div><h3>Bitkisel atık yağ</h3><p>Habitat firması; 2018'den beri düzenli toplama</p></div></div>
+                <div class="simge-karti ton-mavi"><span class="sk-simge"><i class="fa-solid fa-plug" aria-hidden="true"></i></span><div><h3>Elektronik atık</h3><p>Toplama noktalarından lisanslı geri dönüşüm firmalarına</p></div></div>
+                <div class="simge-karti ton-pembe"><span class="sk-simge"><i class="fa-solid fa-shirt" aria-hidden="true"></i></span><div><h3>Tekstil atığı</h3><p>Lisanslı firmalar; 80 giysi kumbarası</p></div></div>
+                <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-leaf" aria-hidden="true"></i></span><div><h3>Organik atık</h3><p>Park-bahçe atığını Fen İşleri ayrı topluyor; diğerleri evsel atıkla</p></div></div>
+                <div class="simge-karti ton-turuncu"><span class="sk-simge"><i class="fa-solid fa-couch" aria-hidden="true"></i></span><div><h3>Büyük hacimli atık</h3><p>Kullanılabilir olanlar ihtiyaç sahiplerine; hurdalar Makine Kimya Endüstrisi'ne</p></div></div>
+                <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-pills" aria-hidden="true"></i></span><div><h3>Atık ilaç</h3><p>Sağlık ocağı ve eczanelerdeki kilitli kutulardan lisanslı firmalara</p></div></div>
+                <div class="simge-karti ton-sari"><span class="sk-simge"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></span><div><h3>Aydınlatma ekipmanı</h3><p>Makine Kimya Endüstrisi'ne teslim</p></div></div>
+                <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-skull-crossbones" aria-hidden="true"></i></span><div><h3>Evsel tehlikeli atık</h3><p>Atık Getirme Merkezi'nde toplanıyor</p></div></div>
+            </div>
+
+            <!-- Toplama düzeni -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-amber" aria-hidden="true"><i class="fa-solid fa-truck-ramp-box" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Toplama Düzeni, Araç ve Personel</h2>
+                    <p>Belediyenin 2022 faaliyet raporu · son okunabilen belediye verisi 2022 yılına ait</p>
+                </div>
+            </div>
+            <div class="mini-istatistik genis">
+                <div class="mini-ist ton-amber"><div class="deger">7 gün</div><div class="etiket">haftanın her günü çöp toplama</div></div>
+                <div class="mini-ist ton-amber"><div class="deger">2 gün</div><div class="etiket">her sokağa haftada</div></div>
+                <div class="mini-ist ton-yesil"><div class="deger">2 gün + 15 gün</div><div class="etiket">Payamlı, Küçükkaya, Çamlı: haftada 2 gün; 15 günde bir genel temizlik</div></div>
+                <div class="mini-ist ton-mavi"><div class="deger">5 rota</div><div class="etiket">her rotaya 1 araç + 1 hazır ekip aracı; yazın ilave araç</div></div>
+            </div>
+            <div class="etiket-listesi alt-bosluk-k">
+                <span>Yelki · Mustafa Kemal Paşa</span><span>Atatürk · Kahramandere</span><span>Çelebi · Kahramandere</span><span>Yalı · Siteler</span><span>Maltepe</span>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Temizlik İşleri Araç Filosu, 2022</h2>
+                    <div class="chart-container y-300"><canvas id="filoChart"></canvas></div>
+                </div>
+                <div class="card chart-card">
+                    <h2>Temizlik Personeli</h2>
+                    <div class="chart-container y-300"><canvas id="personelChart"></canvas></div>
+                </div>
+                <div class="card chart-card">
+                    <h2>Çöp Aracı Sayısı</h2>
+                    <div class="chart-container y-250"><canvas id="aracChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>2020 planı değeri <span class="not-rozeti">doğrulanacak</span> · 2025: TBB hibesi 1 çöp kamyonu eklendi (2024 model, 8+1 m³).</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-dumpster renk-amber ikon-bosluk" aria-hidden="true"></i>Konteyner ve Bütçe</h2>
+                    <div class="mini-ist ton-amber">
+                        <div class="deger">20 / 75</div>
+                        <div class="etiket">Büyükşehir'in hibe ettiği konteynerlerden yerleştirilen (2022)</div>
+                        <div class="ilerleme" role="img" aria-label="75 konteynerden 20'si yerleştirildi"><span style="width: 26.7%"></span></div>
+                    </div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-mavi"><div class="deger">4.556.109,64 TL</div><div class="etiket">Temizlik İşleri 2022 bütçesi</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">%99</div><div class="etiket">bütçe kullanım oranı</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Okunabilen belediye belgelerinde toplam konteyner sayısı bulunamadı.</p>
+                </div>
+            </div>
+
+            <h2 class="ara-baslik">Moloz, Bahçe Atığı ve Ev Eşyası Toplama Takvimi</h2>
+            <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Belediye duyurusu, Şubat 2025 <span class="not-rozeti">güncelliği doğrulanmalı</span></p>
+            <div class="haftalik-takvim ust-bosluk-k alt-bosluk-k">
+                <div class="gun"><div class="gun-ad">Pazartesi</div><span>Yelki</span><span>Siteler</span></div>
+                <div class="gun"><div class="gun-ad">Salı</div><span>Maltepe</span><span>Mustafa Kemal Paşa</span></div>
+                <div class="gun"><div class="gun-ad">Çarşamba</div><span>Yalı</span><span>Çamlı</span><span>siteler</span></div>
+                <div class="gun"><div class="gun-ad">Perşembe</div><span>Atatürk</span><span>siteler</span></div>
+                <div class="gun"><div class="gun-ad">Cuma</div><span>Kahramandere</span></div>
+                <div class="gun"><div class="gun-ad">Cumartesi</div><span>Çelebi</span><span>Yaka</span></div>
+            </div>
+
+            <!-- Maliyet ve tarife -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-mavi" aria-hidden="true"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Sistem Maliyeti ve Tarife</h2>
+                    <p>2026 evsel katı atık tarife hesabı · kirleten öder ve tam maliyet geri kazanımı ilkeleri</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card full-width">
+                    <h2>Yıllık Sistem Maliyeti (TL)</h2>
+                    <div class="chart-container y-300"><canvas id="maliyetChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>2026 yılı 2. geçici vergi dönemi yeniden değerleme oranı %11,51. Maliyetlerin yüksekliği nedeniyle özkaynak getirisi hesaba tam yansıtılmadı.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Evsel Katı Atığın Kaynaklara Göre Payı (%)</h2>
+                    <div class="chart-container y-300"><canvas id="kaynakPayChart"></canvas></div>
+                </div>
+                <div class="card chart-card">
+                    <h2>Aylık Ortalama Toplama Maliyeti (TL/ay)</h2>
+                    <div class="chart-container y-300"><canvas id="aylikMaliyetChart"></canvas></div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-mavi"><div class="deger">15.044</div><div class="etiket">konut su abonesi (İZSU 2026)</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">1.241</div><div class="etiket">konut dışı abone</div></div>
+                    </div>
+                </div>
+                <div class="card chart-card full-width">
+                    <h2>Katı Atık Tarifesi: 2022, 2023 ve 2026 (TL)</h2>
+                    <div class="chart-container y-320"><canvas id="tarifeChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>2026'da meskenler için tek tarife (150 TL; tarife dönemi belgede yazmıyor), kırsal konut için ayrı kalem yok. Devlet okulları: 2022'de 200-1.200 TL, 2023'te 320-1.920 TL, 2026'da 840 TL.</p>
+                </div>
+            </div>
+
+            <!-- Tıbbi atık ve hafriyat -->
+            <div class="izgara-iki ust-bosluk-k">
+                <div class="card chart-card">
+                    <h2>Güzelbahçe'den Toplanan Tıbbi Atık (kg)</h2>
+                    <div class="chart-container y-250"><canvas id="tibbiChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>2021'den 2025'e artış %67 <span class="not-rozeti hesap">hesap</span></p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-trowel-bricks renk-amber ikon-bosluk" aria-hidden="true"></i>Hafriyat ve İnşaat Atığı</h2>
+                    <div class="mini-ist ton-amber">
+                        <div class="deger">1.178.302 ton</div>
+                        <div class="etiket">2019, Yelki Çalıcası'ndaki saha kaydı <span class="not-rozeti">doğrulanacak</span></div>
+                    </div>
+                    <div class="etiket-listesi">
+                        <span>Yelki-2 Hafriyat Toprağı Sahası (İZBETON A.Ş.)</span><span>Haydar Madencilik İnşaat/Yıkıntı Atıkları Geri Kazanım Tesisi</span>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Bakanlık planının arama özetinden okundu; asıl tablodan doğrulanmalı.</p>
+                </div>
+            </div>
+
+            <!-- Aktarma ve bertaraf -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-mor" aria-hidden="true"><i class="fa-solid fa-timeline" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Aktarma, Bertaraf ve Yeni Uygulamalar</h2>
+                    <p>Urla Transfer İstasyonu'ndan bugüne kayıtlar</p>
+                </div>
+            </div>
+            <ol class="zaman-cizelgesi ton-mor alt-bosluk-k">
+                <li><span class="zc-tarih">15.10.2009</span><div><span class="zc-baslik">Urla transfer istasyonu</span><span class="zc-metin">İBB, Zeytinalanı'nda Urla, Güzelbahçe, Seferihisar ve Yelki çöplerini alacak istasyonu duyurdu.</span></div></li>
+                <li><span class="zc-tarih">2020</span><div><span class="zc-baslik">Bakanlık planı <span class="not-rozeti">doğrulanacak</span></span><span class="zc-metin">Atığın %100'ü Urla Aktarma İstasyonu'na, oradan Harmandalı Düzenli Depolama Tesisi'ne.</span></div></li>
+                <li><span class="zc-tarih">2022</span><div><span class="zc-baslik">Belediye raporu</span><span class="zc-metin">Atıklar Urla Transfer İstasyonu'na taşınıyor.</span></div></li>
+                <li><span class="zc-tarih">13.03.2023</span><div><span class="zc-baslik">Mekanik ayırma tesisi</span><span class="zc-metin">Yaklaşık 9.006,72 m²'lik istasyonun Mekanik Ayırma Tesisi'ne dönüşmesi ve 15 yıl kiralamalı işletilmesi.</span></div></li>
+                <li><span class="zc-tarih">04.11.2023</span><div><span class="zc-baslik">Resmî Gazete ilanı <span class="not-rozeti">doğrulanacak</span></span><span class="zc-metin">Yelki Mekanik Ayırma Tesisi; istasyon Urla ve Güzelbahçe sınırında.</span></div></li>
+                <li><span class="zc-tarih">25.06.2025</span><div><span class="zc-baslik">Harmandalı kararı</span><span class="zc-metin">Yargı kararı Danıştay onamasıyla kesinleşti; Bakanlık 31 Ekim 2025'e kadar geçici izin verdi.</span></div></li>
+                <li><span class="zc-tarih">Temmuz 2026</span><div><span class="zc-baslik">Dönüşüme Evde Başla</span><span class="zc-metin">İBB ve İzdoğa'nın kapıdan kapıya ambalaj toplaması Siteler, Yalı ve Maltepe'de; QR kodlu mavi poşetler.</span></div></li>
+            </ol>
+
+            <!-- Kronoloji -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-gavel" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Katı Atık Kronolojisi</h2>
+                    <p>Sözleşmeler, protokoller ve Güzelbahçe Belediye Meclisi (GM) kararları</p>
+                </div>
+            </div>
+            <ol class="zaman-cizelgesi ton-yesil alt-bosluk-k">
+                <li><span class="zc-tarih">2010</span><div><span class="zc-baslik">GM 2010/05</span><span class="zc-metin">Büyükşehir su şebekesi dışındaki konutlar için çevre temizlik vergisi tarifesi.</span></div></li>
+                <li><span class="zc-tarih">19.12.2011</span><div><span class="zc-baslik">İlk ambalaj sözleşmesi</span><span class="zc-metin">Çevsan ile 3 yıllık sözleşme; 2012'den beri ambalaj atığı ayrı toplanıyor.</span></div></li>
+                <li><span class="zc-tarih">2015</span><div><span class="zc-baslik">GM 2015/37</span><span class="zc-metin">3.200.000 TL kredi; planlananlar arasında 6 çöp kamyonu, 2 arazöz, 2 vidanjör, 1 süpürge aracı.</span></div></li>
+                <li><span class="zc-tarih">17.10.2019</span><div><span class="zc-baslik">Bitkisel atık yağ</span><span class="zc-metin">Habitat Geri Dönüşüm ile 3 yıllık protokol.</span></div></li>
+                <li><span class="zc-tarih">2020</span><div><span class="zc-baslik">GM kararı</span><span class="zc-metin">Faaliyeti durdurulan işletmelerden 19 Mart-19 Haziran 2020 için çevre temizlik vergisi alınmadı.</span></div></li>
+                <li><span class="zc-tarih">03.02.2021</span><div><span class="zc-baslik">GM 2021/12</span><span class="zc-metin">Esnaftan 01.12.2020-31.05.2021 dönemi çevre temizlik vergisi alınmadı.</span></div></li>
+                <li><span class="zc-tarih">2021</span><div><span class="zc-baslik">GM 2021/22</span><span class="zc-metin">Okullardan katı atık bedeli alınmasına devam edildi.</span></div></li>
+                <li><span class="zc-tarih">01.12.2021</span><div><span class="zc-baslik">GM 2021/66</span><span class="zc-metin">2022 evsel katı atık tarifeleri yeniden düzenlendi.</span></div></li>
+                <li><span class="zc-tarih">2022</span><div><span class="zc-baslik">GM 2022/24</span><span class="zc-metin">Organik atık toplama, Bornova tesisi açılınca planlanıyor.</span></div></li>
+                <li><span class="zc-tarih">01.06.2023</span><div><span class="zc-baslik">GM 2023/39</span><span class="zc-metin">Bağımsız Atık Toplayıcıları Yönetmeliği'nin 5. maddesi revize edildi.</span></div></li>
+                <li><span class="zc-tarih">03.02.2025</span><div><span class="zc-baslik">GM 2025/16</span><span class="zc-metin">TBB'nin hibe ettiği 2024 model, 8+1 m³ çöp kamyonu kabul edildi.</span></div></li>
+            </ol>
+
+            <div class="kaynak-notu">
+                <p>Veri Kaynağı: Güzelbahçe Belediyesi Temizlik İşleri Müdürlüğü görüşmesi ve 2026 katı atık tarife raporu · Güzelbahçe Belediyesi faaliyet raporları, meclis kararları ve tarife cetvelleri · İzmir Entegre Atık Yönetim Planı (Ekim 2018) · İzmir İli Sıfır Atık Yönetim Sistemi Planı (2020) · İBB Tıbbi Atık Yönetim Planları · Sayıştay 2018 denetim raporu · İBB açıklamaları</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/katiatik.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

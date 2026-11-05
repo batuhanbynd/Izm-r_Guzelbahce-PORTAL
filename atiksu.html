@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atık Su ve Arıtma | BAS PORTAL</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
+    <script src="js/dil-en.js"></script>
+    <script src="js/dil.js"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <nav aria-label="Sayfalar">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
+                    Otoparklar
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                    İZSU Su Kaynakları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="atiksu.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+                    Atık Su
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kati-atik.html" class="nav-link">
+                    <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                    Katı Atık
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                    Elektrik Altyapısı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                    Planlanan Projeler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                    İşbirliklerimiz
+                </a>
+            </li>
+        </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+        <main class="main-content" id="icerik" tabindex="-1">
+        <div id="atiksu" class="tab-pane active">
+            <header>
+                <h1>Atık Su ve Arıtma</h1>
+                <p class="subtitle">Güneybatı Atıksu Arıtma Tesisi, kapasite kullanımı, 75. Yıl Cumhuriyet Bulvarı altyapı yatırımı ve Körfez izleme verileri</p>
+            </header>
+
+            <div class="stats-row dar-kartlar">
+                <div class="stat-card ton-su">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></div>
+                    <div class="stat-label">Arıtma Kapasitesi</div>
+                    <div class="stat-value kucuk">21.600 m³/gün</div>
+                    <div class="stat-change ton-su">250 L/sn · Güneybatı AAT</div>
+                </div>
+                <div class="stat-card ton-mavi">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-chart-column" aria-hidden="true"></i></div>
+                    <div class="stat-label">2024 Günlük Ortalama Debi</div>
+                    <div class="stat-value kucuk">21.597 m³/gün</div>
+                    <div class="stat-change ton-mavi"><span class="not-rozeti hesap">hesap</span> 0,249966 m³/sn</div>
+                </div>
+                <div class="stat-card ton-kirmizi">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></div>
+                    <div class="stat-label">Kapasite Kullanımı</div>
+                    <div class="stat-value">%100,0</div>
+                    <div class="stat-change ton-kirmizi">2024 <span class="not-rozeti hesap">hesap</span> · 2019'da %108,2</div>
+                </div>
+                <div class="stat-card ton-yesil">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
+                    <div class="stat-label">Tasarım Nüfusu</div>
+                    <div class="stat-value kucuk">~100.000</div>
+                    <div class="stat-change ton-yesil">kişi eşdeğeri</div>
+                </div>
+            </div>
+
+            <div class="card full-width alt-bosluk-k">
+                <h2><i class="fa-solid fa-route renk-su ikon-bosluk" aria-hidden="true"></i>Atık Suyun Yolu</h2>
+                <div class="akis ton-su">
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-city" aria-hidden="true"></i></span><span class="ak-ust">Hizmet alanı</span><span class="ak-deger">Güzelbahçe'nin tamamı</span><span class="ak-alt">Narlıdere'nin bir bölümü ve askerî birlik alanı</span></div>
+                    <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-industry" aria-hidden="true"></i></span><span class="ak-ust">Narlıdere</span><span class="ak-deger">Güneybatı AAT</span><span class="ak-alt">İleri biyolojik arıtma · 2001-2002</span></div>
+                    <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-arrows-down-to-line" aria-hidden="true"></i></span><span class="ak-ust">Deşarj</span><span class="ak-deger">600 m</span><span class="ak-alt">Derin deniz deşarj hattı</span></div>
+                    <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-water" aria-hidden="true"></i></span><span class="ak-ust">Alıcı ortam</span><span class="ak-deger">İzmir Körfezi</span><span class="ak-alt">Tesis koku kontrol sistemiyle çalışıyor</span></div>
+                </div>
+            </div>
+
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Günlük Ortalama Debi ve Kapasite (m³/gün)</h2>
+                    <div class="chart-container y-300"><canvas id="debiChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Günlük ortalamalar kaynaktaki yıllık değerlerden hesaplandı. Tesis Narlıdere'nin bir bölümüne de hizmet ettiği için debinin tamamı Güzelbahçe'ye ait değildir.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Kapasiteye Oran (%)</h2>
+                    <div class="chart-container y-300"><canvas id="oranChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Yıllık ortalama debi üç yılın ikisinde kapasiteye ulaştı veya onu aştı. Aylık veri bulunamadı.</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-table-list" aria-hidden="true"></i> Tesis Kartı</h3>
+                    <table class="kart-tablo">
+                        <tr><td>Konum</td><td>Narlıdere</td></tr>
+                        <tr><td>İşletmeye alınma</td><td>2001 (ÇMO tablosu), 2002 (EMO)</td></tr>
+                        <tr><td>Kapasite</td><td>21.600 m³/gün (250 L/sn)</td></tr>
+                        <tr><td>Arıtma yöntemi</td><td>İleri biyolojik</td></tr>
+                        <tr><td>Enerji</td><td>Kurulu güç 1.250 kVA, aylık yaklaşık 150.000 kWh (2010)</td></tr>
+                    </table>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-arrow-trend-up renk-amber ikon-bosluk" aria-hidden="true"></i>Kapasite Artırımı Süreci</h2>
+                    <ol class="zaman-cizelgesi ton-amber tek-sutun-zc">
+                        <li><span class="zc-tarih">17.01.2025</span><div><span class="zc-metin">İBB Meclisi gündemi: İZSU'nun Fransız Kalkınma Ajansı'ndan (AFD) sağlayacağı kredi ve garantörlük.</span></div></li>
+                        <li><span class="zc-tarih">22.05.2025</span><div><span class="zc-metin">İZSU Genel Kurulu haberi: kapasite artırımı için "gerekli izinler bekleniyor".</span></div></li>
+                        <li><span class="zc-tarih">2026 bütçesi</span><div><span class="zc-metin">Yurt dışı finansmanlı projelerin Hazine ve Maliye Bakanlığı'nda beklediği söylendi; Güneybatı adı geçmiyor.</span></div></li>
+                    </ol>
+                    <p class="kucuk-not"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>Hedef kapasite, ÇED kararı ve ihale durumu için kurum belgesi okunamadı; yapımın başladığını gösteren belge bulunamadı.</p>
+                </div>
+            </div>
+
+            <!-- 75. Yıl Cumhuriyet Bulvarı altyapısı -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-amber" aria-hidden="true"><i class="fa-solid fa-road" aria-hidden="true"></i></div>
+                <div>
+                    <h2>75. Yıl Cumhuriyet Bulvarı Altyapı Yatırımı</h2>
+                    <p>İBB'nin 23 Ağustos 2025 tarihli açıklaması · belgelenen en güncel şebeke yatırımı</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Döşenen Hat Uzunluğu (m)</h2>
+                    <div class="chart-container y-250"><canvas id="hatChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Aynı metinde yağmur suyu için toplam 4.342 m hat da geçiyor.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Yatırımın Dağılımı (milyon TL)</h2>
+                    <div class="chart-container y-250"><canvas id="yatirimChart"></canvas></div>
+                </div>
+            </div>
+            <div class="mini-istatistik genis ust-bosluk-k">
+                <div class="mini-ist ton-amber"><div class="deger">87,35 mn TL</div><div class="etiket">toplam yatırım</div></div>
+                <div class="mini-ist ton-su"><div class="deger">400</div><div class="etiket">tekli ızgara yapılacak</div></div>
+                <div class="mini-ist ton-su"><div class="deger">2 nokta</div><div class="etiket">yağmur suyu Bozukiçi Deresi'ne verilecek</div></div>
+                <div class="mini-ist ton-mavi"><div class="deger">Güneybatı AAT</div><div class="etiket">bölgenin atık suyunun gideceği tesis</div></div>
+            </div>
+            <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İlçedeki toplam kanalizasyon uzunluğu ve kapsama oranı bulunamadı. Yalı Mahallesi'nde atık su ve yağmur suyu hattı inşaatı sürüyordu.</p>
+
+            <!-- Körfez izleme -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-mavi" aria-hidden="true"><i class="fa-solid fa-flask-vial" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Körfez İzleme: Pina Restoran Açığı (2024)</h2>
+                    <p>İBB Körfez izleme istasyonu · Bu ölçümler arıtma tesisinin etkisini tek başına göstermez</p>
+                </div>
+            </div>
+            <div class="card chart-card full-width">
+                <h2>Aylık Bakteri Ölçümleri (cfu/100 ml)</h2>
+                <div class="chart-container y-320"><canvas id="korfezChart"></canvas></div>
+                <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>E. coli Aralık'ta 500, Ocak'ta 210 cfu/100 ml oldu; diğer aylarda 100'ün altında kaldı.</p>
+            </div>
+
+            <!-- Dere ve altyapı kararları -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-gavel" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Dere ve Altyapı Kararları</h2>
+                    <p>Güzelbahçe Belediye Meclisi (GM) kararları ve İBB açıklamaları</p>
+                </div>
+            </div>
+            <ol class="zaman-cizelgesi ton-yesil alt-bosluk-k">
+                <li><span class="zc-tarih">2015</span><div><span class="zc-baslik">GM 2015/16, 2015/17</span><span class="zc-metin">Yelki ve Mustafa Kemal Paşa'da dere yatağı ve kanal gösterimine ilişkin plan değişiklikleri.</span></div></li>
+                <li><span class="zc-tarih">2018</span><div><span class="zc-baslik">GM 2018/26</span><span class="zc-metin">İZSU yazısına dayanan Kahramandere dere güzergâhı ve imar planı kararı.</span></div></li>
+                <li><span class="zc-tarih">01.03.2019</span><div><span class="zc-baslik">GM 2019/13</span><span class="zc-metin">Pınar Deresi ana kolu imar planına işlendi; servis yolu tek tarafta 5 m.</span></div></li>
+                <li><span class="zc-tarih">2021</span><div><span class="zc-baslik">Pınar Deresi ıslahı</span><span class="zc-metin">İBB, Kahramandere'deki ıslahın tamamlandığını açıkladı.</span></div></li>
+                <li><span class="zc-tarih">2021</span><div><span class="zc-baslik">GM 2021/30</span><span class="zc-metin">Yalı Mahallesi'nde bir bağımsız bölüm İZSU'ya 3 yıl süreyle bedelsiz tahsis edildi.</span></div></li>
+                <li><span class="zc-tarih">2023</span><div><span class="zc-baslik">GM 2023/30</span><span class="zc-metin">İZSU'nun belirttiği bir dere güzergâhı imar planına işlendi.</span></div></li>
+            </ol>
+
+            <div class="kaynak-notu">
+                <p>Veri Kaynağı: TMMOB ÇMO İzmir Su Raporu 2023-2024 ve 2021 Çevre Durum Raporu · EMO İzmir Şubesi Bülteni (2010) · İBB ve İZSU açıklamaları · Güzelbahçe Belediyesi faaliyet raporları ve meclis kararları</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/atiksu.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>
