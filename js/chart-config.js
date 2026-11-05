@@ -52,39 +52,72 @@ function renkSaydam(hex, alfa) {
 }
 
 // ---------------------------------------------
-// Türkçe sayı biçimleri
+// Sayı biçimleri (seçili dile göre: TR 1.234,5 · %7,5 / EN 1,234.5 · 7.5%)
 // ---------------------------------------------
+function ingilizceMi() {
+    return document.documentElement.getAttribute('lang') === 'en';
+}
+
+function yerelAyar() {
+    return ingilizceMi() ? 'en-US' : 'tr-TR';
+}
+
+// Sözlükte karşılığı olan metni çevirir (js/dil.js yüklüyse)
+function cevir(metin) {
+    return typeof window.basCevir === 'function' ? window.basCevir(metin) : metin;
+}
+
 function formatSayi(deger, basamak) {
     if (deger === null || deger === undefined || isNaN(deger)) return '–';
     const opt = basamak === undefined ? {} : { minimumFractionDigits: basamak, maximumFractionDigits: basamak };
-    return Number(deger).toLocaleString('tr-TR', opt);
+    return Number(deger).toLocaleString(yerelAyar(), opt);
 }
 
-// Eksen ve etiketler için kısa gösterim: 1,5 milyon · 840 bin
+// Eksen ve etiketler için kısa gösterim: 1,5 mn · 840 bin / 1.5 M · 840k
 function formatKisa(deger) {
     if (deger === null || deger === undefined || isNaN(deger)) return '';
     const mutlak = Math.abs(deger);
-    if (mutlak >= 1e6) return (deger / 1e6).toLocaleString('tr-TR', { maximumFractionDigits: 1 }) + ' mn';
-    if (mutlak >= 1e3) return (deger / 1e3).toLocaleString('tr-TR', { maximumFractionDigits: 0 }) + ' bin';
-    return deger.toLocaleString('tr-TR', { maximumFractionDigits: 1 });
+    const en = ingilizceMi();
+    if (mutlak >= 1e6) return (deger / 1e6).toLocaleString(yerelAyar(), { maximumFractionDigits: 1 }) + (en ? ' M' : ' mn');
+    if (mutlak >= 1e3) return (deger / 1e3).toLocaleString(yerelAyar(), { maximumFractionDigits: 0 }) + (en ? 'k' : ' bin');
+    return Number(deger).toLocaleString(yerelAyar(), { maximumFractionDigits: 1 });
 }
 
-// Yüzde, Türkçe yazımla: %7,5
+// Yüzde: TR %7,5 · EN 7.5%
 function formatYuzde(deger, basamak) {
     if (deger === null || deger === undefined || isNaN(deger)) return '–';
     const b = basamak === undefined ? 1 : basamak;
-    return '%' + Number(deger).toLocaleString('tr-TR', { maximumFractionDigits: b });
+    const metin = Number(deger).toLocaleString(yerelAyar(), { maximumFractionDigits: b });
+    return ingilizceMi() ? metin + '%' : '%' + metin;
+}
+
+// Yüzde, sabit ondalıkla (kaynaktaki yazımı korur: %11,90)
+function formatYuzdeSabit(deger, basamak) {
+    if (deger === null || deger === undefined || isNaN(deger)) return '–';
+    const metin = Number(deger).toLocaleString(yerelAyar(), { minimumFractionDigits: basamak, maximumFractionDigits: basamak });
+    return ingilizceMi() ? metin + '%' : '%' + metin;
+}
+
+// Birim adları (TR / EN)
+const BIRIM_METNI = {
+    tr: { yolcu: 'yolcu', tasit: 'taşıt/gün', m3: 'milyon m³', adet: 'adet', ton: 'ton', kg: 'kg', tl: 'TL', m3gun: 'm³/gün', kisi: 'kişi', cfu: 'cfu/100 ml', metre: 'm', mnm3: 'milyon m³', mnm3yil: 'milyon m³/yıl', mnTL: 'milyon TL', tlay: 'TL/ay', kotm: 'm' },
+    en: { yolcu: 'passengers', tasit: 'vehicles/day', m3: 'million m³', adet: 'units', ton: 'tonnes', kg: 'kg', tl: 'TL', m3gun: 'm³/day', kisi: 'people', cfu: 'cfu/100 ml', metre: 'm', mnm3: 'million m³', mnm3yil: 'million m³/year', mnTL: 'million TL', tlay: 'TL/month', kotm: 'm' }
+};
+
+function birimAdi(birim) {
+    const tablo = BIRIM_METNI[ingilizceMi() ? 'en' : 'tr'];
+    return tablo[birim] || '';
 }
 
 // Veri setinin "birim" alanına göre değeri yazar.
-// birim: 'yuzde' | 'yolcu' | 'tasit' | 'm3' | undefined
 function formatBirimli(deger, birim) {
     switch (birim) {
         case 'yuzde': return formatYuzde(deger);
-        case 'yolcu': return formatSayi(deger) + ' yolcu';
-        case 'tasit': return formatSayi(deger) + ' taşıt/gün';
-        case 'm3': return formatSayi(deger, 3) + ' milyon m³';
-        case 'adet': return formatSayi(deger) + ' adet';
+        case 'm3': return formatSayi(deger, 3) + ' ' + birimAdi('m3');
+        case 'mnm3': case 'mnm3yil': case 'mnTL': return formatSayi(deger) + ' ' + birimAdi(birim);
+        case 'yolcu': case 'tasit': case 'adet': case 'ton': case 'kg': case 'tl': case 'm3gun':
+        case 'kisi': case 'cfu': case 'metre': case 'tlay': case 'kotm':
+            return formatSayi(deger) + ' ' + birimAdi(birim);
         default: return formatSayi(deger);
     }
 }
@@ -326,7 +359,10 @@ window.addEventListener('temadegisti', function () {
 // Erişilebilirlik: her grafiğe metin karşılığı ve açılır veri tablosu
 // Tablo, grafiğe verilen değerlerin aynısını yuvarlamadan gösterir.
 // ---------------------------------------------
-const BIRIM_ADI = { yolcu: 'yolcu', tasit: 'taşıt/gün', m3: 'milyon m³', adet: 'adet', yuzde: '%' };
+function birimBasligi(birim) {
+    if (birim === 'yuzde') return '%';
+    return birimAdi(birim);
+}
 
 function grafikBasligi(chart) {
     const kap = chart.canvas.closest('.card, .chart-card, .info-card, .galeri-karti');
@@ -341,8 +377,9 @@ function etiketMetni(etiket) {
 function tabloDegeri(deger, birim) {
     if (Array.isArray(deger)) return deger.map(function (d) { return tabloDegeri(d, birim); }).join(' – ');
     if (deger === null || deger === undefined || deger === '' || isNaN(Number(deger))) return '–';
-    const metin = Number(deger).toLocaleString('tr-TR', { maximumFractionDigits: 6 });
-    return birim === 'yuzde' ? '%' + metin : metin;
+    const metin = Number(deger).toLocaleString(yerelAyar(), { maximumFractionDigits: 6 });
+    if (birim !== 'yuzde') return metin;
+    return ingilizceMi() ? metin + '%' : '%' + metin;
 }
 
 function hucre(etiket, metin, ozellik) {
@@ -354,20 +391,22 @@ function hucre(etiket, metin, ozellik) {
 
 function veriTablosunuYaz(chart) {
     const veri = chart.data;
-    const imza = JSON.stringify([veri.labels, (veri.datasets || []).map(function (d) { return [d.label, d.data]; })]);
+    const imza = JSON.stringify([yerelAyar(), veri.labels, (veri.datasets || []).map(function (d) { return [d.label, d.data]; })]);
     if (chart.$tabloImza === imza) return;
     chart.$tabloImza = imza;
 
     const baslik = grafikBasligi(chart);
     const canvas = chart.canvas;
     canvas.setAttribute('role', 'img');
-    canvas.setAttribute('aria-label', baslik + ' grafiği. Değerler grafiğin altındaki veri tablosundadır.');
+    canvas.setAttribute('aria-label', ingilizceMi()
+        ? baslik + ' chart. The values are in the data table below the chart.'
+        : baslik + ' grafiği. Değerler grafiğin altındaki veri tablosundadır.');
 
     let kutu = chart.$tabloKutusu;
     if (!kutu) {
         kutu = document.createElement('details');
         kutu.className = 'grafik-tablo';
-        kutu.appendChild(hucre('summary', 'Verileri tablo olarak göster'));
+        kutu.appendChild(hucre('summary', ingilizceMi() ? 'Show the data as a table' : 'Verileri tablo olarak göster'));
         const kaydir = document.createElement('div');
         kaydir.className = 'tablo-kaydir';
         kutu.appendChild(kaydir);
@@ -382,14 +421,14 @@ function veriTablosunuYaz(chart) {
     const eksen = chart.options.indexAxis === 'y' ? 'y' : 'x';
     const eksenAyari = chart.options.scales && chart.options.scales[eksen];
     const ilkSutun = !pasta && eksenAyari && eksenAyari.title && eksenAyari.title.display && eksenAyari.title.text
-        ? eksenAyari.title.text : 'Kategori';
+        ? eksenAyari.title.text : (ingilizceMi() ? 'Category' : 'Kategori');
 
     const ust = document.createElement('thead');
     const ustSatir = document.createElement('tr');
     ustSatir.appendChild(hucre('th', ilkSutun, { scope: 'col' }));
     veri.datasets.forEach(function (ds) {
-        const birim = BIRIM_ADI[ds.birim];
-        ustSatir.appendChild(hucre('th', (ds.label || 'Değer') + (birim ? ' (' + birim + ')' : ''), { scope: 'col' }));
+        const birim = birimBasligi(ds.birim);
+        ustSatir.appendChild(hucre('th', (ds.label || (ingilizceMi() ? 'Value' : 'Değer')) + (birim ? ' (' + birim + ')' : ''), { scope: 'col' }));
     });
     ust.appendChild(ustSatir);
     tablo.appendChild(ust);

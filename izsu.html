@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="js/tema.js"></script>
+    <script src="js/dil-en.js"></script>
+    <script src="js/dil.js"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 </head>
 <body>
@@ -98,6 +100,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="atiksu.html" class="nav-link">
+                    <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+                    Atık Su
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kati-atik.html" class="nav-link">
+                    <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                    Katı Atık
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="elektrik.html" class="nav-link">
                     <i class="fa-solid fa-bolt" aria-hidden="true"></i>
                     Elektrik Altyapısı
@@ -150,9 +164,16 @@
 
             <div class="izgara-iki">
                 <div class="card chart-card full-width">
-                    <h2>Barajların Aktif Doluluk Oranı (%)</h2>
+                    <h2>Barajların Aktif Doluluk Oranı (%): 2026 ve Bir Önceki Yıl</h2>
+                    <p class="kart-aciklama">İZSU baraj durumu, 07.10.2026 güncellemesi. Bir önceki yıl için Gördes Barajı doluluk verisi yok.</p>
                     <div class="chart-container y-400">
                         <canvas id="su1Chart"></canvas>
+                    </div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-su"><div class="deger">%41,46</div><div class="etiket">Tahtalı · 4 Kasım 2026</div></div>
+                        <div class="mini-ist ton-su"><div class="deger">%28,07</div><div class="etiket">Gördes · 4 Kasım 2026</div></div>
+                        <div class="mini-ist ton-su"><div class="deger">%37,64</div><div class="etiket">Balçova · 4 Kasım 2026</div></div>
+                        <div class="mini-ist ton-kirmizi"><div class="deger">%1,62</div><div class="etiket">Tahtalı · bir yıl önce</div></div>
                     </div>
                 </div>
 
@@ -171,6 +192,53 @@
                     <div class="chart-container y-300">
                         <canvas id="kaynakChart"></canvas>
                     </div>
+                </div>
+            </div>
+
+            <!-- Günlük su üretimi (Word Tablo 4) -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-su" aria-hidden="true"><i class="fa-solid fa-faucet" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Bağlı Olunan Sistemin Günlük Su Üretimi</h2>
+                    <p>İZSU günlük su üretimi, 03.11.2026 · Güzelbahçe'nin de içinde olduğu 11 ilçelik metropol sistem</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Kaynaklara Göre Üretim (m³/gün)</h2>
+                    <div class="chart-container y-380"><canvas id="uretimChart"></canvas></div>
+                </div>
+                <div class="card chart-card">
+                    <h2>Üretimde Kaynak Türlerinin Payı</h2>
+                    <div class="chart-container y-300"><canvas id="uretimTurChart"></canvas></div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-su"><div class="deger">639.415</div><div class="etiket">m³/gün toplam üretim</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">11</div><div class="etiket">ilçe aynı sistemden besleniyor</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İlçenin tüketimini değil, bağlı olduğu sistemin bir günlük üretimini gösterir. Güzelbahçe'ye özel kaynak dağılımı bulunamadı.</p>
+                </div>
+            </div>
+
+            <!-- Baraj hacimleri (Word Tablo 23) -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-mavi" aria-hidden="true"><i class="fa-solid fa-water" aria-hidden="true"></i></div>
+                <div>
+                    <h2>İzmir Barajlarının Hacim Durumu</h2>
+                    <p>Toplam su hacmi, kullanılabilir su ve maksimum göl hacmi · 07.10.2026</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card full-width">
+                    <h2>Toplam Su Hacmi ve Maksimum Göl Hacmi (milyon m³)</h2>
+                    <div class="chart-container y-380"><canvas id="hacimChart"></canvas></div>
+                </div>
+                <div class="card chart-card">
+                    <h2>Kullanılabilir Su: 2026 ve Bir Önceki Yıl (milyon m³)</h2>
+                    <div class="chart-container y-320"><canvas id="kullanilabilirChart"></canvas></div>
+                </div>
+                <div class="card chart-card">
+                    <h2>Göl Su Yükseltisi (m): Minimum, Son Durum, Maksimum</h2>
+                    <div class="chart-container y-320"><canvas id="kotChart"></canvas></div>
                 </div>
             </div>
 
@@ -274,6 +342,66 @@
                 </figure>
             </div>
 
+            <!-- Su kayıpları ve yerel kayıtlar -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-amber" aria-hidden="true"><i class="fa-solid fa-droplet-slash" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Su Kayıpları ve Güzelbahçe'deki Çalışmalar</h2>
+                    <p>Güzelbahçe'ye özel kayıp-kaçak oranı bulunamadı; ilçeyi kapsayan merkez ilçe değerleri gösterilir</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Su Kayıp-Kaçak Oranı (%)</h2>
+                    <div class="chart-container y-300"><canvas id="kayipChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>2021 ve 2023: merkez ilçeler (ÇMO raporu, İZSU verisi). Ocak 2026: İBB açıklaması; "kent merkezi"nin kapsamı belirtilmiyor.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-person-digging renk-su ikon-bosluk" aria-hidden="true"></i>Yelki İçme Suyu İletim Hattı</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-su"><div class="deger">3 km</div><div class="etiket">hat uzunluğu</div></div>
+                        <div class="mini-ist ton-su"><div class="deger">400 mm</div><div class="etiket">düktil font boru çapı</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">~15 mn TL</div><div class="etiket">yaklaşık yatırım</div></div>
+                    </div>
+                    <p class="kart-aciklama">İstiklal Caddesi'nden Yelki'ye, yaz aylarındaki basınç ve debi sorunları için mevcut sisteme alternatif hat. Yapımına Mayıs 2026'da başlandı; 2026 yazından önce bitirilmesi planlandı.</p>
+                    <p class="kucuk-not"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>Hattın devreye alındığını gösteren belge bulunamadı.</p>
+                </div>
+            </div>
+
+            <h2 class="ara-baslik">Güzelbahçe'ye Özel İçme Suyu Kayıtları</h2>
+            <ol class="zaman-cizelgesi ton-su alt-bosluk-k">
+                <li><span class="zc-tarih">Mayıs 2026</span><div><span class="zc-baslik">Yelki iletim hattı</span><span class="zc-metin">3 km, 400 mm çaplı hat; yaklaşık 15 milyon TL.</span></div></li>
+                <li><span class="zc-tarih">2024</span><div><span class="zc-baslik">Yeni hatlar</span><span class="zc-metin">Kemalpaşa, Güzelbahçe, Tire, Bayındır ve Beydağ'da toplam 44 km içme suyu hattı. Güzelbahçe payı verilmiyor.</span></div></li>
+                <li><span class="zc-tarih">Mart 2021</span><div><span class="zc-baslik">Güzelbahçe kuyuları</span><span class="zc-metin">Kuyulardan gelen suyu toplayan dolum tesisi yeşil alan sulamasında kullanılıyor.</span></div></li>
+                <li><span class="zc-tarih">2013</span><div><span class="zc-baslik">Pompa istasyonu</span><span class="zc-metin">Çelebi Mahallesi'ndeki İZSU pompa istasyonu alanı için plan değişikliği.</span></div></li>
+                <li><span class="zc-tarih">2009</span><div><span class="zc-baslik">Yazın su dağıtımı</span><span class="zc-metin">Yaz aylarında su sıkıntısı olan yerlere su dağıtımı belediye görevleri arasında.</span></div></li>
+            </ol>
+
+            <!-- Çamlı Barajı -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Planlanan Çamlı Barajı</h2>
+                    <p>Seferihisar, Urla ve Güzelbahçe'nin bulunduğu Yarımada bölgesinin su kaynağı olarak tanımlanıyor</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Yıllık Su Verimi (milyon m³/yıl)</h2>
+                    <div class="chart-container y-250"><canvas id="camliChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İki değer farklı kaynaklardan; ikisi de kaynağıyla birlikte verilir.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-list-check renk-yesil ikon-bosluk" aria-hidden="true"></i>Proje Durumu</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-yesil"><div class="deger">~300 bin</div><div class="etiket">kişiye su (İZSU)</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">ÇED</div><div class="etiket">İBB, Eylül 2024: "onay çıktı" <span class="not-rozeti">doğrulanacak</span></div></div>
+                    </div>
+                    <p class="kart-aciklama">Meslek odası raporu yapım projesinin hazırlandığını ve barajın İBB stratejik planında yer aldığını aktarıyor; Efemçukuru'ndaki maden ruhsatlarını havza için risk olarak gösteriyor.</p>
+                    <p class="kucuk-not"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>Yapım ihalesi veya takvimi bulunamadı.</p>
+                </div>
+            </div>
+
             <!-- Ek görseller -->
             <div class="bolum-baslik">
                 <div class="ikon ton-kirmizi" aria-hidden="true"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i></div>
@@ -300,6 +428,7 @@
 
             <div class="kaynak-notu">
                 <p>Veri Kaynağı: İZSU Günlük Su Üretimi &amp; Açık Veri Portalı (05 Ekim 2026)</p>
+                <p>İZSU Günlük Su Üretimi (03.11.2026) ve Barajlardaki Su Durumu (07.10.2026, 04.11.2026) · İBB ve İZSU açıklamaları · TMMOB ÇMO İzmir Su Raporu 2023-2024</p>
             </div>
         </div>
     </main>

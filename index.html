@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Genel Bakış | BAS PORTAL</title>
     <meta name="description" content="Güzelbahçe ulaşım ve altyapı verilerinin özeti: toplu taşıma, karayolu trafiği, su ve elektrik altyapısı, planlanan projeler.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="js/tema.js"></script>
+    <script src="js/dil-en.js"></script>
+    <script src="js/dil.js"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
 </head>
 <body>
@@ -97,6 +101,18 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="atiksu.html" class="nav-link">
+                    <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+                    Atık Su
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kati-atik.html" class="nav-link">
+                    <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                    Katı Atık
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="elektrik.html" class="nav-link">
                     <i class="fa-solid fa-bolt" aria-hidden="true"></i>
                     Elektrik Altyapısı
@@ -172,6 +188,16 @@
                     <span class="kpi-deger">100 MVA</span>
                     <span class="kpi-alt">Ana indirici trafo kapasitesi (154 → 34,5 kV)</span>
                 </a>
+                <a class="kpi ton-su" href="atiksu.html">
+                    <span class="kpi-etiket"><i class="fa-solid fa-house-flood-water" aria-hidden="true"></i> Atık su</span>
+                    <span class="kpi-deger">%100,0</span>
+                    <span class="kpi-alt">Güneybatı arıtma tesisi kapasite kullanımı, 2024 (hesap) · 21.600 m³/gün</span>
+                </a>
+                <a class="kpi ton-turuncu" href="kati-atik.html">
+                    <span class="kpi-etiket"><i class="fa-solid fa-recycle" aria-hidden="true"></i> Katı atık</span>
+                    <span class="kpi-deger">16.824 ton</span>
+                    <span class="kpi-alt">2026'da toplanması beklenen yıllık atık · günde 46,09 ton</span>
+                </a>
                 <a class="kpi ton-amber" href="planlanan-projeler.html">
                     <span class="kpi-etiket"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> 75. Yıl Cumhuriyet Bulvarı</span>
                     <span class="kpi-deger">1,5 / 4,25 km</span>
@@ -182,6 +208,26 @@
                     <span class="kpi-deger">13,6 km</span>
                     <span class="kpi-alt">Narlıdere'den sonra planlanan hat · 11 istasyon</span>
                 </a>
+            </div>
+
+            <div class="bolum-ust">
+                <h2>İlçe profili</h2>
+                <p>TÜİK Adrese Dayalı Nüfus Kayıt Sistemi</p>
+            </div>
+            <div class="izgara-iki alt-bosluk-k">
+                <div class="card chart-card">
+                    <h2>Güzelbahçe Nüfusu, 2017-2025</h2>
+                    <div class="chart-container y-300"><canvas id="nufusChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>2017-2025 arasında nüfus 8.045 kişi, yani %25,6 arttı <span class="not-rozeti hesap">hesap</span>. Yaz nüfusuna ilişkin resmî veri bulunamadı.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>2025 Nüfusu: Kadın ve Erkek</h2>
+                    <div class="chart-container y-250"><canvas id="cinsiyetChart"></canvas></div>
+                    <h3 class="kart-alt-baslik">12 mahalle</h3>
+                    <div class="etiket-listesi">
+                        <span>Atatürk</span><span>Çamlı</span><span>Çelebi</span><span>Kahramandere</span><span>Küçükkaya</span><span>Maltepe</span><span>Mustafa Kemal Paşa</span><span>Payamlı</span><span>Siteler</span><span>Yaka</span><span>Yalı</span><span>Yelki</span>
+                    </div>
+                </div>
             </div>
 
             <div class="bolum-ust">
@@ -233,12 +279,20 @@
 
             <div class="bolum-ust">
                 <h2>Altyapı</h2>
-                <p>Su ve elektrik şebekeleri</p>
+                <p>Su, atık su, katı atık ve elektrik</p>
             </div>
             <div class="servis-izgarasi">
                 <a class="servis-karti ton-su" href="izsu.html">
                     <span class="sk-ikon"><i class="fa-solid fa-droplet" aria-hidden="true"></i></span>
                     <div><h3>İZSU Su Kaynakları <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Baraj doluluk oranları, su kaynakları listesi ve su altyapısı metrajı</p></div>
+                </a>
+                <a class="servis-karti ton-mavi" href="atiksu.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-house-flood-water" aria-hidden="true"></i></span>
+                    <div><h3>Atık Su <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Güneybatı arıtma tesisi, kapasite kullanımı, 75. Yıl Bulvarı altyapısı ve Körfez ölçümleri</p></div>
+                </a>
+                <a class="servis-karti ton-yesil" href="kati-atik.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-recycle" aria-hidden="true"></i></span>
+                    <div><h3>Katı Atık <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Atık bileşenleri, ayrı toplama, araç ve personel, maliyet ve tarife</p></div>
                 </a>
                 <a class="servis-karti ton-turuncu" href="elektrik.html">
                     <span class="sk-ikon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
@@ -267,6 +321,8 @@
         </div>
     </main>
 
+    <script src="js/chart-config.js"></script>
+    <script src="js/genel.js"></script>
     <script src="js/ui.js"></script>
 </body>
 </html>

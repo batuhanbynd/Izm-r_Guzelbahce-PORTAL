@@ -2659,6 +2659,69 @@ a.brand { text-decoration: none; }
 .kaynak-tablosu th:nth-child(4) { width: 40%; }
 .galeri-karti figcaption + .interactive-image-container { border-top: 1px solid var(--border); }
 
+/* =============================================
+   Su, atık su ve katı atık sayfaları (Word raporundan eklenen bölümler)
+   ============================================= */
+
+/* Zaman çizelgesi: tarih rozeti + kısa açıklama */
+.zaman-cizelgesi { --ton: var(--accent-1); list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 0.9rem 1.5rem; }
+.zaman-cizelgesi li { display: grid; grid-template-columns: 7.2rem 1fr; gap: 0.9rem; align-items: start; padding: 0.85rem 1rem; background: var(--surface-1); border: 1px solid var(--border); border-left: 3px solid var(--ton); border-radius: 10px; box-shadow: var(--golge); }
+.zaman-cizelgesi .zc-tarih { font-weight: 800; color: var(--ton); font-variant-numeric: tabular-nums; font-size: 0.95rem; line-height: 1.35; }
+.zaman-cizelgesi .zc-baslik { display: block; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem; }
+.zaman-cizelgesi .zc-metin { color: var(--text-body); font-size: 0.93rem; line-height: 1.5; }
+.zaman-cizelgesi.tek-sutun-zc { grid-template-columns: 1fr; }
+.zaman-cizelgesi.tek-sutun-zc li { box-shadow: none; background: var(--surface-2); }
+
+/* Süreç akışı: kutu → ok → kutu */
+.akis { --ton: var(--accent-1); display: flex; align-items: stretch; gap: 0.6rem; flex-wrap: wrap; }
+.akis-adim { flex: 1 1 170px; background: var(--surface-2); border: 1px solid color-mix(in srgb, var(--ton) 40%, transparent); border-radius: var(--radius); padding: 1rem 1.1rem; text-align: center; display: flex; flex-direction: column; gap: 0.3rem; justify-content: center; }
+.akis-adim .ak-ikon { font-size: 1.5rem; color: var(--ton); }
+.akis-adim .ak-ust { font-size: 0.78rem; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
+.akis-adim .ak-deger { font-size: 1.08rem; font-weight: 800; color: var(--text-main); }
+.akis-adim .ak-alt { font-size: 0.86rem; color: var(--text-body); line-height: 1.4; }
+.akis-ok { display: flex; align-items: center; justify-content: center; color: var(--ton); font-size: 1.2rem; flex: 0 0 auto; }
+@media (max-width: 900px) { .akis { flex-direction: column; } .akis-ok { transform: rotate(90deg); padding: 0.2rem 0; } }
+
+/* Simge kartları ızgarası (atık türleri, görev dağılımı) */
+.simge-izgarasi { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; }
+.simge-karti { --ton: var(--accent-1); display: flex; gap: 0.85rem; align-items: flex-start; background: var(--surface-1); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; box-shadow: var(--golge); }
+.simge-karti .sk-simge { flex: 0 0 2.4rem; height: 2.4rem; border-radius: 10px; display: grid; place-items: center; color: var(--ton); background: color-mix(in srgb, var(--ton) 14%, transparent); font-size: 1.1rem; }
+.simge-karti h3 { margin: 0 0 0.25rem; font-size: 1rem; color: var(--text-main); }
+.simge-karti p { margin: 0; font-size: 0.88rem; color: var(--text-body); line-height: 1.45; }
+
+/* Haftalık takvim */
+.haftalik-takvim { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.6rem; }
+.haftalik-takvim .gun { background: var(--surface-2); border: 1px solid var(--border); border-top: 3px solid var(--ton, var(--accent-2)); border-radius: 10px; padding: 0.8rem; min-width: 0; }
+.haftalik-takvim .gun-ad { font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem; font-size: 0.95rem; }
+.haftalik-takvim .gun span { display: inline-block; margin: 0 0.3rem 0.3rem 0; padding: 0.15rem 0.55rem; border-radius: 999px; font-size: 0.82rem; background: color-mix(in srgb, var(--accent-2) 14%, transparent); color: var(--text-main); }
+@media (max-width: 1100px) { .haftalik-takvim { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .haftalik-takvim { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* İlerleme çubuğu (ör. 75 konteynerden 20'si) */
+.ilerleme { height: 10px; border-radius: 999px; background: var(--surface-3); overflow: hidden; margin-top: 0.6rem; }
+.ilerleme > span { display: block; height: 100%; background: var(--ton, var(--accent-1)); border-radius: inherit; }
+
+.ust-bosluk-k { margin-top: 1rem; }
+.kart-alt-baslik { margin: 1rem 0 0; font-size: 1rem; color: var(--text-main); }
+.alt-bosluk-k { margin-bottom: 2rem; }
+
+/* Doğrulama ve not rozetleri */
+.not-rozeti { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.3px; padding: 0.15rem 0.5rem; border-radius: 999px; vertical-align: middle; background: color-mix(in srgb, var(--accent-2) 16%, transparent); color: var(--accent-2); border: 1px solid color-mix(in srgb, var(--accent-2) 35%, transparent); white-space: nowrap; }
+.not-rozeti.hesap { background: color-mix(in srgb, var(--accent-1) 14%, transparent); color: var(--accent-1); border-color: color-mix(in srgb, var(--accent-1) 35%, transparent); }
+.kucuk-not { font-size: 0.86rem; color: var(--text-muted); margin: 0.75rem 0 0; line-height: 1.5; }
+.kucuk-not i { margin-right: 6px; color: var(--accent-2); }
+.etiket-listesi { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+.etiket-listesi span { padding: 0.25rem 0.7rem; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); font-size: 0.86rem; color: var(--text-body); }
+
+/* Dil seçici (TR / EN): her sayfada sağ üstte sabit */
+.dil-secici { position: fixed; top: 14px; right: 18px; z-index: 1200; display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; background: var(--surface-1); border: 1px solid var(--border-strong); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); }
+.dil-secici button { font: 700 0.85rem 'Outfit', sans-serif; letter-spacing: 0.5px; color: var(--text-muted); background: transparent; border: 0; border-radius: 999px; padding: 0.38rem 0.85rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; }
+.dil-secici button:hover { color: var(--text-main); }
+.dil-secici button[aria-pressed="true"] { background: var(--primary); color: var(--on-primary); }
+.dil-secici .dil-ikon { color: var(--accent-2); padding: 0 0.3rem 0 0.55rem; display: inline-flex; align-items: center; }
+html[data-dil-bekle] body { visibility: hidden; }
+@media (max-width: 900px) { .dil-secici { top: 10px; right: 10px; } }
+
 /* Renk tonu yardımcıları: bileşen kendi rengini --ton değişkeninden alır.
    Bileşenlerin varsayılan tonunu ezmesi için dosyanın sonunda durur. */
 .ton-mavi { --ton: var(--accent-1); }

@@ -1,0 +1,92 @@
+[
+[
+"^(\\d+) Numaralı Hat Görseli – büyüterek aç$",
+"Line $1 map – open enlarged"
+],
+[
+"^(\\d+) Numaralı Hat Görseli$",
+"Line $1 map"
+],
+[
+"^(\\d+) Numaralı Hat Durak Ulaşım Çapları – büyüterek aç$",
+"Line $1 stop catchment areas – open enlarged"
+],
+[
+"^(\\d+) Numaralı Hat Durak Ulaşım Çapları$",
+"Line $1 stop catchment areas"
+],
+[
+"^ESHOT (\\d+) Numaralı Hat Bilgisi:$",
+"ESHOT Line $1 information:"
+],
+[
+"^(\\d+) NO'lu Hat – Durak Ulaşım Çapları \\(400 m\\)$",
+"Line $1 – Stop Catchment Areas (400 m)"
+],
+[
+"^(\\d+) NO'lu Hattın Geçtiği Duraklar \\((\\d+) Durak\\)$",
+"Stops on Line $1 ($2 stops)"
+],
+[
+"^(\\d+(?: - \\d+)?) sefer$",
+"$1 round trips"
+],
+[
+"^(\\d+) dakika$",
+"$1 minutes"
+],
+[
+"^(\\d+) saat$",
+"$1 hours"
+],
+[
+"^Hat No: (\\d+) - (.+)$",
+"Line No: $1 - $2"
+],
+[
+"^GÜZERGAH : (.+) \\(Görüntülemek için tıklayınız\\)$",
+"ROUTE: $1 (click to view)"
+],
+[
+"^HAT (\\d+) · HAT (\\d+)$",
+"LINE $1 · LINE $2"
+],
+[
+"^HAT (\\d+)$",
+"LINE $1"
+],
+[
+"^Hat (\\d+) · (.+) dk$",
+"Line $1 · $2 min"
+],
+[
+"^Hat (\\d+) · (\\d+) saat$",
+"Line $1 · $2 hours"
+],
+[
+"^Hat (\\d+)$",
+"Line $1"
+],
+[
+"^(~?[\\d.,]+) mn$",
+"$1 M"
+],
+[
+"^(~?[\\d.,]+) mn yolcu$",
+"$1 M passengers"
+],
+[
+"^(~?[\\d.,]+) mn/yıl$",
+"$1 M/year"
+],
+[
+"^(.+) \\(yatay kaydırılabilir\\)$",
+"$1 (scrolls horizontally)",
+1
+],
+[
+"^(.+) – büyüterek aç$",
+"$1 – open enlarged",
+1
+]
+]
