@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>3B Yer Altı Ağları | BAS PORTAL</title>
+<meta name="m3-baslik-en" content="3D Underground Networks | BAS PORTAL">
+<meta name="description" content="Güzelbahçe'nin içme suyu, yağmur suyu ve atık su boru ağlarının etkileşimli 3B modeli ve Güneybatı Atıksu Arıtma Tesisi'nin kapasite kullanımı.">
+<meta name="theme-color" content="#0a0e13">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="3b/ortak.css">
+</head>
+<body class="su">
+
+<canvas id="gl" tabindex="0" aria-label="Güzelbahçe yer altı altyapı ağlarının 3B modeli" data-en-aria-label="3D model of Güzelbahçe's underground infrastructure networks"></canvas>
+<div class="vignette"></div>
+<div id="labels"></div>
+
+<header class="ust">
+  <a class="marka" href="index.html" aria-label="BAS PORTAL'a dön" data-en-aria-label="Back to BAS PORTAL"><span class="ok" aria-hidden="true">←</span><span class="cizgi" aria-hidden="true"></span><span class="yazi">BAS PORTAL</span></a>
+  <nav class="sekmeler" aria-label="3B modeller" data-en-aria-label="3D models">
+    <a href="3b-su-aglari.html" aria-current="page"><i class="nokta" style="--c:#38bdf8" aria-hidden="true"></i><span class="uzun" data-en="Underground networks">Yer altı ağları</span><span class="kisa" data-en="Networks">Su ağları</span></a>
+    <a href="3b-erisim.html"><i class="nokta" style="--c:#ef4b3f" aria-hidden="true"></i><span class="uzun" data-en="Access gaps">Erişim boşlukları</span><span class="kisa" data-en="Access">Erişim</span></a>
+  </nav>
+  <div class="ust-sag">
+    <button class="ust-btn yardim-btn" id="b-yardim" type="button"><span aria-hidden="true">?</span> <span data-en="Controls">Kontroller</span></button>
+    <div class="dil" role="group" aria-label="Dil / Language"><button type="button" data-dil="tr" lang="tr" aria-pressed="true">TR</button><button type="button" data-dil="en" lang="en" aria-pressed="false">EN</button></div>
+    <button class="ust-btn" id="b-tam" type="button" aria-pressed="false" aria-label="Tam ekran" data-en-aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+</header>
+
+<section id="panel" class="card" aria-label="Katmanlar ve ayarlar" data-en-aria-label="Layers and settings">
+  <div>
+    <div class="kicker" data-en="Güzelbahçe · Water infrastructure">Güzelbahçe · Su altyapısı</div>
+    <h1 data-en="Underground networks">Yer altı ağları</h1>
+    <p class="sub" data-en="The street map is a glass surface. The three pipe networks hang below it in order of depth. Depths are exaggerated so that they are easy to read.">Sokak haritası cam bir yüzey gibi duruyor. Altında üç boru ağı derinlik sırasıyla asılı. Derinlikler okunabilsin diye abartıldı.</p>
+  </div>
+  <div class="layers" role="group" aria-label="Katmanlar" data-en-aria-label="Layers">
+    <button class="lyr" id="ly-dw" type="button" style="--c:var(--dw)" aria-pressed="true"><i></i><span><span data-en="Drinking water">İçme suyu</span><small data-en="Top layer · İZSU">En üst katman · İZSU</small></span><em id="pay-dw"></em></button>
+    <button class="lyr" id="ly-rw" type="button" style="--c:var(--rw)" aria-pressed="true"><i></i><span><span data-en="Rainwater">Yağmur suyu</span><small data-en="Middle layer">Orta katman</small></span><em id="pay-rw"></em></button>
+    <button class="lyr" id="ly-ww" type="button" style="--c:var(--ww)" aria-pressed="true"><i></i><span><span data-en="Wastewater">Atık su</span><small data-en="Bottom layer · gravity flow">En alt katman · cazibeli akış</small></span><em id="pay-ww"></em></button>
+  </div>
+  <div class="share" role="img" aria-label="Toplam hat uzunluğu payları" data-en-aria-label="Shares of total line length"><b style="width:54.1%;background:var(--dw)"></b><b style="width:41.9%;background:var(--ww)"></b><b style="width:4.1%;background:var(--rw)"></b></div>
+  <div class="ctl">
+    <div class="ctl-head"><label for="c-glass" data-en="Ground transparency">Zemin saydamlığı</label><output id="o-glass"></output></div>
+    <input id="c-glass" type="range" min="0" max="100" step="1" value="78">
+  </div>
+  <div class="ctl">
+    <div class="ctl-head"><label for="c-gap" data-en="Layer spacing">Katman aralığı</label><output id="o-gap"></output></div>
+    <input id="c-gap" type="range" min="0" max="200" step="5" value="100">
+  </div>
+  <button class="tbtn" id="more" type="button" data-en="Treatment plant and method">Arıtma tesisi ve yöntem</button>
+  <div class="plant">
+    <div>
+      <div class="kicker" style="color:var(--ww)" data-en="Where the wastewater goes">Atık suyun gittiği yer</div>
+      <h2 data-en="Güneybatı Wastewater Treatment Plant">Güneybatı Atıksu Arıtma Tesisi</h2>
+      <p id="plant-p"></p>
+    </div>
+    <div class="bars" id="bars"><div class="cap" id="cap"><span>100%</span></div></div>
+  </div>
+  <details>
+    <summary data-en="Method and limits">Yöntem ve sınırlar</summary>
+    <ul>
+      <li data-en="The lines were digitised from the team's drinking water, wastewater and rainwater maps and aligned on shared points. Each network is limited to the area its own map covers (dashed frames).">Hatlar, çalışma ekibinin içme suyu, atık su ve yağmur suyu haritalarından sayısallaştırıldı ve ortak noktalardan çakıştırıldı. Her ağ, kendi haritasının kapsadığı alanla sınırlı (kesik çizgili çerçeveler).</li>
+      <li data-en="The wastewater and rainwater layers were matched to fit the line-length shares: the dense network is wastewater and the short pieces are rainwater.">Atık su ve yağmur suyu katmanları, hat uzunluğu paylarıyla uyumlu olacak şekilde eşleştirildi: yoğun ağ atık su, kısa parçalar yağmur suyu.</li>
+      <li data-en="The percentages are shares of the total line length. The treatment plant values come from the TMMOB ÇMO İzmir Water Reports; the ratios to capacity were calculated.">Yüzdeler toplam hat uzunluğu içindeki paylardır. Arıtma tesisi değerleri TMMOB ÇMO İzmir Su Raporlarından alındı; kapasiteye oranlar hesaplandı.</li>
+      <li data-en="Layer depths are only representative and do not show real pipe depths. The plant location is schematic.">Katman derinlikleri temsilîdir, gerçek boru derinliklerini göstermez. Tesisin konumu şematiktir.</li>
+    </ul>
+  </details>
+  <div class="kaynak" data-en="Source: the team's water infrastructure maps and report · İZSU · İBB (August 2025) · TMMOB ÇMO İzmir Water Reports">Kaynak: Çalışma ekibinin su altyapısı haritaları ve raporu · İZSU · İBB (Ağustos 2025) · TMMOB ÇMO İzmir Su Raporları</div>
+</section>
+
+<div id="kontroller">
+  <div class="grup">
+    <button id="b-yak" type="button" aria-label="Yakınlaştır" data-en-aria-label="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Zoom in">Yakınlaştır</span></button>
+    <button id="b-uzak" type="button" aria-label="Uzaklaştır" data-en-aria-label="Zoom out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Zoom out">Uzaklaştır</span></button>
+  </div>
+  <div class="grup">
+    <button id="b-kuzey" class="pusula" type="button" aria-label="Kuzeyi yukarı al" data-en-aria-label="Turn north up"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="n" d="M12 2.5l3.6 9.5H8.4z"/><path d="M12 21.5l-3.6-9.5h7.2z" fill="#5d6b7d"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="North up">Kuzey yukarı</span></button>
+  </div>
+  <div class="grup ikinci">
+    <button id="b-reset" type="button" aria-label="Genel görünüm" data-en-aria-label="Overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7M6 10v10h12V10"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Overview">Genel görünüm</span></button>
+    <button id="b-side" type="button" aria-label="Kesit görünümü" data-en-aria-label="Section view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Section view">Kesit görünümü</span></button>
+    <button id="b-spin" type="button" aria-pressed="false" aria-label="Döndür" data-en-aria-label="Rotate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Rotate slowly">Yavaşça döndür</span></button>
+  </div>
+</div>
+<div id="olcek" aria-hidden="true"><b>1 km</b><i></i></div>
+
+<section id="tour" class="card" aria-label="Gezinti" data-en-aria-label="Guided tour">
+  <div class="row">
+    <h3 id="t-title"></h3>
+    <div class="dots" id="t-dots"></div>
+  </div>
+  <p id="t-text" aria-live="polite"></p>
+  <div class="ilerleme-cubugu" aria-hidden="true"><span></span></div>
+  <div class="row">
+    <button class="tbtn primary" id="t-play" type="button"></button>
+    <button class="tbtn" id="t-prev" type="button" aria-label="Önceki durak" data-en-aria-label="Previous stop">◀</button>
+    <button class="tbtn" id="t-next" type="button" aria-label="Sonraki durak" data-en-aria-label="Next stop">▶</button>
+    <span style="flex:1"></span>
+    <span class="kicker" id="t-step" style="color:var(--muted)"></span>
+  </div>
+</section>
+
+<div id="yukleniyor">
+  <div class="yk">
+    <div class="kicker" data-en="Güzelbahçe · 3D model">Güzelbahçe · 3B model</div>
+    <h2 data-en="Underground networks">Yer altı ağları</h2>
+    <div class="cubuk"><span></span></div>
+    <p class="sub" data-en="Preparing the model…">Model hazırlanıyor…</p>
+  </div>
+</div>
+
+<div id="yardim" hidden role="dialog" aria-modal="true" aria-labelledby="yardim-baslik">
+  <div class="kutu">
+    <h2 id="yardim-baslik" data-en="Controls">Kontroller</h2>
+    <dl>
+      <dt data-en="Drag">Sürükle</dt><dd data-en="Rotate the model">Modeli döndür</dd>
+      <dt data-en="Right-click / Shift + drag">Sağ tık / Shift + sürükle</dt><dd data-en="Move the view">Görünümü kaydır</dd>
+      <dt data-en="Wheel · pinch · + −">Tekerlek · iki parmak · + −</dt><dd data-en="Zoom in / out">Yakınlaştır / uzaklaştır</dd>
+      <dt>← →</dt><dd data-en="Previous / next tour stop">Gezintide önceki / sonraki durak</dd>
+      <dt data-en="Space">Boşluk</dt><dd data-en="Start / pause the tour">Gezintiyi başlat / duraklat</dd>
+      <dt>F</dt><dd data-en="Full screen">Tam ekran</dd>
+      <dt>?</dt><dd data-en="Show this window">Bu pencereyi aç</dd>
+    </dl>
+    <div class="alt"><button class="tbtn primary" type="button" data-kapat data-en="OK">Tamam</button></div>
+  </div>
+</div>
+
+<div id="nogl" hidden><div><p data-en="This browser does not support WebGL2. Please use an up-to-date Chrome, Edge, Firefox or Safari to see the 3D model.">Bu tarayıcı WebGL2 desteklemiyor. 3B modeli görmek için güncel bir Chrome, Edge, Firefox ya da Safari kullanın.</p><p><a href="atiksu.html" data-en="See the wastewater data on the portal →">Atık su verilerini portalda görün →</a></p></div></div>
+
+<script src="3b/motor.js"></script>
+<script src="3b/zemin.js"></script>
+<script src="3b/su-aglari-veri.js"></script>
+<script src="3b/su-aglari.js"></script>
+</body>
+</html>

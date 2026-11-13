@@ -21,6 +21,8 @@
 | [İZSU Su Kaynakları](izsu.html) | Baraj durumu, günlük su üretimi, su kayıpları, Çamlı Barajı |
 | [Atık Su](atiksu.html) | Güneybatı arıtma tesisi, kapasite kullanımı, 75. Yıl Bulvarı altyapısı, Körfez ölçümleri |
 | [Katı Atık](kati-atik.html) | Atık bileşenleri, ayrı toplama, araç ve personel, maliyet ve tarife |
+| [3B: Yer altı ağları](3b-su-aglari.html) | İçme suyu, yağmur suyu ve atık su hatlarının etkileşimli 3B modeli; arıtma tesisi kapasite kullanımı |
+| [3B: Erişim boşlukları](3b-erisim.html) | Durağa ve çöp konteynerine uzak kalan yerleşim alanlarının 3B analizi |
 | [Planlanan Projeler](planlanan-projeler.html) | Planlanan ulaşım projeleri |
 | [İşbirliklerimiz](isbirlikleri.html) | İşbirlikleri |
 | [Güzelbahçe Raporu](Guzelbahce_Rapor.html) | Güzelbahçe ulaşım analizi raporu |
@@ -44,4 +46,5 @@ Herhangi bir kurulum gerekmez. `index.html` dosyasını tarayıcıda açmanız y
 - `*.html`: portal sayfaları
 - `js/`: her sayfanın grafik verileri ve ayarları
 - `styles.css`: ortak tasarım
+- `3b/`: 3B modellerin ortak motoru (`motor.js`), görünümü (`ortak.css`), zemin haritası ve verileri (WebGL2, harici kütüphane yok)
 - `_tools/`: sayfaları ve Word raporunu üretmek ya da güncellemek için kullanılan Node.js yardımcı scriptleri (`npm install` sonrası çalışır)
