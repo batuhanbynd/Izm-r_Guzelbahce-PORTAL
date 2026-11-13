@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>3B Erişim Boşlukları | BAS PORTAL</title>
+<meta name="m3-baslik-en" content="3D Access Gaps | BAS PORTAL">
+<meta name="description" content="Güzelbahçe'de ESHOT durağına ve çöp konteynerine uzak kalan yerleşim alanlarının etkileşimli 3B analizi.">
+<meta name="theme-color" content="#0b0f14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="3b/ortak.css">
+</head>
+<body class="erisim lejantli">
+
+<canvas id="gl" tabindex="0" aria-label="Güzelbahçe erişim analizinin 3B modeli" data-en-aria-label="3D model of the Güzelbahçe access analysis"></canvas>
+<div class="vignette"></div>
+<div id="labels"></div>
+
+<header class="ust">
+  <a class="marka" href="index.html" aria-label="BAS PORTAL'a dön" data-en-aria-label="Back to BAS PORTAL"><span class="ok" aria-hidden="true">←</span><span class="cizgi" aria-hidden="true"></span><span class="yazi">BAS PORTAL</span></a>
+  <nav class="sekmeler" aria-label="3B modeller" data-en-aria-label="3D models">
+    <a href="3b-su-aglari.html"><i class="nokta" style="--c:#38bdf8" aria-hidden="true"></i><span class="uzun" data-en="Underground networks">Yer altı ağları</span><span class="kisa" data-en="Networks">Su ağları</span></a>
+    <a href="3b-erisim.html" aria-current="page"><i class="nokta" style="--c:#ef4b3f" aria-hidden="true"></i><span class="uzun" data-en="Access gaps">Erişim boşlukları</span><span class="kisa" data-en="Access">Erişim</span></a>
+  </nav>
+  <div class="ust-sag">
+    <button class="ust-btn yardim-btn" id="b-yardim" type="button"><span aria-hidden="true">?</span> <span data-en="Controls">Kontroller</span></button>
+    <div class="dil" role="group" aria-label="Dil / Language"><button type="button" data-dil="tr" lang="tr" aria-pressed="true">TR</button><button type="button" data-dil="en" lang="en" aria-pressed="false">EN</button></div>
+    <button class="ust-btn" id="b-tam" type="button" aria-pressed="false" aria-label="Tam ekran" data-en-aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+</header>
+
+<section id="panel" class="card" aria-label="Analiz ayarları" data-en-aria-label="Analysis settings">
+  <div>
+    <div class="kicker" data-en="Güzelbahçe · Transport and infrastructure">Güzelbahçe · Ulaşım ve altyapı</div>
+    <h1 data-en="Hard-to-reach areas">Erişimi zor bölgeler</h1>
+    <p class="sub" data-en="Each column is a 50 × 50 m settlement cell. Its height shows how far the cell is beyond the chosen threshold.">Her sütun 50 × 50 m'lik bir yerleşim hücresi. Yükseklik, hücrenin seçilen eşiği ne kadar aştığını gösterir.</p>
+  </div>
+  <div class="seg" role="group" aria-label="Analiz türü" data-en-aria-label="Type of analysis">
+    <button id="m-transit" type="button" aria-pressed="true" data-en="Transport">Ulaşım</button>
+    <button id="m-cont" type="button" aria-pressed="false" data-en="Containers">Konteyner</button>
+    <button id="m-both" type="button" aria-pressed="false" data-en="Both">İkisi birden</button>
+  </div>
+  <div class="chips" id="lineopt" role="group" aria-label="Hangi hatlar" data-en-aria-label="Which lines">
+    <button id="l-all" type="button" aria-pressed="true" data-en="All 6 lines">6 hattın tümü</button>
+    <button id="l-freq" type="button" aria-pressed="false" data-en="Frequent lines only · 8, 82, 684">Sadece sık hatlar · 8, 82, 684</button>
+  </div>
+  <div class="ctl" id="ctl-t">
+    <div class="ctl-head"><label for="t-trans" data-en="Walking threshold to a stop">Durağa yürüme eşiği</label><output id="o-trans">400 m</output></div>
+    <input id="t-trans" type="range" min="200" max="800" step="50" value="400">
+  </div>
+  <div class="ctl" id="ctl-c" hidden>
+    <div class="ctl-head"><label for="t-cont" data-en="Walking threshold to a container">Konteynere yürüme eşiği</label><output id="o-cont">100 m</output></div>
+    <input id="t-cont" type="range" min="50" max="300" step="25" value="100">
+  </div>
+  <div class="stat" aria-live="polite">
+    <div class="big" id="s-pct"></div>
+    <p id="s-txt"></p>
+    <small id="s-km"></small>
+  </div>
+  <button class="tbtn" id="more" type="button" data-en="Areas and method">Bölgeler ve yöntem</button>
+  <div class="zones" id="zones"><h2 data-en="Key areas · click one">Öne çıkan bölgeler · tıklayın</h2></div>
+  <details>
+    <summary data-en="Method and limits">Yöntem ve sınırlar</summary>
+    <ul>
+      <li data-en="The settlement area was taken from the team's urban road network map: every 50 m cell that a road passes through counts as settled.">Yerleşim alanı, çalışma ekibinin kentsel yol ağı haritasından çıkarıldı: yol geçen her 50 m'lik hücre yerleşim sayıldı.</li>
+      <li data-en="Stops were taken from the centres of the 400 m catchment circles on the combined line map (6 ESHOT lines). Line 8 uses its own map.">Duraklar, birleşik hat haritasındaki 400 m erişim dairelerinin merkezlerinden alındı (6 ESHOT hattı). Hat 8 için kendi haritası kullanıldı.</li>
+      <li data-en="Containers were digitised from the team's waste container map.">Konteynerler, ekibin çöp konteyneri haritasından sayısallaştırıldı.</li>
+      <li data-en="Distances are straight-line. The real walking distance is longer because of slopes and winding roads.">Mesafeler kuş uçuşu. Gerçek yürüme mesafesi yokuş ve yol kıvrımlarıyla daha uzun olur.</li>
+      <li data-en="The maps were aligned on shared points (error about 10 m). The study area boundary is approximate. The Kara Harp Okulu campus and the O-32 motorway corridor are outside the analysis.">Haritalar ortak noktalardan çakıştırıldı (sapma yaklaşık 10 m). Çalışma alanı sınırı yaklaşık. Kara Harp Okulu yerleşkesi ve O-32 otoyolu koridoru analiz dışında.</li>
+      <li data-en="Payamlı, Küçükkaya and the southern villages are outside the road data.">Payamlı, Küçükkaya ve güney köyleri yol verisinin kapsamı dışında kaldı.</li>
+    </ul>
+  </details>
+  <div class="kaynak" data-en="Source: the team's transport and solid waste maps and report · ESHOT · Güzelbahçe Belediyesi Temizlik İşleri. Values are approximate.">Kaynak: Çalışma ekibinin ulaşım ve katı atık haritaları ve raporu · ESHOT · Güzelbahçe Belediyesi Temizlik İşleri. Değerler yaklaşıktır.</div>
+</section>
+
+<div id="kontroller">
+  <div class="grup">
+    <button id="b-yak" type="button" aria-label="Yakınlaştır" data-en-aria-label="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Zoom in">Yakınlaştır</span></button>
+    <button id="b-uzak" type="button" aria-label="Uzaklaştır" data-en-aria-label="Zoom out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Zoom out">Uzaklaştır</span></button>
+  </div>
+  <div class="grup">
+    <button id="b-kuzey" class="pusula" type="button" aria-label="Kuzeyi yukarı al" data-en-aria-label="Turn north up"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="n" d="M12 2.5l3.6 9.5H8.4z"/><path d="M12 21.5l-3.6-9.5h7.2z" fill="#5d6b7d"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="North up">Kuzey yukarı</span></button>
+  </div>
+  <div class="grup ikinci">
+    <button id="b-reset" type="button" aria-label="Genel görünüm" data-en-aria-label="Overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7M6 10v10h12V10"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Overview">Genel görünüm</span></button>
+    <button id="b-top" type="button" aria-label="Üstten görünüm" data-en-aria-label="Top view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16M12 4v16"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Top view">Üstten görünüm</span></button>
+    <button id="b-spin" type="button" aria-pressed="false" aria-label="Döndür" data-en-aria-label="Rotate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v5h-5"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Rotate slowly">Yavaşça döndür</span></button>
+  </div>
+</div>
+<div id="olcek" aria-hidden="true"><b>1 km</b><i></i></div>
+
+<section id="legend" class="card" aria-label="Lejant" data-en-aria-label="Legend">
+  <h2 data-en="Legend">Lejant</h2>
+  <div id="lg-ramp">
+    <div class="ramp"></div>
+    <div class="ramp-l"><span id="lg-esik"></span><span>2×</span><span>3×+</span></div>
+  </div>
+  <div class="key" id="lg-key"></div>
+</section>
+
+<section id="tour" class="card" aria-label="Gezinti" data-en-aria-label="Guided tour">
+  <div class="row">
+    <h3 id="t-title"></h3>
+    <div class="dots" id="t-dots"></div>
+  </div>
+  <p id="t-text" aria-live="polite"></p>
+  <div class="ilerleme-cubugu" aria-hidden="true"><span></span></div>
+  <div class="row">
+    <button class="tbtn primary" id="t-play" type="button"></button>
+    <button class="tbtn" id="t-prev" type="button" aria-label="Önceki durak" data-en-aria-label="Previous stop">◀</button>
+    <button class="tbtn" id="t-next" type="button" aria-label="Sonraki durak" data-en-aria-label="Next stop">▶</button>
+    <span style="flex:1"></span>
+    <span class="kicker" id="t-step" style="color:var(--muted)"></span>
+  </div>
+</section>
+<div id="tip" hidden></div>
+
+<div id="yukleniyor">
+  <div class="yk">
+    <div class="kicker" data-en="Güzelbahçe · 3D model">Güzelbahçe · 3B model</div>
+    <h2 data-en="Access gaps">Erişim boşlukları</h2>
+    <div class="cubuk"><span></span></div>
+    <p class="sub" data-en="Preparing the model…">Model hazırlanıyor…</p>
+  </div>
+</div>
+
+<div id="yardim" hidden role="dialog" aria-modal="true" aria-labelledby="yardim-baslik">
+  <div class="kutu">
+    <h2 id="yardim-baslik" data-en="Controls">Kontroller</h2>
+    <dl>
+      <dt data-en="Drag">Sürükle</dt><dd data-en="Rotate the model">Modeli döndür</dd>
+      <dt data-en="Right-click / Shift + drag">Sağ tık / Shift + sürükle</dt><dd data-en="Move the view">Görünümü kaydır</dd>
+      <dt data-en="Wheel · pinch · + −">Tekerlek · iki parmak · + −</dt><dd data-en="Zoom in / out">Yakınlaştır / uzaklaştır</dd>
+      <dt data-en="Hover">Üzerine gel</dt><dd data-en="Distances for a cell">Bir hücrenin mesafeleri</dd>
+      <dt>← →</dt><dd data-en="Previous / next tour stop">Gezintide önceki / sonraki durak</dd>
+      <dt data-en="Space">Boşluk</dt><dd data-en="Start / pause the tour">Gezintiyi başlat / duraklat</dd>
+      <dt>F</dt><dd data-en="Full screen">Tam ekran</dd>
+      <dt>?</dt><dd data-en="Show this window">Bu pencereyi aç</dd>
+    </dl>
+    <div class="alt"><button class="tbtn primary" type="button" data-kapat data-en="OK">Tamam</button></div>
+  </div>
+</div>
+
+<div id="nogl" hidden><div><p data-en="This browser does not support WebGL2. Please use an up-to-date Chrome, Edge, Firefox or Safari to see the 3D model.">Bu tarayıcı WebGL2 desteklemiyor. 3B modeli görmek için güncel bir Chrome, Edge, Firefox ya da Safari kullanın.</p><p><a href="eshot.html" data-en="See the ESHOT data on the portal →">ESHOT verilerini portalda görün →</a></p></div></div>
+
+<script src="3b/motor.js"></script>
+<script src="3b/zemin.js"></script>
+<script src="3b/erisim-veri.js"></script>
+<script src="3b/erisim.js"></script>
+</body>
+</html>
