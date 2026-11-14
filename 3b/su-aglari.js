@@ -1,7 +1,8 @@
 // =============================================
 // Güzelbahçe yer altı ağları: 3B model
-// Sokak haritası saydam bir zemin; altında içme suyu, yağmur suyu ve atık su ağları
-// temsilî derinliklerde. Veriler 3b/su-aglari-veri.js (NETS, LABELS) ve 3b/zemin.js (GROUND).
+// Sokak haritası gerçek arazinin üzerine serili saydam bir yüzey; altında içme suyu, yağmur suyu ve
+// atık su ağları araziyi izleyerek temsilî derinliklerde. Veriler: 3b/su-aglari-veri.js (NETS, LABELS),
+// 3b/su-aglari-cbs.js (CBS: atık su ve yağmur suyu hatları), 3b/arazi-veri.js (ARAZI), 3b/zemin.js (GROUND).
 // =============================================
 (() => {
 "use strict";
@@ -11,17 +12,17 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const W = NETS.W, H = NETS.H, HW = W / 2, HH = H / 2;
 const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
 
-// Katmanlar (yukarıdan aşağı). Veri anahtarları kaynak harita dosyalarını izler:
-// yoğun ağ ('rw' haritası) atık su, kısa parçalar ('ww' haritası) yağmur suyu olarak eşlenir (yöntem notu).
+// Katmanlar (yukarıdan aşağı). src: kapsama çerçevesinin (NETS.ext) anahtarı; seg: çizilen hat parçaları.
+// İçme suyu haritadan sayısallaştırıldı; atık su ve yağmur suyu ekibin CBS katmanlarından (ATIKSU, YAGMURSUYU) alındı.
 const LAYERS = [
-  { id: 'dw', src: 'dw', ad: ['İçme suyu', 'Drinking water'], col: hex('#38bdf8'), depth: -70, thick: 11, share: 54.1 },
-  { id: 'rw', src: 'ww', ad: ['Yağmur suyu', 'Rainwater'], col: hex('#34d399'), depth: -145, thick: 15, share: 4.1 },
-  { id: 'ww', src: 'rw', ad: ['Atık su', 'Wastewater'], col: hex('#d9822b'), depth: -220, thick: 13, share: 41.9 }
+  { id: 'dw', src: 'dw', seg: NETS.nets.dw, ad: ['İçme suyu', 'Drinking water'], col: hex('#38bdf8'), depth: -70, thick: 11, share: 54.1 },
+  { id: 'rw', src: 'ww', seg: CBS.yagmur, ad: ['Yağmur suyu', 'Rainwater'], col: hex('#34d399'), depth: -145, thick: 15, share: 4.1 },
+  { id: 'ww', src: 'rw', seg: CBS.atik, ad: ['Atık su', 'Wastewater'], col: hex('#d9822b'), depth: -220, thick: 13, share: 41.9 }
 ];
 const ad = L => t(L.ad[0], L.ad[1]);
 // Güneybatı AAT: kapasite 21.600 m³/gün; yıllık ortalama debinin kapasiteye oranı (hesap)
 const PLANT = { cap: 21600, years: [{ y: 2019, p: 108.2 }, { y: 2022, p: 94.6 }, { y: 2024, p: 100.0 }] };
-const S = { glass: 0.78, gap: 1, vis: { dw: true, rw: true, ww: true }, focus: null, year: 2024, showNew: false };
+const S = { glass: 0.78, gap: 1, kab: 1.5, vis: { dw: true, rw: true, ww: true }, focus: null, year: 2024, showNew: false };
 
 const cv = $('gl');
 const gl = cv.getContext('webgl2', { antialias: true, alpha: false, preserveDrawingBuffer: true });
@@ -31,11 +32,13 @@ const prog = (v, f) => M3.program(gl, v, f);
 const BG = [0.039, 0.055, 0.075];
 const FOG = `float d=length(vW-uCam);float f=1.-exp(-pow(d*uFog,1.6));`;
 // Boru parçaları: birim küp, x [0,1] boyunca, y/z [-.5,.5]
+// Borular araziyi izler: y = katman derinliği + arazi kotu × kabartma
 const pipeVS = `#version 300 es
 layout(location=0) in vec3 aPos;layout(location=1) in vec3 aNor;layout(location=2) in vec4 iSeg;
 uniform mat4 uVP;uniform float uY;uniform float uT;out vec3 vN;out vec3 vW;out float vX;
+${M3.araziGLSL}
 void main(){vec2 a=iSeg.xy,b=iSeg.zw;vec2 dv=b-a;float L=length(dv);vec2 dn=L>0.?dv/L:vec2(1,0);vec2 pn=vec2(-dn.y,dn.x);
- vec2 xz=a+dn*(aPos.x*(L+uT)-uT*.5)+pn*aPos.z*uT;vec3 p=vec3(xz.x,uY+aPos.y*uT,xz.y);vW=p;vX=aPos.x;
+ vec2 xz=a+dn*(aPos.x*(L+uT)-uT*.5)+pn*aPos.z*uT;vec3 p=vec3(xz.x,uY+araziY(xz)+aPos.y*uT,xz.y);vW=p;vX=aPos.x;
  vN=normalize(vec3(dn.x*aNor.x+pn.x*aNor.z,aNor.y,dn.y*aNor.x+pn.y*aNor.z));gl_Position=uVP*vec4(p,1.);}`;
 const litFS = `#version 300 es
 precision highp float;in vec3 vN;in vec3 vW;uniform vec3 uCol;uniform float uA;uniform float uEm;uniform vec3 uCam;uniform vec3 uBG;uniform float uFog;out vec4 o;
@@ -47,19 +50,30 @@ void main(){vec3 p=uO+aPos*uS;vW=p;vN=aNor;gl_Position=uVP*vec4(p,1.);}`;
 const planeVS = `#version 300 es
 layout(location=0) in vec2 aP;uniform mat4 uVP;uniform float uY;uniform vec4 uFrame;out vec2 vUV;out vec3 vW;
 void main(){vec3 p=vec3(aP.x,uY,aP.y);vW=p;vUV=(aP-uFrame.xy)/uFrame.zw;gl_Position=uVP*vec4(p,1.);}`;
+// Çerçeve dışındaki düz zemin (çerçeve içi arazi ağıyla çizilir)
 const groundFS = `#version 300 es
 precision highp float;in vec2 vUV;in vec3 vW;uniform sampler2D uT;uniform float uA;uniform vec3 uCam;uniform vec3 uBG;uniform float uFog;out vec4 o;
-void main(){vec3 outc=vec3(.06,.075,.095);bool inside=all(greaterThanEqual(vUV,vec2(0.)))&&all(lessThanEqual(vUV,vec2(1.)));
- vec3 c;float a=uA;if(inside){c=texture(uT,vUV).rgb;float lum=dot(c,vec3(.33));a=mix(uA,min(1.,uA+.35),smoothstep(.22,.4,lum));}
- else{vec2 g=abs(fract(vW.xz/500.)-.5);c=outc+step(.49,max(g.x,g.y))*.03;a=uA*.7;}
+void main(){vec3 outc=vec3(.06,.075,.095);bool inside=all(greaterThan(vUV,vec2(0.)))&&all(lessThan(vUV,vec2(1.)));if(inside)discard;
+ vec2 g=abs(fract(vW.xz/500.)-.5);vec3 c=outc+step(.49,max(g.x,g.y))*.03;float a=uA*.7;
+ ${FOG}o=vec4(mix(c,uBG,clamp(f,0.,.92)),a*(1.-clamp(f,0.,.92)*.5));}`;
+// Arazi yüzeyi: sokak haritası + kabartma gölgesi + eş yükselti eğrileri; saydamlık "zemin saydamlığı"ndan
+const terrFS = `#version 300 es
+precision highp float;in vec3 vW;in vec2 vUV;in vec3 vN;in vec4 vS;in float vH;in float vE;
+uniform sampler2D uT;uniform float uA;uniform vec3 uCam;uniform vec3 uBG;uniform float uFog;out vec4 o;
+${M3.araziRenk}
+void main(){vec3 tex=texture(uT,clamp(vUV,0.,1.)).rgb;vec3 c=araziRenk(tex,vN,vS,vH,vW,vE);
+ float lum=dot(tex,vec3(.33));float a=mix(uA,min(1.,uA+.35),smoothstep(.22,.4,lum));if(vE>.01)a=min(1.,uA*.9+.06);
  ${FOG}o=vec4(mix(c,uBG,clamp(f,0.,.92)),a*(1.-clamp(f,0.,.92)*.5));}`;
 const gridFS = `#version 300 es
 precision highp float;in vec2 vUV;in vec3 vW;uniform vec3 uCol;uniform float uA;uniform vec3 uCam;uniform vec3 uBG;uniform float uFog;out vec4 o;
 void main(){if(any(lessThan(vUV,vec2(0.)))||any(greaterThan(vUV,vec2(1.))))discard;vec2 g=abs(fract(vW.xz/250.)-.5);float l=step(.485,max(g.x,g.y));
  vec2 e=min(vUV,1.-vUV);float edge=1.-smoothstep(0.,.004,min(e.x,e.y));${FOG}
  o=vec4(uCol,(uA*.35+l*uA+edge*uA*2.)*(1.-clamp(f,0.,.9)));}`;
-const PP = prog(pipeVS, litFS), PM = prog(meshVS, litFS), PGd = prog(planeVS, groundFS), PGr = prog(planeVS, gridFS);
+const PP = prog(pipeVS, litFS), PM = prog(meshVS, litFS), PGd = prog(planeVS, groundFS), PGr = prog(M3.araziVS, gridFS), PT = prog(M3.araziVS, terrFS);
 const U = (p, n) => gl.getUniformLocation(p, n);
+const AR = M3.arazi(gl, () => { dirty = true; });
+let kabCur = S.kab, tyS = 0;
+const ZC = M3.zeminCerceve();
 
 // Küp (6 yüz, x [0,1])
 const cv6 = [], ci6 = [];
@@ -82,7 +96,7 @@ function segVAO(segs) {
   return { vao, n: segs.length };
 }
 LAYERS.forEach(L => {
-  L.vao = segVAO(NETS.nets[L.src]);
+  L.vao = segVAO(L.seg);
   const e = NETS.ext[L.src]; const s = [];
   for (let i = 0; i < e.length; i++) {
     const a = e[i], b = e[(i + 1) % e.length]; const n = Math.max(1, Math.round(Math.hypot(b[0] - a[0], b[1] - a[1]) / 60));
@@ -130,7 +144,9 @@ const cam = { tx: 0, tz: 0, ty: -80, dist: 9000, yaw: 0.32, pitch: 0.6 };
 const HOME = { tx: -300, tz: 150, ty: -80, dist: 9000, yaw: 0.32, pitch: 0.6 };
 function aspK() { const a = innerWidth / innerHeight; return a < 1.25 ? Math.min(2.2, 1.25 / a) : 1; }
 let fly = null, spin = false;
-function camPos() { const cp = Math.cos(cam.pitch); return [cam.tx + cam.dist * cp * Math.sin(cam.yaw), cam.ty + cam.dist * Math.sin(cam.pitch), cam.tz + cam.dist * cp * Math.cos(cam.yaw)]; }
+// Kamera hedefinin yüksekliği: cam.ty, hedefin altındaki arazi kotuna göre (yumuşatılmış tyS)
+const tyHedef = () => cam.ty + AR.yer(cam.tx, cam.tz) * kabCur;
+function camPos() { const cp = Math.cos(cam.pitch); return [cam.tx + cam.dist * cp * Math.sin(cam.yaw), tyS + cam.dist * Math.sin(cam.pitch), cam.tz + cam.dist * cp * Math.cos(cam.yaw)]; }
 const FOV = 40 * Math.PI / 180; let VP = null, EYE = null;
 function flyTo(tg, ms = 2600, olcekle = true) {
   if (reduce) ms = 1; tg = { ...tg }; if (tg.dist && olcekle) tg.dist *= aspK();
@@ -145,7 +161,7 @@ cv.addEventListener('pointerdown', e => { cv.setPointerCapture(e.pointerId); ptr
 const up = e => { ptrs.delete(e.pointerId); cv.classList.remove('drag'); };
 cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
 cv.addEventListener('contextmenu', e => e.preventDefault());
-function clampCam() { cam.tx = Math.max(-HW - 1500, Math.min(HW + 1800, cam.tx)); cam.tz = Math.max(-HH - 1000, Math.min(HH + 1000, cam.tz)); cam.dist = Math.max(600, Math.min(17000, cam.dist)); cam.pitch = Math.max(0.04, Math.min(1.45, cam.pitch)); }
+function clampCam() { cam.tx = Math.max(AR.x0, Math.min(AR.x1 + 1800, cam.tx)); cam.tz = Math.max(AR.z0, Math.min(AR.z1, cam.tz)); cam.dist = Math.max(600, Math.min(24000, cam.dist)); cam.pitch = Math.max(0.04, Math.min(1.45, cam.pitch)); }
 function pan(dx, dy) { const s = cam.dist * 0.0011, cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw); cam.tx -= (dx * cy + dy * sy) * s; cam.tz -= (-dx * sy + dy * cy) * s; clampCam(); }
 cv.addEventListener('pointermove', e => {
   const p = ptrs.get(e.pointerId); if (!p) return; const dx = e.clientX - p.x, dy = e.clientY - p.y;
@@ -157,7 +173,7 @@ cv.addEventListener('pointermove', e => {
   p.x = e.clientX; p.y = e.clientY; dirty = true;
 });
 cv.addEventListener('wheel', e => { e.preventDefault(); userTouched(); cam.dist *= Math.exp(e.deltaY * 0.0012); clampCam(); dirty = true; }, { passive: false });
-function zoomBy(k) { userTouched(); flyTo({ dist: Math.max(600, Math.min(17000, cam.dist * k)) }, 420, false); }
+function zoomBy(k) { userTouched(); flyTo({ dist: Math.max(600, Math.min(24000, cam.dist * k)) }, 420, false); }
 
 // ---------- etiketler
 const LB = $('labels'); const tags = [];
@@ -183,10 +199,12 @@ function project(x, y, z) {
   if (o[3] <= 0) return null; return [(o[0] / o[3] * .5 + .5) * innerWidth, (1 - (o[1] / o[3] * .5 + .5)) * innerHeight];
 }
 function placeTags() {
-  LAYERS.forEach((L, i) => { layTags[i].y = depthOf(L); layTags[i].on = S.vis[L.id] && gapCur > 0.35; });
-  mkPlant.y = TANK.h + 120; mkWell.y = depthOf(LAYERS[0]); mkBalc.y = depthOf(LAYERS[0]); mkBulv.y = 60;
+  const yer = (x, z) => AR.yer(x, z) * kabCur;
+  LAYERS.forEach((L, i) => { layTags[i].y = depthOf(L) + yer(HW - 10, 0); layTags[i].on = S.vis[L.id] && gapCur > 0.35; });
+  mkPlant.y = TANK.h + 120; mkWell.y = depthOf(LAYERS[0]) + yer(mkWell.x, HH - 10); mkBalc.y = depthOf(LAYERS[0]) + yer(HW - 10, mkBalc.z); mkBulv.y = 60 + yer(mkBulv.x, mkBulv.z);
   for (const tg of tags) {
-    const p = project(tg.x, tg.y, tg.z); if (!p) { tg.el.style.display = 'none'; continue; }
+    const ty = tg.kind === 'name' ? yer(tg.x, tg.z) + 25 : tg.y;
+    const p = project(tg.x, ty, tg.z); if (!p) { tg.el.style.display = 'none'; continue; }
     tg.el.style.display = ''; tg.el.style.left = p[0] + 'px'; tg.el.style.top = p[1] + 'px';
     let op = 1; if (tg.kind === 'layer') op = tg.on ? 1 : 0;
     if (tg.kind === 'mk') {
@@ -197,7 +215,7 @@ function placeTags() {
     if (tg.kind === 'name') op = 0.35 + glassCur * 0.65;
     tg.el.style.opacity = op;
   }
-  M3.haritaGostergeleri(project, [cam.tx, 0, cam.tz], cam.yaw);
+  M3.haritaGostergeleri(project, [cam.tx, tyS, cam.tz], cam.yaw);
 }
 
 // ---------- çizim
@@ -209,7 +227,9 @@ function frame(now) {
   const dt = Math.min(.05, (now - lastT) / 1000); lastT = now;
   if (fly) { const p = Math.min(1, (now - fly.t0) / fly.ms), e = ease(p); for (const k of ['tx', 'tz', 'dist', 'yaw', 'pitch', 'ty']) if (fly.to[k] !== undefined) cam[k] = fly.from[k] + (fly.to[k] - fly.from[k]) * e; if (p >= 1) fly = null; dirty = true; }
   if (spin && !fly) { cam.yaw += dt * 0.06; dirty = true; }
-  const pv = [glassCur, gapCur, tankLevel]; glassCur = approach(glassCur, S.glass, dt, 4); gapCur = approach(gapCur, S.gap, dt, 4);
+  const pv = [glassCur, gapCur, tankLevel, kabCur, tyS]; glassCur = approach(glassCur, S.glass, dt, 4); gapCur = approach(gapCur, S.gap, dt, 4);
+  kabCur = approach(kabCur, S.kab, dt, 4); tyS = approach(tyS, tyHedef(), dt, 6);
+  if (Math.abs(pv[3] - kabCur) > 1e-4 || Math.abs(pv[4] - tyS) > 0.05) dirty = true;
   const yr = PLANT.years.find(y => y.y === S.year); tankTgt = yr.p / 100; tankLevel = approach(tankLevel, tankTgt, dt, 2.5);
   LAYERS.forEach(L => {
     L.tgt = !S.vis[L.id] ? 0 : (S.focus && S.focus !== L.id && S.focus !== 'plant' ? 0.18 : 1);
@@ -221,11 +241,12 @@ function frame(now) {
   requestAnimationFrame(frame);
 }
 function setCommon(p) { gl.uniformMatrix4fv(U(p, 'uVP'), false, VP); gl.uniform3f(U(p, 'uCam'), ...EYE); gl.uniform3f(U(p, 'uBG'), ...BG); gl.uniform1f(U(p, 'uFog'), 1 / (cam.dist * 2.8)); }
+function setArazi(p, yo, etek) { AR.bagla(gl, p, 1, kabCur); gl.uniform4f(U(p, 'uFrame'), ...ZC); gl.uniform1f(U(p, 'uYo'), yo || 0); gl.uniform1f(U(p, 'uEtek'), etek || 0); }
 function draw() {
-  EYE = camPos(); VP = M3.mul(M3.persp(FOV, cv.width / cv.height, 20, 80000), M3.lookAt(EYE, [cam.tx, cam.ty, cam.tz], [0, 1, 0]));
+  EYE = camPos(); VP = M3.mul(M3.persp(FOV, cv.width / cv.height, 20, 80000), M3.lookAt(EYE, [cam.tx, tyS, cam.tz], [0, 1, 0]));
   gl.clearColor(...BG, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); gl.enable(gl.DEPTH_TEST); gl.disable(gl.BLEND); gl.depthMask(true);
   // borular
-  gl.useProgram(PP); setCommon(PP);
+  gl.useProgram(PP); setCommon(PP); AR.bagla(gl, PP, 1, kabCur);
   for (const L of LAYERS) {
     if (L.cur < 0.02) continue; gl.uniform1f(U(PP, 'uY'), depthOf(L)); gl.uniform1f(U(PP, 'uT'), L.thick);
     const k = 0.25 + 0.75 * L.cur; gl.uniform3f(U(PP, 'uCol'), L.col[0] * k, L.col[1] * k, L.col[2] * k); gl.uniform1f(U(PP, 'uA'), 1); gl.uniform1f(U(PP, 'uEm'), L.cur > 0.9 ? 0.35 : 0.);
@@ -249,10 +270,18 @@ function draw() {
   }
   // saydam katmanlar: ızgaralar, zemin, hazne kabuğu
   gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); gl.depthMask(false);
-  gl.useProgram(PGr); setCommon(PGr); gl.bindVertexArray(QUAD); gl.uniform4f(U(PGr, 'uFrame'), -HW, -HH, W, H);
-  for (const L of LAYERS) { if (L.cur < 0.02 || gapCur < 0.2) continue; gl.uniform1f(U(PGr, 'uY'), depthOf(L) - L.thick); gl.uniform3f(U(PGr, 'uCol'), ...L.col); gl.uniform1f(U(PGr, 'uA'), 0.05 * L.cur); gl.drawArrays(gl.TRIANGLES, 0, 6); }
-  gl.useProgram(PGd); setCommon(PGd); gl.uniform4f(U(PGd, 'uFrame'), -HW, -HH, W, H); gl.uniform1f(U(PGd, 'uY'), 0); gl.uniform1f(U(PGd, 'uA'), 1 - glassCur * 0.92);
-  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texReady ? tex : null); gl.uniform1i(U(PGd, 'uT'), 0); gl.drawArrays(gl.TRIANGLES, 0, 6);
+  // katman ızgaraları: arazi yüzeyinin katman derinliğine kaydırılmış kopyaları
+  gl.useProgram(PGr); setCommon(PGr); gl.bindVertexArray(AR.vao);
+  for (const L of LAYERS) { if (L.cur < 0.02 || gapCur < 0.2) continue; setArazi(PGr, depthOf(L) - L.thick); gl.uniform3f(U(PGr, 'uCol'), ...L.col); gl.uniform1f(U(PGr, 'uA'), 0.05 * L.cur); gl.drawElements(gl.TRIANGLES, AR.nYuzey, gl.UNSIGNED_INT, 0); }
+  const zA = 1 - glassCur * 0.92;
+  gl.useProgram(PGd); setCommon(PGd); gl.bindVertexArray(QUAD); gl.uniform4f(U(PGd, 'uFrame'), ...ZC); gl.uniform1f(U(PGd, 'uY'), 0); gl.uniform1f(U(PGd, 'uA'), zA);
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  // arazi: önce yalnız derinlik (öndeki tepe arkadakini örtsün), sonra saydam renk
+  const etek = Math.min(0, depthOf(LAYERS[2]) - 60);
+  gl.useProgram(PT); setCommon(PT); setArazi(PT, 0, etek); gl.bindVertexArray(AR.vao);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texReady ? tex : null); gl.uniform1i(U(PT, 'uT'), 0); gl.uniform1f(U(PT, 'uA'), zA);
+  gl.colorMask(false, false, false, false); gl.depthMask(true); gl.drawElements(gl.TRIANGLES, AR.nTum, gl.UNSIGNED_INT, 0);
+  gl.colorMask(true, true, true, true); gl.depthMask(false); gl.depthFunc(gl.LEQUAL); gl.drawElements(gl.TRIANGLES, AR.nTum, gl.UNSIGNED_INT, 0); gl.depthFunc(gl.LESS);
   if (plantOn) { gl.useProgram(PM); setCommon(PM); gl.bindVertexArray(CYL.vao); gl.uniform3f(U(PM, 'uO'), TANK.x, 0, TANK.z); gl.uniform3f(U(PM, 'uS'), TANK.r, TANK.h, TANK.r); gl.uniform3f(U(PM, 'uCol'), .75, .82, .9); gl.uniform1f(U(PM, 'uA'), .16); gl.uniform1f(U(PM, 'uEm'), 0.); gl.drawElements(gl.TRIANGLES, CYL.n, gl.UNSIGNED_SHORT, 0); }
   gl.depthMask(true); gl.disable(gl.BLEND); gl.bindVertexArray(null);
   placeTags();
@@ -263,11 +292,13 @@ function syncUI() {
   LAYERS.forEach(L => { $('ly-' + L.id).setAttribute('aria-pressed', S.vis[L.id]); $('pay-' + L.id).textContent = pct(L.share, 1); });
   $('c-glass').value = Math.round(S.glass * 100); $('o-glass').textContent = pct(Math.round(S.glass * 100), 0);
   $('c-gap').value = Math.round(S.gap * 100); $('o-gap').textContent = fmt(S.gap, 1) + '×';
+  $('c-kab').value = Math.round(S.kab * 100); $('o-kab').textContent = fmt(S.kab, 1) + '×';
   document.querySelectorAll('.yr').forEach(b => b.setAttribute('aria-pressed', +b.dataset.y === S.year)); dirty = true;
 }
 LAYERS.forEach(L => { $('ly-' + L.id).onclick = () => { S.vis[L.id] = !S.vis[L.id]; S.focus = null; syncUI(); }; });
 $('c-glass').oninput = e => { S.glass = e.target.value / 100; syncUI(); };
 $('c-gap').oninput = e => { S.gap = e.target.value / 100; syncUI(); };
+$('c-kab').oninput = e => { S.kab = e.target.value / 100; syncUI(); };
 $('more').onclick = () => $('panel').classList.toggle('open');
 // Tesis çubukları (kapasiteye oran, hesap)
 const BOX = $('bars'), MAXP = 120;

@@ -1,7 +1,8 @@
 // =============================================
 // Güzelbahçe erişim boşlukları: 3B model
 // 50 m'lik yerleşim hücreleri; sütun yüksekliği hücrenin seçilen yürüme eşiğini ne kadar aştığını gösterir.
-// Veriler 3b/erisim-veri.js (DATA) ve 3b/zemin.js (GROUND).
+// Sütunlar, duraklar ve konteynerler gerçek arazinin üzerinde durur.
+// Veriler 3b/erisim-veri.js (DATA), 3b/arazi-veri.js (ARAZI) ve 3b/zemin.js (GROUND).
 // =============================================
 (() => {
 "use strict";
@@ -27,7 +28,7 @@ const zAd = z => t(z.ad[0], z.ad[1]);
 ZONES.forEach(z => { z.cells = []; cells.forEach((c, k) => { if (Math.hypot(c.x - z.c[0], c.z - z.c[1]) <= z.r) z.cells.push(k); }); });
 
 // ---------- durum
-const S = { mode: 'transit', lines: 'all', tT: 400, tC: 100 };
+const S = { mode: 'transit', lines: 'all', tT: 400, tC: 100, kab: 1.5 };
 function dT(c) { return S.lines === 'all' ? c.da : c.df; }
 function ratio(d, th) { return Math.max(0, (d - th) / th); }
 function cellState(c) {
@@ -56,7 +57,11 @@ const boxVS = `#version 300 es
 layout(location=0) in vec3 aPos;layout(location=1) in vec3 aNor;
 layout(location=2) in vec4 iRect;layout(location=3) in float iH;layout(location=4) in vec4 iCol;
 uniform mat4 uVP;out vec3 vN;out vec4 vCol;out float vY;out vec3 vW;out float vH;
-void main(){vec3 p=vec3(iRect.x+aPos.x*iRect.z,aPos.y*iH,iRect.y+aPos.z*iRect.w);vW=p;vN=aNor;vCol=iCol;vY=aPos.y;vH=iH;gl_Position=uVP*vec4(p,1.);}`;
+${M3.araziGLSL}
+void main(){vec2 c=iRect.xy;vec2 hs=iRect.zw*.5;
+ float top=max(max(araziY(c-hs),araziY(c+hs)),max(araziY(c+vec2(hs.x,-hs.y)),araziY(c+vec2(-hs.x,hs.y))));
+ vec2 xz=vec2(c.x+aPos.x*iRect.z,c.y+aPos.z*iRect.w);float y=aPos.y>.5?top+iH:araziY(xz)-2.;
+ vec3 p=vec3(xz.x,y,xz.y);vW=p;vN=aNor;vCol=iCol;vY=aPos.y;vH=iH;gl_Position=uVP*vec4(p,1.);}`;
 const boxFS = `#version 300 es
 precision highp float;in vec3 vN;in vec4 vCol;in float vY;in vec3 vW;in float vH;
 uniform vec3 uCam;uniform vec3 uBG;uniform float uFog;out vec4 o;
@@ -71,13 +76,22 @@ layout(location=0) in vec2 aP;uniform mat4 uVP;uniform vec4 uFrame;out vec2 vUV;
 void main(){vec3 p=vec3(aP.x,0.,aP.y);vW=p;vUV=(aP-uFrame.xy)/uFrame.zw;gl_Position=uVP*vec4(p,1.);}`;
 const gFS = `#version 300 es
 precision highp float;in vec2 vUV;in vec3 vW;uniform sampler2D uT;uniform vec3 uCam;uniform vec3 uBG;uniform float uFog;out vec4 o;
-void main(){vec3 out_c=vec3(.067,.08,.1);vec3 c;
-bool inside=all(greaterThanEqual(vUV,vec2(0.)))&&all(lessThanEqual(vUV,vec2(1.)));
-if(inside){c=texture(uT,vUV).rgb;}else{vec2 g=abs(fract(vW.xz/500.)-.5);float l=step(.49,max(g.x,g.y));c=out_c+l*.025;}
-vec2 e=min(vUV,1.-vUV);float edge=inside?smoothstep(0.,.012,min(e.x,e.y)*1.):0.;c=mix(out_c,c,inside?mix(.6,1.,edge):1.);
+void main(){vec3 out_c=vec3(.067,.08,.1);
+bool inside=all(greaterThan(vUV,vec2(0.)))&&all(lessThan(vUV,vec2(1.)));if(inside)discard;
+vec2 g=abs(fract(vW.xz/500.)-.5);float l=step(.49,max(g.x,g.y));vec3 c=out_c+l*.025;
 float d=length(vW-uCam);float f=1.-exp(-pow(d*uFog,1.6));o=vec4(mix(c,uBG,clamp(f,0.,.92)),1.);}`;
-const PB = M3.program(gl, boxVS, boxFS), PG = M3.program(gl, gVS, gFS);
+// Arazi yüzeyi (opak): sokak haritası + kabartma gölgesi + eş yükselti eğrileri
+const tFS = `#version 300 es
+precision highp float;in vec3 vW;in vec2 vUV;in vec3 vN;in vec4 vS;in float vH;in float vE;
+uniform sampler2D uT;uniform vec3 uCam;uniform vec3 uBG;uniform float uFog;out vec4 o;
+${M3.araziRenk}
+void main(){vec3 tex=texture(uT,clamp(vUV,0.,1.)).rgb;vec3 c=araziRenk(tex,vN,vS,vH,vW,vE);
+float d=length(vW-uCam);float f=1.-exp(-pow(d*uFog,1.6));o=vec4(mix(c,uBG,clamp(f,0.,.92)),1.);}`;
+const PB = M3.program(gl, boxVS, boxFS), PG = M3.program(gl, gVS, gFS), PT = M3.program(gl, M3.araziVS, tFS);
 const U = (p, n) => gl.getUniformLocation(p, n);
+const AR = M3.arazi(gl, () => { dirty = true; });
+let kabCur = S.kab, tyS = 0;
+const ZC = M3.zeminCerceve();
 // küp (tabansız)
 const cubeV = [], cubeI = [];
 function face(n, a, b, c, d) { const o = cubeV.length / 6; [a, b, c, d].forEach(v => cubeV.push(...v, ...n)); cubeI.push(o, o + 1, o + 2, o, o + 2, o + 3); }
@@ -106,7 +120,8 @@ function makeInst(n) {
 const IC = makeInst(N);
 cells.forEach((c, k) => { IC.rect.set([c.x, c.z, 42, 42], k * 4); });
 const hTgt = new Float32Array(N), cTgt = new Float32Array(N * 4);
-const stops = DATA.stops.map(s => ({ x: s[0] - HW, z: s[1] - HH, l: s[2] }));
+// Yalnızca model alanındaki duraklar çizilir (mesafeler veri dosyasında hazır, bundan etkilenmez)
+const stops = DATA.stops.filter(s => s[0] >= 0 && s[0] <= W && s[1] >= 0 && s[1] <= H).map(s => ({ x: s[0] - HW, z: s[1] - HH, l: s[2] }));
 const IS = makeInst(stops.length);
 const IK = makeInst(DATA.conts.length);
 DATA.conts.forEach((p, k) => { IK.rect.set([p[0] - HW, p[1] - HH, 11, 11], k * 4); IK.h[k] = 10; IK.col.set([0.56, 0.83, 1.0, 0], k * 4); }); IK.upload();
@@ -159,7 +174,9 @@ function stepAnim(dt) {
 // ---------- kamera
 const cam = { tx: 0, tz: 0, dist: 9800, yaw: 0.32, pitch: 0.78 };
 let fly = null, spin = false;
-function camPos() { const cp = Math.cos(cam.pitch); return [cam.tx + cam.dist * cp * Math.sin(cam.yaw), cam.dist * Math.sin(cam.pitch), cam.tz + cam.dist * cp * Math.cos(cam.yaw)]; }
+// Kamera hedefi, altındaki arazi kotunda (yumuşatılmış tyS)
+const tyHedef = () => AR.yer(cam.tx, cam.tz) * kabCur;
+function camPos() { const cp = Math.cos(cam.pitch); return [cam.tx + cam.dist * cp * Math.sin(cam.yaw), tyS + cam.dist * Math.sin(cam.pitch), cam.tz + cam.dist * cp * Math.cos(cam.yaw)]; }
 const FOV = 40 * Math.PI / 180; let VP = null, EYE = null;
 function aspK() { const a = innerWidth / innerHeight; return a < 1.25 ? Math.min(2.2, 1.25 / a) : 1; }
 function flyTo(tg, ms = 2600, olcekle = true) {
@@ -177,7 +194,7 @@ cv.addEventListener('pointerup', e => { ptrs.delete(e.pointerId); cv.classList.r
 cv.addEventListener('pointercancel', e => { ptrs.delete(e.pointerId); });
 cv.addEventListener('contextmenu', e => e.preventDefault());
 function pan(dx, dy) { const s = cam.dist * 0.0011; const cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw); cam.tx -= (dx * cy + dy * sy) * s; cam.tz -= (-dx * sy + dy * cy) * s; clampCam(); }
-function clampCam() { cam.tx = Math.max(-HW - 800, Math.min(HW + 800, cam.tx)); cam.tz = Math.max(-HH - 800, Math.min(HH + 800, cam.tz)); cam.dist = Math.max(700, Math.min(17000, cam.dist)); cam.pitch = Math.max(0.16, Math.min(1.45, cam.pitch)); }
+function clampCam() { cam.tx = Math.max(AR.x0, Math.min(AR.x1, cam.tx)); cam.tz = Math.max(AR.z0, Math.min(AR.z1, cam.tz)); cam.dist = Math.max(700, Math.min(24000, cam.dist)); cam.pitch = Math.max(0.16, Math.min(1.45, cam.pitch)); }
 cv.addEventListener('pointermove', e => {
   const p = ptrs.get(e.pointerId);
   if (!p) { hover(e.clientX, e.clientY); return; }
@@ -192,12 +209,16 @@ cv.addEventListener('pointermove', e => {
 });
 cv.addEventListener('wheel', e => { e.preventDefault(); userTouched(); cam.dist *= Math.exp(e.deltaY * 0.0012); clampCam(); dirty = true; }, { passive: false });
 cv.addEventListener('pointerleave', () => { $('tip').hidden = true; });
-function zoomBy(k) { userTouched(); flyTo({ dist: Math.max(700, Math.min(17000, cam.dist * k)) }, 420, false); }
+function zoomBy(k) { userTouched(); flyTo({ dist: Math.max(700, Math.min(24000, cam.dist * k)) }, 420, false); }
 function ray(mx, my) {
   const r = cv.getBoundingClientRect(); const nx = (mx - r.left) / r.width * 2 - 1, ny = 1 - (my - r.top) / r.height * 2;
-  const e = camPos(); const f = [cam.tx - e[0], -e[1], cam.tz - e[2]]; const fl = Math.hypot(...f); f.forEach((v, i) => f[i] = v / fl);
+  const e = camPos(); const f = [cam.tx - e[0], tyS - e[1], cam.tz - e[2]]; const fl = Math.hypot(...f); f.forEach((v, i) => f[i] = v / fl);
   let rt = [f[2], 0, -f[0]]; const rl = Math.hypot(...rt); rt = rt.map(v => -v / rl); const up = [rt[1] * f[2] - rt[2] * f[1], rt[2] * f[0] - rt[0] * f[2], rt[0] * f[1] - rt[1] * f[0]];
   const th = Math.tan(FOV / 2), asp = r.width / r.height; const d = [0, 1, 2].map(i => f[i] + rt[i] * nx * th * asp + up[i] * ny * th);
+  const dl = Math.hypot(...d); d.forEach((v, i) => d[i] = v / dl);
+  // arazi yüzeyiyle kesişim (çerçeve dışında y = 0 düzlemi)
+  const p = AR.isin(e, d, kabCur);
+  if (p && Math.abs(p[0]) <= HW && Math.abs(p[2]) <= HH) return [p[0], p[2]];
   if (d[1] >= 0) return null; const k = -e[1] / d[1]; return [e[0] + d[0] * k, e[2] + d[2] * k];
 }
 function hover(mx, my) {
@@ -229,9 +250,10 @@ function project(x, y, z) {
   if (o[3] <= 0) return null; return [(o[0] / o[3] * .5 + .5) * innerWidth, (1 - (o[1] / o[3] * .5 + .5)) * innerHeight, o[3]];
 }
 function placeLabels() {
-  labelEls.forEach(l => { const p = project(l.x, l.y, l.z); if (!p) { l.el.style.display = 'none'; return; } l.el.style.display = ''; l.el.style.left = p[0] + 'px'; l.el.style.top = p[1] + 'px'; });
-  zoneTags.forEach(zt => { const p = project(zt.x, zt.y, zt.zz); if (!p) { zt.el.style.display = 'none'; return; } zt.el.style.display = ''; zt.el.style.left = p[0] + 'px'; zt.el.style.top = p[1] + 'px'; zt.el.style.opacity = zt.on ? 1 : 0; });
-  M3.haritaGostergeleri(project, [cam.tx, 0, cam.tz], cam.yaw);
+  const yer = (x, z) => AR.yer(x, z) * kabCur;
+  labelEls.forEach(l => { const p = project(l.x, l.y + yer(l.x, l.z) + 25, l.z); if (!p) { l.el.style.display = 'none'; return; } l.el.style.display = ''; l.el.style.left = p[0] + 'px'; l.el.style.top = p[1] + 'px'; });
+  zoneTags.forEach(zt => { const p = project(zt.x, zt.y + yer(zt.x, zt.zz), zt.zz); if (!p) { zt.el.style.display = 'none'; return; } zt.el.style.display = ''; zt.el.style.left = p[0] + 'px'; zt.el.style.top = p[1] + 'px'; zt.el.style.opacity = zt.on ? 1 : 0; });
+  M3.haritaGostergeleri(project, [cam.tx, tyS, cam.tz], cam.yaw);
 }
 function showZone(id) { zoneTags.forEach(zt => zt.on = zt.z.id === id); dirty = true; }
 
@@ -244,18 +266,26 @@ function frame(now) {
   if (fly) { const p = Math.min(1, (now - fly.t0) / fly.ms), e = ease(p); for (const k of ['tx', 'tz', 'dist', 'yaw', 'pitch']) cam[k] = fly.from[k] + (fly.to[k] - fly.from[k]) * e; if (p >= 1) fly = null; dirty = true; }
   if (spin && !fly) { cam.yaw += dt * 0.06; dirty = true; }
   if (stepAnim(dt)) dirty = true;
+  const pk = kabCur, pt = tyS; kabCur = reduce ? S.kab : kabCur + (S.kab - kabCur) * Math.min(1, dt * 4); tyS = reduce ? tyHedef() : tyS + (tyHedef() - tyS) * Math.min(1, dt * 6);
+  if (Math.abs(pk - kabCur) > 1e-4 || Math.abs(pt - tyS) > 0.05) dirty = true;
   if (dirty) { draw(); dirty = false; }
   requestAnimationFrame(frame);
 }
 function draw() {
   const asp = cv.width / cv.height; EYE = camPos();
-  VP = M3.mul(M3.persp(FOV, asp, 20, 80000), M3.lookAt(EYE, [cam.tx, 0, cam.tz], [0, 1, 0]));
+  VP = M3.mul(M3.persp(FOV, asp, 20, 80000), M3.lookAt(EYE, [cam.tx, tyS, cam.tz], [0, 1, 0]));
   const fog = 1 / (cam.dist * 2.6);
   gl.clearColor(...BG, 1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); gl.enable(gl.DEPTH_TEST);
-  gl.useProgram(PG); gl.uniformMatrix4fv(U(PG, 'uVP'), false, VP); gl.uniform4f(U(PG, 'uFrame'), -HW, -HH, W, H); gl.uniform3f(U(PG, 'uCam'), ...EYE); gl.uniform3f(U(PG, 'uBG'), ...BG); gl.uniform1f(U(PG, 'uFog'), fog);
-  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texReady ? tex : null); gl.uniform1i(U(PG, 'uT'), 0);
+  // çerçeve dışı düz zemin
+  gl.useProgram(PG); gl.uniformMatrix4fv(U(PG, 'uVP'), false, VP); gl.uniform4f(U(PG, 'uFrame'), ...ZC); gl.uniform3f(U(PG, 'uCam'), ...EYE); gl.uniform3f(U(PG, 'uBG'), ...BG); gl.uniform1f(U(PG, 'uFog'), fog);
   gl.bindVertexArray(GQ); gl.drawArrays(gl.TRIANGLES, 0, 6);
+  // arazi (etek tabanı -60 m)
+  gl.useProgram(PT); gl.uniformMatrix4fv(U(PT, 'uVP'), false, VP); gl.uniform3f(U(PT, 'uCam'), ...EYE); gl.uniform3f(U(PT, 'uBG'), ...BG); gl.uniform1f(U(PT, 'uFog'), fog);
+  AR.bagla(gl, PT, 1, kabCur); gl.uniform4f(U(PT, 'uFrame'), ...ZC); gl.uniform1f(U(PT, 'uYo'), 0); gl.uniform1f(U(PT, 'uEtek'), -60);
+  gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texReady ? tex : null); gl.uniform1i(U(PT, 'uT'), 0);
+  gl.bindVertexArray(AR.vao); gl.drawElements(gl.TRIANGLES, AR.nTum, gl.UNSIGNED_INT, 0);
   gl.useProgram(PB); gl.uniformMatrix4fv(U(PB, 'uVP'), false, VP); gl.uniform3f(U(PB, 'uCam'), ...EYE); gl.uniform3f(U(PB, 'uBG'), ...BG); gl.uniform1f(U(PB, 'uFog'), fog);
+  AR.bagla(gl, PB, 1, kabCur);
   gl.enable(gl.POLYGON_OFFSET_FILL); gl.polygonOffset(-1, -1);
   gl.bindVertexArray(IC.vao); gl.drawElementsInstanced(gl.TRIANGLES, 30, gl.UNSIGNED_SHORT, 0, N);
   if (S.mode !== 'transit') { gl.bindVertexArray(IK.vao); gl.drawElementsInstanced(gl.TRIANGLES, 30, gl.UNSIGNED_SHORT, 0, IK.n); }
@@ -306,6 +336,7 @@ function apply() {
   setPressed(['m-transit', 'm-cont', 'm-both'], 'm-' + S.mode); setPressed(['l-all', 'l-freq'], 'l-' + S.lines);
   $('lineopt').hidden = S.mode === 'cont'; $('ctl-t').hidden = S.mode === 'cont'; $('ctl-c').hidden = S.mode === 'transit';
   $('t-trans').value = S.tT; $('t-cont').value = S.tC; $('o-trans').textContent = S.tT + ' m'; $('o-cont').textContent = S.tC + ' m';
+  $('c-kab').value = Math.round(S.kab * 100); $('o-kab').textContent = fmt(S.kab, 1) + '×';
   computeTargets(); renderStats(); legend();
 }
 $('m-transit').onclick = () => { S.mode = 'transit'; apply(); };
@@ -315,6 +346,7 @@ $('l-all').onclick = () => { S.lines = 'all'; apply(); };
 $('l-freq').onclick = () => { S.lines = 'freq'; apply(); };
 $('t-trans').oninput = e => { S.tT = +e.target.value; apply(); };
 $('t-cont').oninput = e => { S.tC = +e.target.value; apply(); };
+$('c-kab').oninput = e => { S.kab = e.target.value / 100; $('o-kab').textContent = fmt(S.kab, 1) + '×'; dirty = true; };
 $('b-reset').onclick = () => { stopTour(); showZone(null); flyTo(HOME); };
 $('b-top').onclick = () => { stopTour(); flyTo({ tx: -200, tz: 100, dist: 7600, yaw: 0, pitch: 1.45 }); };
 $('b-spin').onclick = () => { spin = !spin; $('b-spin').setAttribute('aria-pressed', spin); };

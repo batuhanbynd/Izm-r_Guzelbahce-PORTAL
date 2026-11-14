@@ -36,7 +36,7 @@
             if (!el.hasAttribute('data-tr')) el.setAttribute('data-tr', el.textContent);
             el.textContent = dil === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-tr');
         });
-        ['aria-label', 'title'].forEach(function (oz) {
+        ['aria-label', 'title', 'alt'].forEach(function (oz) {
             document.querySelectorAll('[data-en-' + oz + ']').forEach(function (el) {
                 if (!el.hasAttribute('data-tr-' + oz)) el.setAttribute('data-tr-' + oz, el.getAttribute(oz) || '');
                 el.setAttribute(oz, dil === 'en' ? el.getAttribute('data-en-' + oz) : el.getAttribute('data-tr-' + oz));

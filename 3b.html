@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Güzelbahçe 3B | BAS PORTAL</title>
+<meta name="m3-baslik-en" content="Güzelbahçe 3D | BAS PORTAL">
+<meta name="description" content="Güzelbahçe'nin etkileşimli 3B modelleri: gerçek arazi üzerinde binalar, yer altı boru ağları, erişim boşlukları, toplu taşıma hatları ve elektrik şebekesi.">
+<meta name="theme-color" content="#0a0e13">
+<meta property="og:title" content="Güzelbahçe 3B | BAS PORTAL">
+<meta property="og:description" content="Gerçek arazi üzerinde binalar, boru ağları, otobüs hatları ve elektrik şebekesi; beş etkileşimli 3B model.">
+<meta property="og:image" content="3b/gorseller/afis.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="3b/ortak.css">
+<link rel="stylesheet" href="3b/vitrin.css">
+</head>
+<body class="vitrin">
+
+<header class="ust">
+  <a class="marka" href="index.html" aria-label="BAS PORTAL'a dön" data-en-aria-label="Back to BAS PORTAL"><span class="ok" aria-hidden="true">←</span><span class="cizgi" aria-hidden="true"></span><span class="yazi">BAS PORTAL</span></a>
+  <nav class="sekmeler" aria-label="3B modeller" data-en-aria-label="3D models">
+    <a href="3b.html" aria-current="page"><i class="nokta" style="--c:#f39a3d" aria-hidden="true"></i><span class="uzun" data-en="All models">Tüm modeller</span><span class="kisa" data-en="All">Tümü</span></a>
+    <a href="3b-kent.html"><i class="nokta" style="--c:#e9c46a" aria-hidden="true"></i><span class="uzun" data-en="City model">Kent modeli</span><span class="kisa" data-en="City">Kent</span></a>
+    <a href="3b-su-aglari.html"><i class="nokta" style="--c:#38bdf8" aria-hidden="true"></i><span class="uzun" data-en="Underground networks">Yer altı ağları</span><span class="kisa" data-en="Networks">Su ağları</span></a>
+    <a href="3b-erisim.html"><i class="nokta" style="--c:#ef4b3f" aria-hidden="true"></i><span class="uzun" data-en="Access gaps">Erişim boşlukları</span><span class="kisa" data-en="Access">Erişim</span></a>
+    <a href="3b-ulasim.html"><i class="nokta" style="--c:#f472b6" aria-hidden="true"></i><span class="uzun" data-en="Public transport">Toplu taşıma</span><span class="kisa" data-en="Transit">Ulaşım</span></a>
+    <a href="3b-elektrik.html"><i class="nokta" style="--c:#facc15" aria-hidden="true"></i><span class="uzun" data-en="Electricity">Elektrik</span><span class="kisa" data-en="Power">Elektrik</span></a>
+  </nav>
+  <div class="ust-sag">
+    <div class="dil" role="group" aria-label="Dil / Language"><button type="button" data-dil="tr" lang="tr" aria-pressed="true">TR</button><button type="button" data-dil="en" lang="en" aria-pressed="false">EN</button></div>
+  </div>
+</header>
+
+<main>
+  <section class="v-hero" aria-labelledby="v-baslik">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="perde" aria-hidden="true"></div>
+    <div class="v-ic">
+      <div class="kicker" data-en="BAS PORTAL · Interactive 3D models">BAS PORTAL · Etkileşimli 3B modeller</div>
+      <h1 id="v-baslik"><span data-en="Güzelbahçe">Güzelbahçe</span><span class="vurgu" data-en="in 3D">3B</span></h1>
+      <p class="v-lead" data-en="The district's real terrain, its buildings, the pipe networks beneath them, bus lines and the power network, in five models you can turn, zoom and tour.">İlçenin gerçek arazisi, binaları, altındaki boru ağları, otobüs hatları ve elektrik şebekesi; döndürüp yakınlaşabileceğiniz, gezintiyle izleyebileceğiniz beş modelde.</p>
+      <div class="v-btns">
+        <a class="v-btn ana" href="3b-kent.html"><span data-en="Open the city model">Kent modelini aç</span> <span aria-hidden="true">→</span></a>
+        <a class="v-btn" href="#modeller"><span data-en="All 5 models">5 modelin tümü</span></a>
+      </div>
+      <div class="v-cipler">
+        <span class="v-cip"><i aria-hidden="true"></i><span data-en="Real terrain and buildings · 1:1000 base map">Gerçek arazi ve binalar · 1:1000 halihazır harita</span></span>
+        <span class="v-cip" style="--c:#38bdf8"><i aria-hidden="true"></i><span data-en="Runs in the browser, on phones too">Tarayıcıda çalışır, telefonda da açılır</span></span>
+        <span class="v-cip" style="--c:#34d399"><i aria-hidden="true"></i><span data-en="Guided tour · TR / EN">Gezinti modu · TR / EN</span></span>
+      </div>
+    </div>
+    <a class="v-asagi" href="#modeller" data-en="Models">Modeller</a>
+  </section>
+
+  <section class="v-bolum" id="modeller" aria-labelledby="m-baslik">
+    <div class="v-ic">
+      <div class="v-bolum-ust">
+        <div>
+          <div class="kicker" data-en="Five models">Beş model</div>
+          <h2 id="m-baslik" data-en="Explore the models">Modelleri keşfedin</h2>
+        </div>
+        <p data-en="Each model opens full screen. Drag to turn, use the wheel or two fingers to zoom, or start the guided tour.">Her model tam ekran açılır. Sürükleyerek döndürün, tekerlek ya da iki parmakla yakınlaşın veya gezintiyi başlatın.</p>
+      </div>
+      <div class="v-kartlar">
+        <a class="v-kart genis" href="3b-kent.html" style="--c:#e9c46a">
+          <figure>
+            <img src="3b/gorseller/kent.jpg" width="1200" height="750" loading="lazy" alt="Güzelbahçe merkezindeki binaları kat adedine göre renklendirilmiş olarak gösteren 3B kent modeli görünümü" data-en-alt="3D city model view of the buildings in central Güzelbahçe, coloured by number of floors">
+            <span class="rozet"><i aria-hidden="true"></i><span data-en="New · Building stock">Yeni · Yapı stoku</span></span>
+          </figure>
+          <div class="v-govde">
+            <h3 data-en="City model">Kent modeli</h3>
+            <p data-en="The buildings on the base map rise on the real terrain with the floor count written on the map sheet. Colour them by floors or use, filter the tall ones, and hover over a building to see its type and floors.">Halihazır haritadaki binalar, paftada yazan kat adediyle gerçek arazinin üzerinde yükseliyor. Kat adedine ya da kullanıma göre renklendirin, yüksek binaları süzün, bir binanın üzerine gelip türünü ve kat adedini görün.</p>
+            <ul>
+              <li><span data-en="Buildings with the floor count from the map sheets">Paftadaki kat adediyle binalar</span></li>
+              <li><span data-en="Colour by floors or use, floor filter">Kat adedi ya da kullanıma göre renk, kat süzgeci</span></li>
+              <li><span data-en="Guided tour with 8 stops">8 duraklı gezinti</span></li>
+            </ul>
+            <span class="v-ac"><span data-en="Open the model">Modeli aç</span> <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a class="v-kart" href="3b-su-aglari.html" style="--c:#38bdf8">
+          <figure>
+            <img src="3b/gorseller/su-aglari.jpg" width="1200" height="750" loading="lazy" alt="Güzelbahçe'nin arazisi altında atık su ve içme suyu hatlarını gösteren 3B model görünümü" data-en-alt="3D model view of the wastewater and drinking water lines under Güzelbahçe's terrain">
+            <span class="rozet"><i aria-hidden="true"></i><span data-en="Water infrastructure">Su altyapısı</span></span>
+          </figure>
+          <div class="v-govde">
+            <h3 data-en="Underground networks">Yer altı ağları</h3>
+            <p data-en="Drinking water, rainwater and wastewater lines below the real terrain, in order of depth. Make the ground transparent and open up the layers.">İçme suyu, yağmur suyu ve atık su hatları gerçek arazinin altında, derinlik sırasıyla. Zemini saydamlaştırın, katmanları açın.</p>
+            <ul>
+              <li><span data-en="3 pipe networks, layer by layer">3 boru ağı, katman katman</span></li>
+              <li><span data-en="Güneybatı Treatment Plant: 108.2% of capacity in 2019 (calc.)">Güneybatı Arıtma Tesisi: 2019'da kapasitenin %108,2'si (hesap)</span></li>
+              <li><span data-en="Guided tour with 8 stops">8 duraklı gezinti</span></li>
+            </ul>
+            <span class="v-ac"><span data-en="Open the model">Modeli aç</span> <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a class="v-kart" href="3b-erisim.html" style="--c:#ef4b3f">
+          <figure>
+            <img src="3b/gorseller/erisim.jpg" width="1200" height="750" loading="lazy" alt="Yaka'nın doğu yamaçlarında durağa uzak hücreleri yükselen sütunlarla gösteren 3B model görünümü" data-en-alt="3D model view showing cells far from a stop as raised columns on the eastern slopes of Yaka">
+            <span class="rozet"><i aria-hidden="true"></i><span data-en="Transport and waste">Ulaşım ve atık</span></span>
+          </figure>
+          <div class="v-govde">
+            <h3 data-en="Access gaps">Erişim boşlukları</h3>
+            <p data-en="Settlement areas far from an ESHOT stop and from a waste container, in 50 m cells. The further a cell is beyond the threshold, the higher its column.">ESHOT durağına ve çöp konteynerine uzak kalan yerleşim alanları, 50 m'lik hücrelerle. Eşiği ne kadar aşarsa sütun o kadar yükselir.</p>
+            <ul>
+              <li><span data-en="17.3% of the settlement area is more than 400 m from a stop">Yerleşim alanının %17,3'ü durağa 400 m'den uzak</span></li>
+              <li><span data-en="Adjustable walking threshold">Ayarlanabilir yürüme eşiği</span></li>
+              <li><span data-en="Guided tour with 9 stops">9 duraklı gezinti</span></li>
+            </ul>
+            <span class="v-ac"><span data-en="Open the model">Modeli aç</span> <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a class="v-kart" href="3b-ulasim.html" style="--c:#f472b6">
+          <figure>
+            <img src="3b/gorseller/ulasim.jpg" width="1200" height="750" loading="lazy" alt="Güzelbahçe'deki ESHOT ve dolmuş hatlarını, duraklarını ve 400 m yürüme alanlarını arazi üzerinde gösteren 3B model görünümü" data-en-alt="3D model view of the ESHOT and minibus lines, their stops and 400 m walking areas on the terrain of Güzelbahçe">
+            <span class="rozet"><i aria-hidden="true"></i><span data-en="New · Public transport">Yeni · Toplu taşıma</span></span>
+          </figure>
+          <div class="v-govde">
+            <h3 data-en="Public transport">Toplu taşıma</h3>
+            <p data-en="Routes, stops and 400 m walking areas of the 6 ESHOT lines in the study and the minibus. Switch lines on and off; the share of buildings in the selected lines' areas is calculated at once.">Çalışmadaki 6 ESHOT hattının ve dolmuşun güzergâhları, durakları ve 400 m yürüme alanları. Hatları açıp kapatın; seçili hatların alanında kalan bina payı anında hesaplanır.</p>
+            <ul>
+              <li><span data-en="7 lines · route, stops, 400 m area">7 hat · güzergâh, durak, 400 m alanı</span></li>
+              <li><span data-en="Switch lines on and off; the share of buildings is calculated at once">Hatları açıp kapatın, bina payı anında hesaplanır</span></li>
+              <li><span data-en="Guided tour with 5 stops">5 duraklı gezinti</span></li>
+            </ul>
+            <span class="v-ac"><span data-en="Open the model">Modeli aç</span> <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+        <a class="v-kart" href="3b-elektrik.html" style="--c:#facc15">
+          <figure>
+            <img src="3b/gorseller/elektrik.jpg" width="1200" height="750" loading="lazy" alt="Güzelbahçe'deki enerji nakil hatlarını, havai hatları ve trafoları arazi üzerinde gösteren 3B model görünümü" data-en-alt="3D model view of the power transmission lines, overhead lines and transformers on the terrain of Güzelbahçe">
+            <span class="rozet"><i aria-hidden="true"></i><span data-en="New · Energy">Yeni · Enerji</span></span>
+          </figure>
+          <div class="v-govde">
+            <h3 data-en="Power network">Elektrik şebekesi</h3>
+            <p data-en="Electricity poles, pylons, transformers, street lamps, overhead lines and the power transmission line from the base map, on the real terrain.">Halihazır haritadaki elektrik direkleri, pilonlar, trafolar, sokak lambaları, havai hatlar ve enerji nakil hattı, gerçek arazi üzerinde.</p>
+            <ul>
+              <li><span data-en="Poles, pylons, transformers and street lamps">Direk, pilon, trafo ve sokak lambası</span></li>
+              <li><span data-en="Overhead lines and the power transmission line">Havai hat ve enerji nakil hattı</span></li>
+              <li><span data-en="Guided tour with 5 stops">5 duraklı gezinti</span></li>
+            </ul>
+            <span class="v-ac"><span data-en="Open the model">Modeli aç</span> <span aria-hidden="true">→</span></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="v-bolum" aria-labelledby="n-baslik" style="padding-top:8px">
+    <div class="v-ic">
+      <div class="v-bolum-ust">
+        <div>
+          <div class="kicker" data-en="Method">Yöntem</div>
+          <h2 id="n-baslik" data-en="How they were made">Nasıl hazırlandı</h2>
+        </div>
+      </div>
+      <div class="v-adimlar">
+        <div class="v-adim">
+          <h3 data-en="Base map">Halihazır harita</h3>
+          <p data-en="The NetCAD sheets of Güzelbahçe's base map (2015, 1:1000, ITRF96) were read directly: elevation points, buildings with their floor counts and electricity features.">Güzelbahçe halihazır haritasının NetCAD paftaları (2015, 1:1000, ITRF96) doğrudan okundu: kot noktaları, kat adedi yazılarıyla binalar ve elektrik unsurları.</p>
+        </div>
+        <div class="v-adim">
+          <h3 data-en="Team data">Ekip verisi</h3>
+          <p data-en="The team's infrastructure and transport maps, GIS layers, QGIS drawings and report. Sources and limits are listed in each model.">Çalışma ekibinin altyapı ve ulaşım haritaları, CBS katmanları, QGIS çizimleri ve raporu. Kaynaklar ve sınırlar her modelin içinde yazılı.</p>
+        </div>
+        <div class="v-adim">
+          <h3 data-en="Model">Model</h3>
+          <p data-en="Drawn in the browser with WebGL on a 20 m terrain model. No plug-in is needed.">20 m'lik arazi modeli üzerinde, tarayıcıda WebGL ile çiziliyor. Eklenti gerekmez.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="v-alt">
+  <div class="v-ic">
+    <span data-en="Source: Güzelbahçe base map sheets (2015) · the team's maps, GIS layers, QGIS drawings and report">Kaynak: Güzelbahçe halihazır harita paftaları (2015) · çalışma ekibinin haritaları, CBS katmanları, QGIS çizimleri ve raporu</span>
+    <a href="index.html" data-en="← Back to BAS PORTAL">← BAS PORTAL'a dön</a>
+  </div>
+</footer>
+
+<script src="3b/motor.js"></script>
+<script src="3b/zemin.js"></script>
+<script src="3b/arazi-veri.js"></script>
+<script src="3b/arazi.js"></script>
+<script src="3b/kent-veri.js"></script>
+<script src="3b/sahne.js"></script>
+<script src="3b/vitrin.js"></script>
+</body>
+</html>

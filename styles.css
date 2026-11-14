@@ -2733,3 +2733,163 @@ html[data-dil-bekle] body { visibility: hidden; }
 .ton-sari { --ton: var(--sari); }
 .ton-turuncu { --ton: var(--turuncu); }
 .ton-su { --ton: var(--su-mavi); }
+
+/* =============================================
+   3B vitrin afişi (Genel Bakış) ve "Yeni" rozeti
+   Afiş her iki temada da koyu (3B modellerin görünümü)
+   ============================================= */
+.rozet-yeni {
+    margin-left: auto;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: #f39a3d;
+    color: #1b1006;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.5;
+}
+
+.vitrin-3b {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: 250px;
+    margin: 0 0 2.5rem;
+    border-radius: var(--radius);
+    overflow: hidden;
+    text-decoration: none;
+    color: #e6ebf2;
+    background: #0a0e13;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+}
+
+.vitrin-3b img {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 75% 50%;
+    transition: transform 0.8s ease;
+}
+
+.vitrin-3b::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgba(10, 14, 19, 0.96) 0%, rgba(10, 14, 19, 0.78) 40%, rgba(10, 14, 19, 0.05) 78%);
+}
+
+.vitrin-3b:hover img {
+    transform: scale(1.04);
+}
+
+.v3-metin {
+    max-width: 540px;
+    padding: 2rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+}
+
+.v3-etiket {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    background: #f39a3d;
+    color: #1b1006;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.vitrin-3b h2 {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+    line-height: 1.15;
+}
+
+.vitrin-3b p {
+    margin: 0;
+    color: #c4cfdc;
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+.v3-dugme {
+    margin-top: 0.4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.65rem 1.1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    font-weight: 700;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.vitrin-3b:hover .v3-dugme {
+    background: #f39a3d;
+    border-color: #f39a3d;
+    color: #1b1006;
+}
+
+.vitrin-3b:focus-visible {
+    outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+    .vitrin-3b {
+        align-items: flex-end;
+        min-height: 360px;
+    }
+
+    .vitrin-3b::before {
+        background: linear-gradient(0deg, rgba(10, 14, 19, 0.97) 35%, rgba(10, 14, 19, 0.55) 70%, rgba(10, 14, 19, 0.1) 100%);
+    }
+
+    .vitrin-3b img {
+        object-position: 70% 0%;
+        height: 60%;
+    }
+
+    .v3-metin {
+        padding: 1.4rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vitrin-3b img,
+    .v3-dugme {
+        transition: none;
+    }
+}
+
+/* 3B modeller bölümü: 3 x 2 düzen (sarkan tek kart olmasın) */
+.servis-izgarasi.uc-sutun {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+    .servis-izgarasi.uc-sutun {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .servis-izgarasi.uc-sutun {
+        grid-template-columns: 1fr;
+    }
+}
