@@ -214,6 +214,7 @@ body.lejantli #tour{right:calc(250px + var(--kenar) * 2)}
   #panel .plant,#panel details,#panel .ctl,#panel .kaynak,#panel .zones{display:none}
   #panel.open .plant,#panel.open .ctl{display:flex}#panel.open details,#panel.open .kaynak{display:block}#panel.open .zones{display:flex}
   body.erisim #panel .ctl{display:flex}
+  body.erisim #panel #ctl-kab{display:none}body.erisim #panel.open #ctl-kab{display:flex}
   .layers{display:grid;grid-template-columns:repeat(3,1fr)}
   .lyr{grid-template-columns:1fr;gap:4px;padding:7px 8px}.lyr i{display:none}.lyr span small{display:none}
   #more{display:inline-flex}
@@ -226,3 +227,53 @@ body.lejantli #tour{right:calc(250px + var(--kenar) * 2)}
 }
 @media (max-width:420px){.sekmeler .nokta{display:none}}
 @media (prefers-reduced-motion:reduce){.mk,.lay,.zt,#yukleniyor,.dots i{transition:none}.yk .cubuk span{animation:none;width:100%}}
+
+/* ---------- kent, toplu taşıma, elektrik sayfaları ---------- */
+.sekmeler{min-width:0;overflow-x:auto;scrollbar-width:none}
+.sekmeler::-webkit-scrollbar{display:none}
+body.kent .big{color:#e9c46a}
+body.ulasim .big{color:#f472b6}
+body.elektrik .big{color:#facc15}
+.katgrafik{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:12px}
+.kg-ust{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.kg-ust h2{margin:0;font:500 10.5px/1.2 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.kg-ust button{font:600 11.5px/1 var(--f-body);border:1px solid var(--line-2);background:var(--panel-2);color:var(--muted);border-radius:999px;padding:6px 11px;cursor:pointer}
+.kg-ust button:hover{color:var(--fg)}
+.kg-ust button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.kg-sutunlar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;height:118px}
+.kg{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:5px;min-width:0;padding:6px 0 7px;border-radius:8px;border:1px solid var(--line);background:var(--panel-2);cursor:pointer;color:var(--fg);transition:background .15s,border-color .15s}
+.kg:hover{border-color:var(--line-2);background:#151d27}
+.kg .s{font:500 9.5px/1 var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.kg .c{width:62%;min-height:3px;border-radius:3px 3px 1px 1px;background:var(--c);transition:background .15s}
+.kg .e{font:600 15px/1 var(--f-display);color:var(--fg)}
+.kg[aria-pressed="true"]{background:color-mix(in srgb,var(--c) 16%,var(--panel-2));border-color:var(--c);box-shadow:0 0 0 1px var(--c)}
+.kg[aria-pressed="true"] .s{color:var(--fg)}
+.katgrafik.filtreli .kg[aria-pressed="false"]{background:transparent;border-style:dashed}
+.katgrafik.filtreli .kg[aria-pressed="false"] .c{background:#3a4350}
+.katgrafik.filtreli .kg[aria-pressed="false"] .e,.katgrafik.filtreli .kg[aria-pressed="false"] .s{color:var(--faint)}
+.kg.yok{cursor:default;background:transparent;border-style:dashed}
+.kg.yok:hover{border-color:var(--line);background:transparent}
+.kg.yok .c{background:repeating-linear-gradient(45deg,#5b6472 0 3px,#3a4350 3px 6px)}
+.kg.yok .e{color:var(--muted)}
+.kg-not{font-size:12px;line-height:1.5;color:var(--muted);margin:0}
+.kg-not b{color:var(--fg);font-weight:600}
+.liste{display:flex;flex-direction:column;gap:6px}
+.liste button{display:grid;grid-template-columns:12px 1fr auto;align-items:center;gap:10px;text-align:left;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--panel-2);cursor:pointer;color:var(--fg)}
+.liste button i{width:12px;height:12px;border-radius:3px;background:var(--c)}
+.liste button[aria-pressed="false"]{opacity:.45}
+.liste button[aria-pressed="false"] i{background:transparent;box-shadow:inset 0 0 0 1.5px var(--c)}
+.liste button span{font:500 13px/1.25 var(--f-body)}
+.liste button small{display:block;font:11px/1.35 var(--f-mono);color:var(--muted);margin-top:2px}
+.liste button em{font:500 12px var(--f-mono);font-style:normal;color:var(--muted)}
+.anahtar{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12.5px;color:var(--muted)}
+.anahtar button{font:500 12px var(--f-body);border:1px solid var(--line);background:var(--panel-2);color:var(--muted);border-radius:999px;padding:6px 12px;cursor:pointer}
+.anahtar button[aria-pressed="true"]{background:#1f2834;color:var(--fg);box-shadow:inset 0 0 0 1px rgba(243,154,61,.45)}
+@media (max-width:760px){
+  body.kent #panel .katgrafik{display:none}
+  body.kent #panel.open .katgrafik{display:flex}
+  body.ulasim #panel .liste,body.elektrik #panel .liste{display:none}
+  body.ulasim #panel.open .liste,body.elektrik #panel.open .liste{display:flex}
+}
+/* orta genişlikte sekmeler kısa adlarla (6 model sekmesi kesilmesin) */
+@media (max-width:1320px){.sekmeler .uzun{display:none}.sekmeler .kisa{display:inline}}
+@media (max-width:1000px){.ust .marka .yazi{display:none}.ust .marka .cizgi{display:none}.yardim-btn{display:none}}

@@ -22,8 +22,12 @@
 <header class="ust">
   <a class="marka" href="index.html" aria-label="BAS PORTAL'a dön" data-en-aria-label="Back to BAS PORTAL"><span class="ok" aria-hidden="true">←</span><span class="cizgi" aria-hidden="true"></span><span class="yazi">BAS PORTAL</span></a>
   <nav class="sekmeler" aria-label="3B modeller" data-en-aria-label="3D models">
+    <a href="3b.html"><i class="nokta" style="--c:#f39a3d" aria-hidden="true"></i><span class="uzun" data-en="All models">Tüm modeller</span><span class="kisa" data-en="All">Tümü</span></a>
+    <a href="3b-kent.html"><i class="nokta" style="--c:#e9c46a" aria-hidden="true"></i><span class="uzun" data-en="City model">Kent modeli</span><span class="kisa" data-en="City">Kent</span></a>
     <a href="3b-su-aglari.html"><i class="nokta" style="--c:#38bdf8" aria-hidden="true"></i><span class="uzun" data-en="Underground networks">Yer altı ağları</span><span class="kisa" data-en="Networks">Su ağları</span></a>
     <a href="3b-erisim.html" aria-current="page"><i class="nokta" style="--c:#ef4b3f" aria-hidden="true"></i><span class="uzun" data-en="Access gaps">Erişim boşlukları</span><span class="kisa" data-en="Access">Erişim</span></a>
+    <a href="3b-ulasim.html"><i class="nokta" style="--c:#f472b6" aria-hidden="true"></i><span class="uzun" data-en="Public transport">Toplu taşıma</span><span class="kisa" data-en="Transit">Ulaşım</span></a>
+    <a href="3b-elektrik.html"><i class="nokta" style="--c:#facc15" aria-hidden="true"></i><span class="uzun" data-en="Electricity">Elektrik</span><span class="kisa" data-en="Power">Elektrik</span></a>
   </nav>
   <div class="ust-sag">
     <button class="ust-btn yardim-btn" id="b-yardim" type="button"><span aria-hidden="true">?</span> <span data-en="Controls">Kontroller</span></button>
@@ -55,6 +59,10 @@
     <div class="ctl-head"><label for="t-cont" data-en="Walking threshold to a container">Konteynere yürüme eşiği</label><output id="o-cont">100 m</output></div>
     <input id="t-cont" type="range" min="50" max="300" step="25" value="100">
   </div>
+  <div class="ctl" id="ctl-kab">
+    <div class="ctl-head"><label for="c-kab" data-en="Terrain relief">Arazi kabartması</label><output id="o-kab"></output></div>
+    <input id="c-kab" type="range" min="0" max="300" step="10" value="150">
+  </div>
   <div class="stat" aria-live="polite">
     <div class="big" id="s-pct"></div>
     <p id="s-txt"></p>
@@ -71,9 +79,10 @@
       <li data-en="Distances are straight-line. The real walking distance is longer because of slopes and winding roads.">Mesafeler kuş uçuşu. Gerçek yürüme mesafesi yokuş ve yol kıvrımlarıyla daha uzun olur.</li>
       <li data-en="The maps were aligned on shared points (error about 10 m). The study area boundary is approximate. The Kara Harp Okulu campus and the O-32 motorway corridor are outside the analysis.">Haritalar ortak noktalardan çakıştırıldı (sapma yaklaşık 10 m). Çalışma alanı sınırı yaklaşık. Kara Harp Okulu yerleşkesi ve O-32 otoyolu koridoru analiz dışında.</li>
       <li data-en="Payamlı, Küçükkaya and the southern villages are outside the road data.">Payamlı, Küçükkaya ve güney köyleri yol verisinin kapsamı dışında kaldı.</li>
+      <li data-en="The terrain covers the whole district on a 25 m grid. It was built from the elevation points on Güzelbahçe's base map sheets (2015, 1:1000, ITRF96); where the sheets have no or unreliable heights (about 29% of the district, mostly Yelki and the southern hills) the Copernicus GLO-30 elevation model (ESA, 30 m) was used. The two agree to a median of 0.5 m. Heights are multiplied by the relief factor; contour lines are every 10 m. Areas outside the district are faded. The terrain does not change the distances.">Arazi ilçenin tamamını 25 m'lik ızgarayla kapsıyor. Güzelbahçe halihazır harita paftalarındaki (2015, 1:1000, ITRF96) kot noktalarından üretildi; paftaların kapsamadığı ya da kotların güvenilmez olduğu yerlerde (ilçenin yaklaşık %29'u, çoğu Yelki ve güney tepeleri) Copernicus GLO-30 arazi modeli (ESA, 30 m) kullanıldı. İki kaynak ortancada 0,5 m içinde örtüşüyor. Yükseklikler kabartma katsayısıyla çarpılarak gösteriliyor; eş yükselti eğrileri 10 m'de bir. İlçe dışı soluk gösteriliyor. Arazi mesafe hesaplarını değiştirmez.</li>
     </ul>
   </details>
-  <div class="kaynak" data-en="Source: the team's transport and solid waste maps and report · ESHOT · Güzelbahçe Belediyesi Temizlik İşleri. Values are approximate.">Kaynak: Çalışma ekibinin ulaşım ve katı atık haritaları ve raporu · ESHOT · Güzelbahçe Belediyesi Temizlik İşleri. Değerler yaklaşıktır.</div>
+  <div class="kaynak" data-en="Source: the team's transport and solid waste maps and report · ESHOT · Güzelbahçe Belediyesi Temizlik İşleri · Güzelbahçe base map sheets (2015). Values are approximate.">Kaynak: Çalışma ekibinin ulaşım ve katı atık haritaları ve raporu · ESHOT · Güzelbahçe Belediyesi Temizlik İşleri · Güzelbahçe halihazır haritası (2015). Değerler yaklaşıktır.</div>
 </section>
 
 <div id="kontroller">
@@ -148,6 +157,8 @@
 
 <script src="3b/motor.js"></script>
 <script src="3b/zemin.js"></script>
+<script src="3b/arazi-veri.js"></script>
+<script src="3b/arazi.js"></script>
 <script src="3b/erisim-veri.js"></script>
 <script src="3b/erisim.js"></script>
 </body>

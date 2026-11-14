@@ -22,8 +22,12 @@
 <header class="ust">
   <a class="marka" href="index.html" aria-label="BAS PORTAL'a dön" data-en-aria-label="Back to BAS PORTAL"><span class="ok" aria-hidden="true">←</span><span class="cizgi" aria-hidden="true"></span><span class="yazi">BAS PORTAL</span></a>
   <nav class="sekmeler" aria-label="3B modeller" data-en-aria-label="3D models">
+    <a href="3b.html"><i class="nokta" style="--c:#f39a3d" aria-hidden="true"></i><span class="uzun" data-en="All models">Tüm modeller</span><span class="kisa" data-en="All">Tümü</span></a>
+    <a href="3b-kent.html"><i class="nokta" style="--c:#e9c46a" aria-hidden="true"></i><span class="uzun" data-en="City model">Kent modeli</span><span class="kisa" data-en="City">Kent</span></a>
     <a href="3b-su-aglari.html" aria-current="page"><i class="nokta" style="--c:#38bdf8" aria-hidden="true"></i><span class="uzun" data-en="Underground networks">Yer altı ağları</span><span class="kisa" data-en="Networks">Su ağları</span></a>
     <a href="3b-erisim.html"><i class="nokta" style="--c:#ef4b3f" aria-hidden="true"></i><span class="uzun" data-en="Access gaps">Erişim boşlukları</span><span class="kisa" data-en="Access">Erişim</span></a>
+    <a href="3b-ulasim.html"><i class="nokta" style="--c:#f472b6" aria-hidden="true"></i><span class="uzun" data-en="Public transport">Toplu taşıma</span><span class="kisa" data-en="Transit">Ulaşım</span></a>
+    <a href="3b-elektrik.html"><i class="nokta" style="--c:#facc15" aria-hidden="true"></i><span class="uzun" data-en="Electricity">Elektrik</span><span class="kisa" data-en="Power">Elektrik</span></a>
   </nav>
   <div class="ust-sag">
     <button class="ust-btn yardim-btn" id="b-yardim" type="button"><span aria-hidden="true">?</span> <span data-en="Controls">Kontroller</span></button>
@@ -36,7 +40,7 @@
   <div>
     <div class="kicker" data-en="Güzelbahçe · Water infrastructure">Güzelbahçe · Su altyapısı</div>
     <h1 data-en="Underground networks">Yer altı ağları</h1>
-    <p class="sub" data-en="The street map is a glass surface. The three pipe networks hang below it in order of depth. Depths are exaggerated so that they are easy to read.">Sokak haritası cam bir yüzey gibi duruyor. Altında üç boru ağı derinlik sırasıyla asılı. Derinlikler okunabilsin diye abartıldı.</p>
+    <p class="sub" data-en="The street map lies like glass on the real terrain. The three pipe networks follow the ground below it in order of depth. Depths are exaggerated so that they are easy to read.">Sokak haritası gerçek arazinin üzerine cam gibi serili. Altında üç boru ağı derinlik sırasıyla araziyi izliyor. Derinlikler okunabilsin diye abartıldı.</p>
   </div>
   <div class="layers" role="group" aria-label="Katmanlar" data-en-aria-label="Layers">
     <button class="lyr" id="ly-dw" type="button" style="--c:var(--dw)" aria-pressed="true"><i></i><span><span data-en="Drinking water">İçme suyu</span><small data-en="Top layer · İZSU">En üst katman · İZSU</small></span><em id="pay-dw"></em></button>
@@ -52,6 +56,10 @@
     <div class="ctl-head"><label for="c-gap" data-en="Layer spacing">Katman aralığı</label><output id="o-gap"></output></div>
     <input id="c-gap" type="range" min="0" max="200" step="5" value="100">
   </div>
+  <div class="ctl">
+    <div class="ctl-head"><label for="c-kab" data-en="Terrain relief">Arazi kabartması</label><output id="o-kab"></output></div>
+    <input id="c-kab" type="range" min="0" max="300" step="10" value="150">
+  </div>
   <button class="tbtn" id="more" type="button" data-en="Treatment plant and method">Arıtma tesisi ve yöntem</button>
   <div class="plant">
     <div>
@@ -64,13 +72,14 @@
   <details>
     <summary data-en="Method and limits">Yöntem ve sınırlar</summary>
     <ul>
-      <li data-en="The lines were digitised from the team's drinking water, wastewater and rainwater maps and aligned on shared points. Each network is limited to the area its own map covers (dashed frames).">Hatlar, çalışma ekibinin içme suyu, atık su ve yağmur suyu haritalarından sayısallaştırıldı ve ortak noktalardan çakıştırıldı. Her ağ, kendi haritasının kapsadığı alanla sınırlı (kesik çizgili çerçeveler).</li>
-      <li data-en="The wastewater and rainwater layers were matched to fit the line-length shares: the dense network is wastewater and the short pieces are rainwater.">Atık su ve yağmur suyu katmanları, hat uzunluğu paylarıyla uyumlu olacak şekilde eşleştirildi: yoğun ağ atık su, kısa parçalar yağmur suyu.</li>
+      <li data-en="The wastewater and rainwater lines come from the team's GIS layers (ATIKSU, YAGMURSUYU · ITRF96). The drinking water lines were digitised from the team's map, because the GIS drinking water layer covers only part of the network on the map. Each network is limited to the area its own map covers (dashed frames).">Atık su ve yağmur suyu hatları ekibin CBS katmanlarından (ATIKSU, YAGMURSUYU · ITRF96) alındı. İçme suyu hatları ekibin haritasından sayısallaştırıldı, çünkü CBS'deki içme suyu katmanı haritadaki ağın yalnızca bir bölümünü kapsıyor. Her ağ, kendi haritasının kapsadığı alanla sınırlı (kesik çizgili çerçeveler).</li>
+      <li data-en="The terrain covers the whole district on a 25 m grid. It was built from the elevation points on Güzelbahçe's base map sheets (2015, 1:1000, ITRF96); where the sheets have no or unreliable heights (about 29% of the district, mostly Yelki and the southern hills) the Copernicus GLO-30 elevation model (ESA, 30 m) was used. The two agree to a median of 0.5 m. Heights are multiplied by the relief factor; contour lines are every 10 m. Areas outside the district are faded.">Arazi ilçenin tamamını 25 m'lik ızgarayla kapsıyor. Güzelbahçe halihazır harita paftalarındaki (2015, 1:1000, ITRF96) kot noktalarından üretildi; paftaların kapsamadığı ya da kotların güvenilmez olduğu yerlerde (ilçenin yaklaşık %29'u, çoğu Yelki ve güney tepeleri) Copernicus GLO-30 arazi modeli (ESA, 30 m) kullanıldı. İki kaynak ortancada 0,5 m içinde örtüşüyor. Yükseklikler kabartma katsayısıyla çarpılarak gösteriliyor; eş yükselti eğrileri 10 m'de bir. İlçe dışı soluk gösteriliyor.</li>
+      <li data-en="The elevations in the GIS layers put the wastewater lines mostly 1.7–5.3 m and the rainwater lines 1.2–4.9 m below the terrain surface (calc.; 10th–90th percentile).">CBS katmanlarındaki kotlara göre atık su hatları arazi yüzeyinin çoğunlukla 1,7–5,3 m, yağmur suyu hatları 1,2–4,9 m altında (hesap; %10–%90 dilim).</li>
       <li data-en="The percentages are shares of the total line length. The treatment plant values come from the TMMOB ÇMO İzmir Water Reports; the ratios to capacity were calculated.">Yüzdeler toplam hat uzunluğu içindeki paylardır. Arıtma tesisi değerleri TMMOB ÇMO İzmir Su Raporlarından alındı; kapasiteye oranlar hesaplandı.</li>
       <li data-en="Layer depths are only representative and do not show real pipe depths. The plant location is schematic.">Katman derinlikleri temsilîdir, gerçek boru derinliklerini göstermez. Tesisin konumu şematiktir.</li>
     </ul>
   </details>
-  <div class="kaynak" data-en="Source: the team's water infrastructure maps and report · İZSU · İBB (August 2025) · TMMOB ÇMO İzmir Water Reports">Kaynak: Çalışma ekibinin su altyapısı haritaları ve raporu · İZSU · İBB (Ağustos 2025) · TMMOB ÇMO İzmir Su Raporları</div>
+  <div class="kaynak" data-en="Source: the team's water infrastructure maps, GIS layers and report · Güzelbahçe base map sheets (2015) · İZSU · İBB (August 2025) · TMMOB ÇMO İzmir Water Reports">Kaynak: Çalışma ekibinin su altyapısı haritaları, CBS katmanları ve raporu · Güzelbahçe halihazır haritası (2015) · İZSU · İBB (Ağustos 2025) · TMMOB ÇMO İzmir Su Raporları</div>
 </section>
 
 <div id="kontroller">
@@ -134,7 +143,10 @@
 
 <script src="3b/motor.js"></script>
 <script src="3b/zemin.js"></script>
+<script src="3b/arazi-veri.js"></script>
+<script src="3b/arazi.js"></script>
 <script src="3b/su-aglari-veri.js"></script>
+<script src="3b/su-aglari-cbs.js"></script>
 <script src="3b/su-aglari.js"></script>
 </body>
 </html>
