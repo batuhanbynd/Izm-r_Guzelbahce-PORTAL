@@ -1,0 +1,3 @@
+// Senaryo laboratuvarı ek verileri (model koordinatı): ekibin tahmini metro istasyonları (QGIS, TUREF/TM33),
+// halihazır haritadaki cami/mescit sembolleri, portaldaki TÜİK 2025 nüfusu.
+const SENARYO = {"metro":[[13729.2,-1015.1],[14539.0,-884.6],[12759.5,-905.7],[9076.3,141.0],[7347.6,284.7],[5674.6,469.8],[4819.2,574.8],[4112.0,703.1],[2412.7,989.7],[779.3,1109.0],[1567.8,1066.2]],"metroIlcede":[false,false,false,false,true,true,true,true,false,false,false],"cami":[[5340.6,2723.4],[5084.3,2855.1],[3965.3,806.7],[7980.6,145.0],[3651.3,4533.7],[3782.2,4642.5],[5613.4,5866.9],[2404.6,7636.8],[8071.8,7634.5]],"nufus":{"yil":2025,"deger":39474,"kaynak":"TÜİK ADNKS"}};

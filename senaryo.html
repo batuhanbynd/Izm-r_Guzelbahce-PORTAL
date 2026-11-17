@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Senaryo Laboratuvarı | İzmir Güzelbahçe Veri Portalı</title>
+<meta name="m3-baslik-en" content="Scenario Lab | İzmir Güzelbahçe Data Portal">
+<meta name="description" content="Güzelbahçe için 'ya şöyle olsaydı?' deneme alanı: yeni durak, metro, okul, konteyner, deniz seviyesi, yapılaşma ve aydınlatma senaryolarının etkisi gerçek veriden anında hesaplanır.">
+<meta name="theme-color" content="#0a0e13">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M12 6h8M14 6v7l-6 11a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-11V6%22 stroke=%22%23a3e635%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="3b/ortak.css">
+</head>
+<body class="senaryo lejantli">
+
+<canvas id="gl" tabindex="0" aria-label="Güzelbahçe senaryo laboratuvarının 3B haritası" data-en-aria-label="3D map of the Güzelbahçe scenario lab"></canvas>
+<div class="vignette"></div>
+<div id="labels"></div>
+
+<header class="ust">
+  <a class="marka" href="index.html" aria-label="Veri portalına dön" data-en-aria-label="Back to the data portal"><span class="ok" aria-hidden="true">←</span><span class="cizgi" aria-hidden="true" style="background:#a3e635"></span><span class="yazi"><span class="yazi-ust">İzmir Güzelbahçe</span><span class="yazi-alt" data-en="Data Portal">Veri Portalı</span></span></a>
+  <span class="deneme-rozet" title="Buradaki değişiklikler portaldaki verileri değiştirmez" data-en-title="Changes here do not change the data on the portal"><i aria-hidden="true"></i><span data-en="Sandbox · the portal's data stays unchanged">Deneme alanı · portal verileri değişmez</span></span>
+  <div class="ust-sag">
+    <button class="ust-btn yardim-btn" id="b-yardim" type="button"><span aria-hidden="true">?</span> <span data-en="How to use">Nasıl kullanılır</span></button>
+    <div class="dil" role="group" aria-label="Dil / Language"><button type="button" data-dil="tr" lang="tr" aria-pressed="true">TR</button><button type="button" data-dil="en" lang="en" aria-pressed="false">EN</button></div>
+    <button class="ust-btn" id="b-tam" type="button" aria-pressed="false" aria-label="Tam ekran" data-en-aria-label="Full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+  </div>
+</header>
+
+<section id="panel" class="card" aria-label="Senaryo" data-en-aria-label="Scenario">
+  <div>
+    <div class="kicker" data-en="Imagination workshop · Güzelbahçe">Hayal atölyesi · Güzelbahçe</div>
+    <h1 data-en="Scenario lab">Senaryo laboratuvarı</h1>
+    <p class="sub" data-en="Pick a scenario and change the map: add a stop, a station or a school, raise the sea or the buildings. The effect is calculated at once from the real data.">Bir senaryo seçin ve haritayı değiştirin: durak, istasyon ya da okul ekleyin, denizi veya binaları yükseltin. Etkisi gerçek veriden anında hesaplanır.</p>
+  </div>
+  <div class="sn-secici" id="secici" role="group" aria-label="Senaryolar" data-en-aria-label="Scenarios"></div>
+  <div class="sn-govde" id="govde" aria-live="polite"></div>
+  <button class="tbtn" id="more" type="button" data-en="Scenario details">Senaryo ayrıntıları</button>
+  <div class="sn-alt">
+    <button id="b-paylas" type="button" data-en="Copy scenario link">Senaryo bağlantısını kopyala</button>
+    <button id="b-sifirla" type="button" data-en="Reset">Sıfırla</button>
+  </div>
+  <div class="kaynak" data-en="Data: Güzelbahçe base map (2015) · the team's ESHOT, minibus, metro and waste container drawings · TÜİK ADNKS 2025 · Copernicus GLO-30. Results are calculations, not recommendations.">Veri: Güzelbahçe halihazır haritası (2015) · ekibin ESHOT, dolmuş, metro ve konteyner çizimleri · TÜİK ADNKS 2025 · Copernicus GLO-30. Sonuçlar hesaptır, öneri değildir.</div>
+</section>
+
+<div id="ekle-ipucu" hidden><i aria-hidden="true"></i><span id="ekle-metin"></span></div>
+
+<div id="kontroller">
+  <div class="grup">
+    <button id="b-yak" type="button" aria-label="Yakınlaştır" data-en-aria-label="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Zoom in">Yakınlaştır</span></button>
+    <button id="b-uzak" type="button" aria-label="Uzaklaştır" data-en-aria-label="Zoom out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Zoom out">Uzaklaştır</span></button>
+  </div>
+  <div class="grup">
+    <button id="b-kuzey" class="pusula" type="button" aria-label="Kuzeyi yukarı al" data-en-aria-label="Turn north up"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="n" d="M12 2.5l3.6 9.5H8.4z"/><path d="M12 21.5l-3.6-9.5h7.2z" fill="#5d6b7d"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="North up">Kuzey yukarı</span></button>
+  </div>
+  <div class="grup ikinci">
+    <button id="b-reset" type="button" aria-label="Genel görünüm" data-en-aria-label="Overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7M6 10v10h12V10"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Overview">Genel görünüm</span></button>
+    <button id="b-top" type="button" aria-label="Üstten görünüm" data-en-aria-label="Top view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 12h16M12 4v16"/></svg><span class="ipucu-etiket" aria-hidden="true" data-en="Top view">Üstten görünüm</span></button>
+  </div>
+</div>
+<div id="olcek" aria-hidden="true"><b>1 km</b><i></i></div>
+
+<section id="legend" class="card" aria-label="Lejant" data-en-aria-label="Legend">
+  <h2 id="lg-baslik" data-en="Legend">Lejant</h2>
+  <div class="key" id="lg-key"></div>
+</section>
+<div id="tip" hidden></div>
+
+<div id="yukleniyor">
+  <div class="yk">
+    <div class="kicker" style="color:#a3e635" data-en="Imagination workshop">Hayal atölyesi</div>
+    <h2 data-en="Scenario lab">Senaryo laboratuvarı</h2>
+    <div class="cubuk"><span></span></div>
+    <p class="sub" data-en="Preparing the map…">Harita hazırlanıyor…</p>
+  </div>
+</div>
+
+<div id="yardim" hidden role="dialog" aria-modal="true" aria-labelledby="yardim-baslik">
+  <div class="kutu">
+    <h2 id="yardim-baslik" data-en="How to use">Nasıl kullanılır</h2>
+    <dl>
+      <dt data-en="1 · Pick">1 · Seç</dt><dd data-en="Choose a scenario from the tiles on the left">Soldaki kutulardan bir senaryo seçin</dd>
+      <dt data-en="2 · Change">2 · Değiştir</dt><dd data-en="Move the sliders, or press 'Add on the map' and click the map">Kaydırıcıları oynatın ya da "Haritaya ekle"ye basıp haritaya tıklayın</dd>
+      <dt data-en="3 · Suggest">3 · Öner</dt><dd data-en="'Suggest the best places' finds the spots that reach the most buildings">"En iyi yerleri öner", en çok binaya ulaşan noktaları bulur</dd>
+      <dt data-en="4 · Compare">4 · Karşılaştır</dt><dd data-en="The result card shows today and the scenario side by side">Sonuç kartı bugünü ve senaryoyu yan yana gösterir</dd>
+      <dt data-en="Share">Paylaş</dt><dd data-en="'Copy scenario link' saves everything in the address">"Senaryo bağlantısını kopyala" her şeyi adrese kaydeder</dd>
+      <dt data-en="Drag · wheel">Sürükle · tekerlek</dt><dd data-en="Turn and zoom the map">Haritayı döndür ve yakınlaştır</dd>
+      <dt>Esc</dt><dd data-en="Leave adding mode">Ekleme modundan çık</dd>
+    </dl>
+    <p class="sn-not" style="margin-top:12px" data-en="This is a sandbox: nothing here changes the data on the portal. The results are calculations from the data, not planning recommendations.">Burası bir deneme alanıdır: buradaki hiçbir şey portaldaki verileri değiştirmez. Sonuçlar veriden yapılan hesaplardır, planlama önerisi değildir.</p>
+    <div class="alt"><button class="tbtn primary" type="button" data-kapat data-en="OK">Tamam</button></div>
+  </div>
+</div>
+
+<div id="nogl" hidden><div><p data-en="This browser does not support WebGL2. Please use an up-to-date Chrome, Edge, Firefox or Safari.">Bu tarayıcı WebGL2 desteklemiyor. Güncel bir Chrome, Edge, Firefox ya da Safari kullanın.</p><p><a href="index.html" data-en="Back to the portal →">Portala dönün →</a></p></div></div>
+
+<script src="3b/motor.js"></script>
+<script src="3b/zemin.js"></script>
+<script src="3b/arazi-veri.js"></script>
+<script src="3b/arazi.js"></script>
+<script src="3b/kent-veri.js"></script>
+<script src="3b/sahne.js"></script>
+<script src="3b/ulasim-veri.js"></script>
+<script src="3b/elektrik-veri.js"></script>
+<script src="3b/erisim-veri.js"></script>
+<script src="3b/senaryo-veri.js"></script>
+<script src="3b/senaryo.js"></script>
+</body>
+</html>

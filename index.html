@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genel Bakış | BAS PORTAL</title>
-    <meta name="description" content="Güzelbahçe ulaşım ve altyapı verilerinin özeti: toplu taşıma, karayolu trafiği, su ve elektrik altyapısı, planlanan projeler.">
+    <title>Genel Bakış | İzmir Güzelbahçe Veri Portalı</title>
+    <meta name="description" content="İzmir Güzelbahçe Veri Portalı: ulaşım, altyapı, ekonomik yapı, doğal yapı ve afet riskleri, havza ve koruma alanları, 3B modeller ve planlanan projeler.">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <a href="index.html" class="brand" aria-label="İzmir Güzelbahçe Veri Portalı – Genel Bakış"><span class="marka-metin"><span class="marka-ust">İzmir Güzelbahçe</span><span class="marka-ad">Veri Portalı</span></span></a>
         <nav aria-label="Sayfalar">
         <ul class="nav-menu">
             <li class="nav-item">
@@ -34,6 +34,26 @@
                     Diyagramlar
                 </a>
             </li>
+            <li class="nav-grup">İlçe Profili</li>
+            <li class="nav-item">
+                <a href="ekonomi.html" class="nav-link">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    Ekonomik Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dogal-yapi.html" class="nav-link">
+                    <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+                    Doğal Yapı ve Afet
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havza-koruma.html" class="nav-link">
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    Havza ve Koruma
+                </a>
+            </li>
+            <li class="nav-grup">Ulaşım</li>
             <li class="nav-item">
                 <a href="havalimani.html" class="nav-link">
                     <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
@@ -94,6 +114,7 @@
                     Otoparklar
                 </a>
             </li>
+            <li class="nav-grup">Altyapı</li>
             <li class="nav-item">
                 <a href="izsu.html" class="nav-link">
                     <i class="fa-solid fa-droplet" aria-hidden="true"></i>
@@ -118,12 +139,20 @@
                     Elektrik Altyapısı
                 </a>
             </li>
+            <li class="nav-grup">3B ve Senaryo</li>
             <li class="nav-item">
                 <a href="3b.html" class="nav-link">
                     <i class="fa-solid fa-cube" aria-hidden="true"></i>
                     3B Modeller <span class="rozet-yeni">Yeni</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="senaryo.html" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                    Senaryo Laboratuvarı <span class="rozet-deneme">Deneme</span>
+                </a>
+            </li>
+            <li class="nav-grup">Planlama</li>
             <li class="nav-item">
                 <a href="planlanan-projeler.html" class="nav-link">
                     <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
@@ -146,8 +175,8 @@
             <div class="giris-ust">
                 <div class="giris-metin">
                     <span class="ust-etiket"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> İzmir · Güzelbahçe</span>
-                    <h1>Güzelbahçe Ulaşım ve Altyapı Analizi</h1>
-                    <p>Bu sayfa, sitedeki ulaşım ve altyapı verilerinin kısa bir özetidir: toplu taşıma hatları, karayolu trafiği, su ve elektrik altyapısı ile planlanan projeler.</p>
+                    <h1>İzmir Güzelbahçe Veri Portalı</h1>
+                    <p>Güzelbahçe'nin ulaşım, altyapı, ekonomi ve doğal yapı verileri tek yerde: toplu taşıma hatları, karayolu trafiği, su ve elektrik altyapısı, ekonomik yapı, afet riskleri, havza ve koruma alanları ile planlanan projeler.</p>
                     <p>Aşağıdaki her kart ilgili sayfaya bağlanır. Kartlardaki sayılar, o sayfalarda yer alan verilerin aynısıdır.</p>
                 </div>
                 <figure class="giris-gorsel">
@@ -166,6 +195,16 @@
                     <h2>Güzelbahçe'yi üç boyutta keşfedin</h2>
                     <p>İlçenin tamamı gerçek arazi üzerinde: binalar, boru ağları, otobüs hatları ve elektrik şebekesi. Döndürün, yakınlaşın, gezintiyi başlatın.</p>
                     <span class="v3-dugme">3B modelleri aç <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+                </div>
+            </a>
+
+            <a class="vitrin-3b vitrin-lab" href="senaryo.html" target="_blank" rel="noopener">
+                <img src="3b/gorseller/senaryo.jpg" alt="" width="1200" height="750" loading="lazy">
+                <div class="v3-metin">
+                    <span class="v3-etiket"><i class="fa-solid fa-flask" aria-hidden="true"></i> Deneme alanı</span>
+                    <h2>Ya şöyle olsaydı? Senaryo laboratuvarı</h2>
+                    <p>Yeni durak, okul, metro istasyonu ya da konteyner ekleyin; denizi ve binaları yükseltin. Etkisi gerçek veriden anında hesaplanır, portaldaki veriler değişmez.</p>
+                    <span class="v3-dugme">Laboratuvarı aç <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
                 </div>
             </a>
 
@@ -224,11 +263,21 @@
                     <span class="kpi-deger">13,6 km</span>
                     <span class="kpi-alt">Narlıdere'den sonra planlanan hat · 11 istasyon</span>
                 </a>
+                <a class="kpi ton-mavi" href="ekonomi.html">
+                    <span class="kpi-etiket"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Ekonomik yapı</span>
+                    <span class="kpi-deger">52.</span>
+                    <span class="kpi-alt">SEGE-2022'de Türkiye'deki ilçeler arasında · İzmir'de 8.</span>
+                </a>
+                <a class="kpi ton-kirmizi" href="dogal-yapi.html#deprem">
+                    <span class="kpi-etiket"><i class="fa-solid fa-house-crack" aria-hidden="true"></i> Deprem</span>
+                    <span class="kpi-deger">0,35–0,45 g</span>
+                    <span class="kpi-alt">Sağlam kayada tasarım yer ivmesi · Seferihisar Fayı'nın aktif kolu ilçeden geçiyor</span>
+                </a>
             </div>
 
             <div class="bolum-ust">
                 <h2>İlçe profili</h2>
-                <p>TÜİK Adrese Dayalı Nüfus Kayıt Sistemi</p>
+                <p>Nüfus (TÜİK Adrese Dayalı Nüfus Kayıt Sistemi), ekonomik yapı, doğal yapı ve koruma alanları</p>
             </div>
             <div class="izgara-iki alt-bosluk-k">
                 <div class="card chart-card">
@@ -244,6 +293,21 @@
                         <span>Atatürk</span><span>Çamlı</span><span>Çelebi</span><span>Kahramandere</span><span>Küçükkaya</span><span>Maltepe</span><span>Mustafa Kemal Paşa</span><span>Payamlı</span><span>Siteler</span><span>Yaka</span><span>Yalı</span><span>Yelki</span>
                     </div>
                 </div>
+            </div>
+
+            <div class="servis-izgarasi uc-sutun alt-bosluk-k">
+                <a class="servis-karti ton-mavi" href="ekonomi.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span>
+                    <div><h3>Ekonomik Yapı <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Gelişmişlik sıralaması, işgücü, imalat, tarım, balıkçılık, turizm, enerji ve kalkınma potansiyeli</p></div>
+                </a>
+                <a class="servis-karti ton-kirmizi" href="dogal-yapi.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-mountain" aria-hidden="true"></i></span>
+                    <div><h3>Doğal Yapı ve Afet <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Eğim ve yükselti, jeoloji, fay hatları ve depremsellik, dereler ve taşkın riski, iklim ve rüzgâr</p></div>
+                </a>
+                <a class="servis-karti ton-yesil" href="havza-koruma.html">
+                    <span class="sk-ikon"><i class="fa-solid fa-leaf" aria-hidden="true"></i></span>
+                    <div><h3>Havza ve Koruma <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></h3><p>Su kütleleri, Çamlı Barajı koruma kuşakları, toprak ve erozyon, tarım arazisi kaybı, sit alanları, flora ve fauna</p></div>
+                </a>
             </div>
 
             <div class="bolum-ust">

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Havza ve Koruma Alanları | İzmir Güzelbahçe Veri Portalı</title>
+    <meta name="description" content="Güzelbahçe'nin Küçük Menderes Havzası'ndaki yeri, su kütlelerinin durumu, Çamlı Barajı koruma kuşakları, toprak, tarım arazileri, doğal ve arkeolojik sit alanları, flora ve fauna.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
+    <script src="js/dil-en.js"></script>
+    <script src="js/dil.js"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="index.html" class="brand" aria-label="İzmir Güzelbahçe Veri Portalı – Genel Bakış"><span class="marka-metin"><span class="marka-ust">İzmir Güzelbahçe</span><span class="marka-ad">Veri Portalı</span></span></a>
+        <nav aria-label="Sayfalar">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-grup">İlçe Profili</li>
+            <li class="nav-item">
+                <a href="ekonomi.html" class="nav-link">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    Ekonomik Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dogal-yapi.html" class="nav-link">
+                    <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+                    Doğal Yapı ve Afet
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havza-koruma.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    Havza ve Koruma
+                </a>
+            </li>
+            <li class="nav-grup">Ulaşım</li>
+            <li class="nav-item">
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
+                    Otoparklar
+                </a>
+            </li>
+            <li class="nav-grup">Altyapı</li>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                    İZSU Su Kaynakları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="atiksu.html" class="nav-link">
+                    <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+                    Atık Su
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kati-atik.html" class="nav-link">
+                    <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                    Katı Atık
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                    Elektrik Altyapısı
+                </a>
+            </li>
+            <li class="nav-grup">3B ve Senaryo</li>
+            <li class="nav-item">
+                <a href="3b.html" class="nav-link">
+                    <i class="fa-solid fa-cube" aria-hidden="true"></i>
+                    3B Modeller <span class="rozet-yeni">Yeni</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="senaryo.html" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                    Senaryo Laboratuvarı <span class="rozet-deneme">Deneme</span>
+                </a>
+            </li>
+            <li class="nav-grup">Planlama</li>
+            <li class="nav-item">
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                    Planlanan Projeler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                    İşbirliklerimiz
+                </a>
+            </li>
+        </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="icerik" tabindex="-1">
+        <div id="havza-koruma" class="tab-pane active">
+            <header>
+                <h1>Havza ve Koruma Alanları</h1>
+                <p class="subtitle">Küçük Menderes Havzası'ndaki yeri, su kütlelerinin durumu, Çamlı Barajı koruma kuşakları, toprak, tarım arazileri, doğal ve arkeolojik sit alanları, flora ve fauna</p>
+            </header>
+
+            <div class="stats-row dar-kartlar">
+                <div class="stat-card ton-su">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-water" aria-hidden="true"></i></div>
+                    <div class="stat-label">Alt Havza</div>
+                    <div class="stat-value kucuk">İzmir Körfezi</div>
+                    <div class="stat-change ton-su">Küçük Menderes Havzası · 6.967 km²</div>
+                </div>
+                <div class="stat-card ton-kirmizi">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-droplet-slash" aria-hidden="true"></i></div>
+                    <div class="stat-label">Yeraltı Suyu Kalitesi</div>
+                    <div class="stat-value">33 / 42</div>
+                    <div class="stat-change ton-kirmizi">Havzadaki yeraltı suyu kütlesi riskte</div>
+                </div>
+                <div class="stat-card ton-amber">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-wheat-awn" aria-hidden="true"></i></div>
+                    <div class="stat-label">1. Sınıf Tarım Arazisi</div>
+                    <div class="stat-value">−%43,6</div>
+                    <div class="stat-change ton-amber">1957–2005: 1.753,1 → 989,6 ha <span class="not-rozeti hesap">hesap</span></div>
+                </div>
+                <div class="stat-card ton-yesil">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-tree" aria-hidden="true"></i></div>
+                    <div class="stat-label">Doğal Sit Alanı</div>
+                    <div class="stat-value kucuk">2 grup</div>
+                    <div class="stat-change ton-yesil">Yelki ve Çamlı'da · 3 tabiat anıtı</div>
+                </div>
+            </div>
+
+            <nav class="sayfa-ici-menu" aria-label="Bu sayfadaki bölümler">
+                <a href="#havza" class="ton-su"><i class="fa-solid fa-water" aria-hidden="true"></i>Havza</a>
+                <a href="#su-kutleleri" class="ton-mavi"><i class="fa-solid fa-droplet" aria-hidden="true"></i>Su kütleleri</a>
+                <a href="#camli" class="ton-yesil"><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i>Çamlı Barajı</a>
+                <a href="#toprak" class="ton-amber"><i class="fa-solid fa-mound" aria-hidden="true"></i>Toprak ve erozyon</a>
+                <a href="#tarim-arazisi" class="ton-turuncu"><i class="fa-solid fa-wheat-awn" aria-hidden="true"></i>Tarım arazileri</a>
+                <a href="#dogal-sit" class="ton-yesil"><i class="fa-solid fa-tree" aria-hidden="true"></i>Doğal sit</a>
+                <a href="#kultur" class="ton-mor"><i class="fa-solid fa-landmark" aria-hidden="true"></i>Kültür varlıkları</a>
+                <a href="#flora-fauna" class="ton-pembe"><i class="fa-solid fa-dove" aria-hidden="true"></i>Flora ve fauna</a>
+            </nav>
+
+            <!-- 1. Havza -->
+            <div class="bolum-baslik" id="havza">
+                <div class="ikon ton-su" aria-hidden="true"><i class="fa-solid fa-water" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Küçük Menderes Havzası</h2>
+                    <p>Güzelbahçe, havzanın beş alt havzasından İzmir Körfezi alt havzasının kuzey sınırında yer alıyor</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-map" aria-hidden="true"></i> Küçük Menderes Havzası ve Alt Havzaları</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/kucuk-menderes-alt-havzalar.jpg')">
+                        <img src="gorseller/kucuk-menderes-alt-havzalar.jpg" alt="Küçük Menderes Havzası'nın beş alt havzası: Küçük Menderes Nehri, Tahtalı–Seferihisar, İzmir Körfezi, Çeşme–Karaburun ve Kuşadası; Güzelbahçe İzmir Körfezi alt havzasında işaretli" width="907" height="559" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu. Körfez alt havzası İzmir merkezini, Bornova, Karşıyaka, Narlıdere, Güzelbahçe ve Urla'yı kapsıyor.</p>
+                    </div>
+                </figure>
+                <div class="card chart-card">
+                    <h2>Havza Alanının İllere Dağılımı (km²)</h2>
+                    <div class="chart-container y-250"><canvas id="havzaIlChart"></canvas></div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-su"><div class="deger">6.967 km²</div><div class="etiket">havzanın toplam alanı</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">%75,12</div><div class="etiket">İzmir il alanının havzada kalan kısmı</div></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-droplet renk-su ikon-bosluk" aria-hidden="true"></i>Havzadaki Su Kütleleri</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-su"><div class="deger">38</div><div class="etiket">nehir su kütlesi</div></div>
+                        <div class="mini-ist ton-su"><div class="deger">13</div><div class="etiket">göl su kütlesi (2 doğal göl, 11 baraj ve gölet)</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">42</div><div class="etiket">yeraltı suyu kütlesi</div></div>
+                    </div>
+                    <h3 class="kart-alt-baslik">Başlıca baskılar</h3>
+                    <div class="etiket-listesi">
+                        <span>Evsel atık su deşarjları</span><span>Endüstriyel atık su</span><span>Arıtılmış atık su deşarjı</span><span>Tarım ve hayvancılıktan yayılı kirlilik</span><span>Düzensiz katı atık sahalarından sızıntı suyu</span><span>Hidromorfolojik baskılar</span>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Küçük Menderes Nehri Havza Yönetim Planı (Tarım ve Orman Bakanlığı, Su Yönetimi Genel Müdürlüğü, 2019).</p>
+                </div>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-map" aria-hidden="true"></i> Mikro Havza Sınırları</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/mikro-havzalar.jpg')">
+                        <img src="gorseller/mikro-havzalar.jpg" alt="İzmir Körfezi, Tahtalı–Seferihisar ve Çeşme–Karaburun alt havzalarının mikro havza sınırları ve akarsuları" width="917" height="660" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; Copernicus EU-Hydro akarsu ağı verisiyle ArcGIS'te üretildi.</p>
+                    </div>
+                </figure>
+            </div>
+
+            <!-- 2. Su kütleleri -->
+            <div class="bolum-baslik" id="su-kutleleri">
+                <div class="ikon ton-mavi" aria-hidden="true"><i class="fa-solid fa-droplet" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Su Kütlelerinin Durumu</h2>
+                    <p>Havza yönetim planı değerlendirmesi (SYGM, 2018) · Güzelbahçe ile ilişkili yeraltı suyu kütleleri</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card full-width">
+                    <h2>Yüzey Su Kütlelerinin Durumu: Havzadaki 55 Kütle</h2>
+                    <div class="chart-container y-250"><canvas id="yuzeySuChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Kimyasal durumda yalnızca "geçti / kaldı" değerlendirmesi var. Ekolojik durum alt havzalarda orta ile kötü arasında; Küçük Menderes Nehri ve Kuşadası alt havzalarında kötü.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-water renk-su ikon-bosluk" aria-hidden="true"></i>İzmir Körfezi Alt Havzası</h2>
+                    <table class="kart-tablo">
+                        <tr><td>Balçova Barajı</td><td><span class="durum-cip iyi">İyi</span></td></tr>
+                        <tr><td>Yeşildere</td><td><span class="durum-cip orta">Orta</span></td></tr>
+                        <tr><td>Kona Deresi</td><td><span class="durum-cip zayif">Zayıf</span> <span class="durum-cip notr">Veri yok</span></td></tr>
+                        <tr><td>Akpınar Deresi</td><td><span class="durum-cip kotu">Kötü</span></td></tr>
+                        <tr><td>Yarıkpınar Deresi</td><td><span class="durum-cip notr">Veri yok</span></td></tr>
+                        <tr><td>Kıyı su kütleleri (4)</td><td><span class="durum-cip orta">3 orta</span> <span class="durum-cip zayif">1 zayıf</span></td></tr>
+                    </table>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Ekolojik durum. Kona Deresi iki ayrı su kütlesi olarak değerlendiriliyor.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Yeraltı Suyu Kütlelerinde Risk (42 kütle)</h2>
+                    <div class="chart-container y-250"><canvas id="yeraltiChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Miktar bakımından kütlelerin çoğu risksiz, kalite bakımından büyük çoğunluğu riskte.</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-arrow-down-up-across-line renk-mavi ikon-bosluk" aria-hidden="true"></i>Güzelbahçe ile İlişkili Yeraltı Suyu Kütleleri</h2>
+                    <div class="tablo-kaydir">
+                        <table class="veri-tablosu">
+                            <thead><tr><th scope="col">Su kütlesi</th><th scope="col">Miktar bakımından</th><th scope="col">Kalite bakımından</th></tr></thead>
+                            <tbody>
+                                <tr><td class="kaynak-adi">Narlıdere</td><td><span class="durum-cip iyi">Risk yok</span></td><td><span class="durum-cip kotu">Riskte</span></td></tr>
+                                <tr><td class="kaynak-adi">Urla</td><td><span class="durum-cip kotu">Riskte</span></td><td><span class="durum-cip kotu">Riskte</span></td></tr>
+                                <tr><td class="kaynak-adi">Payamlı-Kavacık</td><td><span class="durum-cip iyi">Risk yok</span></td><td><span class="durum-cip iyi">Risk yok</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Çamlı Barajı -->
+            <div class="bolum-baslik" id="camli">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Çamlı Barajı ve Efemçukuru</h2>
+                    <p>Planlanan içme suyu barajının koruma kuşakları güney Güzelbahçe'de imar kararlarını sınırlıyor; havzadaki altın madeni yıllardır tartışma konusu</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-map" aria-hidden="true"></i> Çamlı Barajı Koruma Alanları ve Efemçukuru Altın Madeni</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/camli-baraji-koruma-alanlari.jpg')">
+                        <img src="gorseller/camli-baraji-koruma-alanlari.jpg" alt="Çamlı Barajı göl alanı çevresinde mutlak, kısa, orta ve uzun mesafeli koruma alanları; Payamlı, Küçükkaya, Kavacık, Çamtepe ve Efemçukuru Altın Madeni" width="611" height="476" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <ul class="harita-lejant">
+                            <li><i class="cizgi" style="--b:#22c55e" aria-hidden="true"></i>Mutlak koruma</li>
+                            <li><i class="cizgi" style="--b:#dc2626" aria-hidden="true"></i>Kısa mesafeli</li>
+                            <li><i class="cizgi" style="--b:#f59e0b" aria-hidden="true"></i>Orta mesafeli</li>
+                        </ul>
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu. Efemçukuru Altın Madeni uzun mesafeli koruma alanında kalıyor.</p>
+                    </div>
+                </figure>
+                <div class="card">
+                    <h2><i class="fa-solid fa-ruler-horizontal renk-yesil ikon-bosluk" aria-hidden="true"></i>Koruma Kuşakları</h2>
+                    <p class="kart-aciklama">Göl alanından uzaklık · İBB Su Havzaları Koruma Yönetmeliği</p>
+                    <div class="kusak-semasi" role="img" aria-label="Göl alanından itibaren 0–300 m mutlak, 300–700 m kısa mesafeli, 700–2000 m orta mesafeli koruma kuşağı">
+                        <span style="--b:#22c55e; width:15%">Mutlak</span>
+                        <span style="--b:#f87171; width:20%">Kısa</span>
+                        <span style="--b:#fbbf24; width:65%">Orta mesafeli</span>
+                    </div>
+                    <div class="kusak-olcek" aria-hidden="true"><span style="width:15%">0 m</span><span style="width:20%">300</span><span style="width:65%">700<span>2000 m</span></span></div>
+                    <ul class="bant-listesi">
+                        <li style="--b:#22c55e"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">0–300 m</span><span class="bant-metin"><strong>Mutlak koruma alanı</strong>Yapılaşma yasak (%0); kentsel gelişme eşiği.</span></li>
+                        <li style="--b:#f87171"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">300–700 m</span><span class="bant-metin"><strong>Kısa mesafeli koruma alanı</strong>Yalnızca teknik altyapı tesislerine izin verilir.</span></li>
+                        <li style="--b:#fbbf24"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">700–2000 m</span><span class="bant-metin"><strong>Orta mesafeli koruma alanı</strong>Düşük yoğunluklu kırsal ve tarımsal kullanım.</span></li>
+                    </ul>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Kuşaklar Çamlı ve Payamlı'nın kırsal kesimlerini ve Yelki'nin güney yamaçlarını kapsıyor.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-clipboard-list renk-yesil ikon-bosluk" aria-hidden="true"></i>Proje Künyesi</h2>
+                    <table class="kart-tablo">
+                        <tr><td>Konum</td><td>Çamlı Deresi (Çamlıçay), Çamlı ve Küçükkaya mahalleleri</td></tr>
+                        <tr><td>Amaç</td><td>Güzelbahçe ve Yarımada'nın (Urla, Çeşme, Karaburun) uzun vadeli içme ve kullanma suyu</td></tr>
+                        <tr><td>Ek su</td><td>Yılda 11,18 milyon m³ (İZSU İklim Değişikliği ve Barajlar Şube Müdürlüğü)</td></tr>
+                        <tr><td>Durum</td><td>İZSU planlama raporu hazır, ÇED olumlu belgesi alındı; uygulama projesi DSİ ile protokol aşamasında</td></tr>
+                        <tr><td>Hizmet edeceği nüfus</td><td>250.000–300.000 kişi; planlama sürecinde dile getirilen tahmin, gerçekleşmiş bir hizmet değil</td></tr>
+                    </table>
+                    <p class="kucuk-not"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>Baraj bugüne kadar yapılmadı. Yıllık su verimine ilişkin diğer kaynaklar İZSU Su Kaynakları sayfasında.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-triangle-exclamation renk-amber ikon-bosluk" aria-hidden="true"></i>Madencilik Suyu Nasıl Etkileyebilir?</h2>
+                    <ul class="bant-listesi">
+                        <li style="--b:#f87171"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Ağır metal</span><span class="bant-metin">Kayaçlardaki arsenik ve diğer metaller su kalitesini etkileyebilir.</span></li>
+                        <li style="--b:#fb923c"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Asit drenajı</span><span class="bant-metin">Bazı kayaçların hava ve suyla teması asidik koşul yaratıp metalleri çözebilir.</span></li>
+                        <li style="--b:#fbbf24"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Sediment</span><span class="bant-metin">Kazı ve arazi bozulması yüzey akışındaki sedimenti artırabilir.</span></li>
+                        <li style="--b:#60a5fa"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Yeraltı suyu</span><span class="bant-metin">Madencilik yeraltı suyunun akışını ve kalitesini değiştirebilir.</span></li>
+                    </ul>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Bunlar olası risklerdir; belirli bir madende kirlilik oluştuğu anlamına gelmez.</p>
+                </div>
+            </div>
+            <h2 class="ara-baslik">Baraj ve maden: zaman çizelgesi</h2>
+            <ol class="zaman-cizelgesi ton-yesil alt-bosluk-k">
+                <li><span class="zc-tarih">1984</span><div><span class="zc-baslik">Bademler Projesi</span><span class="zc-metin">DSİ'nin planlama raporunda Çamlı Barajı ilk olarak sulama amacıyla önerildi.</span></div></li>
+                <li><span class="zc-tarih">1992</span><div><span class="zc-baslik">Amaç değişikliği</span><span class="zc-metin">İzmir'in artan içme suyu ihtiyacı nedeniyle proje içme suyuna çevrildi.</span></div></li>
+                <li><span class="zc-tarih">1997</span><div><span class="zc-baslik">İZSU planlaması</span><span class="zc-metin">Planlama çalışmaları İZSU tarafından yürütülmeye başlandı.</span></div></li>
+                <li><span class="zc-tarih">2000'ler</span><div><span class="zc-baslik">Maden tartışması</span><span class="zc-metin">Bölgede planlanan altın madenciliği çevre ve hukuk tartışmalarının odağı oldu; alternatif kaynaklar geliştikçe barajın yatırım önceliği düştü.</span></div></li>
+                <li><span class="zc-tarih">2004</span><div><span class="zc-baslik">Ruhsat iptali</span><span class="zc-metin">İzmir 4. İdare Mahkemesi olası çevresel etkiler nedeniyle madenin işletme ruhsatını iptal etti.</span></div></li>
+                <li><span class="zc-tarih">2011</span><div><span class="zc-baslik">Ticari üretim</span><span class="zc-metin">TÜPRAG'ın işlettiği Efemçukuru Altın Madeni ticari üretime başladı (yeraltı madenciliği).</span></div></li>
+                <li><span class="zc-tarih">2014</span><div><span class="zc-baslik">Revize planlama raporu</span><span class="zc-metin">Barajın revize planlama raporu DSİ kriterlerine uygun bulundu.</span></div></li>
+                <li><span class="zc-tarih">2015–2021</span><div><span class="zc-baslik">Kapasite artışı davaları</span><span class="zc-metin">Madenin kapasite artışı ve çevresel etkileri üzerine hukuki süreç sürdü.</span></div></li>
+                <li><span class="zc-tarih">2017</span><div><span class="zc-baslik">DSİ açıklaması</span><span class="zc-metin">Barajın 2040'tan önce uygulanması planlanmıyor; sonraki ihtiyaçlar için yeniden ele alınabilir.</span></div></li>
+                <li><span class="zc-tarih">2020</span><div><span class="zc-baslik">İBB açıklaması</span><span class="zc-metin">Kapasite artışına ilişkin hukuki süreç ve madenin uzun mesafeli koruma alanıyla ilişkisi açıklandı.</span></div></li>
+                <li><span class="zc-tarih">2024</span><div><span class="zc-baslik">Meclis soru önergeleri</span><span class="zc-metin">Barajın ÇED süreci ve madenin aynı havzadaki konumu TBMM gündemine taşındı.</span></div></li>
+            </ol>
+            <div class="izgara-iki">
+                <div class="card">
+                    <h2><i class="fa-solid fa-droplet renk-su ikon-bosluk" aria-hidden="true"></i>Güzelbahçe Göleti</h2>
+                    <ol class="zaman-cizelgesi ton-su tek-sutun-zc">
+                        <li><span class="zc-tarih">2012</span><div><span class="zc-metin">DSİ faaliyet raporunda tarımsal sulama için planlanan gölet projeleri arasında yer aldı.</span></div></li>
+                        <li><span class="zc-tarih">2023</span><div><span class="zc-metin">Plan değişikliği raporunda gölet ve sulama alanının 1/100.000 ölçekli İzmir-Manisa Çevre Düzeni Planı'ndan çıkarılması önerildi.</span></div></li>
+                    </ol>
+                    <p class="kucuk-not"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>Göletin güncel durumu ve sulamada kullanılıp kullanılmadığı için daha yeni veri gerekiyor.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-scale-balanced renk-amber ikon-bosluk" aria-hidden="true"></i>Planlama Açısından</h2>
+                    <ul class="bant-listesi">
+                        <li style="--b:#34d399"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Havza</span><span class="bant-metin">Arazi kullanım kararları su kaynaklarını korurken ekonomik faaliyetleri de gözetmeli.</span></li>
+                        <li style="--b:#f59e0b"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Çatışma</span><span class="bant-metin">Madencilik ekonomik yarar sağlarken su kaynakları için risk oluşturabilir; etkileri dikkatle değerlendirilmeli.</span></li>
+                        <li style="--b:#60a5fa"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Su yönetimi</span><span class="bant-metin">İklim değişikliği, kuraklık ve artan talep havza korumayı, alternatif kaynakları ve izlemeyi zorunlu kılıyor.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4. Toprak ve erozyon -->
+            <div class="bolum-baslik" id="toprak">
+                <div class="ikon ton-amber" aria-hidden="true"><i class="fa-solid fa-mound" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Toprak ve Erozyon</h2>
+                    <p>Mahallelere göre toprak türleri, toprak kısıtları ve erozyon dereceleri</p>
+                </div>
+            </div>
+            <div class="tablo-kutu">
+                <div class="tablo-kaydir">
+                    <table class="veri-tablosu matris-tablo">
+                        <thead>
+                            <tr><th scope="col">Mahalle</th><th scope="col">Toprak türleri</th><th scope="col">Toprak kısıtları</th><th scope="col">Erozyon derecesi</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="kaynak-adi">Atatürk</td><td><span class="cip-grubu"><span class="cip">Kırmızı kestane</span><span class="cip genis">Kireçli kahverengi</span></span></td><td><span class="cip-grubu"><span class="cip">SE</span></span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 4. derece: çok şiddetli"><span class="d1" title="1. derece: yok veya çok az">1</span><span class="d2" title="2. derece: orta">2</span><span class="d3" title="3. derece: şiddetli">3</span><span class="d4 var" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Çamlı</td><td><span class="cip-grubu"><span class="cip">Kolüvyal</span><span class="cip">Kırmızı kestane</span><span class="cip">Rendzina</span><span class="cip genis">Kireçli kahverengi</span></span></td><td><span class="cip-grubu"><span class="cip">SE</span></span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 1. derece: yok veya çok az, 2. derece: orta, 3. derece: şiddetli, 4. derece: çok şiddetli"><span class="d1 var" title="1. derece: yok veya çok az">1</span><span class="d2 var" title="2. derece: orta">2</span><span class="d3 var" title="3. derece: şiddetli">3</span><span class="d4 var" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Çelebi</td><td><span class="cip-grubu"><span class="cip">Kolüvyal</span><span class="cip genis">Kireçli kahverengi</span></span></td><td><span class="cip-grubu"><span class="cip">E</span><span class="cip">ES</span></span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 1. derece: yok veya çok az"><span class="d1 var" title="1. derece: yok veya çok az">1</span><span class="d2" title="2. derece: orta">2</span><span class="d3" title="3. derece: şiddetli">3</span><span class="d4" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Kahramandere</td><td><span class="cip-grubu"><span class="cip">Kolüvyal</span><span class="cip genis">Kireçli kahverengi</span></span></td><td><span class="cip-grubu"><span class="cip">E</span><span class="cip">ES</span><span class="cip">SE</span></span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 1. derece: yok veya çok az"><span class="d1 var" title="1. derece: yok veya çok az">1</span><span class="d2" title="2. derece: orta">2</span><span class="d3" title="3. derece: şiddetli">3</span><span class="d4" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Küçükkaya</td><td><span class="cip-grubu"><span class="cip">Kırmızı kestane</span><span class="cip genis">Kireçli kahverengi</span></span></td><td><span class="cip-grubu"><span class="cip">SE</span></span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 3. derece: şiddetli, 4. derece: çok şiddetli"><span class="d1" title="1. derece: yok veya çok az">1</span><span class="d2" title="2. derece: orta">2</span><span class="d3 var" title="3. derece: şiddetli">3</span><span class="d4 var" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Maltepe</td><td><span class="cip-grubu"><span class="cip genis">Kolüvyal</span><span class="cip">Kırmızı kestane</span></span></td><td><span class="cip-grubu"><span class="cip">E</span><span class="cip">ES</span></span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 1. derece: yok veya çok az, 2. derece: orta, 3. derece: şiddetli"><span class="d1 var" title="1. derece: yok veya çok az">1</span><span class="d2 var" title="2. derece: orta">2</span><span class="d3 var" title="3. derece: şiddetli">3</span><span class="d4" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Mustafa Kemal Paşa</td><td><span class="cip-grubu"><span class="cip genis">Kireçli kahverengi</span></span></td><td><span class="cip-grubu"><span class="cip">E</span><span class="cip">ES</span><span class="cip">SE</span></span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 4. derece: çok şiddetli"><span class="d1" title="1. derece: yok veya çok az">1</span><span class="d2" title="2. derece: orta">2</span><span class="d3" title="3. derece: şiddetli">3</span><span class="d4 var" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Payamlı</td><td><span class="cip-grubu"><span class="cip">Kırmızı kestane</span><span class="cip genis">Kireçli kahverengi</span></span></td><td><span class="cip-grubu"><span class="cip">SE</span></span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon derecesi belirtilmemiş"><span class="d1" title="1. derece: yok veya çok az">1</span><span class="d2" title="2. derece: orta">2</span><span class="d3" title="3. derece: şiddetli">3</span><span class="d4" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Siteler</td><td><span class="cip-grubu"><span class="cip genis">Kolüvyal</span><span class="cip">Kırmızı kestane</span></span></td><td><span class="metin-soluk">–</span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 1. derece: yok veya çok az, 2. derece: orta"><span class="d1 var" title="1. derece: yok veya çok az">1</span><span class="d2 var" title="2. derece: orta">2</span><span class="d3" title="3. derece: şiddetli">3</span><span class="d4" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Yaka</td><td><span class="cip-grubu"><span class="cip">Kolüvyal</span><span class="cip genis">Kırmızı kestane</span><span class="cip">Kireçli kahverengi</span></span></td><td><span class="cip-grubu"><span class="cip">E</span><span class="cip">ES</span><span class="cip">SE</span></span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 1. derece: yok veya çok az, 2. derece: orta, 3. derece: şiddetli, 4. derece: çok şiddetli"><span class="d1 var" title="1. derece: yok veya çok az">1</span><span class="d2 var" title="2. derece: orta">2</span><span class="d3 var" title="3. derece: şiddetli">3</span><span class="d4 var" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Yalı</td><td><span class="cip-grubu"><span class="cip genis">Kolüvyal</span></span></td><td><span class="metin-soluk">–</span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 1. derece: yok veya çok az"><span class="d1 var" title="1. derece: yok veya çok az">1</span><span class="d2" title="2. derece: orta">2</span><span class="d3" title="3. derece: şiddetli">3</span><span class="d4" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                            <tr><td class="kaynak-adi">Yelki</td><td><span class="cip-grubu"><span class="cip">Kolüvyal</span><span class="cip">Kırmızı kestane</span><span class="cip">Kireçli kahverengi</span></span></td><td><span class="cip-grubu"><span class="cip">E</span><span class="cip">ES</span></span></td><td><span class="derece-noktalari" role="img" aria-label="Erozyon: 1. derece: yok veya çok az, 2. derece: orta"><span class="d1 var" title="1. derece: yok veya çok az">1</span><span class="d2 var" title="2. derece: orta">2</span><span class="d3" title="3. derece: şiddetli">3</span><span class="d4" title="4. derece: çok şiddetli">4</span></span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="toprak-lejant">
+                <span><span class="cip genis">Kalın</span> mahallenin büyük bölümü <span class="cip">İnce</span> bir bölümü</span>
+                <span><strong>E</strong> hafif erozyon · <strong>ES</strong> erozyon ve sığ toprak · <strong>SE</strong> sığ toprak ve erozyon</span>
+                <span><span class="derece-noktalari" aria-hidden="true"><span class="d1 var">1</span><span class="d2 var">2</span><span class="d3 var">3</span><span class="d4 var">4</span></span> yok veya çok az · orta · şiddetli · çok şiddetli</span>
+            </div>
+            <div class="simge-izgarasi">
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-mound" aria-hidden="true"></i></span><div><h3>Kolüvyal topraklar</h3><p>Uygun eğimli alanlarda ve vadi tabanlarında tarım. Zeytin, üzüm, sebze.</p></div></div>
+                <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-mound" aria-hidden="true"></i></span><div><h3>Kırmızı kestane rengi topraklar</h3><p>Tarım ve kuru tarım. Zeytin, üzüm, tahıl.</p></div></div>
+                <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-mound" aria-hidden="true"></i></span><div><h3>Rendzina topraklar</h3><p>Sınırlı tarım, otlatma ve doğal bitki örtüsü. Zeytin ve Akdeniz'e uyumlu bitkiler.</p></div></div>
+                <div class="simge-karti ton-turuncu"><span class="sk-simge"><i class="fa-solid fa-mound" aria-hidden="true"></i></span><div><h3>Kireçli kahverengi topraklar</h3><p>Tarım ve kuru tarım. Zeytin, üzüm, narenciye, tahıl.</p></div></div>
+            </div>
+            <p class="kucuk-not alt-bosluk-k"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Baraj koruma kuşaklarında 3. ve 4. derece (şiddetli, çok şiddetli) erozyon görülüyor. Kaynakta Payamlı için erozyon derecesi belirtilmemiş.</p>
+
+            <!-- 5. Tarım arazileri -->
+            <div class="bolum-baslik" id="tarim-arazisi">
+                <div class="ikon ton-turuncu" aria-hidden="true"><i class="fa-solid fa-wheat-awn" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Tarım Arazilerinin Korunması ve Kaybı</h2>
+                    <p>Toprak yeteneğine göre yasal koruma · 1957–2005 arazi kullanımı değişimi (Balçova, Narlıdere ve Güzelbahçe'nin kıyı kesimi)</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card">
+                    <h2><i class="fa-solid fa-scale-balanced renk-turuncu ikon-bosluk" aria-hidden="true"></i>Koruma Statüleri</h2>
+                    <ul class="bant-listesi">
+                        <li style="--b:#f59e0b"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Mutlak tarım</span><span class="bant-metin"><strong>Mutlak tarım arazileri</strong>Tarımsal amaçla 2 hektardan (20 dekar) küçük parsellere bölünemez; Bakanlıkça "kamu yararı" kararı verilmedikçe tarım dışı yapılaşma yasak.</span></li>
+                        <li style="--b:#84cc16"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Dikili tarım</span><span class="bant-metin"><strong>Dikili tarım arazileri</strong>Zeytinlik, bağ ve narenciye bahçeleri; zeytinlikler 3573 sayılı Kanun'la ayrıca korunuyor.</span></li>
+                    </ul>
+                </div>
+                <div class="card chart-card">
+                    <h2>Birinci Sınıf Tarım Arazisi (ha)</h2>
+                    <div class="chart-container y-250"><canvas id="birinciSinifChart"></canvas></div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-kirmizi"><div class="deger">680 ha</div><div class="etiket">yerleşime giden 1. sınıf arazi</div></div>
+                        <div class="mini-ist ton-turuncu"><div class="deger">83,5 ha</div><div class="etiket">otoyol yapımıyla kaybedilen</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">992,8 ha</div><div class="etiket">bahçe tarımı, 2005 (%7,0 artış)</div></div>
+                    </div>
+                </div>
+                <div class="card chart-card">
+                    <h2>Kentsel ve Diğer Kullanımların Alanı, 1957–2005 (ha)</h2>
+                    <div class="chart-container y-300"><canvas id="kullanimDegisimChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Yerleşim alanı 48 yılda 104,7 ha'dan 1.694,5 ha'ya çıktı; bataklık 53,3 ha'dan 6,4 ha'ya indi.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Yerleşim, Otoyol ve Barajın Yerini Aldığı Alanlar (ha)</h2>
+                    <div class="chart-container y-300"><canvas id="donusumChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>1957–2005 arasında bu kullanımlara dönüşen arazinin önceki kullanımı.</p>
+                </div>
+            </div>
+
+            <!-- 6. Doğal sit -->
+            <div class="bolum-baslik" id="dogal-sit">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-tree" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Doğal Sit Alanları ve Tabiat Anıtları</h2>
+                    <p>İlçenin batısında, Yelki ve Çamlı'da iki doğal koruma alanı; Balçova–Çeşme Otoyolu Yelki'de bunları ikiye bölüyor</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card">
+                    <h2><i class="fa-solid fa-shield-halved renk-yesil ikon-bosluk" aria-hidden="true"></i>Koruma Alanları</h2>
+                    <ul class="bant-listesi">
+                        <li style="--b:#15803d"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">32. Grup</span><span class="bant-metin"><strong>Nitelikli doğal koruma alanı</strong>Yelki ve Çamlı</span></li>
+                        <li style="--b:#84cc16"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">38. Grup</span><span class="bant-metin"><strong>Sürdürülebilir koruma ve kontrollü kullanım alanı</strong>Çeşme, Urla, Güzelbahçe ve Seferihisar; 2018'de tescil edildi</span></li>
+                    </ul>
+                    <h3 class="kart-alt-baslik">Tabiat anıtları</h3>
+                    <div class="etiket-listesi">
+                        <span>Yarendede Fıstık Çamı</span><span>Yemişçi Çınarı</span><span>Fıstık Çamı Tabiat Anıtı</span>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe'de Özel Çevre Koruma Bölgesi yok; İzmir'dekiler Karaburun Yarımadası'nda (Akdeniz foku üreme ve yaşam alanı) ve Gediz Deltası'nda.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Arazi Kullanımında Doğal Nitelikli Alanlar (ha)</h2>
+                    <div class="chart-container y-300"><canvas id="dogalAlanChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Yüzdeler ilçenin genel arazi kullanımı içindeki paylardır.</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-house-chimney renk-yesil ikon-bosluk" aria-hidden="true"></i>Doğal Sit Alanlarındaki Tarım Alanlarında Bağ Evi ve Yazlık Koşulları</h2>
+                    <div class="mini-istatistik">
+                        <div class="mini-ist ton-yesil"><div class="deger">5,00 m</div><div class="etiket">yola ve parsel sınırına en az uzaklık</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">%5</div><div class="etiket">parselin en fazla kaplanabilecek kısmı</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">250 m²</div><div class="etiket">en fazla toplam inşaat alanı</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">6,80 m</div><div class="etiket">doğal zeminden en fazla saçak yüksekliği</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">Kısıt yok</div><div class="etiket">tarımsal tesis olarak seralar</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Kültür varlıkları -->
+            <div class="bolum-baslik" id="kultur">
+                <div class="ikon ton-mor" aria-hidden="true"><i class="fa-solid fa-landmark" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Arkeolojik Sit Alanları ve Tescilli Kültür Varlıkları</h2>
+                    <p>Arkeolojik sitler kuzeybatıda Siteler'de ve batıda Yelki'de · İzmir 1 Numaralı Kültür Varlıklarını Koruma Bölge Kurulu kararları</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card">
+                    <h2><i class="fa-solid fa-landmark renk-mor ikon-bosluk" aria-hidden="true"></i>Çalıtepe Mevkii</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-mor"><div class="deger">1. ve 3. derece</div><div class="etiket">arkeolojik sit · 03.10.2002 tarih, 10133 sayılı kurul kararı</div></div>
+                        <div class="mini-ist ton-kirmizi"><div class="deger">Yapılaşma yasak</div><div class="etiket">İBB Meclisi kararıyla mutlak koruma alanı</div></div>
+                    </div>
+                    <p class="kart-aciklama">İlk tespit edildiğinde 1. derece arkeolojik sit olarak belirlenen alanın statüsü, üzerine yapılan bir konut sitesi nedeniyle 3. dereceye çevrildi. Bu örnek, imar kararlarının koruma süreçlerini nasıl etkileyebildiğini gösteriyor.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Tescilli Kültür Varlıkları: Türlere Göre</h2>
+                    <div class="chart-container y-250"><canvas id="kulturChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Aşağıdaki 14 kaydın türlere göre sayımı <span class="not-rozeti hesap">hesap</span>.</p>
+                </div>
+            </div>
+            <div class="tablo-kutu alt-bosluk-k">
+                <div class="tablo-kaydir">
+                    <table class="veri-tablosu">
+                        <thead>
+                            <tr><th scope="col">Adı</th><th scope="col">Konum</th><th scope="col">Tür</th><th scope="col">Grup / derece</th><th scope="col">Kurul kararı (tarih / sayı)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="kaynak-adi">Güzelbahçe Sahil Yolu Anıtı</td><td>Yalı Mah., Mithatpaşa Cad.</td><td>Anıt</td><td>1. grup</td><td>12.1.1989/783 · 14.6.2012/554</td></tr>
+                            <tr><td class="kaynak-adi">Güzelbahçe Anıtı</td><td>Çelebi Mah.</td><td>Anıt</td><td>1. grup</td><td>12.1.1989/783 · 14.6.2012/553</td></tr>
+                            <tr><td class="kaynak-adi">Aşağı Çarşı Camii</td><td>Yelki</td><td>Cami</td><td>–</td><td>11.9.2000/8800</td></tr>
+                            <tr><td class="kaynak-adi">Yukarı Çarşı Camii</td><td>Yelki</td><td>Cami</td><td>–</td><td>11.9.2000/8800</td></tr>
+                            <tr><td class="kaynak-adi">Tümülüs (1. derece arkeolojik sit)</td><td>Yelki</td><td>Tümülüs</td><td>1. grup</td><td>11.9.2000/8800</td></tr>
+                            <tr><td class="kaynak-adi">III. derece arkeolojik sit</td><td>Çalıtepe Mevkii</td><td>Arkeolojik sit</td><td>3. grup</td><td>30.7.1998/7456 · 3.10.2002/10133</td></tr>
+                            <tr><td class="kaynak-adi">III. derece arkeolojik sit</td><td>Yelki</td><td>Arkeolojik sit</td><td>3. grup</td><td>11.9.2000/8800 · 29.4.2004/11258</td></tr>
+                            <tr><td class="kaynak-adi">Aşağı Çarşı Camii</td><td>Atatürk Mah., 672 Sok.</td><td>Cami</td><td>–</td><td>6.3.2009/3896</td></tr>
+                            <tr><td class="kaynak-adi">Bağ Evi</td><td>Yalı Mah., 482 Sok.</td><td>Sivil mimarlık örneği</td><td>–</td><td>30.3.2012/421</td></tr>
+                            <tr><td class="kaynak-adi">Kameriye</td><td>Yalı Mah., 482 Sok.</td><td>Sivil mimarlık örneği</td><td>–</td><td>30.3.2012/421</td></tr>
+                            <tr><td class="kaynak-adi">Konut</td><td>Yalı Mah., 482 Sok.</td><td>Sivil mimarlık örneği</td><td>–</td><td>30.3.2012/421</td></tr>
+                            <tr><td class="kaynak-adi">Eski Kilise Kalıntısı</td><td>Yelki Mah.</td><td>Dini yapı</td><td>–</td><td>28.09.2017/6576</td></tr>
+                            <tr><td class="kaynak-adi">Osmanlı Mezarlığı</td><td>Büyükhamediye Mah.</td><td>Mezarlık (koruma alanı)</td><td>1. grup</td><td>30.05.2019/9229</td></tr>
+                            <tr><td class="kaynak-adi">İnkaya Kült Mağarası vb. (1. derece arkeolojik sit)</td><td>–</td><td>Arkeolojik sit</td><td>–</td><td>06.10.1995/5932</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p class="kucuk-not alt-bosluk-k"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Tescil listesi araştırma grubunca kişisel iletişimle edinildi (Ekim 2026). Kurul kararları İzmir 1 Numaralı KVKBK ve öncülü kurullara aittir.</p>
+
+            <!-- 8. Flora ve fauna -->
+            <div class="bolum-baslik" id="flora-fauna">
+                <div class="ikon ton-pembe" aria-hidden="true"><i class="fa-solid fa-dove" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Flora ve Fauna</h2>
+                    <p>Akdeniz bitki örtüsü: yüksek kesimlerde kızılçam ormanları, alçak kesimlerde maki · Yelki çevresi yerel biyolojik çeşitlilik için önemli</p>
+                </div>
+            </div>
+            <h2 class="ara-baslik">Önemli bitki türleri</h2>
+            <div class="simge-izgarasi dort-sutun alt-bosluk-k">
+                <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-tree" aria-hidden="true"></i></span><div><h3>Kızılçam</h3><span class="latince">Pinus brutia</span></div></div>
+                <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-tree" aria-hidden="true"></i></span><div><h3>Palamut meşesi</h3><span class="latince">Quercus ithaburensis subsp. macrolepis</span></div></div>
+                <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-leaf" aria-hidden="true"></i></span><div><h3>Kermes meşesi</h3><span class="latince">Quercus coccifera</span></div></div>
+                <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-leaf" aria-hidden="true"></i></span><div><h3>Menengiç</h3><span class="latince">Pistacia terebinthus</span></div></div>
+                <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span><div><h3>Zeytin</h3><span class="latince">Olea europaea</span></div></div>
+            </div>
+            <h2 class="ara-baslik">Yaban hayatı</h2>
+            <div class="simge-izgarasi dort-sutun">
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-paw" aria-hidden="true"></i></span><div><h3>Yaban domuzu</h3><span class="latince">Sus scrofa</span></div></div>
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-paw" aria-hidden="true"></i></span><div><h3>Kızıl tilki</h3><span class="latince">Vulpes vulpes</span></div></div>
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-paw" aria-hidden="true"></i></span><div><h3>Çakal</h3><span class="latince">Canis aureus</span></div></div>
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-paw" aria-hidden="true"></i></span><div><h3>Yaban tavşanı</h3><span class="latince">Lepus europaeus</span></div></div>
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-feather" aria-hidden="true"></i></span><div><h3>Şahin</h3><span class="latince">Buteo buteo</span></div></div>
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-feather" aria-hidden="true"></i></span><div><h3>Atmaca</h3><span class="latince">Accipiter nisus</span></div></div>
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-dove" aria-hidden="true"></i></span><div><h3>Kızılgerdan</h3><span class="latince">Erithacus rubecula</span></div></div>
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-dove" aria-hidden="true"></i></span><div><h3>Mavi baştankara</h3><span class="latince">Cyanistes caeruleus</span></div></div>
+            </div>
+            <p class="kucuk-not alt-bosluk-k"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe için hazırlanan gözlem verisinde bukalemun, tosbağa, yılan, ova kurbağası ve başka sürüngen ve kuş türleri de kayıtlı.</p>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Havzadaki Omurgalı Türler (balıklar hariç)</h2>
+                    <div class="chart-container y-250"><canvas id="omurgaliChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Küçük Menderes Deltası ve çevresi: 81 familyadan 213 tür.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Havzadaki Bitki Türlerinin Fitocoğrafik Dağılımı</h2>
+                    <div class="chart-container y-250"><canvas id="floraChart"></canvas></div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-yesil"><div class="deger">264</div><div class="etiket">tür</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">205</div><div class="etiket">cins</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">70</div><div class="etiket">familya</div></div>
+                        <div class="mini-ist ton-mor"><div class="deger">6</div><div class="etiket">endemik</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kaynak-notu">
+                <p>Veri Kaynağı: Araştırma grubunun koruma alanları ve su havzası raporu ile fiziki yapı raporu · Tarım ve Orman Bakanlığı Su Yönetimi Genel Müdürlüğü: Küçük Menderes Havza Yönetim Planı (2019), Stratejik Çevresel Değerlendirme (2022), Kuraklık Yönetim Planı · TMMOB ÇMO İzmir Su Raporu (2024) · İZSU · DSİ · İBB koruma alanları, sit alanları ve hidroloji haritaları · Çevre, Şehircilik ve İklim Değişikliği Bakanlığı SAYS ve TUCBS · İzmir 1 Numaralı KVKBK · Tarım ve Orman Bakanlığı EKOTABAN · İZKA (2022)</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/havza-koruma.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

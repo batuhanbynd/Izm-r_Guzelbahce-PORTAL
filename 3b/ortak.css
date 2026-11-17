@@ -1,5 +1,5 @@
 /* =============================================
-   BAS PORTAL · 3B modeller (ortak görünüm)
+   İzmir Güzelbahçe Veri Portalı · 3B modeller (ortak görünüm)
    Tam ekran, gece haritası görünümü. Üstte ince bir çubuk, solda kontrol kartı,
    altta gezinti çubuğu, sağda harita kontrolleri, ölçek ve pusula.
    ============================================= */
@@ -35,6 +35,10 @@ button:focus-visible,input:focus-visible,a:focus-visible,canvas:focus-visible{ou
 .marka .ok{display:grid;place-items:center;width:28px;height:28px;border-radius:7px;border:1px solid var(--line-2);color:var(--muted);font:500 15px/1 var(--f-body);transition:background .15s,color .15s}
 .marka:hover .ok{background:#1a222c;color:var(--fg)}
 .marka .cizgi{width:3px;height:18px;border-radius:2px;background:var(--accent)}
+.marka .yazi{display:flex;flex-direction:column;gap:3px;line-height:1}
+.marka .yazi-ust{font-size:9.5px;letter-spacing:.16em;color:var(--muted)}
+.marka .yazi-alt{font-size:13.5px;letter-spacing:.07em}
+.marka .cizgi{height:26px}
 .sekmeler{display:flex;gap:4px;margin-left:10px;padding:3px;background:rgba(10,14,19,.7);border:1px solid var(--line);border-radius:9px}
 .sekmeler a{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:6px;color:var(--muted);text-decoration:none;font:500 13px/1 var(--f-body);white-space:nowrap}
 .sekmeler a:hover{color:var(--fg)}
@@ -277,3 +281,62 @@ body.elektrik .big{color:#facc15}
 /* orta genişlikte sekmeler kısa adlarla (6 model sekmesi kesilmesin) */
 @media (max-width:1320px){.sekmeler .uzun{display:none}.sekmeler .kisa{display:inline}}
 @media (max-width:1000px){.ust .marka .yazi{display:none}.ust .marka .cizgi{display:none}.yardim-btn{display:none}}
+
+/* ---------- senaryo laboratuvarı ---------- */
+body.senaryo{--panel-w:380px;--sn:#a3e635}
+.deneme-rozet{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:999px;border:1px dashed rgba(163,230,53,.6);color:#d9f99d;font:500 11px/1 var(--f-mono);letter-spacing:.05em;white-space:nowrap}
+.deneme-rozet i{width:7px;height:7px;border-radius:50%;background:var(--sn);box-shadow:0 0 0 3px rgba(163,230,53,.18)}
+body.senaryo .kicker{color:var(--sn)}
+.sn-secici{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.sn-secici button{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px 9px;border-radius:10px;border:1px solid var(--line);background:var(--panel-2);color:var(--muted);cursor:pointer;font:500 11px/1.15 var(--f-body);text-align:center;transition:border-color .15s,background .15s,color .15s}
+.sn-secici button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sn-secici button:hover{color:var(--fg);border-color:var(--line-2)}
+.sn-secici button[aria-pressed="true"]{color:#ecfccb;background:#1b2618;border-color:var(--sn);box-shadow:0 0 0 1px var(--sn)}
+.sn-govde{display:flex;flex-direction:column;gap:13px}
+.sn-govde h2{margin:0;font:600 21px/1.1 var(--f-display);text-transform:uppercase;letter-spacing:.01em}
+.sn-govde .ack{margin:0;color:var(--muted);font-size:12.5px;line-height:1.5}
+.sn-sonuc{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:6px 10px;padding:13px 14px;border-radius:11px;background:linear-gradient(180deg,#121a14,#0e1410);border:1px solid rgba(163,230,53,.25)}
+.sn-sonuc .et{grid-column:1/-1;font:500 10.5px/1.3 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sn-sonuc .once,.sn-sonuc .sonra{display:flex;flex-direction:column;gap:3px;min-width:0}
+.sn-sonuc .once b{font:600 26px/1 var(--f-display);color:#9aa7b6;font-variant-numeric:tabular-nums}
+.sn-sonuc .sonra b{font:600 34px/1 var(--f-display);color:#d9f99d;font-variant-numeric:tabular-nums}
+.sn-sonuc small{font:10.5px/1.3 var(--f-mono);color:var(--faint);text-transform:uppercase;letter-spacing:.08em}
+.sn-sonuc .ok{font:500 18px var(--f-mono);color:var(--faint);padding-bottom:6px}
+.sn-sonuc .fark{grid-column:1/-1;font:500 12.5px var(--f-mono);color:#bef264}
+.sn-sonuc .fark.kotu{color:#fb923c}
+.sn-sonuc .fark.notr{color:var(--muted)}
+.sn-satirlar{display:flex;flex-direction:column;gap:6px}
+.sn-satir{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12px;color:var(--muted)}
+.sn-satir b{color:var(--fg);font:500 12px var(--f-mono);white-space:nowrap}
+.sn-satir b em{font-style:normal;color:#bef264}
+.sn-cip{display:flex;flex-wrap:wrap;gap:6px}
+.sn-cip button{display:inline-flex;align-items:center;gap:7px;font:500 12px/1 var(--f-body);border:1px solid var(--line);background:var(--panel-2);color:var(--muted);border-radius:999px;padding:7px 11px;cursor:pointer}
+.sn-cip button i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.sn-cip button:hover{color:var(--fg)}
+.sn-cip button[aria-pressed="true"]{color:var(--fg);border-color:var(--c);background:color-mix(in srgb,var(--c) 16%,var(--panel-2))}
+.sn-cip button[aria-pressed="false"].kapali{opacity:.5;text-decoration:line-through}
+.sn-eylem{display:flex;flex-wrap:wrap;gap:6px}
+.sn-eylem button{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;gap:7px;font:600 12.5px/1 var(--f-body);padding:10px 12px;border-radius:9px;border:1px solid var(--line-2);background:var(--panel-2);color:var(--fg);cursor:pointer;transition:background .15s,border-color .15s}
+.sn-eylem button:hover{border-color:var(--fg)}
+.sn-eylem button.ana,.sn-eylem button[aria-pressed="true"]{background:var(--sn);border-color:var(--sn);color:#13210a}
+.sn-eylem button:disabled{opacity:.35;cursor:default}
+.sn-not{margin:0;font-size:11.5px;line-height:1.5;color:var(--faint)}
+.sn-alt{display:flex;gap:6px;border-top:1px solid var(--line);padding-top:11px}
+.sn-alt button{flex:1;font:500 12px/1 var(--f-body);padding:9px 10px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer}
+.sn-alt button:hover{color:var(--fg);border-color:var(--line-2)}
+#ekle-ipucu{position:fixed;left:50%;top:calc(var(--ust) + 14px);transform:translateX(-50%);z-index:15;display:flex;align-items:center;gap:8px;padding:9px 15px;border-radius:999px;background:rgba(20,32,12,.88);border:1px solid rgba(163,230,53,.65);color:#d9f99d;font:500 12.5px var(--f-body);pointer-events:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#ekle-ipucu i{width:8px;height:8px;border-radius:50%;background:var(--sn);animation:sn-nabiz 1.4s ease-in-out infinite}
+@keyframes sn-nabiz{50%{box-shadow:0 0 0 6px rgba(163,230,53,0)}0%{box-shadow:0 0 0 0 rgba(163,230,53,.6)}}
+body.ekle-modu #gl{cursor:crosshair}
+#hesap-durum{font:500 10.5px var(--f-mono);color:var(--faint);letter-spacing:.06em;text-transform:uppercase}
+@media (max-width:760px){
+  .deneme-rozet span{display:none}
+  .sn-secici{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+  .sn-secici button{padding:8px 2px}.sn-secici button span{display:none}
+  body.senaryo #panel .sn-govde .ack,body.senaryo #panel .sn-not{display:none}
+  body.senaryo #panel.open .sn-govde .ack,body.senaryo #panel.open .sn-not{display:block}
+  #ekle-ipucu{top:auto;bottom:calc(var(--kenar) + 8px)}
+  body.senaryo #panel .ctl{display:flex}
+  body.senaryo #panel .sub{display:none}
+}
+@media (prefers-reduced-motion:reduce){#ekle-ipucu i{animation:none}}

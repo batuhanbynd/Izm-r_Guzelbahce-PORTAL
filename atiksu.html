@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atık Su ve Arıtma | BAS PORTAL</title>
+    <title>Atık Su ve Arıtma | İzmir Güzelbahçe Veri Portalı</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <a href="index.html" class="brand" aria-label="İzmir Güzelbahçe Veri Portalı – Genel Bakış"><span class="marka-metin"><span class="marka-ust">İzmir Güzelbahçe</span><span class="marka-ad">Veri Portalı</span></span></a>
         <nav aria-label="Sayfalar">
         <ul class="nav-menu">
             <li class="nav-item">
@@ -33,6 +33,26 @@
                     Diyagramlar
                 </a>
             </li>
+            <li class="nav-grup">İlçe Profili</li>
+            <li class="nav-item">
+                <a href="ekonomi.html" class="nav-link">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    Ekonomik Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dogal-yapi.html" class="nav-link">
+                    <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+                    Doğal Yapı ve Afet
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havza-koruma.html" class="nav-link">
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    Havza ve Koruma
+                </a>
+            </li>
+            <li class="nav-grup">Ulaşım</li>
             <li class="nav-item">
                 <a href="havalimani.html" class="nav-link">
                     <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
@@ -93,6 +113,7 @@
                     Otoparklar
                 </a>
             </li>
+            <li class="nav-grup">Altyapı</li>
             <li class="nav-item">
                 <a href="izsu.html" class="nav-link">
                     <i class="fa-solid fa-droplet" aria-hidden="true"></i>
@@ -117,12 +138,20 @@
                     Elektrik Altyapısı
                 </a>
             </li>
+            <li class="nav-grup">3B ve Senaryo</li>
             <li class="nav-item">
                 <a href="3b.html" class="nav-link">
                     <i class="fa-solid fa-cube" aria-hidden="true"></i>
                     3B Modeller <span class="rozet-yeni">Yeni</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="senaryo.html" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                    Senaryo Laboratuvarı <span class="rozet-deneme">Deneme</span>
+                </a>
+            </li>
+            <li class="nav-grup">Planlama</li>
             <li class="nav-item">
                 <a href="planlanan-projeler.html" class="nav-link">
                     <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
@@ -188,7 +217,7 @@
                     <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
                     <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-industry" aria-hidden="true"></i></span><span class="ak-ust">Narlıdere</span><span class="ak-deger">Güneybatı AAT</span><span class="ak-alt">İleri biyolojik arıtma · 2001-2002</span></div>
                     <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
-                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-arrows-down-to-line" aria-hidden="true"></i></span><span class="ak-ust">Deşarj</span><span class="ak-deger">600 m</span><span class="ak-alt">Derin deniz deşarj hattı</span></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-arrows-down-to-line" aria-hidden="true"></i></span><span class="ak-ust">Deşarj</span><span class="ak-deger">600 m</span><span class="ak-alt">Derin deniz deşarj hattı · yaklaşık 25 m derinlik</span></div>
                     <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
                     <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-water" aria-hidden="true"></i></span><span class="ak-ust">Alıcı ortam</span><span class="ak-deger">İzmir Körfezi</span><span class="ak-alt">Tesis koku kontrol sistemiyle çalışıyor</span></div>
                 </div>
@@ -213,6 +242,8 @@
                         <tr><td>Kapasite</td><td>21.600 m³/gün (250 L/sn)</td></tr>
                         <tr><td>Arıtma yöntemi</td><td>İleri biyolojik</td></tr>
                         <tr><td>Enerji</td><td>Kurulu güç 1.250 kVA, aylık yaklaşık 150.000 kWh (2010)</td></tr>
+                        <tr><td>Kanalizasyon şebekesi</td><td>78 km; ana kolektör 13 km (İZSU tarihsel altyapı verisi)</td></tr>
+                        <tr><td>Tamamlanma</td><td>Şebeke 2001, tesise giden ana hat 2002</td></tr>
                     </table>
                 </div>
                 <div class="card">
@@ -222,7 +253,11 @@
                         <li><span class="zc-tarih">22.05.2025</span><div><span class="zc-metin">İZSU Genel Kurulu haberi: kapasite artırımı için "gerekli izinler bekleniyor".</span></div></li>
                         <li><span class="zc-tarih">2026 bütçesi</span><div><span class="zc-metin">Yurt dışı finansmanlı projelerin Hazine ve Maliye Bakanlığı'nda beklediği söylendi; Güneybatı adı geçmiyor.</span></div></li>
                     </ol>
-                    <p class="kucuk-not"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>Hedef kapasite, ÇED kararı ve ihale durumu için kurum belgesi okunamadı; yapımın başladığını gösteren belge bulunamadı.</p>
+                    <div class="mini-istatistik genis ust-bosluk-k">
+                        <div class="mini-ist ton-amber"><div class="deger">58.000 m³/gün</div><div class="etiket">İZSU'nun açıkladığı hedef kapasite</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">≈ 2,69 kat</div><div class="etiket">mevcut kapasiteye göre (yaklaşık %169 artış)</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>Hedef kapasite İZSU'nun tesis sayfasından aktarıldı; güncel işletme durumu doğrulanmalı. ÇED kararı ve ihale durumu için kurum belgesi okunamadı; yapımın başladığını gösteren belge bulunamadı.</p>
                 </div>
             </div>
 
@@ -251,7 +286,7 @@
                 <div class="mini-ist ton-su"><div class="deger">2 nokta</div><div class="etiket">yağmur suyu Bozukiçi Deresi'ne verilecek</div></div>
                 <div class="mini-ist ton-mavi"><div class="deger">Güneybatı AAT</div><div class="etiket">bölgenin atık suyunun gideceği tesis</div></div>
             </div>
-            <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İlçedeki toplam kanalizasyon uzunluğu ve kapsama oranı bulunamadı. Yalı Mahallesi'nde atık su ve yağmur suyu hattı inşaatı sürüyordu.</p>
+            <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İZSU'nun tarihsel altyapı verisine göre kanalizasyon şebekesi 78 km, ana kolektör 13 km; güncel uzunluk ve kapsama oranı bulunamadı. Yalı Mahallesi'nde atık su ve yağmur suyu hattı inşaatı sürüyordu.</p>
 
             <!-- Körfez izleme -->
             <div class="bolum-baslik">
@@ -285,7 +320,7 @@
             </ol>
 
             <div class="kaynak-notu">
-                <p>Veri Kaynağı: TMMOB ÇMO İzmir Su Raporu 2023-2024 ve 2021 Çevre Durum Raporu · EMO İzmir Şubesi Bülteni (2010) · İBB ve İZSU açıklamaları · Güzelbahçe Belediyesi faaliyet raporları ve meclis kararları</p>
+                <p>Veri Kaynağı: TMMOB ÇMO İzmir Su Raporu 2023-2024 ve 2021 Çevre Durum Raporu · İZSU Güneybatı Atıksu Arıtma Tesisi sayfası (araştırma grubunun koruma alanları ve su havzası raporu) · EMO İzmir Şubesi Bülteni (2010) · İBB ve İZSU açıklamaları · Güzelbahçe Belediyesi faaliyet raporları ve meclis kararları</p>
             </div>
         </div>
 

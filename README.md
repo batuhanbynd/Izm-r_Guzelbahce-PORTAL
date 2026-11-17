@@ -1,6 +1,6 @@
-# BAS PORTAL — İzmir Güzelbahçe Ulaşım Portalı
+# İzmir Güzelbahçe Veri Portalı
 
-İzmir'deki toplu ulaşım ve altyapı verilerini grafiklerle sunan, Güzelbahçe ulaşım analizi çalışmasına ait web portalı.
+Güzelbahçe'nin ulaşım, altyapı, ekonomik yapı, doğal yapı ve koruma alanlarına ilişkin verilerini grafikler, haritalar ve 3B modellerle sunan web portalı.
 
 🔗 **Canlı site:** https://batuhanbynd.github.io/Izm-r_Guzelbahce-PORTAL/
 
@@ -10,6 +10,9 @@
 |---|---|
 | [Genel Bakış](index.html) | Öne çıkan veriler ve tüm sayfalara giriş |
 | [Diyagramlar](kavramsal.html) | İzmir ulaşım ağı kavramsal diyagramları |
+| [Ekonomik Yapı](ekonomi.html) | SEGE-2022 sıralaması, işgücü, imalat, tarım, balıkçılık, turizm, enerji, kalkınma potansiyeli |
+| [Doğal Yapı ve Afet](dogal-yapi.html) | Eğim ve yükselti, jeoloji, fay hatları ve depremsellik, dereler ve taşkın riski, iklim ve rüzgâr |
+| [Havza ve Koruma](havza-koruma.html) | Küçük Menderes Havzası, su kütlelerinin durumu, Çamlı Barajı koruma kuşakları, toprak ve erozyon, tarım arazisi kaybı, sit alanları, flora ve fauna |
 | [Adnan Menderes](havalimani.html) | Havalimanı yolcu trafiği analizi |
 | [ESHOT](eshot.html) | Otobüs verileri |
 | [Tramvay](tramvay.html) | İzmir Tramvayı analizi |
@@ -18,9 +21,10 @@
 | [İzmir Metro](metro.html) | Metro toplam biniş analizi |
 | [Ulaşım Karşılaştırması](karsilastirma.html) | Tüm toplu ulaşım ağlarının karşılaştırması |
 | [KGM Karayolları](kgm.html) | KGM 2. Bölge devlet yolları |
-| [İZSU Su Kaynakları](izsu.html) | Baraj durumu, günlük su üretimi, su kayıpları, Çamlı Barajı |
+| [İZSU Su Kaynakları](izsu.html) | Baraj durumu, günlük su üretimi, Güzelbahçe'de su tüketimi, su kayıpları, Çamlı Barajı |
 | [Atık Su](atiksu.html) | Güneybatı arıtma tesisi, kapasite kullanımı, 75. Yıl Bulvarı altyapısı, Körfez ölçümleri |
 | [Katı Atık](kati-atik.html) | Atık bileşenleri, ayrı toplama, araç ve personel, maliyet ve tarife |
+| [Senaryo Laboratuvarı](senaryo.html) | "Ya şöyle olsaydı?" deneme alanı: durak, okul, metro, konteyner, lamba ekleme; deniz seviyesi ve kat artışı senaryoları (yeni sekmede açılır, portal verilerini değiştirmez) |
 | [Güzelbahçe 3B](3b.html) | 3B modellerin vitrini: canlı arazi görünümü ve modellere giriş |
 | [3B: Kent modeli](3b-kent.html) | İlçedeki binalar, halihazır haritadaki kat adediyle gerçek arazi üzerinde |
 | [3B: Toplu taşıma](3b-ulasim.html) | ESHOT ve dolmuş hatlarının güzergâh, durak ve 400 m yürüme alanları |
@@ -50,9 +54,11 @@ Herhangi bir kurulum gerekmez. `index.html` dosyasını tarayıcıda açmanız y
 - `*.html`: portal sayfaları
 - `js/`: her sayfanın grafik verileri ve ayarları
 - `styles.css`: ortak tasarım
+- `gorseller/`: ilçe profili sayfalarındaki araştırma grubu haritaları (eğim, yükselti, fay, taşkın, havza, Çamlı Barajı koruma alanları)
 - `3b/`: 3B modellerin ortak motoru (`motor.js`), görünümü (`ortak.css`), zemin haritası ve verileri (WebGL2, harici kütüphane yok)
   - `arazi.js`, `arazi-veri.js`: ilçenin tamamı için gerçek arazi (25 m ızgara); halihazır harita paftalarındaki (2015, 1:1000, ITRF96) kot noktaları, paftaların kapsamadığı yerlerde Copernicus GLO-30 (ESA, 30 m)
   - `zemin.js`: ilçenin tamamı için zemin haritası (halihazır yol, bina, dere, kıyı çizimleri; ulusal yol verisi)
+  - `senaryo.js`, `senaryo-veri.js`: senaryo laboratuvarı (7 senaryo, açgözlü yer önerisi, adres satırında paylaşılabilir durum)
   - `sahne.js`: kent, toplu taşıma ve elektrik modellerinin ortak motoru (bina ağı, çizgi/nokta katmanları, seçim, gezinti)
   - `kent-veri.js`, `ulasim-veri.js`, `elektrik-veri.js`: halihazır bina ve elektrik katmanları, ekibin ESHOT/dolmuş QGIS çizimleri
   - `vitrin.js`, `vitrin.css`, `gorseller/`: 3b.html vitrin sayfası ve model önizleme görselleri

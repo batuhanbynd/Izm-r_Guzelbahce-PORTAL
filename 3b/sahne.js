@@ -1,5 +1,5 @@
 // =============================================
-// BAS PORTAL · 3B kent sahneleri için ortak motor (kent modeli, toplu taşıma, elektrik)
+// İzmir Güzelbahçe Veri Portalı · 3B kent sahneleri için ortak motor (kent modeli, toplu taşıma, elektrik)
 // Gerçek arazi (3b/arazi.js) + bina modeli (KENT) + çizgi ve nokta katmanları.
 // Kamera, fareyle seçim (binalar için kimlik tamponu), etiketler, pusula/ölçek ve gezinti burada.
 // Dünya: x = modelX - W/2, z = modelY - H/2 (kuzey = -z), y yukarı (m).
@@ -51,14 +51,15 @@ M3.b64u16 = b64u16;
 
 var FOG_ = 'float d=length(vW-uCam);float f=1.-exp(-pow(d*uFog,1.6));';
 M3.binaVS = '#version 300 es\nlayout(location=0) in vec3 aP;layout(location=1) in vec4 aB;layout(location=2) in float aId;\n' +
-    'uniform mat4 uVP;uniform float uKatH;\n' + M3.araziGLSL + '\nout vec3 vW;out vec4 vB;out float vId;out float vT;\n' +
+    'uniform mat4 uVP;uniform float uKatH;uniform highp int uMod;uniform highp sampler2D uBR;\n' + M3.araziGLSL + '\nout vec3 vW;out vec4 vB;out float vId;out float vT;out vec3 vC;\n' +
     'float yuks(float kat,float tur){return kat>.5?kat*uKatH:(tur>8.5&&tur<9.5?.8:1.5);}\n' +
-    'void main(){float h=yuks(aB.z,aB.w);float taban=araziY(aB.xy);float y=aP.z>.5?taban+h*uK:araziY(aP.xy)-2.;' +
+    'void main(){float kat=aB.z;vC=vec3(0.);if(uMod==3){vec4 r=texelFetch(uBR,ivec2(int(mod(aId,256.)),int(aId/256.)),0);vC=r.rgb;float ek=floor(r.a*255.+.5);if(ek>0.)kat=max(kat,1.)+ek;}' +
+    'float h=yuks(kat,aB.w);float taban=araziY(aB.xy);float y=aP.z>.5?taban+h*uK:araziY(aP.xy)-2.;' +
     'vW=vec3(aP.x,y,aP.y);vB=aB;vId=aId;vT=aP.z;gl_Position=uVP*vec4(vW,1.);}';
-M3.binaFS = '#version 300 es\nprecision highp float;in vec3 vW;in vec4 vB;in float vId;in float vT;\n' +
-    'uniform vec3 uKat[7];uniform vec3 uTur[11];uniform int uMod;uniform float uMin;uniform float uSec;uniform vec3 uCam;uniform vec3 uBG;uniform float uFog;out vec4 o;\n' +
+M3.binaFS = '#version 300 es\nprecision highp float;in vec3 vW;in vec4 vB;in float vId;in float vT;in vec3 vC;\n' +
+    'uniform vec3 uKat[7];uniform vec3 uTur[11];uniform highp int uMod;uniform float uMin;uniform float uSec;uniform vec3 uCam;uniform vec3 uBG;uniform float uFog;out vec4 o;\n' +
     'void main(){vec3 n=normalize(cross(dFdx(vW),dFdy(vW)));if(n.y<0.)n=-n;vec3 L=normalize(vec3(-.5,.72,.45));float dif=max(dot(n,L),0.);\n' +
-    ' int k=int(vB.z+.5);int t=int(vB.w+.5);vec3 c=uMod==0?uKat[min(k,6)]:(uMod==1?uTur[t]:vec3(.36,.4,.46));\n' +
+    ' int k=int(vB.z+.5);int t=int(vB.w+.5);vec3 c=uMod==0?uKat[min(k,6)]:(uMod==1?uTur[t]:(uMod==3?vC:vec3(.36,.4,.46)));\n' +
     ' bool cati=n.y>.85;float s=cati?1.08:(.55+.5*dif);s*=mix(.72,1.,clamp(vT,0.,1.));c*=s;\n' +
     ' if(uMin>.5&&float(k)<uMin){c=mix(vec3(dot(c,vec3(.3,.5,.2))),uBG,.55)*.8;}\n' +
     ' if(abs(vId-uSec)<.5)c=mix(c,vec3(1.),.45);\n' + FOG_ + 'o=vec4(mix(c,uBG,clamp(f,0.,.9)),1.);}';
@@ -207,6 +208,25 @@ M3.sahne = function (ayar) {
     K.vao = ornekVAO(KN, f, 2); K.n = noktalar.length; K.col = hex(K.renk); K.noktalar = noktalar; SC.katmanlar.push(K); dirty = true; return K;
   };
   SC.renkAyarla = function (K, renk) { K.renk = renk; K.col = hex(renk); dirty = true; };
+  // Bina başına renk ve ek kat (senaryo): rgba Uint8Array, bina başına 4 bayt (r, g, b, ek kat). binaMod = 'ozel' ile kullanılır.
+  var brTex = gl.createTexture();
+  gl.activeTexture(gl.TEXTURE3); gl.bindTexture(gl.TEXTURE_2D, brTex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([90, 100, 115, 0]));
+  ['TEXTURE_MIN_FILTER', 'TEXTURE_MAG_FILTER'].forEach(function (q) { gl.texParameteri(gl.TEXTURE_2D, gl[q], gl.NEAREST); });
+  SC.binaRenkleri = function (rgba) {
+    var y = Math.max(1, Math.ceil(BN.n / 256)), d = new Uint8Array(256 * y * 4); d.set(rgba.subarray(0, Math.min(rgba.length, d.length)));
+    gl.activeTexture(gl.TEXTURE3); gl.bindTexture(gl.TEXTURE_2D, brTex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 256, y, 0, gl.RGBA, gl.UNSIGNED_BYTE, d); dirty = true;
+  };
+  // Nokta katmanının noktalarını değiştir (eklenen tesisler)
+  SC.noktaGuncelle = function (K, noktalar) {
+    var f = new Float32Array(noktalar.length * 2); noktalar.forEach(function (p, i) { f[i * 2] = p[0] - HW; f[i * 2 + 1] = p[1] - HH; });
+    gl.bindVertexArray(K.vao);
+    if (!K.dinBuf) { K.dinBuf = gl.createBuffer(); }
+    gl.bindBuffer(gl.ARRAY_BUFFER, K.dinBuf); gl.bufferData(gl.ARRAY_BUFFER, f, gl.DYNAMIC_DRAW);
+    gl.enableVertexAttribArray(2); gl.vertexAttribPointer(2, 2, gl.FLOAT, false, 0, 0); gl.vertexAttribDivisor(2, 1);
+    gl.bindVertexArray(null); K.noktalar = noktalar; K.n = noktalar.length; dirty = true;
+  };
 
   // ---------- kamera
   var cam = { tx: 0, tz: 0, dist: 9600, yaw: 0.32, pitch: 0.78 };
@@ -234,7 +254,15 @@ M3.sahne = function (ayar) {
   function zoomBy(k) { kullanici(); SC.flyTo({ dist: Math.max(250, Math.min(26000, cam.dist * k)) }, 420, false); }
   var ptrs = new Map();
   cv.addEventListener('pointerdown', function (e) { cv.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, b: e.button, sh: e.shiftKey }); kullanici(); cv.classList.add('drag'); $('tip').hidden = true; });
-  cv.addEventListener('pointerup', function (e) { ptrs.delete(e.pointerId); cv.classList.remove('drag'); });
+  var basX = 0, basY = 0, basT = 0;
+  cv.addEventListener('pointerdown', function (e) { basX = e.clientX; basY = e.clientY; basT = performance.now(); });
+  cv.addEventListener('pointerup', function (e) {
+    var tek = ptrs.size === 1;
+    ptrs.delete(e.pointerId); cv.classList.remove('drag');
+    if (tek && ayar.tikla && e.button === 0 && Math.hypot(e.clientX - basX, e.clientY - basY) < 6 && performance.now() - basT < 600) {
+      var q = SC.ekrandanZemine(e.clientX, e.clientY); if (q) ayar.tikla(q[0], q[1]);
+    }
+  });
   cv.addEventListener('pointercancel', function (e) { ptrs.delete(e.pointerId); });
   cv.addEventListener('contextmenu', function (e) { e.preventDefault(); });
   cv.addEventListener('pointermove', function (e) {
@@ -293,6 +321,7 @@ M3.sahne = function (ayar) {
     gl.uniform4f(U(PTs, 'uFrame'), ZC[0], ZC[1], ZC[2], ZC[3]); gl.uniform1f(U(PTs, 'uYo'), 0); gl.uniform1f(U(PTs, 'uEtek'), -60);
     gl.bindVertexArray(AR.vao); gl.drawElements(gl.TRIANGLES, AR.nYuzey, gl.UNSIGNED_INT, 0);
     gl.useProgram(PBs); gl.uniformMatrix4fv(U(PBs, 'uVP'), false, VP); AR.bagla(gl, PBs, 1, SC.kabCur); gl.uniform1f(U(PBs, 'uKatH'), 3);
+    gl.uniform1i(U(PBs, 'uMod'), SC.binaMod === 'ozel' ? 3 : 0); gl.activeTexture(gl.TEXTURE3); gl.bindTexture(gl.TEXTURE_2D, brTex); gl.uniform1i(U(PBs, 'uBR'), 3);
     gl.bindVertexArray(BN.vao); gl.drawElements(gl.TRIANGLES, BN.nIx, gl.UNSIGNED_INT, 0);
     var px = new Uint8Array(4); gl.readPixels(sx, sy, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
     gl.disable(gl.SCISSOR_TEST); gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, cv.width, cv.height);
@@ -304,6 +333,18 @@ M3.sahne = function (ayar) {
     if (o[3] <= 0) return null; return [(o[0] / o[3] * .5 + .5) * innerWidth, (1 - (o[1] / o[3] * .5 + .5)) * innerHeight, o[3]];
   }
   SC.project = project;
+  // Ekran noktasından araziye ışın; model koordinatı [x, y] ya da null
+  SC.ekrandanZemine = function (mx, my) {
+    if (!EYE) return null;
+    var r = cv.getBoundingClientRect(), nx = (mx - r.left) / r.width * 2 - 1, ny = 1 - (my - r.top) / r.height * 2;
+    var e = EYE, f = [cam.tx - e[0], tyS - e[1], cam.tz - e[2]], fl = Math.hypot(f[0], f[1], f[2]); f = f.map(function (v) { return v / fl; });
+    var rt = [f[2], 0, -f[0]], rl = Math.hypot(rt[0], rt[1], rt[2]); rt = rt.map(function (v) { return -v / rl; });
+    var up = [rt[1] * f[2] - rt[2] * f[1], rt[2] * f[0] - rt[0] * f[2], rt[0] * f[1] - rt[1] * f[0]];
+    var th = Math.tan(FOV / 2), asp = r.width / r.height, d = [0, 1, 2].map(function (i) { return f[i] + rt[i] * nx * th * asp + up[i] * ny * th; });
+    var dl = Math.hypot(d[0], d[1], d[2]); d = d.map(function (v) { return v / dl; });
+    var p = AR.isin(e, d, SC.kabCur);
+    return p ? [p[0] + HW, p[2] + HH] : null;
+  };
   // Ekranda fareye en yakın seçilebilir nokta (katman.secilebilir = true)
   function noktaSec() {
     var en = null, enD = 14;
@@ -376,7 +417,8 @@ M3.sahne = function (ayar) {
     if (BN.n && SC.binaGoster) {
       gl.useProgram(PB); ortak(PB, fog); AR.bagla(gl, PB, 1, SC.kabCur);
       gl.uniform1f(U(PB, 'uKatH'), 3); gl.uniform3fv(U(PB, 'uKat'), katU); gl.uniform3fv(U(PB, 'uTur'), turU);
-      gl.uniform1i(U(PB, 'uMod'), SC.binaMod === 'kat' ? 0 : SC.binaMod === 'tur' ? 1 : 2);
+      gl.uniform1i(U(PB, 'uMod'), SC.binaMod === 'kat' ? 0 : SC.binaMod === 'tur' ? 1 : SC.binaMod === 'ozel' ? 3 : 2);
+      gl.activeTexture(gl.TEXTURE3); gl.bindTexture(gl.TEXTURE_2D, brTex); gl.uniform1i(U(PB, 'uBR'), 3);
       gl.uniform1f(U(PB, 'uMin'), SC.minKat); gl.uniform1f(U(PB, 'uSec'), SC.secili);
       gl.bindVertexArray(BN.vao); gl.drawElements(gl.TRIANGLES, BN.nIx, gl.UNSIGNED_INT, 0);
     }

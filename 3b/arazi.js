@@ -1,5 +1,5 @@
 // =============================================
-// BAS PORTAL · 3B modeller: ortak arazi
+// İzmir Güzelbahçe Veri Portalı · 3B modeller: ortak arazi
 // ARAZI (3b/arazi-veri.js) yükseklik ızgarasını çözer ve iki modele şunları sağlar:
 // - JS'te kot örnekleme (etiketler, kamera, fareyle seçim)
 // - WebGL dokusu (RG32F: kot m, sınıf) ve GLSL yardımcıları (köşe gölgelendiricide örnekleme)

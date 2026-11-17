@@ -123,9 +123,7 @@
     function basligiCevir() {
         if (asilBaslik === null) asilBaslik = document.title;
         if (dil !== 'en') { document.title = asilBaslik; return; }
-        var parcalar = asilBaslik.split(' | ');
-        parcalar[0] = window.basCevir(parcalar[0]);
-        document.title = parcalar.join(' | ');
+        document.title = asilBaslik.split(' | ').map(function (p) { return window.basCevir(p); }).join(' | ');
     }
 
     // ---- Grafikler (Chart.js) ----

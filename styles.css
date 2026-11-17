@@ -2893,3 +2893,435 @@ html[data-dil-bekle] body { visibility: hidden; }
         grid-template-columns: 1fr;
     }
 }
+
+/* Senaryo laboratuvarı: yan menü rozeti ve Genel Bakış afişi (yeşil vurgu) */
+.rozet-deneme {
+    margin-left: auto;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    border: 1px dashed #a3e635;
+    color: #a3e635;
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.5;
+}
+
+.vitrin-lab .v3-etiket {
+    background: #a3e635;
+    color: #13210a;
+}
+
+.vitrin-lab:hover .v3-dugme {
+    background: #a3e635;
+    border-color: #a3e635;
+    color: #13210a;
+}
+
+/* =============================================
+   Ad değişikliği: iki satırlı marka (İzmir Güzelbahçe / Veri Portalı)
+   ============================================= */
+.brand {
+    align-items: stretch;
+    letter-spacing: 0;
+}
+
+.brand::before {
+    height: auto;
+}
+
+.brand .marka-metin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.1rem;
+    min-width: 0;
+    line-height: 1.1;
+}
+
+.brand .marka-ust {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.brand .marka-ad {
+    font-size: 1.45rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--text-main);
+}
+
+@media (min-width: 901px) and (max-height: 860px) {
+    .brand .marka-ad { font-size: 1.3rem; }
+}
+
+/* Yan menü grup başlıkları */
+.nav-grup {
+    padding: 0.95rem 2rem 0.3rem;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+@media (min-width: 901px) and (max-height: 860px) {
+    .nav-grup { padding: 0.6rem 2rem 0.15rem; }
+}
+
+/* =============================================
+   İlçe profili sayfaları: Ekonomik Yapı, Doğal Yapı ve Afet, Havza ve Koruma
+   ============================================= */
+
+/* Sayfa içi bölüm menüsü */
+.sayfa-ici-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: -0.75rem 0 2.25rem;
+}
+
+.sayfa-ici-menu a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    color: var(--text-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.sayfa-ici-menu a:hover {
+    background: var(--surface-3);
+    border-color: var(--border-strong);
+    color: var(--text-main);
+}
+
+.sayfa-ici-menu a i {
+    color: var(--ton, var(--accent-1));
+}
+
+.bolum-baslik[id] {
+    scroll-margin-top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .bolum-baslik[id] { scroll-margin-top: 4.5rem; }
+}
+
+/* Durum çipleri (su kütlesi durumu, risk düzeyi) */
+.durum-cip {
+    --c: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.15rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.5;
+    white-space: nowrap;
+    color: var(--c);
+    background: color-mix(in srgb, var(--c) 13%, transparent);
+    border: 1px solid color-mix(in srgb, var(--c) 38%, transparent);
+}
+
+.durum-cip::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+.durum-cip.iyi { --c: var(--success); }
+.durum-cip.orta { --c: var(--sari); }
+.durum-cip.zayif { --c: var(--turuncu); }
+.durum-cip.kotu { --c: var(--danger); }
+.durum-cip.notr { --c: var(--text-muted); }
+
+/* Renkli bant listesi (eğim sınıfları, yükselti kuşakları, koruma kuşakları) */
+.bant-listesi {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    container-type: inline-size;
+}
+
+/* Dar kartta aralık üstte, açıklama altta; geniş kartta üç sütun */
+.bant-listesi li {
+    display: grid;
+    grid-template-columns: 0.45rem minmax(0, 1fr);
+    grid-template-areas: "renk aralik" "renk metin";
+    column-gap: 0.9rem;
+    row-gap: 0.15rem;
+    align-items: center;
+    padding: 0.7rem 0.95rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+@container (min-width: 520px) {
+    .bant-listesi li {
+        grid-template-columns: 0.45rem 7rem minmax(0, 1fr);
+        grid-template-areas: "renk aralik metin";
+    }
+}
+
+.bant-listesi .bant-aralik { grid-area: aralik; }
+.bant-listesi .bant-metin { grid-area: metin; }
+
+.bant-listesi .bant-renk {
+    grid-area: renk;
+    align-self: stretch;
+    min-height: 1.6rem;
+    border-radius: 4px;
+    background: var(--b, var(--accent-1));
+}
+
+.bant-listesi .bant-aralik {
+    font-weight: 800;
+    color: var(--text-main);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.bant-listesi .bant-metin {
+    color: var(--text-body);
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.bant-listesi .bant-metin strong {
+    display: block;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+/* Oransal kuşak şeması (baraj koruma kuşakları) */
+.kusak-semasi {
+    display: flex;
+    height: 2.6rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    margin: 0.25rem 0 0.45rem;
+}
+
+.kusak-semasi span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.4rem;
+    background: var(--b);
+    color: #0b1220;
+    font-size: 0.8rem;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.kusak-olcek {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 1rem;
+}
+
+/* Mahalle matrisi (toprak türü, kısıt, erozyon derecesi) */
+.matris-tablo td,
+.matris-tablo th {
+    vertical-align: middle;
+}
+
+.derece-noktalari {
+    display: inline-flex;
+    gap: 0.3rem;
+}
+
+.derece-noktalari span {
+    display: grid;
+    place-items: center;
+    width: 1.55rem;
+    height: 1.55rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    border: 1px dashed var(--border-strong);
+}
+
+.derece-noktalari span.var {
+    border-style: solid;
+    color: #0b1220;
+    border-color: transparent;
+}
+
+.derece-noktalari span.d1.var { background: #a3e635; }
+.derece-noktalari span.d2.var { background: #facc15; }
+.derece-noktalari span.d3.var { background: #fb923c; }
+.derece-noktalari span.d4.var { background: #f87171; }
+
+/* Tür kartları (flora ve fauna): Latince ad */
+.simge-karti .latince {
+    display: block;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 0.1rem;
+}
+
+.simge-izgarasi.dort-sutun {
+    grid-template-columns: repeat(auto-fill, minmax(min(210px, 100%), 1fr));
+}
+
+/* Harita/görsel kartında küçük lejant */
+.harita-lejant {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.1rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.86rem;
+    color: var(--text-body);
+}
+
+.harita-lejant li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.harita-lejant i.cizgi {
+    display: inline-block;
+    width: 1.4rem;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--b);
+}
+
+.harita-lejant i.kare {
+    display: inline-block;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 3px;
+    background: var(--b);
+}
+
+.galeri-karti .gorsel-not {
+    padding: 0 1.25rem 1.1rem;
+}
+
+.galeri-karti .gorsel-not .kucuk-not {
+    margin-top: 0;
+}
+
+.galeri-karti .gorsel-not .harita-lejant {
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+}
+
+.renk-pembe { color: var(--pembe) !important; }
+.renk-mor { color: var(--mor) !important; }
+
+/* Sıra listesi (değeri verilmeyen sıralamalar için) */
+.sira-listesi {
+    list-style: none;
+    counter-reset: sira;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.sira-listesi li {
+    counter-increment: sira;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.55rem 0.8rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.sira-listesi li::before {
+    content: counter(sira);
+    display: grid;
+    place-items: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--ton, var(--success)) 18%, transparent);
+    color: var(--ton, var(--success));
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+
+.kusak-olcek > span:last-child {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Toprak matrisi: çipler ve lejant */
+.cip {
+    display: inline-block;
+    padding: 0.12rem 0.55rem;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--text-body);
+    white-space: nowrap;
+}
+
+.cip.genis {
+    border-color: color-mix(in srgb, var(--success) 60%, transparent);
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.cip-grubu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.toprak-lejant {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.75rem;
+    margin: 1rem 0 1.75rem;
+    font-size: 0.86rem;
+    color: var(--text-body);
+}
+
+.toprak-lejant > span {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+}

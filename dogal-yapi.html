@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doğal Yapı ve Afet Riskleri | İzmir Güzelbahçe Veri Portalı</title>
+    <meta name="description" content="Güzelbahçe'nin topoğrafyası, jeolojisi, fay hatları ve depremselliği, dereleri ve taşkın riski, iklimi ve rüzgâr rejimi.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
+    <script src="js/dil-en.js"></script>
+    <script src="js/dil.js"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="index.html" class="brand" aria-label="İzmir Güzelbahçe Veri Portalı – Genel Bakış"><span class="marka-metin"><span class="marka-ust">İzmir Güzelbahçe</span><span class="marka-ad">Veri Portalı</span></span></a>
+        <nav aria-label="Sayfalar">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-grup">İlçe Profili</li>
+            <li class="nav-item">
+                <a href="ekonomi.html" class="nav-link">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    Ekonomik Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dogal-yapi.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+                    Doğal Yapı ve Afet
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havza-koruma.html" class="nav-link">
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    Havza ve Koruma
+                </a>
+            </li>
+            <li class="nav-grup">Ulaşım</li>
+            <li class="nav-item">
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
+                    Otoparklar
+                </a>
+            </li>
+            <li class="nav-grup">Altyapı</li>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                    İZSU Su Kaynakları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="atiksu.html" class="nav-link">
+                    <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+                    Atık Su
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kati-atik.html" class="nav-link">
+                    <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                    Katı Atık
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                    Elektrik Altyapısı
+                </a>
+            </li>
+            <li class="nav-grup">3B ve Senaryo</li>
+            <li class="nav-item">
+                <a href="3b.html" class="nav-link">
+                    <i class="fa-solid fa-cube" aria-hidden="true"></i>
+                    3B Modeller <span class="rozet-yeni">Yeni</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="senaryo.html" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                    Senaryo Laboratuvarı <span class="rozet-deneme">Deneme</span>
+                </a>
+            </li>
+            <li class="nav-grup">Planlama</li>
+            <li class="nav-item">
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                    Planlanan Projeler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                    İşbirliklerimiz
+                </a>
+            </li>
+        </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="icerik" tabindex="-1">
+        <div id="dogal-yapi" class="tab-pane active">
+            <header>
+                <h1>Doğal Yapı ve Afet Riskleri</h1>
+                <p class="subtitle">Topoğrafya, jeoloji, fay hatları ve depremsellik, dereler ve taşkın riski, iklim: planlama kararlarını sınırlayan fiziki eşikler</p>
+            </header>
+
+            <div class="stats-row dar-kartlar">
+                <div class="stat-card ton-kirmizi">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-house-crack" aria-hidden="true"></i></div>
+                    <div class="stat-label">Seferihisar Fay Zonu</div>
+                    <div class="stat-value kucuk">Holosen</div>
+                    <div class="stat-change ton-kirmizi">Aktif kolu ilçeyi kesip kıyıya uzanıyor</div>
+                </div>
+                <div class="stat-card ton-turuncu">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-wave-square" aria-hidden="true"></i></div>
+                    <div class="stat-label">Yer İvmesi (PGA)</div>
+                    <div class="stat-value kucuk">0,35–0,45 g</div>
+                    <div class="stat-change ton-turuncu">Sağlam kayada · kıyı alüvyonunda 0,50–0,65 g</div>
+                </div>
+                <div class="stat-card ton-su">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-water" aria-hidden="true"></i></div>
+                    <div class="stat-label">Çamlı Deresi</div>
+                    <div class="stat-value kucuk">14,2 km</div>
+                    <div class="stat-change ton-su">İlçenin en uzun deresi · yaklaşık 800 m'den doğar</div>
+                </div>
+                <div class="stat-card ton-mavi">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-cloud-rain" aria-hidden="true"></i></div>
+                    <div class="stat-label">Yıllık Yağış</div>
+                    <div class="stat-value kucuk">707,4 mm</div>
+                    <div class="stat-change ton-mavi">İzmir istasyonu, 1938–2025 · ortalama 18,0 °C</div>
+                </div>
+            </div>
+
+            <nav class="sayfa-ici-menu" aria-label="Bu sayfadaki bölümler">
+                <a href="#topografya" class="ton-yesil"><i class="fa-solid fa-mountain" aria-hidden="true"></i>Eğim ve yükselti</a>
+                <a href="#jeoloji" class="ton-amber"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>Jeoloji</a>
+                <a href="#deprem" class="ton-kirmizi"><i class="fa-solid fa-house-crack" aria-hidden="true"></i>Fay ve deprem</a>
+                <a href="#afet" class="ton-turuncu"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>Afet riskleri</a>
+                <a href="#taskin" class="ton-su"><i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>Dereler ve taşkın</a>
+                <a href="#iklim" class="ton-mavi"><i class="fa-solid fa-cloud-sun-rain" aria-hidden="true"></i>İklim ve rüzgâr</a>
+            </nav>
+
+            <!-- 1. Topoğrafya -->
+            <div class="bolum-baslik" id="topografya">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-mountain" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Eğim ve Yükselti</h2>
+                    <p>Arazi kuzeydeki kıyı ovasından güney ve doğudaki dağlık kütlelere doğru dikleşiyor · İBB Coğrafi Bilgi Sistemleri</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-map" aria-hidden="true"></i> Eğim Haritası</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/egim-haritasi.jpg')">
+                        <img src="gorseller/egim-haritasi.jpg" alt="Güzelbahçe eğim haritası: kıyı ovası yeşil, güney ve doğudaki yamaçlar turuncu ve kırmızı" width="682" height="410" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <ul class="harita-lejant">
+                            <li><i class="kare" style="--b:#8bc34a" aria-hidden="true"></i>%0–10 hafif eğimli</li>
+                            <li><i class="kare" style="--b:#f4a582" aria-hidden="true"></i>%10–20 orta eğimli</li>
+                            <li><i class="kare" style="--b:#e5534b" aria-hidden="true"></i>%20 üzeri dik</li>
+                        </ul>
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Kaynak: İBB CBS Şube Müdürlüğü, araştırma grubu derlemesi.</p>
+                    </div>
+                </figure>
+                <div class="card">
+                    <h2><i class="fa-solid fa-chart-area renk-yesil ikon-bosluk" aria-hidden="true"></i>Eğim Sınıfları ve Planlama</h2>
+                    <ul class="bant-listesi">
+                        <li style="--b:#8bc34a"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">%0–10</span><span class="bant-metin"><strong>Kentsel gelişmeye en uygun</strong>Düz kıyı ve vadi ovaları; altyapı kurulumu kolay.</span></li>
+                        <li style="--b:#f4a582"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">%10–20</span><span class="bant-metin"><strong>Düşük yoğunluk</strong>Hafriyat ve istinat çözümü gerektiren geçiş yamaçları; düşük yoğunluklu konut ve rekreasyona uygun.</span></li>
+                        <li style="--b:#e5534b"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">%20 üzeri</span><span class="bant-metin"><strong>Yapılaşma dışı</strong>Dik sırtlar; erozyon ve heyelan tehlikesi nedeniyle yapılaşmaya kapalı tutulmalı.</span></li>
+                    </ul>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Eğim özellikle batıda Yaka, Küçükkaya ve Payamlı'da artıyor. Yaka'nın kuzeyinde eğim çoğunlukla %0–20 iken güneyinde ve mahallenin büyük bölümünde %30'u aşıyor.</p>
+                </div>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-map" aria-hidden="true"></i> Yükselti Haritası</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/yukselti-haritasi.jpg')">
+                        <img src="gorseller/yukselti-haritasi.jpg" alt="Güzelbahçe yükselti haritası: kıyıda 0–100 m, güneydoğuya doğru 500 m'nin üzerine çıkan sırtlar" width="823" height="417" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Kaynak: İBB CBS Şube Müdürlüğü, araştırma grubu derlemesi.</p>
+                    </div>
+                </figure>
+                <div class="card">
+                    <h2><i class="fa-solid fa-mountain-sun renk-yesil ikon-bosluk" aria-hidden="true"></i>Yükselti Kuşakları ve Kullanım</h2>
+                    <ul class="bant-listesi">
+                        <li style="--b:#4d7c4f"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">0–100 m</span><span class="bant-metin"><strong>Kentsel doku</strong>Kıyı ovası ve alçak teraslar: ticaret merkezleri, ulaşım aksları.</span></li>
+                        <li style="--b:#8fd14f"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">100–250 m</span><span class="bant-metin"><strong>Düşük yoğunluklu konut</strong>Etek ve plato alanları: bahçeli konut, açık alanlar.</span></li>
+                        <li style="--b:#fdb462"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">250–500 m</span><span class="bant-metin"><strong>Kırsal ve tarım</strong>Tepelik orta yükselti: zeytincilik, düşük etkili ekoturizm.</span></li>
+                        <li style="--b:#a0522d"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">500 m üzeri</span><span class="bant-metin"><strong>Orman ve havza koruma</strong>Yüksek sırtlar: ormancılık, havza koruma, erozyon önleme.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. Jeoloji -->
+            <div class="bolum-baslik" id="jeoloji">
+                <div class="ikon ton-amber" aria-hidden="true"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Jeolojik Yapı</h2>
+                    <p>Üç ana birim: kıyıda alüvyon, eteklerde Neojen göl çökelleri, güneyde Bornova Karmaşığı · MTA Yerbilimleri Harita Görüntüleyici</p>
+                </div>
+            </div>
+            <div class="tablo-kutu alt-bosluk-k">
+                <table class="veri-tablosu">
+                    <thead>
+                        <tr><th scope="col">Birim</th><th scope="col">Yaş</th><th scope="col">Litoloji</th><th scope="col">Konum</th><th scope="col">Zemin davranışı</th><th scope="col">Planlamaya uygunluk</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="kaynak-adi">Alüvyon</td><td>Kuvaterner</td><td>Tutturulmamış kıyı ve vadi tabanı çökelleri</td><td>Kıyı şeridi</td><td>Düşük taşıma gücü, yüksek sıvılaşma eğilimi</td><td><span class="durum-cip kotu">Kısıtlı</span><br><small class="metin-soluk">Zemin iyileştirme ve jeoteknik etüt gerekli</small></td></tr>
+                        <tr><td class="kaynak-adi">Göl çökelleri</td><td>Neojen</td><td>Kireçtaşı ve marn ardalanması</td><td>Yelki ve iç kesimdeki etekler</td><td>Değişken; marn katmanları ayrışıp yumuşuyor</td><td><span class="durum-cip orta">Koşullu</span><br><small class="metin-soluk">Parsel ölçeğinde jeoteknik etüt</small></td></tr>
+                        <tr><td class="kaynak-adi">Bornova Karmaşığı (İzmir filişi)</td><td>Üst Kretase</td><td>Masif kireçtaşı blokları içeren fliş</td><td>Güneydeki yüksek kesimler</td><td>Sağlam anakaya</td><td><span class="durum-cip iyi">Tercih edilen</span><br><small class="metin-soluk">Büyüme düşük eğimli plato ve basamaklara yönlendirilmeli</small></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="izgara-iki">
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Kuzey–Güney Şematik Jeolojik Kesit</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/jeoloji-kesiti.jpg')">
+                        <img src="gorseller/jeoloji-kesiti.jpg" alt="Kıyıdan yaylalara şematik jeolojik kesit: Kuvaterner alüvyon, Neojen çökeller ve Üst Kretase Bornova Karmaşığı; kentsel gelişmenin sağlam birimler üzerindeki basamaklara yönlendirilmesi öneriliyor" width="766" height="452" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Ölçeksiz şema, araştırma grubu. Kentsel gelişme kıyı alüvyonundan, sağlam birimler üzerindeki düşük eğimli plato ve basamaklara yönlendirilmeli.</p>
+                    </div>
+                </figure>
+                <div class="card">
+                    <h2><i class="fa-solid fa-gem renk-amber ikon-bosluk" aria-hidden="true"></i>Maden Kaynakları</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-amber"><div class="deger">Yok</div><div class="etiket">ekonomik ölçekte metalik maden</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">Kireçtaşı, kil</div><div class="etiket">yapı malzemesi potansiyeli</div></div>
+                    </div>
+                    <p class="kart-aciklama">1/1.000.000 ölçekli Türkiye Metalojenik Haritası'na göre ilçe sınırları içinde ekonomik ölçekte metalik maden zuhuru ya da yatağı bulunmuyor. Komşu Menderes ve Seferihisar'da altın, kurşun-çinko ve gümüş zuhurları var.</p>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Efemçukuru Altın Madeni Menderes ilçesinde; Çamlı Barajı havzasıyla ilişkisi Havza ve Koruma sayfasında.</p>
+                </div>
+            </div>
+
+            <!-- 3. Fay ve depremsellik -->
+            <div class="bolum-baslik" id="deprem">
+                <div class="ikon ton-kirmizi" aria-hidden="true"><i class="fa-solid fa-house-crack" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Fay Hatları ve Depremsellik</h2>
+                    <p>Üç aktif yapının etkisi altında · MTA aktif fay haritası, TBDY-2018 (475 yıllık tekerrür, DD-2)</p>
+                </div>
+            </div>
+            <div class="tablo-kutu alt-bosluk-k">
+                <table class="veri-tablosu">
+                    <thead>
+                        <tr><th scope="col">Fay zonu</th><th scope="col">Tür / doğrultu</th><th scope="col">Güzelbahçe'ye göre konumu</th><th scope="col">Önem</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="kaynak-adi">Seferihisar Fay Zonu</td><td>Aktif, K–G doğrultulu</td><td>Holosen kolu ilçenin kırsal ve kentsel dokusunu kesip kıyıya uzanıyor</td><td><span class="durum-cip kotu">En yüksek</span><br><small class="metin-soluk">Birincil yüzey kırığı ve sarsıntı tehlikesi</small></td></tr>
+                        <tr><td class="kaynak-adi">İzmir Fay Zonu</td><td>Aktif</td><td>İlçeyi doğudan sınırlıyor</td><td><span class="durum-cip zayif">Güçlü sarsıntı kaynağı</span></td></tr>
+                        <tr><td class="kaynak-adi">Gülbahçe Fay Zonu</td><td>Doğrultu atımlı</td><td>İlçenin batısında</td><td><span class="durum-cip zayif">Güçlü sarsıntı kaynağı</span></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="izgara-iki">
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-map" aria-hidden="true"></i> Fay Hattı ve Yerleşim Alanları</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/fay-hatti.jpg')">
+                        <img src="gorseller/fay-hatti.jpg" alt="Uydu görüntüsü üzerinde Çamlı'dan kuzeydoğuya, Yalı ve Maltepe'ye doğru uzanan aktif fay hattı" width="771" height="450" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <ul class="harita-lejant">
+                            <li><i class="cizgi" style="--b:#e5484d" aria-hidden="true"></i>Holosen fay (son 11.000 yılda yüzey kırığı)</li>
+                            <li><i class="cizgi" style="--b:#9b4dca" aria-hidden="true"></i>Kuvaterner fay (son 2,6 milyon yıl)</li>
+                        </ul>
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Kaynak: MTA Yerbilimleri Harita Görüntüleyici, araştırma grubu derlemesi. Fay zonunun yoğun yapılaşmayla kesiştiği yerlerde heyelan ve sıvılaşma gibi ikincil riskler de artıyor.</p>
+                    </div>
+                </figure>
+                <div class="card chart-card">
+                    <h2>Tasarım Yer İvmesi: Zemine Göre (PGA, g)</h2>
+                    <div class="chart-container y-250"><canvas id="pgaChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>475 yıllık tekerrür (TBDY-2018, DD-2). Suya doygun kıyı alüvyonu dalgaları büyütüyor; bu da sıvılaşma eğilimini ve yapı kırılganlığını artırıyor.</p>
+                    <h3 class="kart-alt-baslik">Fay türleri</h3>
+                    <table class="kart-tablo">
+                        <tr><td>Aktif (Holosen) fay</td><td>Son 11.000 yılda yüzey kırığı oluşturmuş</td></tr>
+                        <tr><td>Kuvaterner fay</td><td>Son 2,6 milyon yılda aktif</td></tr>
+                        <tr><td>Olası aktif fay</td><td>Aktif olduğundan şüphelenilen fay ya da çizgisellik</td></tr>
+                    </table>
+                </div>
+            </div>
+            <h2 class="ara-baslik">İzmir ve Çevresinde Hasar Yapan Tarihsel Depremler</h2>
+            <div class="tablo-kutu alt-bosluk-k">
+                <table class="veri-tablosu">
+                    <thead>
+                        <tr><th scope="col">Tarih</th><th scope="col">Etkilenen yer</th><th scope="col" class="sayi">Şiddet</th><th scope="col" class="sayi">Büyüklük</th><th scope="col">Kaynakta aktarılan etki</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>3–5 Temmuz 1778</td><td>İzmir, Urla</td><td class="sayi">IX</td><td class="sayi">6,4</td><td class="soluk">15 saniye sürdü, İzmir'i neredeyse tamamen yıktı; Urla'da yer yarıldı. Can kaybı 200'ü aştı.</td></tr>
+                        <tr><td>13 Ekim 1850</td><td>İzmir, Manisa, Kemalpaşa</td><td class="sayi">VIII</td><td class="sayi">–</td><td class="soluk">Batı Anadolu'da çok şiddetli hissedildi; Kemalpaşa'da yarıklar açıldı.</td></tr>
+                        <tr><td>3 Kasım 1862</td><td>Turgutlu</td><td class="sayi">X</td><td class="sayi">6,9</td><td class="soluk">Turgutlu'daki bütün evler yıkıldı, 280 kişi öldü; İzmir'de de hissedildi.</td></tr>
+                        <tr><td>1 Şubat 1873</td><td>Sisam Adası, İzmir, Aydın</td><td class="sayi">IX</td><td class="sayi">–</td><td class="soluk">–</td></tr>
+                        <tr><td>29 Temmuz 1880</td><td>Menemen, Bornova, Karşıyaka</td><td class="sayi">IX</td><td class="sayi">6,7</td><td class="soluk">İzmir ve Gediz çöküntülerinde geniş hasar; İzmir–Turgutlu demiryolu yarıklarla kesildi.</td></tr>
+                        <tr><td>15 Ekim 1883</td><td>Çeşme Yarımadası</td><td class="sayi">IX</td><td class="sayi">6,8</td><td class="soluk">Yarımadanın batısındaki bütün köylerde geniş hasar; İzmir'de hafif hasar. Kaynak 15.000 kişinin öldüğünü aktarıyor.</td></tr>
+                        <tr><td>1 Kasım 1883</td><td>İzmir Körfezi, Çeşme Yarımadası</td><td class="sayi">VIII</td><td class="sayi">–</td><td class="soluk">Şiddetli deprem; zeminde yarıklar açıldı.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="kucuk-not alt-bosluk-k"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Kaynak: İBB İzmir Deprem Senaryosu ve Deprem Master Planı (İDSDMP). Şiddet Roma rakamlarıyla; büyüklüğü verilmeyen depremler "–" ile gösterildi.</p>
+
+            <!-- 4. Afet riskleri -->
+            <div class="bolum-baslik" id="afet">
+                <div class="ikon ton-turuncu" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Afet Riskleri ve Planlama İlkeleri</h2>
+                    <p>Yüksek depremsellik, kıyı hidrojeolojisi ve engebeli topoğrafyanın birleşimi · AFAD İzmir İl Afet Risk Azaltma Planı (İRAP)</p>
+                </div>
+            </div>
+            <div class="simge-izgarasi">
+                <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-house-crack" aria-hidden="true"></i></span><div><h3>Yüzey kırığı</h3><p>Seferihisar Fayı'nın aktif kolu boyunca doğrudan yüzey kırığı tehlikesi.</p></div></div>
+                <div class="simge-karti ton-turuncu"><span class="sk-simge"><i class="fa-solid fa-water" aria-hidden="true"></i></span><div><h3>Sıvılaşma</h3><p>Kıyı koridorundaki suya doygun alüvyal zeminlerde yüksek sıvılaşma eğilimi.</p></div></div>
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-house-flood-water" aria-hidden="true"></i></span><div><h3>Ani taşkın</h3><p>İç kesimdeki drenaj koridorları ve dere yatakları.</p></div></div>
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-hill-rockslide" aria-hidden="true"></i></span><div><h3>Şev kayması</h3><p>Dik yamaçlar ve yüksek kesimler.</p></div></div>
+                <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-fire" aria-hidden="true"></i></span><div><h3>Orman yangını</h3><p>Güneydeki dağlık alanlarda kızılçam ormanları ve makilik.</p></div></div>
+            </div>
+            <h2 class="ara-baslik">Mekânsal risk azaltma ilkeleri</h2>
+            <ol class="zaman-cizelgesi ton-turuncu alt-bosluk-k">
+                <li><span class="zc-tarih">Fay hatları</span><div><span class="zc-metin">Aktif fay çizgileri boyunca yapılaşmaya kapalı güvenlik tamponları bırakılması.</span></div></li>
+                <li><span class="zc-tarih">Kıyı kuşağı</span><div><span class="zc-metin">Yoğunluğun azaltılması ve zorunlu jeoteknik zemin iyileştirme.</span></div></li>
+                <li><span class="zc-tarih">Dere koridorları</span><div><span class="zc-metin">Dere kenarlarındaki kesintisiz koridorların ekolojik taşkın yolu olarak ayrılması.</span></div></li>
+                <li><span class="zc-tarih">Dik sırtlar</span><div><span class="zc-metin">Koruma alanı olarak belirlenmesi; ağaçlandırma ve teraslama ile desteklenmesi.</span></div></li>
+            </ol>
+
+            <!-- 5. Dereler ve taşkın -->
+            <div class="bolum-baslik" id="taskin">
+                <div class="ikon ton-su" aria-hidden="true"><i class="fa-solid fa-house-flood-water" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Dereler ve Taşkın Riski</h2>
+                    <p>Dereler güneydeki Çatalkaya ve Çamlı dağlarından doğup dik yamaçlardan kuzeye, İzmir Körfezi'ne akıyor; çoğu kuru dere</p>
+                </div>
+            </div>
+            <div class="card full-width alt-bosluk-k">
+                <h2><i class="fa-solid fa-route renk-su ikon-bosluk" aria-hidden="true"></i>Çamlı Deresi Boyunca: Dağdan Körfeze</h2>
+                <div class="akis ton-su">
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-mountain" aria-hidden="true"></i></span><span class="ak-ust">0 km</span><span class="ak-deger">Çamlı Dağları</span><span class="ak-alt">Yaklaşık 800 m yükseltide kaynak</span></div>
+                    <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-angles-down" aria-hidden="true"></i></span><span class="ak-ust">0–4 km</span><span class="ak-deger">Dik dağlık kesim</span><span class="ak-alt">Yüksek akış hızı, güçlü aşındırma, bol sediment</span></div>
+                    <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-mountain-sun" aria-hidden="true"></i></span><span class="ak-ust">4–9 km</span><span class="ak-deger">Çatalkaya ve vadi yamaçları</span><span class="ak-alt">Derenin orta çığırı</span></div>
+                    <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-city" aria-hidden="true"></i></span><span class="ak-ust">10–13 km</span><span class="ak-deger">Kıyı ovası ve alüvyon</span><span class="ak-alt">Eğim azalır, sediment birikir, yatak daralır</span></div>
+                    <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="akis-adim"><span class="ak-ikon"><i class="fa-solid fa-water" aria-hidden="true"></i></span><span class="ak-ust">14,2 km</span><span class="ak-deger">İzmir Körfezi</span><span class="ak-alt">Kahramandere ve Yalı'dan denize ulaşır</span></div>
+                </div>
+                <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Yavaşlayan su sedimenti bırakınca yatak kapasitesi düşüyor; şiddetli yağışta taşkın kent merkezini ve konut alanlarını doğrudan etkiliyor.</p>
+            </div>
+            <div class="tablo-kutu alt-bosluk-k">
+                <table class="veri-tablosu">
+                    <thead>
+                        <tr><th scope="col">Dere / havza</th><th scope="col">Risk düzeyi</th><th scope="col">Ana risk etkeni</th><th scope="col">Etkilenen alan</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="kaynak-adi">Çamlı Deresi (aşağı havza)</td><td><span class="durum-cip kotu">I. derece (yüksek)</span></td><td>Geniş havza alanı, kıyıya yakın yatak daralması ve sediment birikimi</td><td>Kahramandere ve Yalı'nın kentsel alanları</td></tr>
+                        <tr><td class="kaynak-adi">Kıyı kuşağı (denize boşalım)</td><td><span class="durum-cip kotu">I. derece (yüksek)</span></td><td>Fırtına kabarması ile dere taşkınının birleşmesi</td><td>Mithatpaşa Caddesi ve Yalı kıyısı</td></tr>
+                        <tr><td class="kaynak-adi">Koca Dere (Yelki kıyı boşalımı)</td><td><span class="durum-cip zayif">II. derece (orta–yüksek)</span></td><td>Mevsimsel akış dalgalanması ve tıkanan menfezler</td><td>Yelki ve Maltepe'nin tarım ve konut alanları</td></tr>
+                        <tr><td class="kaynak-adi">Çelebi ve ikincil dere kanalları</td><td><span class="durum-cip zayif">II. derece (orta–yüksek)</span></td><td>Üstü kapatılmış dere yatakları ve kentsel müdahaleler</td><td>Çelebi ve Atatürk'teki yollar</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="izgara-iki">
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-map" aria-hidden="true"></i> Ayrıntılı Taşkın Risk Haritası</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/taskin-risk-haritasi.jpg')">
+                        <img src="gorseller/taskin-risk-haritasi.jpg" alt="Güzelbahçe taşkın risk haritası: Çamlı Deresi aşağı havzası ve kıyı kuşağı yüksek riskli, Koca Dere ve Çelebi kanalları orta–yüksek riskli" width="467" height="344" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; AFAD İRAP ve İZSU envanter verisine dayanır.</p>
+                    </div>
+                </figure>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-map" aria-hidden="true"></i> Güzelbahçe ve Çevresindeki Dereler</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/guzelbahce-dereler.jpg')">
+                        <img src="gorseller/guzelbahce-dereler.jpg" alt="Uydu görüntüsü üzerinde Güzelbahçe mahalle sınırları ve mavi çizgiyle gösterilen dereler" width="1354" height="1162" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; İBB su kaynakları (hidroloji) haritası ve İzmir 2B Kent Rehberi.</p>
+                    </div>
+                </figure>
+                <div class="card">
+                    <h2><i class="fa-solid fa-water renk-su ikon-bosluk" aria-hidden="true"></i>Dere Sistemi</h2>
+                    <table class="kart-tablo">
+                        <tr><td>Ana dereler</td><td>Çamlıçay, Yağçayı, Alibey, Fidan</td></tr>
+                        <tr><td>İkincil kollar</td><td>Kuduz (Acem), Kostallı (Karaman), Yarende (Yarendede), İncirli</td></tr>
+                        <tr><td>Doğal sınırlar</td><td>Doğuda Yağçayı (Narlıdere yönü), batıda Çamlıçay (Çamlı ve Urla/Bademler yönü)</td></tr>
+                    </table>
+                    <h3 class="kart-alt-baslik">Taşkın açısından işaretlenmesi gereken dereler</h3>
+                    <div class="etiket-listesi">
+                        <span>Alibey</span><span>Fidan</span><span>Yağçayı</span><span>Kuduz</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-person-digging renk-amber ikon-bosluk" aria-hidden="true"></i>Taşkını Artıran Etkenler</h2>
+                    <ul class="bant-listesi">
+                        <li style="--b:#f59e0b"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Yatak</span><span class="bant-metin">Kentleşme sırasında Çamlı, Koca ve Çelebi derelerinin yataklarının daralması.</span></li>
+                        <li style="--b:#f59e0b"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Kapatma</span><span class="bant-metin">Bazı ikincil derelerin üstünün kapatılması ya da yol menfezlerinden geçirilmesi.</span></li>
+                        <li style="--b:#38bdf8"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">Önlem</span><span class="bant-metin">İZSU dere ıslahı: kanal genişletme ve betonarme istinat duvarları.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 6. İklim -->
+            <div class="bolum-baslik" id="iklim">
+                <div class="ikon ton-mavi" aria-hidden="true"><i class="fa-solid fa-cloud-sun-rain" aria-hidden="true"></i></div>
+                <div>
+                    <h2>İklim ve Rüzgâr</h2>
+                    <p>Akdeniz iklimi: ılık ve yağışlı kışlar, sıcak ve kurak yazlar · MGM İzmir istasyonu uzun yıllar ortalaması (1938–2025)</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card full-width">
+                    <h2>Aylık Ortalama Sıcaklık ve Yağış</h2>
+                    <div class="chart-container y-380"><canvas id="iklimChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Gölgeli aylar kurak dönemdir: yağışın ortalama sıcaklığın iki katından az olduğu Mayıs–Eylül <span class="not-rozeti hesap">hesap</span>. Değerler İzmir istasyonuna aittir; Güzelbahçe'de ayrı bir MGM istasyonu yok.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Ölçülen En Düşük ve En Yüksek Sıcaklık (°C)</h2>
+                    <div class="chart-container y-300"><canvas id="ucSicaklikChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>1938–2025 arasında ölçülen en yüksek değer 43,2 °C (Temmuz), en düşük değer −8,2 °C (Ocak).</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Mevsimlere Göre Yağış (mm)</h2>
+                    <div class="chart-container y-300"><canvas id="mevsimChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Aylık ortalamalardan toplandı <span class="not-rozeti hesap">hesap</span>. Kış: Aralık–Şubat.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Güneşlenme Süresi ve Yağışlı Gün Sayısı</h2>
+                    <div class="chart-container y-300"><canvas id="gunesChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Yılda ortalama 77,4 yağışlı gün; günlük güneşlenme ortalaması 8,1 saat.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Rüzgâr: 8 Knot ve Üzeri Esintinin Zaman Payı (%)</h2>
+                    <div class="chart-container y-300"><canvas id="ruzgarChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe noktası, 2012–2025 (Windy.app). Hâkim rüzgâr kuzeyden (N) esiyor; Temmuz–Ağustos'ta kuzey rüzgârlarının görülme olasılığı %60'a, hızı 12–17 knot'a çıkıyor ve kıyıdan iç kesimlere doğal havalandırma sağlıyor.</p>
+                </div>
+            </div>
+            <div class="mini-istatistik genis ust-bosluk-k alt-bosluk-k">
+                <div class="mini-ist ton-kirmizi"><div class="deger">43,2 °C</div><div class="etiket">ölçülen en yüksek sıcaklık</div></div>
+                <div class="mini-ist ton-mavi"><div class="deger">−8,2 °C</div><div class="etiket">ölçülen en düşük sıcaklık</div></div>
+                <div class="mini-ist ton-su"><div class="deger">145,3 mm</div><div class="etiket">günlük en yüksek yağış · 29.09.2006</div></div>
+                <div class="mini-ist ton-amber"><div class="deger">35,3 m/sn</div><div class="etiket">günlük en hızlı rüzgâr · 29.03.1970</div></div>
+                <div class="mini-ist ton-mor"><div class="deger">32 cm</div><div class="etiket">en yüksek kar · 31.01.1945</div></div>
+            </div>
+
+            <div class="kaynak-notu">
+                <p>Veri Kaynağı: Araştırma grubunun fiziki yapı, doğal ve çevresel kaynaklar raporu · MTA Yerbilimleri Harita Görüntüleyici · AFAD İzmir İl Afet Risk Azaltma Planı (İRAP) · İBB Coğrafi Bilgi Sistemleri · İBB İzmir Deprem Senaryosu ve Deprem Master Planı · MGM İl ve İlçe İstatistikleri: İzmir (1938–2025) · Windy.app Güzelbahçe rüzgâr istatistikleri (2012–2025) · İZSU · Çevre, Şehircilik ve İklim Değişikliği Bakanlığı İzmir 2024 Çevre Durum Raporu</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/dogal-yapi.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

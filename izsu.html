@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İZSU Su Kaynakları | BAS PORTAL</title>
+    <title>İZSU Su Kaynakları | İzmir Güzelbahçe Veri Portalı</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <a href="index.html" class="brand" aria-label="BAS PORTAL – Genel Bakış">BAS PORTAL</a>
+        <a href="index.html" class="brand" aria-label="İzmir Güzelbahçe Veri Portalı – Genel Bakış"><span class="marka-metin"><span class="marka-ust">İzmir Güzelbahçe</span><span class="marka-ad">Veri Portalı</span></span></a>
         <nav aria-label="Sayfalar">
         <ul class="nav-menu">
             <li class="nav-item">
@@ -33,6 +33,26 @@
                     Diyagramlar
                 </a>
             </li>
+            <li class="nav-grup">İlçe Profili</li>
+            <li class="nav-item">
+                <a href="ekonomi.html" class="nav-link">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    Ekonomik Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dogal-yapi.html" class="nav-link">
+                    <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+                    Doğal Yapı ve Afet
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havza-koruma.html" class="nav-link">
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    Havza ve Koruma
+                </a>
+            </li>
+            <li class="nav-grup">Ulaşım</li>
             <li class="nav-item">
                 <a href="havalimani.html" class="nav-link">
                     <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
@@ -93,6 +113,7 @@
                     Otoparklar
                 </a>
             </li>
+            <li class="nav-grup">Altyapı</li>
             <li class="nav-item">
                 <a href="izsu.html" class="nav-link active" aria-current="page">
                     <i class="fa-solid fa-droplet" aria-hidden="true"></i>
@@ -117,12 +138,20 @@
                     Elektrik Altyapısı
                 </a>
             </li>
+            <li class="nav-grup">3B ve Senaryo</li>
             <li class="nav-item">
                 <a href="3b.html" class="nav-link">
                     <i class="fa-solid fa-cube" aria-hidden="true"></i>
                     3B Modeller <span class="rozet-yeni">Yeni</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="senaryo.html" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                    Senaryo Laboratuvarı <span class="rozet-deneme">Deneme</span>
+                </a>
+            </li>
+            <li class="nav-grup">Planlama</li>
             <li class="nav-item">
                 <a href="planlanan-projeler.html" class="nav-link">
                     <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
@@ -229,6 +258,48 @@
                         <div class="mini-ist ton-mavi"><div class="deger">11</div><div class="etiket">ilçe aynı sistemden besleniyor</div></div>
                     </div>
                     <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İlçenin tüketimini değil, bağlı olduğu sistemin bir günlük üretimini gösterir. Güzelbahçe'ye özel kaynak dağılımı bulunamadı.</p>
+                </div>
+            </div>
+
+            <!-- Güzelbahçe su tüketimi (fiziki yapı raporu) -->
+            <div class="bolum-baslik">
+                <div class="ikon ton-su" aria-hidden="true"><i class="fa-solid fa-glass-water" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Güzelbahçe'de Su Tüketimi</h2>
+                    <p>2023 aylık tüketim, kişi başına kullanım ve yaz–kış farkı · Araştırma grubunun fiziki yapı raporu</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card full-width">
+                    <h2>Aylık Su Tüketimi, 2023 (bin m³)</h2>
+                    <div class="chart-container y-300"><canvas id="tuketimChart"></canvas></div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-su"><div class="deger">3,06 mn m³</div><div class="etiket">yıllık toplam tüketim</div></div>
+                        <div class="mini-ist ton-su"><div class="deger">≈ 221 L</div><div class="etiket">kişi başına günlük kullanım (38.044 kişi)</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">179.078 m³</div><div class="etiket">kış aylık ortalaması</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">347.244 m³</div><div class="etiket">yaz aylık ortalaması</div></div>
+                        <div class="mini-ist ton-kirmizi"><div class="deger">+%93,9</div><div class="etiket">yazın artış</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Aylık değerler kaynak grafikte bin m³ olarak verilmiştir. Tüketim ilkbaharda artmaya başlıyor, Ağustos'ta zirve yapıyor; kişi başı kullanım belediye nüfus verisiyle (38.044) hesaplanmış.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-faucet renk-su ikon-bosluk" aria-hidden="true"></i>Abone ve Yerel Kaynaklar</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-su"><div class="deger">20.100</div><div class="etiket">su abonesi</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">1</div><div class="etiket">şebekeye bağlı aktif, kayıtlı kuyu</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">4</div><div class="etiket">içme suyu pompa istasyonu</div></div>
+                        <div class="mini-ist ton-kirmizi"><div class="deger">Yok</div><div class="etiket">ilçe sınırında işletmedeki baraj</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İlçe, metropolün yüzey suyu arzının %62'sini sağlayan Tahtalı Barajı'na ve Göksu–Sarıkız hatlarıyla bağlı kuzeydeki derin kuyulara dayanıyor.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>İzmir'de Sektörlere Göre Su Kullanımı (%)</h2>
+                    <div class="chart-container y-250"><canvas id="suKullanimChart"></canvas></div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-su"><div class="deger">4.508 hm³</div><div class="etiket">yıllık su potansiyeli</div></div>
+                        <div class="mini-ist ton-kirmizi"><div class="deger">639 m³</div><div class="etiket">kişi başına yıllık kullanılabilir su</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>DSİ verisi. Kişi başı kullanılabilir suya göre İzmir su fakiri bölgeler arasında.</p>
                 </div>
             </div>
 
@@ -402,7 +473,7 @@
                 <div class="card chart-card">
                     <h2>Yıllık Su Verimi (milyon m³/yıl)</h2>
                     <div class="chart-container y-250"><canvas id="camliChart"></canvas></div>
-                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İki değer farklı kaynaklardan; ikisi de kaynağıyla birlikte verilir.</p>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Üç değer farklı kaynaklardan; her biri kaynağıyla birlikte verilir. İZSU Barajlar Şube Müdürlüğü değeri, barajın sağlayacağı ek su miktarıdır.</p>
                 </div>
                 <div class="card">
                     <h2><i class="fa-solid fa-list-check renk-yesil ikon-bosluk" aria-hidden="true"></i>Proje Durumu</h2>
