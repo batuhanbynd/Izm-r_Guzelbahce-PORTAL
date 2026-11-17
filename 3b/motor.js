@@ -1,5 +1,5 @@
 // =============================================
-// BAS PORTAL · 3B modeller: ortak yardımcılar
+// İzmir Güzelbahçe Veri Portalı · 3B modeller: ortak yardımcılar
 // - Dil (TR / EN): portalla aynı "bas-dil" seçimini kullanır
 // - Sayı biçimi, pusula, ölçek çubuğu, tam ekran, yardım, yükleniyor ekranı
 // - WebGL ve matris yardımcıları

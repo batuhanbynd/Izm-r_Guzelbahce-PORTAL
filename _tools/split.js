@@ -88,7 +88,7 @@ tabs.forEach(t => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BAS PORTAL</title>
+    <title>İzmir Güzelbahçe Veri Portalı</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -99,7 +99,7 @@ tabs.forEach(t => {
 
     <!-- Sidebar -->
     <aside class="sidebar">
-        <div class="brand">BAS PORTAL</div>
+        <div class="brand">İzmir Güzelbahçe Veri Portalı</div>
         <ul class="nav-menu">
 ${buildSidebar(t)}        </ul>
     </aside>

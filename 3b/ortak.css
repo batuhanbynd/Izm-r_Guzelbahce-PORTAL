@@ -1,5 +1,5 @@
 /* =============================================
-   BAS PORTAL · 3B modeller (ortak görünüm)
+   İzmir Güzelbahçe Veri Portalı · 3B modeller (ortak görünüm)
    Tam ekran, gece haritası görünümü. Üstte ince bir çubuk, solda kontrol kartı,
    altta gezinti çubuğu, sağda harita kontrolleri, ölçek ve pusula.
    ============================================= */
@@ -35,6 +35,10 @@ button:focus-visible,input:focus-visible,a:focus-visible,canvas:focus-visible{ou
 .marka .ok{display:grid;place-items:center;width:28px;height:28px;border-radius:7px;border:1px solid var(--line-2);color:var(--muted);font:500 15px/1 var(--f-body);transition:background .15s,color .15s}
 .marka:hover .ok{background:#1a222c;color:var(--fg)}
 .marka .cizgi{width:3px;height:18px;border-radius:2px;background:var(--accent)}
+.marka .yazi{display:flex;flex-direction:column;gap:3px;line-height:1}
+.marka .yazi-ust{font-size:9.5px;letter-spacing:.16em;color:var(--muted)}
+.marka .yazi-alt{font-size:13.5px;letter-spacing:.07em}
+.marka .cizgi{height:26px}
 .sekmeler{display:flex;gap:4px;margin-left:10px;padding:3px;background:rgba(10,14,19,.7);border:1px solid var(--line);border-radius:9px}
 .sekmeler a{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:6px;color:var(--muted);text-decoration:none;font:500 13px/1 var(--f-body);white-space:nowrap}
 .sekmeler a:hover{color:var(--fg)}

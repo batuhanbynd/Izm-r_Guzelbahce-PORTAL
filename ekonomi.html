@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekonomik Yapı | İzmir Güzelbahçe Veri Portalı</title>
+    <meta name="description" content="Güzelbahçe'nin sosyo-ekonomik gelişmişliği, işgücü, imalat, tarım, balıkçılık, turizm, enerji ve kalkınma potansiyeli.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
+    <script src="js/dil-en.js"></script>
+    <script src="js/dil.js"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="index.html" class="brand" aria-label="İzmir Güzelbahçe Veri Portalı – Genel Bakış"><span class="marka-metin"><span class="marka-ust">İzmir Güzelbahçe</span><span class="marka-ad">Veri Portalı</span></span></a>
+        <nav aria-label="Sayfalar">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-grup">İlçe Profili</li>
+            <li class="nav-item">
+                <a href="ekonomi.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    Ekonomik Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dogal-yapi.html" class="nav-link">
+                    <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+                    Doğal Yapı ve Afet
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havza-koruma.html" class="nav-link">
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    Havza ve Koruma
+                </a>
+            </li>
+            <li class="nav-grup">Ulaşım</li>
+            <li class="nav-item">
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
+                    Otoparklar
+                </a>
+            </li>
+            <li class="nav-grup">Altyapı</li>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                    İZSU Su Kaynakları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="atiksu.html" class="nav-link">
+                    <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+                    Atık Su
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kati-atik.html" class="nav-link">
+                    <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                    Katı Atık
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                    Elektrik Altyapısı
+                </a>
+            </li>
+            <li class="nav-grup">3B ve Senaryo</li>
+            <li class="nav-item">
+                <a href="3b.html" class="nav-link">
+                    <i class="fa-solid fa-cube" aria-hidden="true"></i>
+                    3B Modeller <span class="rozet-yeni">Yeni</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="senaryo.html" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                    Senaryo Laboratuvarı <span class="rozet-deneme">Deneme</span>
+                </a>
+            </li>
+            <li class="nav-grup">Planlama</li>
+            <li class="nav-item">
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                    Planlanan Projeler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                    İşbirliklerimiz
+                </a>
+            </li>
+        </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="icerik" tabindex="-1">
+        <div id="ekonomi" class="tab-pane active">
+            <header>
+                <h1>Ekonomik Yapı</h1>
+                <p class="subtitle">Sosyo-ekonomik gelişmişlik, işgücü, imalat, tarım, balıkçılık, turizm, enerji ve kalkınma potansiyeli</p>
+            </header>
+
+            <div class="stats-row dar-kartlar">
+                <div class="stat-card ton-mavi">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i></div>
+                    <div class="stat-label">SEGE-2022 Sıralaması</div>
+                    <div class="stat-value">52.</div>
+                    <div class="stat-change ton-mavi">Türkiye'deki ilçeler arasında · İzmir'de 8.</div>
+                </div>
+                <div class="stat-card ton-yesil">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
+                    <div class="stat-label">Nüfus, 2025</div>
+                    <div class="stat-value">39.474</div>
+                    <div class="stat-change ton-yesil">İzmir nüfusunun %0,9'u · 30 ilçe içinde 25.</div>
+                </div>
+                <div class="stat-card ton-amber">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-wallet" aria-hidden="true"></i></div>
+                    <div class="stat-label">Hane Geliri</div>
+                    <div class="stat-value">+%37</div>
+                    <div class="stat-change ton-amber">İzmir ortalamasının üzerinde (İBB, 2015)</div>
+                </div>
+                <div class="stat-card ton-mor">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
+                    <div class="stat-label">Eğitim</div>
+                    <div class="stat-value">84 okul</div>
+                    <div class="stat-change ton-mor">Yüksek lisans ve doktora oranı İzmir'de en yüksek</div>
+                </div>
+            </div>
+
+            <nav class="sayfa-ici-menu" aria-label="Bu sayfadaki bölümler">
+                <a href="#gelismislik" class="ton-mavi"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i>Gelişmişlik ve işgücü</a>
+                <a href="#sektorler" class="ton-turuncu"><i class="fa-solid fa-industry" aria-hidden="true"></i>Sektörler</a>
+                <a href="#tarim" class="ton-yesil"><i class="fa-solid fa-wheat-awn" aria-hidden="true"></i>Tarım</a>
+                <a href="#balikcilik" class="ton-su"><i class="fa-solid fa-fish" aria-hidden="true"></i>Balıkçılık</a>
+                <a href="#turizm" class="ton-pembe"><i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i>Turizm</a>
+                <a href="#enerji" class="ton-sari"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i>Enerji</a>
+                <a href="#potansiyel" class="ton-amber"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i>Kalkınma potansiyeli</a>
+            </nav>
+
+            <!-- 1. Gelişmişlik, nüfus ve işgücü -->
+            <div class="bolum-baslik" id="gelismislik">
+                <div class="ikon ton-mavi" aria-hidden="true"><i class="fa-solid fa-ranking-star" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Gelişmişlik, Nüfus ve İşgücü</h2>
+                    <p>Sosyo-ekonomik gelişmişlik sıralaması (SEGE-2022), nüfus, sağlık ve eğitim · İşgücü için İzmir geneli</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card">
+                    <h2><i class="fa-solid fa-ranking-star renk-mavi ikon-bosluk" aria-hidden="true"></i>SEGE-2022'de Güzelbahçe</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-mavi"><div class="deger">8.</div><div class="etiket">İzmir'in ilçeleri arasında</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">52.</div><div class="etiket">Türkiye'nin ilçeleri arasında</div></div>
+                    </div>
+                    <p class="kart-aciklama">Sanayi ve Teknoloji Bakanlığı'nın sıralaması, ilçeleri dört gösterge grubunda karşılaştırır:</p>
+                    <div class="etiket-listesi">
+                        <span>Demografi</span><span>Eğitim</span><span>Sağlık</span><span>İstihdam ve sosyal güvenlik</span>
+                    </div>
+                </div>
+                <div class="card chart-card">
+                    <h2>İzmir'de İşgücü Göstergeleri (%)</h2>
+                    <div class="chart-container y-250"><canvas id="isgucuChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe için ilçe düzeyinde işgücü verisi bulunamadı; İzmir geneli gösterilir (TÜİK).</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-users renk-yesil ikon-bosluk" aria-hidden="true"></i>Nüfus, 2025</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-yesil"><div class="deger">39.474</div><div class="etiket">toplam nüfus</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">19.776</div><div class="etiket">erkek</div></div>
+                        <div class="mini-ist ton-pembe"><div class="deger">19.698</div><div class="etiket">kadın</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">‰25,3</div><div class="etiket">yıllık nüfus artış hızı</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>TÜİK Adrese Dayalı Nüfus Kayıt Sistemi, 2025. Yıllara göre nüfus Genel Bakış sayfasındadır.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Sağlık Kuruluşları (74)</h2>
+                    <div class="chart-container y-250"><canvas id="saglikChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Acil servis 6 Temmuz 2026'da hizmete başladı. Hekim sayısı İzmir ortalamasının altında kalıyor.</p>
+                </div>
+            </div>
+
+            <!-- 2. Sektörler -->
+            <div class="bolum-baslik" id="sektorler">
+                <div class="ikon ton-turuncu" aria-hidden="true"><i class="fa-solid fa-industry" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Ekonomik Faaliyet Kolları</h2>
+                    <p>İzmir ekonomisindeki yeri ve Güzelbahçe'deki imalat tesisleri</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>İzmir'de Sektörlere Göre İstihdam, 2023 (%)</h2>
+                    <div class="chart-container y-300"><canvas id="istihdamChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Sanayi ve hizmetler payları kaynakta yaklaşık olarak verilmiştir (İZKA, 2025).</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Güzelbahçe'deki İmalat Tesisleri (13)</h2>
+                    <div class="chart-container y-300"><canvas id="imalatChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe Belediyesi 2022 faaliyet raporu.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-chart-line renk-amber ikon-bosluk" aria-hidden="true"></i>İzmir Ekonomisi</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-amber"><div class="deger">3.</div><div class="etiket">iller arasında GSYH sırası</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">%5,7</div><div class="etiket">Türkiye GSYH'si içindeki pay</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">2.562.758</div><div class="etiket">milyon TL GSYH</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İlçe düzeyinde GSYH yayımlanmıyor; İzmir değerleri bağlam için verilir (İZTO, TÜİK).</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-industry renk-turuncu ikon-bosluk" aria-hidden="true"></i>Kaynakta Adı Geçen Tesisler</h2>
+                    <div class="etiket-listesi">
+                        <span>Kütaş Baharat Fabrikası</span><span>Bir-Sen Enginar &amp; Turşu</span><span>RC İstiridye Mantar</span><span>Ajinomoto Güzelbahçe Fabrika</span><span>Agora Mobilya</span><span>Rada Concept</span><span>Avşar Demir Çelik Sanayi Ürün Üretimi A.Ş.</span><span>Aktaş Ferforje</span><span>İz-Mer Mermer Granit</span><span>Naçev Mermer ve İnşaat Madencilik</span>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>13 tesisten 10'unun adı kaynakta geçiyor. Ticaret için ilçe düzeyinde sayısal veri bulunamadı.</p>
+                </div>
+            </div>
+
+            <!-- 3. Tarım -->
+            <div class="bolum-baslik" id="tarim">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-wheat-awn" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Tarım ve Yerel Ürünler</h2>
+                    <p>Tarım alanının dağılımı, arazi kullanımı ve öne çıkan ürünler</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card full-width">
+                    <h2>Tarım Alanının Ürün Gruplarına Göre Dağılımı, 2023 (dekar)</h2>
+                    <div class="chart-container y-300"><canvas id="tarimAlanChart"></canvas></div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-yesil"><div class="deger">9.190,3</div><div class="etiket">dekar toplam tarım alanı</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">%77,6</div><div class="etiket">meyve, içecek ve baharat bitkileri</div></div>
+                        <div class="mini-ist ton-sari"><div class="deger">%13,6</div><div class="etiket">nadas</div></div>
+                    </div>
+                </div>
+                <div class="card chart-card">
+                    <h2>İlçe Arazisinin Dağılımı (%)</h2>
+                    <div class="chart-container y-300"><canvas id="araziChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Tarım ve Orman Bakanlığı, 2024.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Tarım Arazisinin Kullanımı (%)</h2>
+                    <div class="chart-container y-300"><canvas id="tarimKullanimChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Zeytinlikler yamaçlarda; narenciye, sera sebzeciliği ve çiçekçilik kıyı ovalarında (Tarım ve Orman Bakanlığı, 2024).</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-list-ol renk-yesil ikon-bosluk" aria-hidden="true"></i>En Çok Ekilen 5 Ürün</h2>
+                    <ol class="sira-listesi ton-yesil">
+                        <li>Zeytin</li>
+                        <li>Fıstık çamı</li>
+                        <li>Ekmeklik buğday</li>
+                        <li>Sofralık üzüm</li>
+                        <li>Badem</li>
+                    </ol>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Ekili alana göre sıralama (Tarım ve Orman Bakanlığı, Çiftçi Kayıt Sistemi, 2024). Alan değerleri kaynakta yalnızca grafik olarak verildiği için yazılmadı.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-seedling renk-yesil ikon-bosluk" aria-hidden="true"></i>Ürün Deseni</h2>
+                    <table class="kart-tablo">
+                        <tr><td>Sera</td><td>Kesme çiçek</td></tr>
+                        <tr><td>Bağcılık</td><td>Payamlı, Küçükkaya, Çamtepe, Kavacık</td></tr>
+                        <tr><td>Kıyı yamaçları</td><td>Zeytincilik</td></tr>
+                        <tr><td>Ova tabanları</td><td>Narenciye ve sebze</td></tr>
+                        <tr><td>Yaygın</td><td>Organik tarım ve hobi bahçeleri</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="simge-izgarasi alt-bosluk-k">
+                <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-award" aria-hidden="true"></i></span><div><h3>Kavacık Üzümü</h3><p>Coğrafi işaretli (TÜRKPATENT, tescil no. 531). Alphonse Lavallée çeşidi; 400 m üzerinde yetişir, gece-gündüz sıcaklık farkı ve poyraz şeker-asit dengesini belirler. İlçenin en yüksek marka değerli ürünü.</p></div></div>
+                <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-leaf" aria-hidden="true"></i></span><div><h3>Erkence ve Hurma Zeytini</h3><p>Yerel Erkence çeşidi ve deniz meltemiyle dalında tatlanan hurma zeytin, yüksek polifenollü zeytinyağı için uygun bir ortam sunar.</p></div></div>
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></span><div><h3>Arazi Yetenek Sınıfları</h3><p>Düzlüklerdeki derin alüvyal topraklar I–IV. sınıf; yükseltiye doğru sığ ve taşlı topraklar VI–VIII. sınıf, zeytin, fıstık çamı ve teraslı bağcılığa uygun.</p></div></div>
+            </div>
+
+            <!-- 4. Balıkçılık -->
+            <div class="bolum-baslik" id="balikcilik">
+                <div class="ikon ton-su" aria-hidden="true"><i class="fa-solid fa-fish" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Balıkçılık</h2>
+                    <p>İzmir'in 629 km'lik kıyısında Güzelbahçe'nin payı, 2024</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Güzelbahçe'nin İzmir İçindeki Payı (%)</h2>
+                    <div class="chart-container y-250"><canvas id="balikPayChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Paylar kaynaktaki sayılardan hesaplandı <span class="not-rozeti hesap">hesap</span>.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-ship renk-su ikon-bosluk" aria-hidden="true"></i>Sayılarla Balıkçılık</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-su"><div class="deger">217</div><div class="etiket">balıkçı teknesi · İzmir'de 1.738</div></div>
+                        <div class="mini-ist ton-su"><div class="deger">13</div><div class="etiket">balık çiftliği · İzmir'de 102</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">10.545</div><div class="etiket">İzmir'de balıkçı</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">629 km</div><div class="etiket">İzmir kıyı uzunluğu</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Turizm -->
+            <div class="bolum-baslik" id="turizm">
+                <div class="ikon ton-pembe" aria-hidden="true"><i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Kültür ve Turizm</h2>
+                    <p>Konaklama kapasitesi sınırlı; deniz turizmi ve kültürel destinasyonlar</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Mahallelere Göre Konaklama Kapasitesi, 2023 (kişi)</h2>
+                    <div class="chart-container y-250"><canvas id="konaklamaChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Toplam kapasite 110 kişi.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-sailboat renk-pembe ikon-bosluk" aria-hidden="true"></i>Deniz Turizmi ve Kültür</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-pembe"><div class="deger">5</div><div class="etiket">lisanslı tur teknesi</div></div>
+                        <div class="mini-ist ton-pembe"><div class="deger">%2,5</div><div class="etiket">İzmir'deki lisanslı tur teknelerinin</div></div>
+                    </div>
+                    <h3 class="kart-alt-baslik">Kültürel destinasyonlar</h3>
+                    <div class="etiket-listesi">
+                        <span>Tahtacı Kültür Evi ve Müze Alanı</span><span>Narwhal Müzesi</span>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İl Kültür ve Turizm Müdürlüğü deniz turizmi verileri; İzmir Kültür Ekonomisi Envanteri.</p>
+                </div>
+            </div>
+
+            <!-- 6. Enerji -->
+            <div class="bolum-baslik" id="enerji">
+                <div class="ikon ton-sari" aria-hidden="true"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Enerji</h2>
+                    <p>Yenilenebilir kaynaklar ve doğal gaz · Elektrik şebekesi için Elektrik Altyapısı sayfası</p>
+                </div>
+            </div>
+            <div class="simge-izgarasi alt-bosluk-k">
+                <div class="simge-karti ton-sari"><span class="sk-simge"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i></span><div><h3>25 GES projesi</h3><p>İlçede kamuya açık bilgisi bulunan güneş enerjisi santrali projesi (İSOS Enerji).</p></div></div>
+                <div class="simge-karti ton-turuncu"><span class="sk-simge"><i class="fa-solid fa-temperature-arrow-up" aria-hidden="true"></i></span><div><h3>Çalca jeotermal kaynağı</h3><p>Güzelbahçe Belediyesi'nin 2011 meclis kayıtlarında geçen jeotermal kaynak.</p></div></div>
+                <div class="simge-karti ton-mavi"><span class="sk-simge"><i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i></span><div><h3>Doğal gaz</h3><p>Arz sürekliliğini sağlamaya yönelik adımlar 2017 meclis kayıtlarında yer alıyor.</p></div></div>
+            </div>
+
+            <!-- 7. Potansiyel -->
+            <div class="bolum-baslik" id="potansiyel">
+                <div class="ikon ton-amber" aria-hidden="true"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Ekonomik Kalkınma Potansiyeli</h2>
+                    <p>Konum, doğal çevre ve yerel değerlere dayanan üç gelişme alanı · İzmir Bölge Planı 2024–2028</p>
+                </div>
+            </div>
+            <div class="simge-izgarasi alt-bosluk-k">
+                <div class="simge-karti ton-turuncu"><span class="sk-simge"><i class="fa-solid fa-route" aria-hidden="true"></i></span><div><h3>Lojistik ve erişilebilirlik</h3><p>İzmir–Çeşme Otoyolu üzerinde; Urla, Çeşme ve Seferihisar'a geçiş kapısı. Kent merkezine yakınlık konum avantajı sağlıyor.</p></div></div>
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-utensils" aria-hidden="true"></i></span><div><h3>Gastronomi ve mavi-yeşil turizm</h3><p>Balık hali, sahil yürüyüş yolu ve Payamlı, Yaka gibi köylerdeki yerel pazarlar; gıda turizmi, organik tarım ve küçük ölçekli kıyı turizmine uygun.</p></div></div>
+                <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></span><div><h3>Nitelikli yaşam ve konut</h3><p>Az katlı yapılaşma ve doğal çevre, yüksek gelirli haneler ile yatırımcılar için çekici; nitelikli konut talebi oluşturuyor.</p></div></div>
+            </div>
+
+            <div class="kaynak-notu">
+                <p>Veri Kaynağı: Araştırma grubunun ekonomik yapı raporu · Sanayi ve Teknoloji Bakanlığı SEGE-2022 · TÜİK ADNKS 2025 ve işgücü istatistikleri · İZKA (2024, 2025) · İZTO · İzmir İl Tarım ve Orman Müdürlüğü · Tarım ve Orman Bakanlığı (2024) · İl Kültür ve Turizm Müdürlüğü · Güzelbahçe Toplum Sağlığı Merkezi · Güzelbahçe İlçe Milli Eğitim Müdürlüğü · Güzelbahçe Belediyesi faaliyet raporu (2022) ve meclis kararları (2011, 2017) · İBB (2015) · İSOS Enerji · TÜRKPATENT (2020)</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/ekonomi.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

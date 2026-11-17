@@ -271,13 +271,47 @@ document.addEventListener('DOMContentLoaded', function() {
     if (ctxCamli) new Chart(ctxCamli, {
         type: 'bar',
         data: {
-            labels: ['İZSU', ['TMMOB ÇMO', '(İZSU 2009 ve 2019 aktarımı)']],
-            datasets: [{ label: 'Yıllık su verimi', data: [15, 21.5], birim: 'mnm3yil', backgroundColor: ['#34d399', '#14b8a6'], barPercentage: 0.55 }]
+            labels: ['İZSU', ['TMMOB ÇMO', '(İZSU 2009 ve 2019 aktarımı)'], ['İZSU Barajlar Şube Md.', '(ek su, araştırma raporu)']],
+            datasets: [{ label: 'Yıllık su verimi', data: [15, 21.5, 11.18], birim: 'mnm3yil', backgroundColor: ['#34d399', '#14b8a6', '#0ea5e9'], barPercentage: 0.55 }]
         },
         options: {
             indexAxis: 'y', responsive: true, maintainAspectRatio: false,
             plugins: { legend: { display: false }, datalabels: { formatter: (v) => formatSayi(v) + ' ' + birimAdi('mnm3yil') } },
             scales: { x: degerEkseni('milyon m³/yıl', { grace: '40%' }), y: kategoriEkseni }
+        }
+    });
+
+    // Güzelbahçe aylık su tüketimi, 2023 (bin m³; kaynak grafikteki etiketler) · araştırma grubunun fiziki yapı raporu
+    const tuketim = [189, 171, 190, 185, 218, 251, 349, 441, 354, 309, 229, 178];
+    const ctxTuketim = getCtx('tuketimChart');
+    if (ctxTuketim) new Chart(ctxTuketim, {
+        type: 'bar',
+        data: {
+            labels: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
+            datasets: [{ label: 'Su tüketimi', data: tuketim, birim: 'binm3', backgroundColor: tuketim.map((v, i) => (i >= 5 && i <= 7) ? '#f59e0b' : MOD_RENK.su), barPercentage: 0.7 }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            plugins: { legend: { display: false }, datalabels: { display: true, formatter: (v) => formatSayi(v), font: { size: 11, weight: '600' } } },
+            scales: { y: degerEkseni('bin m³', { grace: '10%', ticks: { callback: (v) => formatSayi(v) } }), x: kategoriEkseni }
+        }
+    });
+
+    // İzmir'de sektörlere göre su kullanımı (DSİ)
+    const ctxKullanim = getCtx('suKullanimChart');
+    if (ctxKullanim) new Chart(ctxKullanim, {
+        type: 'doughnut',
+        data: {
+            labels: ['Tarım', 'Sanayi', 'Kentsel'],
+            datasets: [{ data: [70, 20, 10], birim: 'yuzde', backgroundColor: ['#84cc16', '#fb923c', MOD_RENK.su], hoverOffset: 6 }]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false, cutout: '56%',
+            plugins: {
+                legend: { position: 'right' },
+                tooltip: { callbacks: { label: (c) => c.label + ': ' + formatYuzde(c.parsed, 0) } },
+                datalabels: { display: true, color: '#0b1220', font: { weight: '800', size: 13 }, formatter: (v) => formatYuzde(v, 0) }
+            }
         }
     });
 });

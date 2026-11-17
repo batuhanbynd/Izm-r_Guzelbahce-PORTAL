@@ -1,5 +1,5 @@
 // =============================================
-// BAS PORTAL · 3B kent sahneleri için ortak motor (kent modeli, toplu taşıma, elektrik)
+// İzmir Güzelbahçe Veri Portalı · 3B kent sahneleri için ortak motor (kent modeli, toplu taşıma, elektrik)
 // Gerçek arazi (3b/arazi.js) + bina modeli (KENT) + çizgi ve nokta katmanları.
 // Kamera, fareyle seçim (binalar için kimlik tamponu), etiketler, pusula/ölçek ve gezinti burada.
 // Dünya: x = modelX - W/2, z = modelY - H/2 (kuzey = -z), y yukarı (m).

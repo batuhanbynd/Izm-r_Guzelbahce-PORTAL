@@ -21,7 +21,6 @@
 "Koyu temaya geç": "Switch to dark theme",
 "Ana menü": "Main menu",
 "Sayfalar": "Pages",
-"BAS PORTAL – Genel Bakış": "BAS PORTAL – Overview",
 "Büyüt": "Enlarge",
 "Görsel": "Image",
 "– büyüterek aç": "– open enlarged",
@@ -37,7 +36,6 @@
 "hesap": "calc.",
 "doğrulanacak": "to be verified",
 "güncelliği doğrulanmalı": "check if still current",
-
 "İzmir · Güzelbahçe": "İzmir · Güzelbahçe",
 "Güzelbahçe Ulaşım ve Altyapı Analizi": "Güzelbahçe Transport and Infrastructure Analysis",
 "Bu sayfa, sitedeki ulaşım ve altyapı verilerinin kısa bir özetidir: toplu taşıma hatları, karayolu trafiği, su ve elektrik altyapısı ile planlanan projeler.": "This page is a short summary of the transport and infrastructure data on the site: public transport lines, road traffic, water and electricity infrastructure, and planned projects.",
@@ -99,11 +97,20 @@
 "75. Yıl Cumhuriyet Bulvarı etapları ve planlanan metro hattı": "Stages of 75. Yıl Cumhuriyet Bulvarı and the planned metro line",
 "Ulaşım modlarının ilişkisel ağ yapısı, yolcu akışı ve hiyerarşik görünümü": "Network structure, passenger flows and hierarchy of transport modes",
 "Verilere katkı sağlayan kurum ve kişiler": "Institutions and people who contributed to the data",
-
 "(Oca–Ağu)": "(Jan–Aug)",
 "(yatay kaydırılabilir)": "(scrolls horizontally)",
 "/yıl": "/year",
 "aktarma var": "transfer available",
 "✓ Doğrudan Aktarma ( bağlantı)": "✓ Direct Transfer ( connection)",
-"Güzelbahçe İçme Suyu, Atık Su ve Katı Atık Altyapısı": "Güzelbahçe Drinking Water, Wastewater and Solid Waste Infrastructure"
+"Güzelbahçe İçme Suyu, Atık Su ve Katı Atık Altyapısı": "Güzelbahçe Drinking Water, Wastewater and Solid Waste Infrastructure",
+"İzmir Güzelbahçe Veri Portalı – Genel Bakış": "İzmir Güzelbahçe Data Portal – Overview",
+"İzmir Güzelbahçe Veri Portalı": "İzmir Güzelbahçe Data Portal",
+"Veri Portalı": "Data Portal",
+"İlçe Profili": "District Profile",
+"3B ve Senaryo": "3D and Scenarios",
+"Planlama": "Planning",
+"Ekonomik Yapı": "Economic Structure",
+"Doğal Yapı ve Afet": "Natural Structure and Hazards",
+"Havza ve Koruma": "Watershed and Conservation",
+"Bu sayfadaki bölümler": "Sections on this page"
 }
