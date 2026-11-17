@@ -21,6 +21,7 @@
 | [İZSU Su Kaynakları](izsu.html) | Baraj durumu, günlük su üretimi, su kayıpları, Çamlı Barajı |
 | [Atık Su](atiksu.html) | Güneybatı arıtma tesisi, kapasite kullanımı, 75. Yıl Bulvarı altyapısı, Körfez ölçümleri |
 | [Katı Atık](kati-atik.html) | Atık bileşenleri, ayrı toplama, araç ve personel, maliyet ve tarife |
+| [Senaryo Laboratuvarı](senaryo.html) | "Ya şöyle olsaydı?" deneme alanı: durak, okul, metro, konteyner, lamba ekleme; deniz seviyesi ve kat artışı senaryoları (yeni sekmede açılır, portal verilerini değiştirmez) |
 | [Güzelbahçe 3B](3b.html) | 3B modellerin vitrini: canlı arazi görünümü ve modellere giriş |
 | [3B: Kent modeli](3b-kent.html) | İlçedeki binalar, halihazır haritadaki kat adediyle gerçek arazi üzerinde |
 | [3B: Toplu taşıma](3b-ulasim.html) | ESHOT ve dolmuş hatlarının güzergâh, durak ve 400 m yürüme alanları |
@@ -53,6 +54,7 @@ Herhangi bir kurulum gerekmez. `index.html` dosyasını tarayıcıda açmanız y
 - `3b/`: 3B modellerin ortak motoru (`motor.js`), görünümü (`ortak.css`), zemin haritası ve verileri (WebGL2, harici kütüphane yok)
   - `arazi.js`, `arazi-veri.js`: ilçenin tamamı için gerçek arazi (25 m ızgara); halihazır harita paftalarındaki (2015, 1:1000, ITRF96) kot noktaları, paftaların kapsamadığı yerlerde Copernicus GLO-30 (ESA, 30 m)
   - `zemin.js`: ilçenin tamamı için zemin haritası (halihazır yol, bina, dere, kıyı çizimleri; ulusal yol verisi)
+  - `senaryo.js`, `senaryo-veri.js`: senaryo laboratuvarı (7 senaryo, açgözlü yer önerisi, adres satırında paylaşılabilir durum)
   - `sahne.js`: kent, toplu taşıma ve elektrik modellerinin ortak motoru (bina ağı, çizgi/nokta katmanları, seçim, gezinti)
   - `kent-veri.js`, `ulasim-veri.js`, `elektrik-veri.js`: halihazır bina ve elektrik katmanları, ekibin ESHOT/dolmuş QGIS çizimleri
   - `vitrin.js`, `vitrin.css`, `gorseller/`: 3b.html vitrin sayfası ve model önizleme görselleri

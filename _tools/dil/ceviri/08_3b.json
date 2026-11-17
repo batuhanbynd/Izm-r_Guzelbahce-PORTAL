@@ -20,5 +20,11 @@
 "İlçenin tamamı gerçek arazi üzerinde: binalar, altyapı ağları, toplu taşıma, elektrik ve erişim analizi": "The whole district on the real terrain: buildings, infrastructure networks, public transport, electricity and access analysis",
 "İlçenin tamamı gerçek arazi üzerinde: binalar, boru ağları, otobüs hatları ve elektrik şebekesi. Döndürün, yakınlaşın, gezintiyi başlatın.": "The whole district on the real terrain: buildings, pipe networks, bus lines and the power network. Turn, zoom and start the guided tour.",
 "Tüm 3B modeller": "All 3D models",
-"Beş modelin tanıtımı, canlı arazi görünümü ve nasıl hazırlandıkları": "An introduction to the five models, a live terrain view and how they were made"
+"Beş modelin tanıtımı, canlı arazi görünümü ve nasıl hazırlandıkları": "An introduction to the five models, a live terrain view and how they were made",
+"Senaryo Laboratuvarı": "Scenario Lab",
+"Deneme": "Sandbox",
+"Deneme alanı": "Sandbox",
+"Ya şöyle olsaydı? Senaryo laboratuvarı": "What if? The scenario lab",
+"Yeni durak, okul, metro istasyonu ya da konteyner ekleyin; denizi ve binaları yükseltin. Etkisi gerçek veriden anında hesaplanır, portaldaki veriler değişmez.": "Add a bus stop, a school, a metro station or a waste container; raise the sea and the buildings. The effect is calculated at once from the real data, and the portal's data stays unchanged.",
+"Laboratuvarı aç": "Open the lab"
 }

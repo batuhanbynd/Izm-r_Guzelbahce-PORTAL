@@ -2893,3 +2893,28 @@ html[data-dil-bekle] body { visibility: hidden; }
         grid-template-columns: 1fr;
     }
 }
+
+/* Senaryo laboratuvarı: yan menü rozeti ve Genel Bakış afişi (yeşil vurgu) */
+.rozet-deneme {
+    margin-left: auto;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    border: 1px dashed #a3e635;
+    color: #a3e635;
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.5;
+}
+
+.vitrin-lab .v3-etiket {
+    background: #a3e635;
+    color: #13210a;
+}
+
+.vitrin-lab:hover .v3-dugme {
+    background: #a3e635;
+    border-color: #a3e635;
+    color: #13210a;
+}

@@ -43,20 +43,28 @@ HATLAR.forEach((L, i) => {
   }
 });
 
-// ---------- 400 m alanları: arazi üstü örtü ve bina payı hesabı (4 m/piksel)
-const OW = Math.round(SC.W / 4), OH = Math.round(SC.H / 4);
+// ---------- 400 m alanları: arazi üstü örtü ve bina payı hesabı
+// Tuval, zemin haritasıyla aynı çerçevede (ilçenin tamamı, ZEMIN), 5 model birimi / piksel.
+// Her daire ayrı doldurulur: üst üste binen daireler birleşir (tek yolda "evenodd" kesişimleri boşaltıyordu).
+const ZM = ZEMIN, P = 5;
+const OW = Math.round(ZM.w / P), OH = Math.round(ZM.h / P);
+const X = x => (x - ZM.mx0) / P, Y = y => (y - ZM.my0) / P;
 const ortu = document.createElement('canvas'); ortu.width = OW; ortu.height = OH;
 const kapsam = document.createElement('canvas'); kapsam.width = OW; kapsam.height = OH;
-function yol(ctx, L) {
-  ctx.beginPath();
-  L.alan400.forEach(poly => poly.forEach(ring => { ring.forEach((p, k) => k ? ctx.lineTo(p[0] / 4, p[1] / 4) : ctx.moveTo(p[0] / 4, p[1] / 4)); ctx.closePath(); }));
+const gecici = document.createElement('canvas'); gecici.width = OW; gecici.height = OH;
+function alanDoldur(ctx, L) {
+  L.alan400.forEach(poly => {
+    ctx.beginPath();
+    poly.forEach(ring => { ring.forEach((p, k) => k ? ctx.lineTo(X(p[0]), Y(p[1])) : ctx.moveTo(X(p[0]), Y(p[1]))); ctx.closePath(); });
+    ctx.fill('evenodd');   // halkanın içindeki delikler (varsa) için; daireler arası birleşim ayrı doldurmayla sağlanır
+  });
 }
 function payHesapla(liste) {
   const ctx = kapsam.getContext('2d', { willReadFrequently: true }); ctx.clearRect(0, 0, OW, OH); ctx.fillStyle = '#fff';
-  liste.forEach(L => { yol(ctx, L); ctx.fill('evenodd'); });
+  liste.forEach(L => alanDoldur(ctx, L));
   const d = ctx.getImageData(0, 0, OW, OH).data; let n = 0;
   for (const b of B) {
-    const px = Math.floor((b.x + SC.HW) / 4), py = Math.floor((b.z + SC.HH) / 4);
+    const px = Math.floor(X(b.x + SC.HW)), py = Math.floor(Y(b.z + SC.HH));
     if (px >= 0 && py >= 0 && px < OW && py < OH && d[(py * OW + px) * 4 + 3] > 127) n++;
   }
   return n;
@@ -64,9 +72,10 @@ function payHesapla(liste) {
 HATLAR.forEach(L => { L.pay = payHesapla([L]); });
 function ortuCiz() {
   const ctx = ortu.getContext('2d'); ctx.clearRect(0, 0, OW, OH);
+  const g = gecici.getContext('2d');
   if (S.alan) HATLAR.filter(L => S.secili.has(L.hat)).forEach(L => {
-    yol(ctx, L); ctx.globalAlpha = 0.28; ctx.fillStyle = HAT[L.hat].renk; ctx.fill('evenodd');
-    ctx.globalAlpha = 0.9; ctx.lineWidth = 1.6; ctx.strokeStyle = HAT[L.hat].renk; ctx.stroke(); ctx.globalAlpha = 1;
+    g.clearRect(0, 0, OW, OH); g.fillStyle = HAT[L.hat].renk; alanDoldur(g, L);
+    ctx.globalAlpha = 0.32; ctx.drawImage(gecici, 0, 0); ctx.globalAlpha = 1;
   });
   SC.ortu(ortu, 0.8);
 }
