@@ -307,3 +307,104 @@
     window.closeImageModal = kapat;
     window.closeLightbox = kapat;
 })();
+
+// =============================================
+// 6) Hareket: kaydırınca belirme, sayaçlar, görünür olunca çizilen grafikler
+//    Her öğe bir kez ve kendini tamamlayarak oynar; sayılar sonunda kaynaktaki metnin aynısına döner.
+// =============================================
+(function () {
+    const kok = document.documentElement;
+    window.basHareketHazir = true;
+    if (!kok.classList.contains('hareket')) return;
+    if (!('IntersectionObserver' in window)) { kok.classList.remove('hareket'); return; }
+
+    const SECICI = '.tab-pane > header, .stats-row > *, .sayfa-ici-menu, .bolum-baslik, .bolum-ust, .card, .info-card, .galeri-karti, .tablo-kutu, ' +
+        '.kpi, .servis-karti, .simge-karti, .zaman-cizelgesi > li, .bant-listesi > li, .akis-adim, .mini-istatistik > .mini-ist, ' +
+        '.vitrin-3b, .giris-ust > *, .kaynak-notu, .sira-yatay > li, .ro-satir > *, .cz-olay, .cz-yil, .harita-figur, .collab-card';
+    const EK = '.cift-zaman';
+    const SAYAC = '.stat-value, .kpi-deger, .mini-ist .deger, .ss-deger, .sb-deger, .vk-sayi';
+    const acilis = performance.now();
+
+    const hedefler = Array.from(document.querySelectorAll(SECICI));
+    hedefler.forEach(function (el) {
+        const kardesler = el.parentElement ? Array.from(el.parentElement.children).filter(function (c) { return c.matches(SECICI); }) : [el];
+        const sira = Math.max(0, kardesler.indexOf(el));
+        el.style.setProperty('--gecikme', (Math.min(sira, 8) * 70) + 'ms');
+    });
+
+    // Metindeki tek sayıyı bulur (TR: 1.234,5 · EN: 1,234.5). İki sayı varsa (aralık, oran) sayılmaz.
+    function sayiCoz(metin) {
+        const en = kok.lang === 'en';
+        const desen = en ? /\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?/g : /\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+(?:,\d+)?/g;
+        const bulunan = metin.match(desen);
+        if (!bulunan || bulunan.length !== 1) return null;
+        const parca = bulunan[0], yer = metin.indexOf(parca);
+        const bin = en ? ',' : '.', ond = en ? '.' : ',';
+        const ondalik = parca.indexOf(ond) >= 0 ? parca.split(ond)[1].length : 0;
+        const deger = parseFloat(parca.split(bin).join('').replace(ond, '.'));
+        if (!isFinite(deger) || deger === 0) return null;
+        return { on: metin.slice(0, yer), son: metin.slice(yer + parca.length), deger: deger, ondalik: ondalik, grup: parca.indexOf(bin) >= 0, en: en };
+    }
+
+    function say(el) {
+        if (el.dataset.sayildi || el.children.length) return;
+        el.dataset.sayildi = '1';
+        const metin = el.textContent.trim();
+        const p = sayiCoz(metin);
+        if (!p) return;
+        const bicim = new Intl.NumberFormat(p.en ? 'en-US' : 'tr-TR', { minimumFractionDigits: p.ondalik, maximumFractionDigits: p.ondalik, useGrouping: p.grup });
+        el.style.setProperty('--sayac-renk', getComputedStyle(el).color);
+        el.setAttribute('data-sayac', p.on + bicim.format(0) + p.son);
+        el.classList.add('sayiyor');
+        const sure = 1400, t0 = performance.now();
+        (function adim(t) {
+            const o = Math.min(1, Math.max(0, (t - t0) / sure)), e = 1 - Math.pow(1 - o, 4);
+            el.setAttribute('data-sayac', p.on + bicim.format(p.deger * e) + p.son);
+            if (o < 1 && el.textContent.trim() === metin) requestAnimationFrame(adim);
+            else { el.classList.remove('sayiyor'); el.removeAttribute('data-sayac'); }
+        })(t0);
+    }
+
+    const bekleyen = new Set(hedefler);
+    function goster(el) {
+        bekleyen.delete(el);
+        el.classList.add('gorundu');
+        const gecikme = parseFloat(el.style.getPropertyValue('--gecikme')) || 0;
+        setTimeout(function () { el.style.removeProperty('--gecikme'); }, gecikme + 800);
+        // Sayaçlar: yalnızca bu öğeye ait olanlar (iç içe hedeflerde her biri kendi zamanında)
+        const sayaclar = (el.matches(SAYAC) ? [el] : []).concat(Array.from(el.querySelectorAll(SAYAC)))
+            .filter(function (s) { return s.closest(SECICI) === el; });
+        if (sayaclar.length) setTimeout(function () { sayaclar.forEach(say); }, gecikme + 150);
+        // Grafikler: sayfa açılışında görünmeyenler, görünür olunca baştan çizilir
+        if (window.Chart && Chart.getChart && performance.now() - acilis > 900) {
+            el.querySelectorAll('canvas').forEach(function (cv) {
+                const g = Chart.getChart(cv);
+                if (!g || g.$oynatildi) return;
+                g.$oynatildi = true;
+                setTimeout(function () { g.reset(); g.update(); }, gecikme + 120);
+            });
+        }
+    }
+
+    const gozcu = new IntersectionObserver(function (girisler) {
+        girisler.forEach(function (g) {
+            if (!g.isIntersecting) return;
+            gozcu.unobserve(g.target);
+            goster(g.target);
+        });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0 });
+    hedefler.forEach(function (el) { gozcu.observe(el); });
+    document.querySelectorAll(EK).forEach(function (el) { gozcu.observe(el); });
+
+    // Yedek: hızlı kaydırma ya da bölüm bağlantısıyla (#) atlanıp ekranın üstünde kalan öğeler hemen gösterilir
+    let bekle = null;
+    function atlananlariGoster() {
+        bekle = null;
+        bekleyen.forEach(function (el) {
+            if (el.getBoundingClientRect().bottom < 0) { gozcu.unobserve(el); goster(el); }
+        });
+    }
+    window.addEventListener('scroll', function () { if (!bekle) bekle = setTimeout(atlananlariGoster, 180); }, { passive: true });
+    window.addEventListener('load', atlananlariGoster);
+    window.addEventListener('hashchange', function () { setTimeout(atlananlariGoster, 60); });
+})();

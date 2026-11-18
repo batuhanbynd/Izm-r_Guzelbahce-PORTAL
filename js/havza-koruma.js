@@ -113,24 +113,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // 6. Yerleşim, otoyol ve barajın yerini aldığı alanlar, 1957–2005 (ha)
-    const ctxDonusum = getCtx('donusumChart');
-    if (ctxDonusum) new Chart(ctxDonusum, {
-        type: 'bar',
-        data: {
-            labels: ['Kuru tarım', 'Fundalık', 'Bahçe tarımı', 'Sulu tarım', 'Orman', 'Zeytinlik'],
-            datasets: [
-                { label: 'Yerleşime', data: [739.0, 606.2, 198.3, 11.6, 9.4, 7.7], birim: 'ha', backgroundColor: '#f87171' },
-                { label: 'Otoyola', data: [49.0, 32.3, 53.5, null, null, null], birim: 'ha', backgroundColor: '#fb923c' },
-                { label: 'Baraja', data: [null, 20.1, null, null, 4.9, null], birim: 'ha', backgroundColor: '#38bdf8' }
-            ]
-        },
-        options: {
-            indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-            interaction: { mode: 'index', intersect: false },
-            plugins: { legend: { position: 'bottom' }, datalabels: { display: false } },
-            scales: { x: degerEkseni('ha', { stacked: true }), y: Object.assign({}, kategoriEkseni, { stacked: true }) }
-        }
+    // 6. 1957–2005 arazi dönüşümü: yerleşim, otoyol ve barajın yerini aldığı arazi (ha), akış grafiği
+    //    Kaynak tablo: "Losses in land use types ... from 1957 to 2005" (rekreasyon ve bataklık için dönüşüm yok)
+    const kapAkis = document.getElementById('donusumAkisi');
+    if (kapAkis && typeof akisGrafigi === 'function') akisGrafigi(kapAkis, {
+        sol: [
+            { ad: 'Kuru tarım', renk: '#f59e0b', grup: 'tarim' },
+            { ad: 'Bahçe tarımı', renk: '#facc15', grup: 'tarim' },
+            { ad: 'Sulu tarım', renk: '#38bdf8', grup: 'tarim' },
+            { ad: 'Zeytinlik', renk: '#a3e635', grup: 'tarim' },
+            { ad: 'Fundalık', renk: '#86efac', grup: 'dogal' },
+            { ad: 'Orman', renk: '#22c55e', grup: 'dogal' }
+        ],
+        sag: [
+            { ad: 'Yerleşim', renk: '#f87171' },
+            { ad: 'Otoyol', renk: '#fb923c' },
+            { ad: 'Baraj', renk: '#60a5fa' }
+        ],
+        gruplar: { tarim: 'Tarım alanları', dogal: 'Doğal alanlar' },
+        akislar: [
+            ['Kuru tarım', 'Yerleşim', 739.0], ['Kuru tarım', 'Otoyol', 49.0],
+            ['Bahçe tarımı', 'Yerleşim', 198.3], ['Bahçe tarımı', 'Otoyol', 53.5],
+            ['Sulu tarım', 'Yerleşim', 11.6],
+            ['Zeytinlik', 'Yerleşim', 7.7],
+            ['Fundalık', 'Yerleşim', 606.2], ['Fundalık', 'Otoyol', 32.3], ['Fundalık', 'Baraj', 20.1],
+            ['Orman', 'Yerleşim', 9.4], ['Orman', 'Baraj', 4.9]
+        ],
+        birim: 'ha', ondalik: 1,
+        solBaslik: 'Önceki kullanım', sagBaslik: 'Yeni kullanım'
     });
 
     // 7. Arazi kullanımında doğal nitelikli alanlar (ha, ilçe genel arazi kullanımındaki pay)
@@ -216,4 +226,65 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+});
+
+// Parsel hesaplayıcı: doğal sit alanındaki tarım parselinde izin verilen en büyük yapı
+// Kurallar (araştırma raporu, plan notları): taban alanı parselin en fazla %5'i, toplam inşaat alanı en fazla 250 m²,
+// yola ve parsel sınırına en az 5,00 m, saçak yüksekliği en fazla 6,80 m. Çizim ölçekli; kesit ayrı ölçekte.
+document.addEventListener('DOMContentLoaded', function () {
+    const girdi = document.getElementById('parselAlan');
+    const svg = document.getElementById('parselCizim');
+    if (!girdi || !svg) return;
+    const NS = 'http://www.w3.org/2000/svg';
+    const PAY = 0.05, UST = 250, CEKME = 5, SACAK = 6.8;
+    const el = (ad, oz, metin) => { const e = document.createElementNS(NS, ad); Object.keys(oz).forEach(k => e.setAttribute(k, oz[k])); if (metin) e.textContent = metin; svg.appendChild(e); return e; };
+
+    // Sabit öğeler
+    const PX = 24, PY = 34, KENAR = 210;               // plan çizimi
+    el('text', { x: PX, y: 18, class: 'pa-yazi koyu' }, cevir('Plan (ölçekli)'));
+    const parsel = el('rect', { x: PX, y: PY, width: KENAR, height: KENAR, class: 'pa-parsel', rx: 2 });
+    const cekme = el('rect', { x: PX, y: PY, width: KENAR, height: KENAR, class: 'pa-cekme' });
+    const bina = el('rect', { x: PX, y: PY, width: 0, height: 0, class: 'pa-bina', rx: 1.5 });
+    const cekmeYazi = el('text', { x: PX + 6, y: PY + 14, class: 'pa-yazi' }, cevir('5 m çekme'));
+    const kenarYazi = el('text', { x: PX + KENAR / 2, y: PY + KENAR + 18, 'text-anchor': 'middle', class: 'pa-yazi' }, '');
+
+    const KX = 278, ZEMIN = 230, OLCEK = 9;           // kesit: 1 m = 9 px
+    el('text', { x: KX, y: 18, class: 'pa-yazi koyu' }, cevir('Kesit'));
+    el('line', { x1: KX - 6, y1: ZEMIN, x2: 432, y2: ZEMIN, class: 'pa-zemin' });
+    const kesitBina = el('rect', { x: KX + 10, y: ZEMIN - SACAK * OLCEK, width: 0, height: SACAK * OLCEK, class: 'pa-bina' });
+    const cati = el('path', { d: '', fill: 'none', stroke: '#b45309', 'stroke-width': 1, 'stroke-dasharray': '3 3' });
+    const olcu = el('path', { d: `M${KX + 2} ${ZEMIN} V${ZEMIN - SACAK * OLCEK} M${KX - 2} ${ZEMIN} H${KX + 6} M${KX - 2} ${ZEMIN - SACAK * OLCEK} H${KX + 6}`, class: 'pa-olcu' });
+    const yukYazi = el('text', { x: KX - 2, y: ZEMIN - SACAK * OLCEK - 8, class: 'pa-yazi' }, '');
+    const genYazi = el('text', { x: KX + 10, y: ZEMIN + 18, class: 'pa-yazi' }, '');
+
+    function m2(v) { return formatSayi(v) + ' m²'; }
+    function guncelle() {
+        const A = Number(girdi.value);
+        const taban = Math.min(A * PAY, UST);
+        const kenarM = Math.sqrt(A), olcek = KENAR / kenarM;
+        const ic = CEKME * olcek;
+        cekme.setAttribute('x', PX + ic); cekme.setAttribute('y', PY + ic);
+        cekme.setAttribute('width', KENAR - 2 * ic); cekme.setAttribute('height', KENAR - 2 * ic);
+        const b = Math.sqrt(taban) * olcek;
+        bina.setAttribute('x', PX + (KENAR - b) / 2); bina.setAttribute('y', PY + (KENAR - b) / 2);
+        bina.setAttribute('width', b); bina.setAttribute('height', b);
+        cekmeYazi.setAttribute('x', PX + ic + 5); cekmeYazi.setAttribute('y', PY + ic + 14);
+        kenarYazi.textContent = cevir('Parsel kenarı') + ' ≈ ' + formatSayi(kenarM, 0) + ' m';
+        // Kesit: bina genişliği = taban alanının kenarı (kare kabul), saçak 6,80 m
+        const g = Math.sqrt(taban) * OLCEK;
+        kesitBina.setAttribute('width', g);
+        cati.setAttribute('d', `M${KX + 10} ${ZEMIN - SACAK * OLCEK} L${KX + 10 + g / 2} ${ZEMIN - SACAK * OLCEK - 22} L${KX + 10 + g} ${ZEMIN - SACAK * OLCEK}`);
+        yukYazi.textContent = cevir('saçak') + ' ' + formatSayi(SACAK, 2) + ' m';
+        genYazi.textContent = '≈ ' + formatSayi(Math.sqrt(taban), 1) + ' m';
+        document.getElementById('parselAlanYazi').textContent = formatSayi(A);
+        document.getElementById('paTaban').textContent = m2(Math.round(taban));
+        document.getElementById('paToplam').textContent = m2(UST);
+        document.getElementById('paDurum').textContent = A * PAY < UST
+            ? cevir('Taban alanını %5 sınırı belirliyor.')
+            : cevir('Parselin %5\'i 250 m²\'yi aştığı için toplam inşaat alanı sınırı belirleyici.');
+        girdi.setAttribute('aria-valuetext', formatSayi(A) + ' m²');
+    }
+    girdi.addEventListener('input', guncelle);
+    window.addEventListener('dildegisti', guncelle);
+    guncelle();
 });

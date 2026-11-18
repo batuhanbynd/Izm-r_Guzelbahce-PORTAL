@@ -52,7 +52,7 @@ Herhangi bir kurulum gerekmez. `index.html` dosyasını tarayıcıda açmanız y
 ## Proje yapısı
 
 - `*.html`: portal sayfaları
-- `js/`: her sayfanın grafik verileri ve ayarları
+- `js/`: her sayfanın grafik verileri ve ayarları; `akis-grafigi.js` kütüphanesiz akış (Sankey) grafiği
 - `styles.css`: ortak tasarım
 - `gorseller/`: ilçe profili sayfalarındaki araştırma grubu haritaları (eğim, yükselti, fay, taşkın, havza, Çamlı Barajı koruma alanları)
 - `3b/`: 3B modellerin ortak motoru (`motor.js`), görünümü (`ortak.css`), zemin haritası ve verileri (WebGL2, harici kütüphane yok)

@@ -348,5 +348,20 @@
 "32. Grup": "Group 32",
 "38. Grup": "Group 38",
 "1. grup": "Group 1",
-"3. grup": "Group 3"
+"3. grup": "Group 3",
+"Önceki kullanım": "Previous use",
+"Yeni kullanım": "New use",
+"Doğal alanlar": "Natural areas",
+"1957–2005: Hangi Arazi Neye Dönüştü?": "1957–2005: What Did the Land Become?",
+"Yerleşim, otoyol ve barajın yerini aldığı arazi, önceki kullanımına göre. Şeritlerin kalınlığı alanla orantılı; ayrıntı için bir şeride ya da kutuya gelin.": "Land replaced by settlement, motorway and dam, by its previous use. Band width is proportional to area; hover over a band or box for details.",
+"1957–2005 arasında 1.732,0 ha arazi yerleşim, otoyol ve baraja dönüştü. En büyük akış 739,0 ha ile kuru tarımdan yerleşime. Tüm değerler aşağıdaki tabloda.": "Between 1957 and 2005, 1,732.0 ha of land became settlement, motorway or dam. The largest flow, 739.0 ha, was from dry farming to settlement. All values are in the table below.",
+"Alan (ha)": "Area (ha)",
+"1.732,0 ha": "1,732.0 ha",
+"tablodaki toplam dönüşüm": "total conversion in the table",
+"yerleşime gitti": "went to settlement",
+"tarım arazisinden geldi": "came from farmland",
+"739,0 ha": "739.0 ha",
+"en büyük akış: kuru tarım → yerleşim": "largest flow: dry farming → settlement",
+"Toplam ve paylar tablodaki değerlerden hesaplandı": "Total and shares calculated from the table values",
+". Tablo yalnızca yerleşim, otoyol ve barajın yerini aldığı arazi türlerini veriyor; bu yüzden toplamlar aşağıdaki kullanım grafiğindeki artışla birebir aynı değil.": ". The table only covers the land types replaced by settlement, motorway and dam, so the totals do not exactly match the increase in the land-use chart below."
 }
