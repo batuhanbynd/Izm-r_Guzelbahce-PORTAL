@@ -225,10 +225,12 @@
             <div class="izgara-iki">
                 <div class="card">
                     <h2><i class="fa-solid fa-ranking-star renk-mavi ikon-bosluk" aria-hidden="true"></i>SEGE-2022'de Güzelbahçe</h2>
-                    <div class="mini-istatistik genis">
-                        <div class="mini-ist ton-mavi"><div class="deger">8.</div><div class="etiket">İzmir'in ilçeleri arasında</div></div>
-                        <div class="mini-ist ton-mavi"><div class="deger">52.</div><div class="etiket">Türkiye'nin ilçeleri arasında</div></div>
+                    <div class="sira-seridi" role="img" aria-label="Güzelbahçe, SEGE-2022'de İzmir'in 30 ilçesi içinde 8. sırada">
+                        <div class="ss-ust"><span class="ss-deger">8.</span><span class="ss-etiket">İzmir'in 30 ilçesi içinde</span></div>
+                        <div class="ss-kutular" aria-hidden="true"><span class="once" style="--i:1"></span><span class="once" style="--i:2"></span><span class="once" style="--i:3"></span><span class="once" style="--i:4"></span><span class="once" style="--i:5"></span><span class="once" style="--i:6"></span><span class="once" style="--i:7"></span><span class="secili" style="--i:8"></span><span style="--i:9"></span><span style="--i:10"></span><span style="--i:11"></span><span style="--i:12"></span><span style="--i:13"></span><span style="--i:14"></span><span style="--i:15"></span><span style="--i:16"></span><span style="--i:17"></span><span style="--i:18"></span><span style="--i:19"></span><span style="--i:20"></span><span style="--i:21"></span><span style="--i:22"></span><span style="--i:23"></span><span style="--i:24"></span><span style="--i:25"></span><span style="--i:26"></span><span style="--i:27"></span><span style="--i:28"></span><span style="--i:29"></span><span style="--i:30"></span></div>
+                        <div class="ss-olcek" aria-hidden="true"><span>1. sıra en gelişmiş</span><span>30.</span></div>
                     </div>
+                    <div class="sira-buyuk"><span class="sb-deger">52.</span><span class="sb-etiket">Türkiye'nin ilçeleri arasında</span></div>
                     <p class="kart-aciklama">Sanayi ve Teknoloji Bakanlığı'nın sıralaması, ilçeleri dört gösterge grubunda karşılaştırır:</p>
                     <div class="etiket-listesi">
                         <span>Demografi</span><span>Eğitim</span><span>Sağlık</span><span>İstihdam ve sosyal güvenlik</span>
@@ -321,29 +323,67 @@
                     <div class="chart-container y-300"><canvas id="tarimKullanimChart"></canvas></div>
                     <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Zeytinlikler yamaçlarda; narenciye, sera sebzeciliği ve çiçekçilik kıyı ovalarında (Tarım ve Orman Bakanlığı, 2024).</p>
                 </div>
-                <div class="card">
+                <div class="card full-width">
                     <h2><i class="fa-solid fa-list-ol renk-yesil ikon-bosluk" aria-hidden="true"></i>En Çok Ekilen 5 Ürün</h2>
-                    <ol class="sira-listesi ton-yesil">
-                        <li>Zeytin</li>
-                        <li>Fıstık çamı</li>
-                        <li>Ekmeklik buğday</li>
-                        <li>Sofralık üzüm</li>
-                        <li>Badem</li>
+                    <ol class="sira-yatay">
+                        <li><span class="sy-ikon">1</span><span class="sy-ad">Zeytin</span></li>
+                        <li><span class="sy-ikon">2</span><span class="sy-ad">Fıstık çamı</span></li>
+                        <li><span class="sy-ikon">3</span><span class="sy-ad">Ekmeklik buğday</span></li>
+                        <li><span class="sy-ikon">4</span><span class="sy-ad">Sofralık üzüm</span></li>
+                        <li><span class="sy-ikon">5</span><span class="sy-ad">Badem</span></li>
                     </ol>
                     <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Ekili alana göre sıralama (Tarım ve Orman Bakanlığı, Çiftçi Kayıt Sistemi, 2024). Alan değerleri kaynakta yalnızca grafik olarak verildiği için yazılmadı.</p>
                 </div>
-                <div class="card">
-                    <h2><i class="fa-solid fa-seedling renk-yesil ikon-bosluk" aria-hidden="true"></i>Ürün Deseni</h2>
-                    <table class="kart-tablo">
-                        <tr><td>Sera</td><td>Kesme çiçek</td></tr>
-                        <tr><td>Bağcılık</td><td>Payamlı, Küçükkaya, Çamtepe, Kavacık</td></tr>
-                        <tr><td>Kıyı yamaçları</td><td>Zeytincilik</td></tr>
-                        <tr><td>Ova tabanları</td><td>Narenciye ve sebze</td></tr>
-                        <tr><td>Yaygın</td><td>Organik tarım ve hobi bahçeleri</td></tr>
-                    </table>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-seedling renk-yesil ikon-bosluk" aria-hidden="true"></i>Kıyıdan Dağa Ürün Deseni</h2>
+                    <p class="kart-aciklama">Yükseldikçe toprak sığlaşıyor, ürün deseni değişiyor. Şematik, ölçeksiz.</p>
+                    <div class="kesit-kutu">
+                        <svg class="kesit-svg" viewBox="0 0 1000 380" role="img" aria-label="Şematik kesit: kıyı ovasında narenciye, sera sebzesi ve kesme çiçek; kıyı yamaçlarında zeytinlik; yüksek kesimlerde Kavacık üzümü bağları, badem ve fıstık çamı; güneydeki dağlarda kızılçam ormanı">
+                            <defs>
+                                <linearGradient id="kesitToprak" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5a2b"/><stop offset="1" stop-color="#3b2614"/></linearGradient>
+                                <linearGradient id="kesitDeniz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#075985"/></linearGradient>
+                            </defs>
+                            <rect x="0" y="300" width="132" height="80" fill="url(#kesitDeniz)"/>
+                            <path d="M8 316 q10 -5 20 0 t20 0 t20 0 t20 0 t20 0 M18 334 q10 -5 20 0 t20 0 t20 0 t20 0" stroke="#bae6fd" stroke-opacity="0.5" stroke-width="1.5" fill="none"/>
+                            <text class="k-deniz-yazi" x="64" y="364" text-anchor="middle">İZMİR KÖRFEZİ</text>
+                            <path d="M120 300 L340 296 C430 286 500 232 560 206 L720 196 C770 186 820 152 870 139 C915 128 955 138 1000 148 L1000 380 L120 380 Z" fill="url(#kesitToprak)"/>
+                            <path d="M120 300 L340 296 C430 286 500 232 560 206 L720 196 C770 186 820 152 870 139 C915 128 955 138 1000 148" stroke="#c08a52" stroke-width="3" fill="none"/>
+                            <g fill="#e2e8f0" fill-opacity="0.8" stroke="#94a3b8" stroke-width="1"><path d="M150 299 v-10 q14 -12 28 0 v10 z"/><path d="M186 298 v-10 q14 -12 28 0 v10 z"/></g>
+                            <g fill="#15803d"><circle cx="242" cy="290" r="7"/><circle cx="270" cy="289" r="7"/><circle cx="298" cy="289" r="7"/><circle cx="324" cy="288" r="7"/></g>
+                            <g fill="#fb923c"><circle cx="240" cy="288" r="1.8"/><circle cx="244" cy="292" r="1.8"/><circle cx="272" cy="287" r="1.8"/><circle cx="268" cy="291" r="1.8"/><circle cx="300" cy="287" r="1.8"/><circle cx="296" cy="291" r="1.8"/><circle cx="326" cy="286" r="1.8"/><circle cx="322" cy="290" r="1.8"/></g>
+                            <g stroke="#57534e" stroke-width="2"><path d="M384 290 v-8"/><path d="M424 277 v-8"/><path d="M462 260 v-8"/><path d="M500 240 v-8"/><path d="M536 220 v-8"/></g>
+                            <g fill="#a3b18a"><ellipse cx="384" cy="279" rx="10" ry="7"/><ellipse cx="424" cy="266" rx="10" ry="7"/><ellipse cx="462" cy="249" rx="10" ry="7"/><ellipse cx="500" cy="229" rx="10" ry="7"/><ellipse cx="536" cy="209" rx="10" ry="7"/></g>
+                            <g stroke="#a3e635" stroke-width="2.2" stroke-linecap="round"><path d="M590 203 v-9 M602 203 v-9 M614 202 v-9 M626 202 v-9 M638 201 v-9 M650 201 v-9 M662 200 v-9 M674 200 v-9"/></g>
+                            <g fill="#9333ea"><circle cx="590" cy="194" r="2"/><circle cx="614" cy="193" r="2"/><circle cx="638" cy="192" r="2"/><circle cx="662" cy="191" r="2"/></g>
+                            <path d="M698 198 v-10" stroke="#57534e" stroke-width="2"/><ellipse cx="698" cy="185" rx="9" ry="6" fill="#f9a8d4"/>
+                            <path d="M712 197 v-14" stroke="#57534e" stroke-width="2"/><ellipse cx="712" cy="181" rx="13" ry="5" fill="#166534"/>
+                            <g fill="#14532d"><path d="M752 190 l8 -20 l8 20 z"/><path d="M780 178 l8 -20 l8 20 z"/><path d="M808 164 l8 -20 l8 20 z"/><path d="M836 152 l8 -20 l8 20 z"/><path d="M864 142 l8 -20 l8 20 z"/><path d="M892 136 l8 -20 l8 20 z"/><path d="M922 136 l8 -20 l8 20 z"/><path d="M952 141 l8 -20 l8 20 z"/></g>
+                            <g class="k-kilavuz"><path d="M235 88 V280"/><path d="M455 88 V250"/><path d="M645 88 V184"/><path d="M870 88 V116"/></g>
+                            <g class="k-nokta"><circle cx="235" cy="88" r="2.5"/><circle cx="455" cy="88" r="2.5"/><circle cx="645" cy="88" r="2.5"/><circle cx="870" cy="88" r="2.5"/></g>
+                            <g text-anchor="middle">
+                                <text class="k-baslik" x="235" y="20">Kıyı ovası</text>
+                                <text class="k-metin" x="235" y="38">Narenciye, sera sebzesi</text>
+                                <text class="k-metin" x="235" y="54">ve kesme çiçek</text>
+                                <text class="k-not" x="235" y="72">I–IV. sınıf derin alüvyal toprak</text>
+                                <text class="k-baslik" x="455" y="20">Kıyı yamaçları</text>
+                                <text class="k-metin" x="455" y="38">Zeytinlik</text>
+                                <text class="k-metin" x="455" y="54">Erkence ve hurma zeytin</text>
+                                <text class="k-not" x="455" y="72">VI–VIII. sınıf sığ, taşlı toprak</text>
+                                <text class="k-baslik" x="645" y="20">Yüksek kesimler</text>
+                                <text class="k-metin" x="645" y="38">Teraslı bağlar: Kavacık üzümü</text>
+                                <text class="k-metin" x="645" y="54">badem, fıstık çamı · 400 m üzeri</text>
+                                <text class="k-not" x="645" y="72">Payamlı, Küçükkaya, Çamtepe, Kavacık</text>
+                                <text class="k-baslik" x="870" y="20">Güneydeki dağlar</text>
+                                <text class="k-metin" x="870" y="38">Kızılçam ormanı</text>
+                                <text class="k-metin" x="870" y="54">250 m üzeri; alt yamaçlarda maki</text>
+                                <text class="k-not" x="870" y="72">Çatalkaya ve Çamlı kütlesi</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Kaynak: Tarım ve Orman Bakanlığı (2024), Ege Üniversitesi Ziraat Fakültesi (2018), TÜRKPATENT (2020), Orman Genel Müdürlüğü (2023); araştırma grubunun fiziki yapı raporu. Organik tarım ve hobi bahçeleri ilçede yaygın.</p>
                 </div>
             </div>
-            <div class="simge-izgarasi alt-bosluk-k">
+            <div class="simge-izgarasi vitrin alt-bosluk-k">
                 <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-award" aria-hidden="true"></i></span><div><h3>Kavacık Üzümü</h3><p>Coğrafi işaretli (TÜRKPATENT, tescil no. 531). Alphonse Lavallée çeşidi; 400 m üzerinde yetişir, gece-gündüz sıcaklık farkı ve poyraz şeker-asit dengesini belirler. İlçenin en yüksek marka değerli ürünü.</p></div></div>
                 <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-leaf" aria-hidden="true"></i></span><div><h3>Erkence ve Hurma Zeytini</h3><p>Yerel Erkence çeşidi ve deniz meltemiyle dalında tatlanan hurma zeytin, yüksek polifenollü zeytinyağı için uygun bir ortam sunar.</p></div></div>
                 <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></span><div><h3>Arazi Yetenek Sınıfları</h3><p>Düzlüklerdeki derin alüvyal topraklar I–IV. sınıf; yükseltiye doğru sığ ve taşlı topraklar VI–VIII. sınıf, zeytin, fıstık çamı ve teraslı bağcılığa uygun.</p></div></div>
@@ -410,7 +450,7 @@
                     <p>Yenilenebilir kaynaklar ve doğal gaz · Elektrik şebekesi için Elektrik Altyapısı sayfası</p>
                 </div>
             </div>
-            <div class="simge-izgarasi alt-bosluk-k">
+            <div class="simge-izgarasi vitrin alt-bosluk-k">
                 <div class="simge-karti ton-sari"><span class="sk-simge"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i></span><div><h3>25 GES projesi</h3><p>İlçede kamuya açık bilgisi bulunan güneş enerjisi santrali projesi (İSOS Enerji).</p></div></div>
                 <div class="simge-karti ton-turuncu"><span class="sk-simge"><i class="fa-solid fa-temperature-arrow-up" aria-hidden="true"></i></span><div><h3>Çalca jeotermal kaynağı</h3><p>Güzelbahçe Belediyesi'nin 2011 meclis kayıtlarında geçen jeotermal kaynak.</p></div></div>
                 <div class="simge-karti ton-mavi"><span class="sk-simge"><i class="fa-solid fa-fire-flame-simple" aria-hidden="true"></i></span><div><h3>Doğal gaz</h3><p>Arz sürekliliğini sağlamaya yönelik adımlar 2017 meclis kayıtlarında yer alıyor.</p></div></div>
@@ -424,7 +464,7 @@
                     <p>Konum, doğal çevre ve yerel değerlere dayanan üç gelişme alanı · İzmir Bölge Planı 2024–2028</p>
                 </div>
             </div>
-            <div class="simge-izgarasi alt-bosluk-k">
+            <div class="simge-izgarasi vitrin alt-bosluk-k">
                 <div class="simge-karti ton-turuncu"><span class="sk-simge"><i class="fa-solid fa-route" aria-hidden="true"></i></span><div><h3>Lojistik ve erişilebilirlik</h3><p>İzmir–Çeşme Otoyolu üzerinde; Urla, Çeşme ve Seferihisar'a geçiş kapısı. Kent merkezine yakınlık konum avantajı sağlıyor.</p></div></div>
                 <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-utensils" aria-hidden="true"></i></span><div><h3>Gastronomi ve mavi-yeşil turizm</h3><p>Balık hali, sahil yürüyüş yolu ve Payamlı, Yaka gibi köylerdeki yerel pazarlar; gıda turizmi, organik tarım ve küçük ölçekli kıyı turizmine uygun.</p></div></div>
                 <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></span><div><h3>Nitelikli yaşam ve konut</h3><p>Az katlı yapılaşma ve doğal çevre, yüksek gelirli haneler ile yatırımcılar için çekici; nitelikli konut talebi oluşturuyor.</p></div></div>

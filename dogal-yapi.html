@@ -258,12 +258,27 @@
                 </figure>
                 <div class="card">
                     <h2><i class="fa-solid fa-mountain-sun renk-yesil ikon-bosluk" aria-hidden="true"></i>Yükselti Kuşakları ve Kullanım</h2>
-                    <ul class="bant-listesi">
-                        <li style="--b:#4d7c4f"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">0–100 m</span><span class="bant-metin"><strong>Kentsel doku</strong>Kıyı ovası ve alçak teraslar: ticaret merkezleri, ulaşım aksları.</span></li>
-                        <li style="--b:#8fd14f"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">100–250 m</span><span class="bant-metin"><strong>Düşük yoğunluklu konut</strong>Etek ve plato alanları: bahçeli konut, açık alanlar.</span></li>
-                        <li style="--b:#fdb462"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">250–500 m</span><span class="bant-metin"><strong>Kırsal ve tarım</strong>Tepelik orta yükselti: zeytincilik, düşük etkili ekoturizm.</span></li>
-                        <li style="--b:#a0522d"><span class="bant-renk" aria-hidden="true"></span><span class="bant-aralik">500 m üzeri</span><span class="bant-metin"><strong>Orman ve havza koruma</strong>Yüksek sırtlar: ormancılık, havza koruma, erozyon önleme.</span></li>
-                    </ul>
+                    <div class="yukselti-merdiveni" role="img" aria-label="Yükselti kuşakları: 0–100 m kentsel doku, 100–250 m düşük yoğunluklu konut, 250–500 m kırsal ve tarım, 500 m üzeri orman ve havza koruma">
+                        <div class="ym-olcek" aria-hidden="true">
+                            <span style="--h:100" data-alt="0 m"></span>
+                            <span style="--h:150" data-alt="100"></span>
+                            <span style="--h:250" data-alt="250"></span>
+                            <span style="--h:160" data-alt="500"></span>
+                        </div>
+                        <div class="ym-sutun" aria-hidden="true">
+                            <span style="--h:100; --b:#4d7c4f; --i:0"></span>
+                            <span style="--h:150; --b:#8fd14f; --i:1"></span>
+                            <span style="--h:250; --b:#fdb462; --i:2"></span>
+                            <span class="acik-uclu" style="--h:160; --b:#a0522d; --i:3"></span>
+                        </div>
+                        <div class="ym-aciklama">
+                            <div style="--h:100; --b:#4d7c4f"><strong>Kentsel doku <span>0–100 m</span></strong><small>Kıyı ovası ve alçak teraslar: ticaret merkezleri, ulaşım aksları.</small></div>
+                            <div style="--h:150; --b:#8fd14f"><strong>Düşük yoğunluklu konut <span>100–250 m</span></strong><small>Etek ve plato alanları: bahçeli konut, açık alanlar.</small></div>
+                            <div style="--h:250; --b:#fdb462"><strong>Kırsal ve tarım <span>250–500 m</span></strong><small>Tepelik orta yükselti: zeytincilik, düşük etkili ekoturizm.</small><em>Kızılçam ormanları 250 m, Kavacık bağları 400 m üzerinde</em></div>
+                            <div style="--h:160; --b:#a0522d"><strong>Orman ve havza koruma <span>500 m üzeri</span></strong><small>Yüksek sırtlar: ormancılık, havza koruma, erozyon önleme.</small></div>
+                        </div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Kuşak yükseklikleri ölçekli çizildi; en üstteki kuşak açık uçlu.</p>
                 </div>
             </div>
 
@@ -357,6 +372,11 @@
                 </div>
             </div>
             <h2 class="ara-baslik">İzmir ve Çevresinde Hasar Yapan Tarihsel Depremler</h2>
+            <div class="card chart-card full-width alt-bosluk-k">
+                <h2>Şiddet ve Büyüklük, 1778–1883</h2>
+                <div class="chart-container y-320"><canvas id="depremChart"></canvas></div>
+                <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Daire büyüdükçe depremin büyüklüğü artıyor; büyüklüğü verilmeyen depremler içi boş daireyle gösterildi. Ayrıntılar aşağıdaki tabloda.</p>
+            </div>
             <div class="tablo-kutu alt-bosluk-k">
                 <table class="veri-tablosu">
                     <thead>
@@ -383,20 +403,34 @@
                     <p>Yüksek depremsellik, kıyı hidrojeolojisi ve engebeli topoğrafyanın birleşimi · AFAD İzmir İl Afet Risk Azaltma Planı (İRAP)</p>
                 </div>
             </div>
-            <div class="simge-izgarasi">
-                <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-house-crack" aria-hidden="true"></i></span><div><h3>Yüzey kırığı</h3><p>Seferihisar Fayı'nın aktif kolu boyunca doğrudan yüzey kırığı tehlikesi.</p></div></div>
-                <div class="simge-karti ton-turuncu"><span class="sk-simge"><i class="fa-solid fa-water" aria-hidden="true"></i></span><div><h3>Sıvılaşma</h3><p>Kıyı koridorundaki suya doygun alüvyal zeminlerde yüksek sıvılaşma eğilimi.</p></div></div>
-                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-house-flood-water" aria-hidden="true"></i></span><div><h3>Ani taşkın</h3><p>İç kesimdeki drenaj koridorları ve dere yatakları.</p></div></div>
-                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-hill-rockslide" aria-hidden="true"></i></span><div><h3>Şev kayması</h3><p>Dik yamaçlar ve yüksek kesimler.</p></div></div>
-                <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-fire" aria-hidden="true"></i></span><div><h3>Orman yangını</h3><p>Güneydeki dağlık alanlarda kızılçam ormanları ve makilik.</p></div></div>
+            <div class="risk-onlem">
+                <div class="ro-baslik" aria-hidden="true"><span>Risk</span><span></span><span>Mekânsal önlem</span></div>
+                <div class="ro-satir ton-kirmizi">
+                    <div class="ro-risk"><span class="ro-ikon" aria-hidden="true"><i class="fa-solid fa-house-crack"></i></span><div><strong>Yüzey kırığı</strong><small>Seferihisar Fayı'nın aktif kolu boyunca doğrudan yüzey kırığı tehlikesi.</small></div></div>
+                    <div class="ro-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="ro-onlem"><span class="ro-ikon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span><div><strong>Güvenlik tamponu</strong><small>Aktif fay çizgileri boyunca yapılaşmaya kapalı güvenlik tamponları bırakılması.</small></div></div>
+                </div>
+                <div class="ro-satir ton-turuncu">
+                    <div class="ro-risk"><span class="ro-ikon" aria-hidden="true"><i class="fa-solid fa-water"></i></span><div><strong>Sıvılaşma</strong><small>Kıyı koridorundaki suya doygun alüvyal zeminlerde yüksek sıvılaşma eğilimi.</small></div></div>
+                    <div class="ro-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="ro-onlem"><span class="ro-ikon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span><div><strong>Kıyı kuşağında yoğunluk ve zemin</strong><small>Yoğunluğun azaltılması ve zorunlu jeoteknik zemin iyileştirme.</small></div></div>
+                </div>
+                <div class="ro-satir ton-su">
+                    <div class="ro-risk"><span class="ro-ikon" aria-hidden="true"><i class="fa-solid fa-house-flood-water"></i></span><div><strong>Ani taşkın</strong><small>İç kesimdeki drenaj koridorları ve dere yatakları.</small></div></div>
+                    <div class="ro-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="ro-onlem"><span class="ro-ikon" aria-hidden="true"><i class="fa-solid fa-route"></i></span><div><strong>Ekolojik taşkın yolu</strong><small>Dere kenarlarındaki kesintisiz koridorların ekolojik taşkın yolu olarak ayrılması.</small></div></div>
+                </div>
+                <div class="ro-satir ton-amber">
+                    <div class="ro-risk"><span class="ro-ikon" aria-hidden="true"><i class="fa-solid fa-hill-rockslide"></i></span><div><strong>Şev kayması</strong><small>Dik yamaçlar ve yüksek kesimler.</small></div></div>
+                    <div class="ro-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="ro-onlem"><span class="ro-ikon" aria-hidden="true"><i class="fa-solid fa-tree"></i></span><div><strong>Dik sırtların korunması</strong><small>Koruma alanı olarak belirlenmesi; ağaçlandırma ve teraslama ile desteklenmesi.</small></div></div>
+                </div>
+                <div class="ro-satir ton-kirmizi">
+                    <div class="ro-risk"><span class="ro-ikon" aria-hidden="true"><i class="fa-solid fa-fire"></i></span><div><strong>Orman yangını</strong><small>Güneydeki dağlık alanlarda kızılçam ormanları ve makilik.</small></div></div>
+                    <div class="ro-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="ro-onlem yok"><span class="ro-ikon" aria-hidden="true"><i class="fa-solid fa-minus"></i></span><div><small>Kaynakta bu risk için ayrı bir mekânsal ilke belirtilmemiş.</small></div></div>
+                </div>
             </div>
-            <h2 class="ara-baslik">Mekânsal risk azaltma ilkeleri</h2>
-            <ol class="zaman-cizelgesi ton-turuncu alt-bosluk-k">
-                <li><span class="zc-tarih">Fay hatları</span><div><span class="zc-metin">Aktif fay çizgileri boyunca yapılaşmaya kapalı güvenlik tamponları bırakılması.</span></div></li>
-                <li><span class="zc-tarih">Kıyı kuşağı</span><div><span class="zc-metin">Yoğunluğun azaltılması ve zorunlu jeoteknik zemin iyileştirme.</span></div></li>
-                <li><span class="zc-tarih">Dere koridorları</span><div><span class="zc-metin">Dere kenarlarındaki kesintisiz koridorların ekolojik taşkın yolu olarak ayrılması.</span></div></li>
-                <li><span class="zc-tarih">Dik sırtlar</span><div><span class="zc-metin">Koruma alanı olarak belirlenmesi; ağaçlandırma ve teraslama ile desteklenmesi.</span></div></li>
-            </ol>
 
             <!-- 5. Dereler ve taşkın -->
             <div class="bolum-baslik" id="taskin">

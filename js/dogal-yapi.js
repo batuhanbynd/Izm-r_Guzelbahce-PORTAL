@@ -166,3 +166,67 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+// Tarihsel depremler: x = tarih (yıl), y = şiddet (VIII–X), daire = büyüklük (verilmeyenler içi boş)
+// Kaynak: İBB İzmir Deprem Senaryosu ve Deprem Master Planı (araştırma raporundaki tablo)
+document.addEventListener('DOMContentLoaded', function () {
+    const ctx = getCtx('depremChart');
+    if (!ctx) return;
+    const ROMA = { 8: 'VIII', 9: 'IX', 10: 'X' };
+    // x: yılın içindeki konum (ay/gün) yalnızca yerleşim içindir
+    const olaylar = [
+        { x: 1778.51, y: 9, b: 6.4, tarih: '3–5 Temmuz 1778', yer: 'İzmir, Urla' },
+        { x: 1850.78, y: 8, b: null, tarih: '13 Ekim 1850', yer: 'İzmir, Manisa, Kemalpaşa' },
+        { x: 1862.84, y: 10, b: 6.9, tarih: '3 Kasım 1862', yer: 'Turgutlu' },
+        { x: 1873.08, y: 9, b: null, tarih: '1 Şubat 1873', yer: 'Sisam Adası, İzmir, Aydın' },
+        { x: 1880.57, y: 9, b: 6.7, tarih: '29 Temmuz 1880', yer: 'Menemen, Bornova, Karşıyaka' },
+        { x: 1883.79, y: 9, b: 6.8, tarih: '15 Ekim 1883', yer: 'Çeşme Yarımadası' },
+        { x: 1883.83, y: 8, b: null, tarih: '1 Kasım 1883', yer: 'İzmir Körfezi, Çeşme Yarımadası' }
+    ];
+    const yaricap = (b) => b === null ? 7 : (b - 5.5) * 11;
+    const veri = (bilinen) => olaylar.filter(o => (o.b !== null) === bilinen).map(o => Object.assign({ r: yaricap(o.b) }, o));
+    const grafik = new Chart(ctx, {
+        type: 'bubble',
+        data: {
+            datasets: [
+                { label: 'Büyüklüğü verilen', data: veri(true), backgroundColor: 'rgba(248, 113, 113, 0.55)', borderColor: '#f87171', borderWidth: 1.5 },
+                { label: 'Büyüklüğü verilmeyen', data: veri(false), backgroundColor: 'rgba(251, 146, 60, 0.08)', borderColor: '#fb923c', borderWidth: 2 }
+            ]
+        },
+        options: {
+            responsive: true, maintainAspectRatio: false,
+            layout: { padding: { top: 18, right: 12 } },
+            plugins: {
+                erisilebilirGrafik: { tablo: false },
+                legend: { position: 'bottom' },
+                datalabels: {
+                    display: true, anchor: 'end', offset: 4,
+                    // 1880 ve Ekim 1883 birbirine çok yakın: etiketleri yanlara alınır
+                    align: (c) => { const x = c.dataset.data[c.dataIndex].x; return x > 1880 && x < 1881 ? 'left' : (x > 1883.7 && x < 1883.8 ? 'right' : 'top'); },
+                    color: (c) => temaRengi('etiket'), font: { size: 11, weight: '700' },
+                    formatter: (v) => String(Math.floor(v.x))
+                },
+                tooltip: {
+                    callbacks: {
+                        title: (l) => cevir(l[0].raw.tarih),
+                        label: (c) => [
+                            cevir(c.raw.yer),
+                            cevir('Şiddet') + ': ' + ROMA[c.raw.y],
+                            cevir('Büyüklük') + ': ' + (c.raw.b === null ? cevir('verilmemiş') : formatSayi(c.raw.b, 1))
+                        ]
+                    }
+                }
+            },
+            scales: {
+                x: { type: 'linear', min: 1770, max: 1890, grid: { color: GRAFIK_TEMA.koyu.izgara }, border: { display: false },
+                     ticks: { stepSize: 10, callback: (v) => String(v) },
+                     title: { display: true, text: 'Yıl', color: GRAFIK_TEMA.koyu.metin } },
+                y: { min: 7.4, max: 10.7, grid: { color: GRAFIK_TEMA.koyu.izgara }, border: { display: false },
+                     ticks: { stepSize: 1, callback: (v) => ROMA[v] || '' },
+                     title: { display: true, text: 'Şiddet', color: GRAFIK_TEMA.koyu.metin } }
+            }
+        }
+    });
+    ctx.canvas.setAttribute('role', 'img');
+    ctx.canvas.setAttribute('aria-label', cevir('Tarihsel depremlerin şiddet ve büyüklük grafiği. Değerler aşağıdaki tablodadır.'));
+});

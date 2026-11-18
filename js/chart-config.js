@@ -176,8 +176,8 @@ Chart.defaults.font.family = "'Outfit', sans-serif";
 Chart.defaults.font.size = 12;
 
 // Sakin, kısa açılış animasyonu; hareket azaltma tercihinde kapalı
-Chart.defaults.animation.duration = AZ_HAREKET ? 0 : 450;
-Chart.defaults.animation.easing = 'easeOutCubic';
+Chart.defaults.animation.duration = AZ_HAREKET ? 0 : 900;
+Chart.defaults.animation.easing = 'easeOutQuart';
 Chart.defaults.transitions.active.animation.duration = AZ_HAREKET ? 0 : 150;
 
 Chart.defaults.elements.bar.borderRadius = 3;
@@ -456,7 +456,9 @@ Chart.register({
     beforeInit: function (chart) {
         if (aktifTema() === 'acik') grafigeTemaUygula(chart, 'acik');
     },
-    afterUpdate: function (chart) {
+    // options.plugins.erisilebilirGrafik.tablo === false: veri tablosu sayfada ayrıca var
+    afterUpdate: function (chart, args, ayar) {
+        if (ayar && ayar.tablo === false) return;
         veriTablosunuYaz(chart);
     }
 });
