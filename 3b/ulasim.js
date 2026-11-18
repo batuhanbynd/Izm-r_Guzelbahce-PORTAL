@@ -1,6 +1,7 @@
 // =============================================
 // Güzelbahçe toplu taşıma: ESHOT hatları ve dolmuş, gerçek arazi ve bina modeli üzerinde
 // Veriler: 3b/ulasim-veri.js (ULASIM), 3b/kent-veri.js (KENT), 3b/arazi-veri.js, 3b/zemin.js. Motor: 3b/sahne.js
+// Tarifeye göre canlandırma: kaynaktaki ilk/son kalkış ve sefer aralığıyla temsili araç hareketi (aşağıda)
 // =============================================
 (() => {
 "use strict";
@@ -87,6 +88,7 @@ function liste() {
     const b = document.createElement('button'); b.type = 'button'; b.style.setProperty('--c', HAT[L.hat].renk);
     b.setAttribute('aria-pressed', S.secili.has(L.hat));
     const ek = [sikMetin(L.hat)];
+    if (TARIFE[L.hat]) ek.push(TARIFE[L.hat].ilk + '–' + TARIFE[L.hat].son);
     if (L.durak.length) ek.push(t('alanda ', '') + fmt(L.durak.length) + t(' durak', L.durak.length === 1 ? ' stop in the area' : ' stops in the area'));
     if (L.uzunluk) ek.push(t('çizim ', 'drawn ') + fmt(L.uzunluk / 1000, 1) + ' km');
     b.innerHTML = `<i></i><span>${hatAd(L.hat)}<small>${ek.join(' · ')}</small></span><em>${pct(L.pay / NB * 100, 1)}</em>`;
@@ -140,7 +142,106 @@ SC.tur([
     metin: () => t(`Güzelbahçe–Fahrettin Altay dolmuşu. Ekibin çiziminde durak yok, yalnızca güzergâh ve 400 m alanı var; bu alanda kalan bina payı ${payMetin(['D1'])} (hesap).`,
       `The Güzelbahçe–Fahrettin Altay minibus. The team's drawing has no stops, only the route and its 400 m area; this area covers ${payMetin(['D1'])} of the buildings (calc.).`) }
 ]);
-addEventListener('m3dil', () => { liste(); istatistik(); lejant(); uygula(); });
+// ---------- tarifeye göre canlandırma (temsili, canlı konum değil)
+// İlk ve son kalkış, ortalama sefer aralığı: ekibin raporu (ESHOT sayfası). Hat 8 için "21–22 dk" ortası (21,5) alındı.
+// Yolculuk süresi verisi yok: araçlar seçilen ortalama hızla (varsayım) güzergâhın model alanındaki bölümünü gider;
+// iki yönde aynı tarife varsayılır. Hat 28 (güzergâh çizimi yok) ve dolmuş (tarife yok) canlandırılmaz.
+const TARIFE = {
+  '8': { ilk: '06:00', son: '00:30', aralik: 21.5, parca: [0, 1] },
+  '82': { ilk: '06:00', son: '00:25', aralik: 30, parca: [0] },
+  '684': { ilk: '06:00', son: '21:20', aralik: 25, parca: [0] },
+  '9': { ilk: '06:35', son: '20:20', aralik: 120, parca: [0, 1] },
+  '762': { ilk: '06:40', son: '16:30', aralik: 120, parca: [0] }
+};
+const SAAT_MIN = 330, SAAT_MAX = 1530;                       // 05:30 … ertesi gün 01:30 (dakika)
+const dakika = s => { const [h, m] = s.split(':').map(Number); return h * 60 + m + (h < 4 ? 1440 : 0); };
+const saatYazi = d => { const m = Math.floor(((d % 1440) + 1440) % 1440); return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); };
+HATLAR.forEach(L => {
+  const T = TARIFE[L.hat];
+  if (!T || !L.guzergah.length) return;
+  const nok = []; T.parca.forEach(i => (L.guzergah[i] || []).forEach(p => nok.push(p)));
+  const kum = [0]; for (let i = 1; i < nok.length; i++) kum.push(kum[i - 1] + Math.hypot(nok[i][0] - nok[i - 1][0], nok[i][1] - nok[i - 1][1]));
+  const kalkis = [], a = dakika(T.ilk), b = dakika(T.son);
+  for (let k = a; k <= b + 1e-6; k += T.aralik) kalkis.push(k);
+  if (b - kalkis[kalkis.length - 1] > 0.5) kalkis.push(b);   // kaynaktaki son kalkış saati korunur
+  L.canli = { T, nok, kum, boy: kum[kum.length - 1], kalkis, pts: [] };
+});
+// Araçlar ekran katmanında çizilir: her yakınlaştırmada aynı boyutta, parlayan işaretler
+const ak = document.createElement('canvas'); ak.id = 'arac-katmani'; ak.setAttribute('aria-hidden', 'true');
+document.getElementById('gl').insertAdjacentElement('afterend', ak);
+const akx = ak.getContext('2d');
+function akBoyut() { const r = Math.min(devicePixelRatio || 1, 2); ak.width = Math.round(innerWidth * r); ak.height = Math.round(innerHeight * r); akx.setTransform(r, 0, 0, r, 0, 0); }
+addEventListener('resize', () => { akBoyut(); SC.yenile(); }); akBoyut();
+function araclariCiz() {
+  akx.clearRect(0, 0, innerWidth, innerHeight);
+  CANLI.forEach(L => {
+    if (!S.secili.has(L.hat)) return;
+    const c = HAT[L.hat].renk;
+    L.canli.pts.forEach(p => {
+      const x = p[0] - SC.HW, z = p[1] - SC.HH, q = SC.project(x, SC.yer(x, z) + 14, z);
+      if (!q) return;
+      const g = akx.createRadialGradient(q[0], q[1], 0, q[0], q[1], 20);
+      g.addColorStop(0, c + 'dd'); g.addColorStop(0.45, c + '55'); g.addColorStop(1, c + '00');
+      akx.fillStyle = g; akx.beginPath(); akx.arc(q[0], q[1], 20, 0, Math.PI * 2); akx.fill();
+      akx.fillStyle = c; akx.strokeStyle = '#ffffff'; akx.lineWidth = 2;
+      akx.beginPath(); akx.arc(q[0], q[1], 7, 0, Math.PI * 2); akx.fill(); akx.stroke();
+    });
+  });
+}
+SC.cizimSonrasi = araclariCiz;
+const CANLI = HATLAR.filter(L => L.canli);
+const simdi = new Date(), simdiDk = simdi.getHours() * 60 + simdi.getMinutes() + (simdi.getHours() < 4 ? 1440 : 0);
+const CS = { saat: simdiDk >= SAAT_MIN && simdiDk <= SAAT_MAX ? simdiDk : 450, carpan: 60, hiz: 20, oynuyor: !matchMedia('(prefers-reduced-motion: reduce)').matches };
+function konum(C, s) {
+  const k = C.kum; let lo = 0, hi = k.length - 1;
+  while (hi - lo > 1) { const m = (lo + hi) >> 1; if (k[m] <= s) lo = m; else hi = m; }
+  const f = (s - k[lo]) / ((k[hi] - k[lo]) || 1), p = C.nok[lo], q = C.nok[hi];
+  return [p[0] + (q[0] - p[0]) * f, p[1] + (q[1] - p[1]) * f];
+}
+let sonYolda = '';
+function araclar() {
+  let toplam = 0; const parcalar = [];
+  CANLI.forEach(L => {
+    const C = L.canli, sure = C.boy * BIRIM / 1000 / CS.hiz * 60;   // dakika
+    const pts = [];
+    C.kalkis.forEach(t0 => {
+      const g = CS.saat - t0;
+      if (g < 0 || g > sure) return;
+      const s = C.boy * g / sure;
+      pts.push(konum(C, s), konum(C, C.boy - s));                 // iki yön
+    });
+    C.pts = pts;
+    if (S.secili.has(L.hat)) { toplam += pts.length; parcalar.push(`<i style="background:${HAT[L.hat].renk}"></i>${L.hat}: ${pts.length}`); }
+  });
+  SC.yenile();
+  const yazi = `<b>${t('Yolda', 'On the road')} ${fmt(toplam)} ${t('araç', toplam === 1 ? 'bus' : 'buses')}</b>${parcalar.join('')}`;
+  if (yazi !== sonYolda) { $('o-yolda').innerHTML = yazi; sonYolda = yazi; }
+}
+function saatGoster() {
+  $('o-saat').textContent = saatYazi(CS.saat);
+  $('c-saat').value = Math.round(CS.saat);
+  $('o-hiz').textContent = fmt(CS.hiz) + ' km/' + t('sa', 'h');
+  const b = $('b-oynat'); b.setAttribute('aria-pressed', CS.oynuyor);
+  b.setAttribute('aria-label', CS.oynuyor ? t('Durdur', 'Pause') : t('Oynat', 'Play'));
+  document.querySelectorAll('#saat-carpan button').forEach(x => x.setAttribute('aria-pressed', Number(x.dataset.k) === CS.carpan));
+}
+$('b-oynat').onclick = () => { CS.oynuyor = !CS.oynuyor; saatGoster(); };
+$('c-saat').oninput = e => { CS.saat = Number(e.target.value); saatGoster(); araclar(); };
+$('c-hiz').oninput = e => { CS.hiz = Number(e.target.value); saatGoster(); araclar(); };
+document.querySelectorAll('#saat-carpan button').forEach(x => { x.onclick = () => { CS.carpan = Number(x.dataset.k); saatGoster(); }; });
+let onceki = performance.now(), sonDakika = -1;
+(function tik(an) {
+  const dt = Math.min(0.25, Math.max(0, (an - onceki) / 1000)); onceki = an;
+  if (CS.oynuyor) {
+    CS.saat += dt * CS.carpan / 60;
+    if (CS.saat > SAAT_MAX) CS.saat = SAAT_MIN;
+    araclar();
+    if (Math.floor(CS.saat) !== sonDakika) { sonDakika = Math.floor(CS.saat); saatGoster(); }
+  }
+  requestAnimationFrame(tik);
+})(onceki);
+saatGoster(); araclar();
+addEventListener('m3dil', () => { liste(); istatistik(); lejant(); uygula(); saatGoster(); sonYolda = ''; araclar(); });
 uygula();
 SC.basla();
 })();

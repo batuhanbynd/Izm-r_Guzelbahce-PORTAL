@@ -47,6 +47,27 @@
     <p id="s-txt"></p>
     <small id="s-km"></small>
   </div>
+  <div class="saat-kutu" role="group" aria-label="Tarifeye göre canlandırma" data-en-aria-label="Timetable animation">
+    <div class="saat-ust"><span class="kicker" data-en="Timetable animation">Tarifeye göre canlandırma</span><span class="saat-rozet" data-en="Representative">Temsili</span></div>
+    <div class="saat-satir">
+      <button class="saat-oynat" id="b-oynat" type="button" aria-pressed="false" aria-label="Oynat" data-en-aria-label="Play"><svg class="i-oynat" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg><svg class="i-dur" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg></button>
+      <output class="saat-buyuk" id="o-saat">07:30</output>
+      <div class="saat-carpan" id="saat-carpan" role="group" aria-label="Zaman hızı" data-en-aria-label="Time speed">
+        <button type="button" data-k="1" aria-pressed="false" title="Gerçek zaman" data-en-title="Real time">1×</button>
+        <button type="button" data-k="60" aria-pressed="true" title="1 saniyede 1 dakika" data-en-title="1 minute per second">60×</button>
+        <button type="button" data-k="300" aria-pressed="false" title="1 saniyede 5 dakika" data-en-title="5 minutes per second">300×</button>
+      </div>
+    </div>
+    <div class="saat-cubuk">
+      <input id="c-saat" type="range" min="330" max="1530" step="1" value="450" aria-label="Günün saati" data-en-aria-label="Time of day">
+      <div class="saat-olcek" aria-hidden="true"><span style="left:2.5%">06</span><span style="left:32.5%">12</span><span style="left:62.5%">18</span><span style="left:92.5%">24</span></div>
+    </div>
+    <p class="saat-yolda" id="o-yolda"></p>
+    <div class="ctl">
+      <div class="ctl-head"><label for="c-hiz" data-en="Average bus speed (assumption)">Ortalama otobüs hızı (varsayım)</label><output id="o-hiz"></output></div>
+      <input id="c-hiz" type="range" min="12" max="35" step="1" value="20">
+    </div>
+  </div>
   <div class="anahtar"><span data-en="400 m walking area">400 m yürüme alanı</span><button id="b-alan" type="button" aria-pressed="true" data-en="Shown">Gösteriliyor</button></div>
   <div class="liste" id="hatlar" role="group" aria-label="Hatlar" data-en-aria-label="Lines"></div>
   <div class="ctl">
@@ -61,6 +82,7 @@
       <li data-en="The minibus drawing has no stops. The line 28 drawing has no route, only stops and areas. The line 684 drawing has a single stop.">Dolmuş çiziminde durak yok. Hat 28 çiziminde güzergâh yok, yalnızca duraklar ve alanlar var. Hat 684 çiziminde tek durak var.</li>
       <li data-en="The share of buildings in the 400 m area was calculated by checking the centre of each building in the city model against the selected lines' areas.">400 m alanındaki bina payı, kent modelindeki her binanın merkezinin seçili hatların alanlarına düşüp düşmediğine bakılarak hesaplandı.</li>
       <li data-en="Frequencies come from the team's report: lines 8, 82 and 684 every 21–30 minutes, lines 9, 28 and 762 every 2–4 hours.">Sıklıklar ekibin raporundan: 8, 82 ve 684 numaralı hatlar 21–30 dakikada bir, 9, 28 ve 762 numaralı hatlar 2–4 saatte bir.</li>
+      <li data-en="Timetable animation: first and last departures and average headways come from the team's report (line 8: 06:00–00:30, every 21–22 min, taken as 21.5; 82: 06:00–00:25, 30 min; 684: 06:00–21:20, 25 min; 9: 06:35–20:20, 2 h; 762: 06:40–16:30, 2 h). There is no travel-time data, so buses run at the chosen average speed (assumption, default 20 km/h) along the part of the route inside the model area, and the same timetable is assumed in both directions. Line 28 (no route drawing) and the minibus (no timetable) are not animated. This is not live vehicle positions.">Tarifeye göre canlandırma: ilk ve son kalkış saatleri ile ortalama sefer aralıkları ekibin raporundan (Hat 8: 06:00–00:30, 21–22 dk, 21,5 alındı; 82: 06:00–00:25, 30 dk; 684: 06:00–21:20, 25 dk; 9: 06:35–20:20, 2 saat; 762: 06:40–16:30, 2 saat). Yolculuk süresi verisi olmadığından araçlar seçilen ortalama hızla (varsayım, varsayılan 20 km/sa) güzergâhın model alanındaki bölümünü gider; iki yönde aynı tarife varsayıldı. Güzergâh çizimi olmayan Hat 28 ve tarifesi olmayan dolmuş canlandırılmadı. Gösterilen, canlı araç konumu değildir.</li>
       <li data-en="The terrain covers the whole district on a 25 m grid. It was built from the elevation points on Güzelbahçe's base map sheets (2015, 1:1000, ITRF96); where the sheets have no or unreliable heights (about 29% of the district, mostly Yelki and the southern hills) the Copernicus GLO-30 elevation model (ESA, 30 m) was used. The two agree to a median of 0.5 m. Heights are multiplied by the vertical factor; contour lines are every 10 m. Areas outside the district are faded.">Arazi ilçenin tamamını 25 m'lik ızgarayla kapsıyor. Güzelbahçe halihazır harita paftalarındaki (2015, 1:1000, ITRF96) kot noktalarından üretildi; paftaların kapsamadığı ya da kotların güvenilmez olduğu yerlerde (ilçenin yaklaşık %29'u, çoğu Yelki ve güney tepeleri) Copernicus GLO-30 arazi modeli (ESA, 30 m) kullanıldı. İki kaynak ortancada 0,5 m içinde örtüşüyor. Yükseklikler dikey abartı katsayısıyla çarpılarak gösteriliyor; eş yükselti eğrileri 10 m'de bir. İlçe dışı soluk gösteriliyor.</li>
     </ul>
   </details>

@@ -3633,3 +3633,117 @@ html.hareket :is(.kpi, .servis-karti).gorundu { transition: opacity 0.65s cubic-
     .cift-zaman .cz-basliklar { display: none; }
     .cift-zaman::before { left: 2.2rem; top: 0.5rem; }
 }
+
+/* =============================================
+   Portal içi arama (Ctrl+K)
+   ============================================= */
+.arama-dugmesi {
+    margin: -0.35rem 1rem 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.7rem 0.55rem 0.85rem;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text-muted);
+    font: 600 0.9rem 'Outfit', sans-serif;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+.arama-dugmesi:hover { border-color: var(--border-strong); color: var(--text-main); background: var(--surface-3); }
+.arama-dugmesi i { color: var(--accent-1); }
+.arama-dugmesi span { flex: 1; text-align: left; }
+.arama-dugmesi kbd, .arama-kutu kbd {
+    font: 700 0.7rem 'Outfit', sans-serif;
+    padding: 0.15rem 0.4rem;
+    border-radius: 5px;
+    border: 1px solid var(--border-strong);
+    border-bottom-width: 2px;
+    background: var(--surface-1);
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+.arama-mobil { display: none; }
+@media (max-width: 900px) {
+    .arama-mobil {
+        display: grid; place-items: center;
+        position: fixed; top: 10px; right: 128px; z-index: 1200;
+        width: 40px; height: 40px; border-radius: 50%;
+        border: 1px solid var(--border-strong); background: var(--surface-1); color: var(--text-main);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); cursor: pointer;
+    }
+}
+
+.arama-perde {
+    position: fixed; inset: 0; z-index: 3000;
+    display: flex; justify-content: center; align-items: flex-start;
+    padding: 9vh 1rem 1rem;
+    background: rgba(2, 6, 23, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    animation: aramaPerde 0.18s ease-out;
+}
+.arama-perde[hidden] { display: none; }
+@keyframes aramaPerde { from { opacity: 0; } to { opacity: 1; } }
+@keyframes aramaKutu { from { opacity: 0; transform: translateY(-10px) scale(0.98); } to { opacity: 1; transform: none; } }
+.arama-kutu {
+    width: min(680px, 100%);
+    max-height: 76vh;
+    display: flex; flex-direction: column;
+    background: var(--surface-1);
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+    animation: aramaKutu 0.22s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.arama-ust { display: flex; align-items: center; gap: 0.75rem; padding: 0.95rem 1.1rem; border-bottom: 1px solid var(--border); }
+.arama-ust > i { color: var(--accent-1); font-size: 1.1rem; }
+.arama-ust input {
+    flex: 1; min-width: 0; border: 0; outline: none; background: transparent;
+    color: var(--text-main); font: 500 1.08rem 'Outfit', sans-serif;
+}
+.arama-ust input::-webkit-search-cancel-button { display: none; }
+.arama-govde { overflow-y: auto; padding: 0.4rem 0.5rem 0.6rem; }
+#arama-sonuc { list-style: none; margin: 0; padding: 0; }
+#arama-sonuc li.arama-grup, .arama-oneri .arama-grup {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 0.65rem 0.35rem;
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
+}
+#arama-sonuc li.arama-grup i { color: var(--accent-2); }
+.arama-kayit {
+    display: grid; grid-template-columns: 2rem minmax(0, 1fr) auto; gap: 0.75rem; align-items: center;
+    padding: 0.6rem 0.65rem; border-radius: 9px; cursor: pointer;
+}
+.arama-kayit[aria-selected="true"] { background: color-mix(in srgb, var(--accent-1) 14%, transparent); box-shadow: inset 3px 0 0 var(--accent-1); }
+.arama-kayit .ak-ikon { width: 2rem; height: 2rem; border-radius: 8px; display: grid; place-items: center; background: var(--surface-2); color: var(--accent-1); font-size: 0.85rem; }
+.arama-kayit .ak-metin { display: flex; flex-direction: column; gap: 0.12rem; min-width: 0; }
+.arama-kayit .ak-baslik { color: var(--text-main); font-weight: 600; font-size: 0.96rem; }
+.arama-kayit .ak-baslik b { color: var(--accent-1); font-weight: 800; margin-left: 0.25rem; }
+.arama-kayit .ak-govde { color: var(--text-body); font-size: 0.85rem; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.arama-kayit .ak-baglam { color: var(--text-muted); font-size: 0.76rem; }
+.arama-kayit .ak-tur { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 0.12rem 0.5rem; }
+.arama-kayit mark { background: color-mix(in srgb, var(--accent-2) 30%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
+.arama-bos { display: flex; align-items: center; gap: 0.6rem; padding: 1.4rem 0.8rem; color: var(--text-muted); }
+.arama-oneri > div { display: flex; flex-wrap: wrap; gap: 0.4rem; padding: 0.2rem 0.6rem 0.6rem; }
+.arama-oneri button {
+    border: 1px solid var(--border); background: var(--surface-2); color: var(--text-body);
+    border-radius: 999px; padding: 0.35rem 0.8rem; font: 600 0.85rem 'Outfit', sans-serif; cursor: pointer;
+}
+.arama-oneri button:hover { border-color: var(--accent-1); color: var(--text-main); }
+.arama-alt { display: flex; gap: 1rem; align-items: center; padding: 0.6rem 1.1rem; border-top: 1px solid var(--border); font-size: 0.78rem; color: var(--text-muted); }
+.arama-alt span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.arama-alt .arama-sayi { margin-left: auto; }
+@media (max-width: 640px) { .arama-alt span:not(.arama-sayi) { display: none; } .arama-perde { padding-top: 4vh; } }
+body.arama-acik { overflow: hidden; }
+
+/* Sonuca gidilince hedefin kısa süreli vurgusu */
+@keyframes aramaVurgu {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 70%, transparent); }
+    35% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent-2) 45%, transparent); }
+    100% { box-shadow: 0 0 0 0 transparent; }
+}
+.arama-vurgu { animation: aramaVurgu 1.3s ease-out 2; outline: 2px solid color-mix(in srgb, var(--accent-2) 70%, transparent); outline-offset: 3px; border-radius: 10px; }
+tr.arama-vurgu { outline-offset: -2px; }

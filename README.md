@@ -53,6 +53,7 @@ Herhangi bir kurulum gerekmez. `index.html` dosyasını tarayıcıda açmanız y
 
 - `*.html`: portal sayfaları
 - `js/`: her sayfanın grafik verileri ve ayarları; `akis-grafigi.js` kütüphanesiz akış (Sankey) grafiği
+- `js/arama.js`, `js/arama-dizin.js`: portal içi arama (Ctrl+K / ⌘K ya da "/"); dizin `_tools/arama/dizin_uret.py` ile sayfalardan üretilir, sayfalar değişince yeniden çalıştırılmalı
 - `styles.css`: ortak tasarım
 - `gorseller/`: ilçe profili sayfalarındaki araştırma grubu haritaları (eğim, yükselti, fay, taşkın, havza, Çamlı Barajı koruma alanları)
 - `3b/`: 3B modellerin ortak motoru (`motor.js`), görünümü (`ortak.css`), zemin haritası ve verileri (WebGL2, harici kütüphane yok)
