@@ -100,8 +100,8 @@ function formatYuzdeSabit(deger, basamak) {
 
 // Birim adları (TR / EN)
 const BIRIM_METNI = {
-    tr: { yolcu: 'yolcu', tasit: 'taşıt/gün', m3: 'milyon m³', adet: 'adet', ton: 'ton', kg: 'kg', tl: 'TL', m3gun: 'm³/gün', kisi: 'kişi', cfu: 'cfu/100 ml', metre: 'm', mnm3: 'milyon m³', mnm3yil: 'milyon m³/yıl', mnTL: 'milyon TL', tlay: 'TL/ay', kotm: 'm', dekar: 'dekar', ha: 'ha', km2: 'km²', mm: 'mm', derece: '°C', saat: 'saat', gun: 'gün', binm3: 'bin m³', kutle: 'su kütlesi', g: 'g' },
-    en: { yolcu: 'passengers', tasit: 'vehicles/day', m3: 'million m³', adet: 'units', ton: 'tonnes', kg: 'kg', tl: 'TL', m3gun: 'm³/day', kisi: 'people', cfu: 'cfu/100 ml', metre: 'm', mnm3: 'million m³', mnm3yil: 'million m³/year', mnTL: 'million TL', tlay: 'TL/month', kotm: 'm', dekar: 'decares', ha: 'ha', km2: 'km²', mm: 'mm', derece: '°C', saat: 'hours', gun: 'days', binm3: 'thousand m³', kutle: 'water bodies', g: 'g' }
+    tr: { yolcu: 'yolcu', tasit: 'taşıt/gün', m3: 'milyon m³', adet: 'adet', ton: 'ton', kg: 'kg', tl: 'TL', m3gun: 'm³/gün', kisi: 'kişi', cfu: 'cfu/100 ml', metre: 'm', mnm3: 'milyon m³', mnm3yil: 'milyon m³/yıl', mnTL: 'milyon TL', tlay: 'TL/ay', kotm: 'm', dekar: 'dekar', ha: 'ha', km2: 'km²', mm: 'mm', derece: '°C', saat: 'saat', gun: 'gün', binm3: 'bin m³', kutle: 'su kütlesi', g: 'g', m2: 'm²', hm3: 'hm³/yıl', tco2: 'tCO₂e', kwhm2: 'kWh/m²·gün', kmetre: 'km' },
+    en: { yolcu: 'passengers', tasit: 'vehicles/day', m3: 'million m³', adet: 'units', ton: 'tonnes', kg: 'kg', tl: 'TL', m3gun: 'm³/day', kisi: 'people', cfu: 'cfu/100 ml', metre: 'm', mnm3: 'million m³', mnm3yil: 'million m³/year', mnTL: 'million TL', tlay: 'TL/month', kotm: 'm', dekar: 'decares', ha: 'ha', km2: 'km²', mm: 'mm', derece: '°C', saat: 'hours', gun: 'days', binm3: 'thousand m³', kutle: 'water bodies', g: 'g', m2: 'm²', hm3: 'hm³/year', tco2: 'tCO₂e', kwhm2: 'kWh/m²·day', kmetre: 'km' }
 };
 
 function birimAdi(birim) {
@@ -118,6 +118,7 @@ function formatBirimli(deger, birim) {
         case 'yolcu': case 'tasit': case 'adet': case 'ton': case 'kg': case 'tl': case 'm3gun':
         case 'kisi': case 'cfu': case 'metre': case 'tlay': case 'kotm':
         case 'dekar': case 'ha': case 'km2': case 'mm': case 'saat': case 'gun': case 'binm3': case 'kutle': case 'g':
+        case 'm2': case 'hm3': case 'tco2': case 'kwhm2': case 'kmetre':
             return formatSayi(deger) + ' ' + birimAdi(birim);
         case 'derece': return formatSayi(deger) + ' °C';
         default: return formatSayi(deger);

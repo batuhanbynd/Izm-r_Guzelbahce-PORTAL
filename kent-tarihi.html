@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kent Tarihi ve Kimlik | İzmir Güzelbahçe Veri Portalı</title>
+    <meta name="description" content="Klazomenai'den bugüne Güzelbahçe: zaman çizelgesi, tarihî haritalar, nüfusun uzun dönemli değişimi, kentsel gelişim ve kent kimliği.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
+    <script src="js/dil-en.js"></script>
+    <script src="js/dil.js"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="index.html" class="brand" aria-label="İzmir Güzelbahçe Veri Portalı – Genel Bakış"><span class="marka-metin"><span class="marka-ust">İzmir Güzelbahçe</span><span class="marka-ad">Veri Portalı</span></span></a>
+        <nav aria-label="Sayfalar">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-grup">İlçe Profili</li>
+            <li class="nav-item">
+                <a href="kent-tarihi.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+                    Kent Tarihi ve Kimlik
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="mekansal-yapi.html" class="nav-link">
+                    <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+                    Mekânsal Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="ekonomi.html" class="nav-link">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    Ekonomik Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dogal-yapi.html" class="nav-link">
+                    <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+                    Doğal Yapı ve Afet
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havza-koruma.html" class="nav-link">
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    Havza ve Koruma
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kriz-dayaniklilik.html" class="nav-link">
+                    <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
+                    Kriz ve Dayanıklılık
+                </a>
+            </li>
+            <li class="nav-grup">Ulaşım</li>
+            <li class="nav-item">
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
+                    Otoparklar
+                </a>
+            </li>
+            <li class="nav-grup">Altyapı</li>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                    İZSU Su Kaynakları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="atiksu.html" class="nav-link">
+                    <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+                    Atık Su
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kati-atik.html" class="nav-link">
+                    <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                    Katı Atık
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                    Elektrik Altyapısı
+                </a>
+            </li>
+            <li class="nav-grup">3B ve Senaryo</li>
+            <li class="nav-item">
+                <a href="3b.html" class="nav-link">
+                    <i class="fa-solid fa-cube" aria-hidden="true"></i>
+                    3B Modeller <span class="rozet-yeni">Yeni</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="senaryo.html" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                    Senaryo Laboratuvarı <span class="rozet-deneme">Deneme</span>
+                </a>
+            </li>
+            <li class="nav-grup">Planlama</li>
+            <li class="nav-item">
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                    Planlanan Projeler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                    İşbirliklerimiz
+                </a>
+            </li>
+        </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="icerik" tabindex="-1">
+        <div id="kent-tarihi" class="tab-pane active">
+            <header>
+                <h1>Kent Tarihi ve Kimlik</h1>
+                <p class="subtitle">Klazomenai'den bugüne yerleşim, tarihî haritalar, nüfusun uzun dönemli değişimi, kentsel gelişim ve kent kimliği</p>
+            </header>
+
+            <div class="stats-row dar-kartlar">
+                <div class="stat-card ton-amber">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-scroll" aria-hidden="true"></i></div>
+                    <div class="stat-label">İlk Ayrıntılı Kayıt</div>
+                    <div class="stat-value">1478</div>
+                    <div class="stat-change ton-amber">Osmanlı tahrir defterinde Seki ve Yelki, Kilizman'a bağlı</div>
+                </div>
+                <div class="stat-card ton-mor">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
+                    <div class="stat-label">Nüfus, 1891–1892</div>
+                    <div class="stat-value">1.630</div>
+                    <div class="stat-change ton-mor">Bugünkü ilçedeki dört köy · 383 yapı</div>
+                </div>
+                <div class="stat-card ton-yesil">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i></div>
+                    <div class="stat-label">Nüfus Artışı, 2000–2025</div>
+                    <div class="stat-value">%117,0</div>
+                    <div class="stat-change ton-yesil">18.190 → 39.474 kişi · İzmir'de %33,6</div>
+                </div>
+                <div class="stat-card ton-mavi">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i></div>
+                    <div class="stat-label">İzmir Nüfusundaki Pay</div>
+                    <div class="stat-value">%0,88</div>
+                    <div class="stat-change ton-mavi">2000'de %0,54 · 2025</div>
+                </div>
+            </div>
+
+            <nav class="sayfa-ici-menu" aria-label="Bu sayfadaki bölümler">
+                <a href="#zaman" class="ton-amber"><i class="fa-solid fa-timeline" aria-hidden="true"></i>Zaman çizelgesi</a>
+                <a href="#haritalar" class="ton-turuncu"><i class="fa-solid fa-map" aria-hidden="true"></i>Tarihî haritalar</a>
+                <a href="#nufus" class="ton-yesil"><i class="fa-solid fa-users" aria-hidden="true"></i>Nüfus</a>
+                <a href="#gelisim" class="ton-mor"><i class="fa-solid fa-city" aria-hidden="true"></i>Kentsel gelişim</a>
+                <a href="#kimlik" class="ton-pembe"><i class="fa-solid fa-fingerprint" aria-hidden="true"></i>Kent kimliği</a>
+                <a href="#gorus" class="ton-mavi"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i>Uzman görüşü</a>
+            </nav>
+
+            <!-- 1. Zaman çizelgesi -->
+            <div class="bolum-baslik" id="zaman">
+                <div class="ikon ton-amber" aria-hidden="true"><i class="fa-solid fa-timeline" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Klazomenai'den Bugüne</h2>
+                    <p>Antik Çağ, Osmanlı, Cumhuriyet ve 2000 sonrası: yerleşimi ve yönetsel konumu değiştiren olaylar</p>
+                </div>
+            </div>
+            <div class="suzgec-cipleri" role="group" aria-label="Döneme göre süz" data-hedef="tarihCizelgesi">
+                <button type="button" aria-pressed="true" data-donem="hepsi" class="ton-mavi"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>Tümü</button>
+                <button type="button" aria-pressed="false" data-donem="antik" class="ton-amber"><i class="fa-solid fa-building-columns" aria-hidden="true"></i>Antik Çağ</button>
+                <button type="button" aria-pressed="false" data-donem="osmanli" class="ton-mor"><i class="fa-solid fa-scroll" aria-hidden="true"></i>Orta Çağ ve Osmanlı</button>
+                <button type="button" aria-pressed="false" data-donem="cumhuriyet" class="ton-kirmizi"><i class="fa-solid fa-flag" aria-hidden="true"></i>Cumhuriyet</button>
+                <button type="button" aria-pressed="false" data-donem="guncel" class="ton-yesil"><i class="fa-solid fa-city" aria-hidden="true"></i>2000 sonrası</button>
+            </div>
+            <ol class="zaman-cizelgesi alt-bosluk-k" id="tarihCizelgesi">
+                <li class="zc-donem ton-amber" data-donem="antik"><span class="zd-ikon"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></span><span class="zd-ad">Antik Çağ</span><span class="zd-aralik">Tunç Çağı – MS 7. yüzyıl</span></li>
+                <li class="ton-amber" data-donem="antik"><span class="zc-tarih">Erken Tunç Çağı</span><div><span class="zc-baslik">Limantepe</span><span class="zc-metin">Körfezin bu dönemdeki en önemli yerleşimi: 3,5 m yüksekliğinde, at nalı biçimli kulelerle güçlendirilmiş surlarla çevrili bir köy.</span><span class="zc-yer">Bölgesel bağlam · Urla</span></div></li>
+                <li class="ton-amber" data-donem="antik"><span class="zc-tarih">Orta Tunç Çağı</span><div><span class="zc-baslik">Çaltepe</span><span class="zc-metin">Bugünkü ilçe sınırındaki en erken yerleşim kanıtı. İnkaya ise köy değil, kült alanı olarak tanımlanır.</span></div></li>
+                <li class="ton-amber" data-donem="antik"><span class="zc-tarih">MÖ 525–520</span><div><span class="zc-baslik">Klazomenai'ye dönüş</span><span class="zc-metin">Halk ana yerleşim alanına döndü; sanayi ve ticaret yeniden canlandı.</span><span class="zc-yer">Bölgesel bağlam · Urla</span></div></li>
+                <li class="ton-amber" data-donem="antik"><span class="zc-tarih">MÖ 498</span><div><span class="zc-baslik">Karantina Adası'na sığınma</span><span class="zc-metin">İyon isyanına Pers ordusunun karşılığı üzerine halk adaya sığındı; ana karada en az bir yüzyıl kalıntıya rastlanmadı.</span></div></li>
+                <li class="ton-amber" data-donem="antik"><span class="zc-tarih">Hellenistik–Roma</span><div><span class="zc-baslik">Ada yerleşimi</span><span class="zc-metin">Adadaki yerleşim MS 5. yüzyıl başına dek sürdü. Ana karada Roma çiftlik evlerinin duvar izleri bulundu; en geç çanak çömlek MS 6.–7. yüzyıla ait.</span></div></li>
+
+                <li class="zc-donem ton-mor" data-donem="osmanli"><span class="zd-ikon"><i class="fa-solid fa-scroll" aria-hidden="true"></i></span><span class="zd-ad">Orta Çağ ve Osmanlı</span><span class="zd-aralik">11.–19. yüzyıl</span></li>
+                <li class="ton-mor" data-donem="osmanli"><span class="zc-tarih">1080'ler</span><div><span class="zc-baslik">Çaka Bey</span><span class="zc-metin">Türkler Çaka Bey ile Ege'ye ulaştı ve Klazomenai gibi kıyı kentlerini aldı. Ardından yaklaşık iki yüzyıl Türk–Bizans mücadelesi sürdü.</span></div></li>
+                <li class="ton-mor" data-donem="osmanli"><span class="zc-tarih">1478</span><div><span class="zc-baslik">İlk ayrıntılı kayıt</span><span class="zc-metin">II. Mehmed dönemi tahrir defterinde Seki ve Yelki köyleri Kilizman'a bağlı. Tahmini nüfus: Kilizman 408, Seki/Yelki 389.</span></div></li>
+                <li class="ton-mor" data-donem="osmanli"><span class="zc-tarih">1528</span><div><span class="zc-baslik">Padişah hassı</span><span class="zc-metin">Kanuni dönemi defterinde bölge padişahın has toprakları arasında. Çamlı ilk kez kayıtta: 888 kişi.</span></div></li>
+                <li class="ton-mor" data-donem="osmanli"><span class="zc-tarih">1575</span><div><span class="zc-baslik">Nüfus değişimi</span><span class="zc-metin">Kilizman 348 kişiye indi (−%14,7), Seki/Yelki 545 kişiye çıktı (+%40,1).</span></div></li>
+                <li class="ton-mor" data-donem="osmanli"><span class="zc-tarih">1845</span><div><span class="zc-baslik">Tahtacı kayıtları</span><span class="zc-metin">Kilizman'da 4 çadır ve 16 erkek, Çamlı'da 20 çadır ve 43 erkek. Bunlar topluluk alt kümeleridir, köy toplamı değildir.</span></div></li>
+                <li class="ton-mor" data-donem="osmanli"><span class="zc-tarih">1891–1892</span><div><span class="zc-baslik">Dört köy</span><span class="zc-metin">Bugünkü ilçedeki Kilizman, Yelki, Payamlı ve Çamlı: 1.630 kişi ve 383 yapı (Aydın Vilayeti Salnamesi).</span></div></li>
+
+                <li class="zc-donem ton-kirmizi" data-donem="cumhuriyet"><span class="zd-ikon"><i class="fa-solid fa-flag" aria-hidden="true"></i></span><span class="zd-ad">Cumhuriyet</span><span class="zd-aralik">1923–1999</span></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1923–1926</span><div><span class="zc-baslik">Mübadele</span><span class="zc-metin">Yunanistan'dan (Girit, Selanik, Manastır vb.) gelen mübadiller, ayrılan gayrimüslim nüfusun yerine yerleştirildi.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1930'lar</span><div><span class="zc-baslik">Kilizman'dan Kızılbahçe'ye</span><span class="zc-metin">Yerleşim Urla'ya bağlı bucak oldu ve Kızılbahçe adını aldı. Raporlar bu değişikliği 1928–1929 ve 1936 olarak farklı tarihlerle verir.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1933</span><div><span class="zc-baslik">Vali Kazım Paşa İlkokulu</span><span class="zc-metin">Resmî MEB kaydına göre okul 1933'te açıldı; bugün ilçenin tanınan sivil simgelerinden.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1950'ler</span><div><span class="zc-baslik">Kıyıya yöneliş</span><span class="zc-metin">Karadeniz'den gelen göçmenler balıkçılıkla yerleşti; kıyıda sayfiye evleri ve gazinolar yapıldı. Yerel olarak "veba" denen bir salgından sonra yerleşimin odağı kıyıya kaydı.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1954</span><div><span class="zc-baslik">Belediye kuruldu</span><span class="zc-metin">Yerleşim belediye örgütlenmesine kavuştu.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1957–1958</span><div><span class="zc-baslik">Güzelbahçe adı</span><span class="zc-metin">Soğuk Savaş ikliminde "Kızıl" sözcüğünden duyulan rahatsızlık üzerine ad Güzelbahçe oldu ve belediye İzmir Merkez ilçesine bağlandı. Raporlarda 1957 ve 1958 olarak geçer.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1960–1965</span><div><span class="zc-baslik">Bucak nüfusu</span><span class="zc-metin">Bucak ve köylerinin toplam nüfusu 4.978'den 5.515'e çıktı (yaklaşık %10,8).</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1978</span><div><span class="zc-baslik">Su Ürünleri Kooperatifi</span><span class="zc-metin">S.S. Güzelbahçe Su Ürünleri Kooperatifi kuruldu; avlama, depolama ve pazarlamada balıkçılara hizmet veriyor.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1980</span><div><span class="zc-baslik">Belediye kaldırıldı</span><span class="zc-metin">1980 askerî darbesinin ardından belediye kaldırıldı; Güzelbahçe İzmir Belediyesi'ne bağlandı.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1984–1997</span><div><span class="zc-baslik">İzmir–Çeşme Otoyolu</span><span class="zc-metin">Otoyol gelişmeyi hızlandırdı ve yazlıklar kalıcı konuta dönüştü. 1990'lardan itibaren kooperatiflerle binlerce konut yapıldı.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1992</span><div><span class="zc-baslik">Narlıbahçe</span><span class="zc-metin">Güzelbahçe ve Narlıdere "Narlıbahçe" adıyla birleştirildi; halk açlık grevi ve çadır eylemleriyle karşı çıktı.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1993</span><div><span class="zc-baslik">Bağımsız ilçe</span><span class="zc-metin">Güzelbahçe ayrı ilçe oldu; kaymakamlık 1994'te çalışmaya başladı.</span></div></li>
+                <li class="ton-kirmizi" data-donem="cumhuriyet"><span class="zc-tarih">1998–2008</span><div><span class="zc-baslik">Yelki Belediyesi</span><span class="zc-metin">Yelki, Atatürk ve Cumhuriyet mahalleleriyle belde belediyesi oldu; 5747 sayılı Kanun'la 2008'de Güzelbahçe'nin mahallesine dönüştü.</span></div></li>
+
+                <li class="zc-donem ton-yesil" data-donem="guncel"><span class="zd-ikon"><i class="fa-solid fa-city" aria-hidden="true"></i></span><span class="zd-ad">2000 sonrası</span><span class="zd-aralik">2000–2026</span></li>
+                <li class="ton-yesil" data-donem="guncel"><span class="zc-tarih">2003–2008</span><div><span class="zc-baslik">Yarımada Oyunları</span><span class="zc-metin">Binlerce katılımcıyla düzenlenen oyunlar ilçenin tanıtımına katkı sağladı. 2003'teki deneme vapur seferleri ise bürokratik engeller nedeniyle sürdürülemedi.</span></div></li>
+                <li class="ton-yesil" data-donem="guncel"><span class="zc-tarih">2000'ler</span><div><span class="zc-baslik">Eğitim odağı</span><span class="zc-metin">Kapalı site tipi konut projeleriyle birlikte ilçe, özel okulların yoğunlaştığı bir eğitim odağına dönüştü.</span></div></li>
+                <li class="ton-yesil" data-donem="guncel"><span class="zc-tarih">Ekim 2015</span><div><span class="zc-baslik">Yalı Balıkçı Barınağı</span><span class="zc-metin">30.000 m² alanda, 250 tekne kapasiteli barınak açıldı ve kıyının kullanımını yeniden biçimlendirdi.</span></div></li>
+                <li class="ton-yesil" data-donem="guncel"><span class="zc-tarih">2025</span><div><span class="zc-baslik">39.474 kişi</span><span class="zc-metin">Kullanılan en güncel nüfus değeri; 2000'den bu yana %117,0 artış.</span></div></li>
+            </ol>
+            <p class="kucuk-not alt-bosluk-k"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubunun kent tarihi ve kimlik raporları; Berber ve Saygı (2013), Pınar (2012), Koparal (2011), Herodotos ve Klazomenai kazı yayınları. Erken Osmanlı nüfusları hane × 5 + bekâr erkek hesabıyla yapılmış tahminlerdir.</p>
+
+            <!-- 2. Tarihî haritalar -->
+            <div class="bolum-baslik" id="haritalar">
+                <div class="ikon ton-turuncu" aria-hidden="true"><i class="fa-solid fa-map" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Haritalarla Güzelbahçe</h2>
+                    <p>Erken yerleşimlerden 1996 hava mozaiğine: araştırma grubunun işaretlediği tarihî haritalar ve hava fotoğrafları</p>
+                </div>
+            </div>
+            <div class="harita-gezgini alt-bosluk-k" id="haritaGezgini">
+                <figure class="hg-sahne" tabindex="0" role="button" aria-label="Haritayı büyüt">
+                    <img src="gorseller/kt-erken-yerlesmeler.jpg" alt="" width="1400" height="1160">
+                    <span class="hg-yil" aria-live="polite"></span>
+                    <span class="hg-buyut"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</span>
+                </figure>
+                <div class="hg-yan">
+                    <ul class="hg-ray" aria-label="Harita seçimi">
+                        <li><button type="button" data-gorsel="gorseller/kt-erken-yerlesmeler.jpg" data-en="1400" data-boy="1160"><span class="hr-nokta" aria-hidden="true"></span><span><strong>Tarih öncesi – 16. yy</strong>Erken yerleşimler</span></button></li>
+                        <li><button type="button" data-gorsel="gorseller/kt-piri-reis.jpg" data-en="1200" data-boy="1195"><span class="hr-nokta" aria-hidden="true"></span><span><strong>17.–18. yy</strong>Piri Reis haritası (geç kopya)</span></button></li>
+                        <li><button type="button" data-gorsel="gorseller/kt-roux-1764.jpg" data-en="1100" data-boy="506"><span class="hr-nokta" aria-hidden="true"></span><span><strong>1764</strong>Roux: İzmir Körfezi</span></button></li>
+                        <li><button type="button" data-gorsel="gorseller/kt-roux-1804.jpg" data-en="1400" data-boy="879"><span class="hr-nokta" aria-hidden="true"></span><span><strong>1804</strong>Roux: kıyı yerleşimleri</span></button></li>
+                        <li><button type="button" data-gorsel="gorseller/kt-kiepert-1890.jpg" data-en="1067" data-boy="795"><span class="hr-nokta" aria-hidden="true"></span><span><strong>1890</strong>Kiepert: Batı Anadolu</span></button></li>
+                        <li><button type="button" data-gorsel="gorseller/kt-hava-1957-1966.jpg" data-en="1000" data-boy="1040"><span class="hr-nokta" aria-hidden="true"></span><span><strong>1957–1966</strong>Hava fotoğrafı katmanları</span></button></li>
+                        <li><button type="button" data-gorsel="gorseller/kt-harita-1966.jpg" data-en="1400" data-boy="920"><span class="hr-nokta" aria-hidden="true"></span><span><strong>1966</strong>Kent Rehberi haritası</span></button></li>
+                        <li><button type="button" data-gorsel="gorseller/kt-hava-1996.jpg" data-en="1100" data-boy="722"><span class="hr-nokta" aria-hidden="true"></span><span><strong>1996</strong>Hava mozaiği</span></button></li>
+                    </ul>
+                    <div class="hg-metinler">
+                        <div class="hg-metin"><p class="hg-aciklama"><strong>Erken yerleşimler</strong>Orta Tunç Çağı Çaltepe, İnkaya kült alanı ve Osmanlı kayıtlarındaki Kilizman (1478), Seki/Yelki (1478) ve Çamlı (16. yüzyıl başı). Lekeler şematiktir; tarihî yerleşim alanını ölçmez.</p><p class="hg-kaynak">Araştırma grubu; arkeolojik kanıt Koparal (2011), Osmanlı kayıtları Berber ve Saygı (2013). Altlık: Google Earth Pro; ilçe sınırı: OpenStreetMap katkıcıları (2026).</p></div>
+                        <div class="hg-metin" hidden><p class="hg-aciklama"><strong>Piri Reis haritası (geç kopya)</strong>İzmir Körfezi çevresinde Sancak Kale ve bugünkü Güzelbahçe'nin yaklaşık konumu işaretlendi. El yazması, 17. yüzyıl sonu – 18. yüzyıl başına tarihlenen bir kopyadır.</p><p class="hg-kaynak">Walters Art Museum, W.658.68B (CC0); iç görsel Tournefort (1717). Daire, ok ve etiketler araştırma grubuna ait.</p></div>
+                        <div class="hg-metin" hidden><p class="hg-aciklama"><strong>Roux: İzmir Körfezi</strong>Denizcilik haritası üzerinde bugünkü çalışma alanı (turuncu) ile Kilizman, Buladan, Yelki ve Çamlı. Hizalama yaklaşıktır; harita kadastro planı değil, seyir haritasıdır.</p><p class="hg-kaynak">J. Roux (1764), Golfe de Smirne, Pl. 105; David Rumsey Map Collection. İşaretler araştırma grubuna ait.</p></div>
+                        <div class="hg-metin" hidden><p class="hg-aciklama"><strong>Roux: kıyı yerleşimleri</strong>Körfez çevresindeki adlandırılmış kıyı yerleşimleri işaretlendi. Simgeler yapı sayısı ya da ölçülmüş yerleşim büyüklüğü olarak okunmadı.</p><p class="hg-kaynak">J. Roux (1804), Pl. 58; Aikaterini Laskaridis Vakfı, Travelogues. Kırmızı daireler araştırma grubuna ait.</p></div>
+                        <div class="hg-metin" hidden><p class="hg-aciklama"><strong>Kiepert: Batı Anadolu</strong>Kilizman, Yelki, Urla ve çevre yerleşimler; tarihî yer adları kıyı yolları ve iç köylerle ilişkilendirildi.</p><p class="hg-kaynak">H. Kiepert (1890), Dietrich Reimer, Berlin; SALT Araştırma. Kırmızı işaretler araştırma grubuna ait.</p></div>
+                        <div class="hg-metin" hidden><p class="hg-aciklama"><strong>Hava fotoğrafı katmanları</strong>1963 hava fotoğrafı üzerinde 1957 (açık yeşil), 1963 (orta yeşil) ve 1966 (koyu yeşil) kaynaklarından yerleşim lekeleri: Kilizman/Yaka, Yelki, Çamlı, Payamlı ve Küçükkaya.</p><p class="hg-kaynak">Araştırma grubu; 1957 yorumu Etlacakuş (2025), 1963 hava fotoğrafı ve 1966 haritası İzmir Kent Rehberi.</p></div>
+                        <div class="hg-metin" hidden><p class="hg-aciklama"><strong>Kent Rehberi haritası</strong>Güzelbahçe ve çevre köyler 1966 katmanında; tarihî nüfus birimlerini arazideki yerleşimlerle ilişkilendirmek için kullanıldı.</p><p class="hg-kaynak">İzmir Büyükşehir Belediyesi, İzmir Kent Rehberi, "Deniz derinliği (1966)" katmanı. 1966 katman etiketidir.</p></div>
+                        <div class="hg-metin" hidden><p class="hg-aciklama"><strong>Hava mozaiği</strong>Kıyı–Yelki penceresinde görünen yerleşim kümeleri (yeşil). Siyah alanlar mozaikteki boşluklardır, boş arazi değildir.</p><p class="hg-kaynak">Araştırma grubu; İzmir Kent Rehberi 1996 hava fotoğrafları. Turuncu çizgi bugünkü ilçe sınırıdır.</p></div>
+                    </div>
+                    <div class="hg-dugmeler">
+                        <button type="button" data-yon="-1"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i> Önceki</button>
+                        <button type="button" data-yon="1">Sonraki <i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+            <p class="kucuk-not alt-bosluk-k"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Bugünkü ilçe sınırı tarihî haritalara yalnızca karşılaştırma için yaklaşık olarak işlendi; tarihî bir yönetsel sınırı ya da eski bir köyün ölçülmüş alanını göstermez. Haritalar arasında ← → tuşlarıyla geçilebilir.</p>
+
+            <!-- 3. Nüfus -->
+            <div class="bolum-baslik" id="nufus">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Nüfusun Uzun Dönemli Değişimi</h2>
+                    <p>Osmanlı tahminleri, erken Cumhuriyet sayımları ve 1990–2025 ilçe nüfusu · Farklı birimler ayrı grafiklerde</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Erken Osmanlı Dönemi Nüfus Tahminleri</h2>
+                    <div class="chart-container y-300"><canvas id="erkenNufusChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Hane × 5 + bekâr erkek (Berber ve Saygı, 2013, s. 57–59). Çamlı için 1478 kaydı yok; sıfır değil, eksik veri.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Erken Cumhuriyet: Bugünkü İlçedeki Yerleşimler</h2>
+                    <div class="chart-container y-300"><canvas id="cumhuriyetNufusChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>1927–28 ve 1935 sayımları (Berber ve Saygı, 2013, s. 74, Tablo 11). Payamlı'nın iki yıldaki değeri kaynakta aynıdır.</p>
+                </div>
+                <div class="card chart-card full-width">
+                    <h2>Güzelbahçe İlçe Nüfusu, 1990–2025</h2>
+                    <div class="chart-container y-300"><canvas id="ilceNufusChart"></canvas></div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-yesil"><div class="deger">14.243</div><div class="etiket">kişi, 1990</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">18.190</div><div class="etiket">kişi, 2000 sayımı</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">39.474</div><div class="etiket">kişi, 2025</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">23.048</div><div class="etiket">ilçe merkezi, 2010 · 1.414 belde</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>1990 ve 2011: Berber ve Saygı (2013); 2000: sayım; 2008–2022: İZKA (2023) / TÜİK; 2010: TÜİK; 2025: MEB resmî tablosu. 2007'de Adrese Dayalı Nüfus Kayıt Sistemi'ne geçildiği için seri tam türdeş değildir.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Nüfus Endeksi: Komşu İlçeler ve İzmir (2000 = 100)</h2>
+                    <div class="chart-container y-300"><canvas id="endeksChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Endeks, aşağıdaki tablodaki nüfuslardan hesaplandı <span class="not-rozeti hesap">hesap</span>. İdari sınırlar sabit sınırlara göre yeniden kurulmadı.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-calculator renk-amber ikon-bosluk" aria-hidden="true"></i>Bugünkü İzmir İl Alanı İçin Model Tahmini</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-amber"><div class="deger">≈184.000</div><div class="etiket">kişi, 1478</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">≈227.000</div><div class="etiket">kişi, 1575</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">≈%22,9</div><div class="etiket">artış</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>HYDE 3.2.1 nüfus ızgarasının bugünkü il sınırı içinde toplanmasıyla yapılan model yeniden kurgusu; sayım değildir ve en yakın 1.000'e yuvarlanmıştır. Köy ölçeğinde tahmin için kullanılamaz.</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-table renk-yesil ikon-bosluk" aria-hidden="true"></i>Nüfus ve Toplam Değişim, 2000–2025</h2>
+                    <div class="tablo-kaydir">
+                        <table class="veri-tablosu">
+                            <thead><tr><th scope="col">Alan</th><th scope="col" class="sayi">2000</th><th scope="col" class="sayi">2010</th><th scope="col" class="sayi">2020</th><th scope="col" class="sayi">2025</th><th scope="col" class="sayi">Değişim</th></tr></thead>
+                            <tbody>
+                                <tr><td class="kaynak-adi">Güzelbahçe</td><td class="sayi">18.190</td><td class="sayi">24.462</td><td class="sayi">36.727</td><td class="sayi">39.474</td><td class="sayi"><strong>+%117,0</strong></td></tr>
+                                <tr><td class="kaynak-adi">Narlıdere</td><td class="sayi">54.107</td><td class="sayi">72.832</td><td class="sayi">65.178</td><td class="sayi">61.320</td><td class="sayi">+%13,3</td></tr>
+                                <tr><td class="kaynak-adi">Urla</td><td class="sayi">49.269</td><td class="sayi">52.500</td><td class="sayi">69.550</td><td class="sayi">82.021</td><td class="sayi">+%66,5</td></tr>
+                                <tr><td class="kaynak-adi">Seferihisar</td><td class="sayi">34.761</td><td class="sayi">32.655</td><td class="sayi">48.320</td><td class="sayi">63.712</td><td class="sayi">+%83,3</td></tr>
+                                <tr><td class="kaynak-adi">İzmir ili</td><td class="sayi">3.370.866</td><td class="sayi">3.948.848</td><td class="sayi">4.394.694</td><td class="sayi">4.504.185</td><td class="sayi">+%33,6</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Değişim, 2000–2025 toplam yüzde değişimidir; yıllık hız değildir. Güzelbahçe'nin il nüfusundaki payı %0,54'ten %0,88'e çıktı. Kaynak: İZKA ve DEÜ (2013), İBB, TÜİK verisi aktaran kaynaklar, MEB (2026).</p>
+                </div>
+            </div>
+
+            <!-- 4. Kentsel gelişim -->
+            <div class="bolum-baslik" id="gelisim">
+                <div class="ikon ton-mor" aria-hidden="true"><i class="fa-solid fa-city" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Kentsel Gelişim, 1996–2026</h2>
+                    <p>Altı dönemlik yerleşim sentezi, 2002 ve 2026 katman karşılaştırması ve ilçe ölçeğinde kütle modeli</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <figure class="galeri-karti full-width">
+                    <figcaption><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Altı Dönemde Yerleşim Gelişimi, 1996–2026</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/kt-alti-donem.jpg')">
+                        <img src="gorseller/kt-alti-donem.jpg" alt="Kıyı ile Yelki arasındaki çalışma penceresinde bina izleri; 1996–2002'den 2020–2026'ya altı dönem açık yeşilden koyu yeşile renklendirilmiş" width="1800" height="941" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <div class="mini-istatistik ust-bosluk-k">
+                            <div class="mini-ist ton-mor"><div class="deger">9.835</div><div class="etiket">derlenmiş bina izi</div></div>
+                            <div class="mini-ist ton-mor"><div class="deger">6</div><div class="etiket">dönem: 1996–2002 … 2020–2026</div></div>
+                            <div class="mini-ist ton-mavi"><div class="deger">6.108</div><div class="etiket">iz, 2002 düzlemi (3.058 görsel yorum + 3.050 komşuluk tahmini)</div></div>
+                        </div>
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; Google Earth Pro, OpenStreetMap ve Microsoft bina izleri. İlk grup 1996 öncesi yapıları da içeren temel gruptur. Sonuç yaklaşık bir okumadır; doğrulanmış yapım yılı kaydı değildir.</p>
+                    </div>
+                </figure>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-clone" aria-hidden="true"></i> Dört Katman: 2002 ve 2026</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/kt-dort-katman.jpg')">
+                        <img src="gorseller/kt-dort-katman.jpg" alt="2002 Temmuz ve 2026 görüntüleri için üst üste dört düzlem: bina izleri, görünür yeşil örtü, ana yol aksları ve uydu görüntüsü" width="1800" height="1227" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Yukarıdan aşağıya: bina izleri, görünür yeşil örtü, ana yol aksları, uydu görüntüsü. Yeşil örtü RGB yorumudur; NDVI ya da ağaç sayımı değildir.</p>
+                    </div>
+                </figure>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-cubes" aria-hidden="true"></i> İlçe Ölçeğinde Kütle Modeli</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/kt-kitle-modeli.jpg')">
+                        <img src="gorseller/kt-kitle-modeli.jpg" alt="Bina izleri ve arazi yükseltisinden üretilmiş şematik kütle modeli; kıyı şeridi, yol koridorları ve iç yamaçlar" width="2000" height="1250" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <div class="mini-istatistik ust-bosluk-k">
+                            <div class="mini-ist ton-mor"><div class="deger">13.188</div><div class="etiket">bina izi</div></div>
+                            <div class="mini-ist ton-mavi"><div class="deger">21</div><div class="etiket">kaynaklı yükseklik bilgisi</div></div>
+                            <div class="mini-ist ton-amber"><div class="deger">6 m</div><div class="etiket">varsayılan yükseklik</div></div>
+                        </div>
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Arazi 60 m aralıkla örneklendi (Tilezen). Şematik kütle modelidir; 2026 için ölçülmüş bir yeniden kurgu değildir. Etkileşimli modeller için <a href="3b.html">3B Modeller</a>.</p>
+                    </div>
+                </figure>
+            </div>
+
+            <!-- 5. Kent kimliği -->
+            <div class="bolum-baslik" id="kimlik">
+                <div class="ikon ton-pembe" aria-hidden="true"><i class="fa-solid fa-fingerprint" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Kent Kimliği</h2>
+                    <p>Çalışan kıyıdan köy meydanına: kimliği taşıyan sekiz yer, ulaşım bağlantıları ve bölgesel miras</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Kimlik Noktaları</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/kt-kimlik-noktalari.jpg')">
+                        <img src="gorseller/kt-kimlik-noktalari.jpg" alt="İlçe sınırı içinde sekiz kimlik noktası: Yalı Balıkçı Barınağı, sahil promenadı, Vali Kazım Paşa Okulu, Yaka pazarı, Yelki Yukarı Camii, Çamlı köy pazarı, Küçükkaya ve Payamlı" width="1320" height="1176" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu. Barınak işareti iskele yerine liman havzasına düzeltildi; okul konumu MEB kaydına, Yelki camisi Kültür Envanteri'ne göre doğrulandı. Köy işaretleri merkezleri gösterir.</p>
+                    </div>
+                </figure>
+                <div class="card">
+                    <h2><i class="fa-solid fa-map-pin renk-pembe ikon-bosluk" aria-hidden="true"></i>Kimliği Taşıyan Sekiz Yer</h2>
+                    <div class="simge-izgarasi">
+                        <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-anchor" aria-hidden="true"></i></span><div><h3>Yalı Balıkçı Barınağı</h3><p>Balıkçılık ve denizle gündelik temas</p></div></div>
+                        <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-person-walking" aria-hidden="true"></i></span><div><h3>Sahil promenadı</h3><p>Kıyı boyunca ortak kamusal alan</p></div></div>
+                        <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-school" aria-hidden="true"></i></span><div><h3>Vali Kazım Paşa Okulu</h3><p>1933'ten bu yana sivil simge</p></div></div>
+                        <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-store" aria-hidden="true"></i></span><div><h3>Yaka pazarı</h3><p>Eski yerleşim çekirdeğinde pazar sokağı</p></div></div>
+                        <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-mosque" aria-hidden="true"></i></span><div><h3>Yelki Yukarı Camii</h3><p>Yelki çekirdeğinde ortak mekân</p></div></div>
+                        <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-bread-slice" aria-hidden="true"></i></span><div><h3>Çamlı köy pazarı</h3><p>Ortak fırın ve yerel üretim</p></div></div>
+                        <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-tree" aria-hidden="true"></i></span><div><h3>Küçükkaya</h3><p>Ormanlık yamaçlar ve körfez manzarası</p></div></div>
+                        <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-people-group" aria-hidden="true"></i></span><div><h3>Payamlı</h3><p>Köy yaşamı ve Bardacık Festivali</p></div></div>
+                    </div>
+                </div>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-anchor" aria-hidden="true"></i> Yalı Balıkçı Barınağı</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/kt-balikci-barinagi.jpg')">
+                        <img src="gorseller/kt-balikci-barinagi.jpg" alt="Yalı Balıkçı Barınağı'nın uydu görüntüsü üzerinde barınak alanı kırmızıyla işaretli" width="1379" height="880" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <div class="mini-istatistik ust-bosluk-k">
+                            <div class="mini-ist ton-su"><div class="deger">30.000 m²</div><div class="etiket">barınak alanı</div></div>
+                            <div class="mini-ist ton-su"><div class="deger">250</div><div class="etiket">tekne kapasitesi</div></div>
+                            <div class="mini-ist ton-mavi"><div class="deger">8</div><div class="etiket">balık satış noktası</div></div>
+                        </div>
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; Google uydu görüntüsü. Barınak tekne bakım ve onarım alanları da içerir; zabıta balık tazeliğini ve fiyatları denetler.</p>
+                    </div>
+                </figure>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-bus" aria-hidden="true"></i> Köyleri Bağlayan Otobüs Ağı</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/kt-otobus-agi.jpg')">
+                        <img src="gorseller/kt-otobus-agi.jpg" alt="İlçe sınırı içinde otobüs güzergahları ve durakları; Güzelbahçe, Yelki, Çamlı, Küçükkaya ve Payamlı bağlantıları" width="1330" height="1242" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <div class="mini-istatistik ust-bosluk-k">
+                            <div class="mini-ist ton-pembe"><div class="deger">18</div><div class="etiket">hat numarası ilçe sınırını kesiyor</div></div>
+                            <div class="mini-ist ton-pembe"><div class="deger">244</div><div class="etiket">durak kaydı ilçe içinde</div></div>
+                        </div>
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; ESHOT açık verisi (18 Kasım 2026). Harita ağın dağılımını gösterir; sefer sıklığını göstermez. Hat ayrıntıları için <a href="eshot.html">ESHOT</a>.</p>
+                    </div>
+                </figure>
+            </div>
+
+            <h2 class="ara-baslik">Bölgesel miras ve kültürel katmanlar</h2>
+            <div class="izgara-iki">
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-building-columns" aria-hidden="true"></i> Klazomenai ve Çevresi</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/kt-klazomenai.jpg')">
+                        <img src="gorseller/kt-klazomenai.jpg" alt="Klazomenai, Limantepe ve Karantina Adası çevresinin bugünkü harita üzerine uyarlanmış planı; antik koy, nekropoller ve yerleşim alanları" width="1166" height="645" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; uydu görüntüsü üzerine uyarlama. Klazomenai, Limantepe ve Karantina Adası Urla'dadır; Güzelbahçe için bölgesel bağlam olarak verilir.</p>
+                    </div>
+                </figure>
+                <div class="card">
+                    <h2><i class="fa-solid fa-landmark renk-amber ikon-bosluk" aria-hidden="true"></i>Kültürel Katmanlar</h2>
+                    <div class="simge-izgarasi">
+                        <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-dungeon" aria-hidden="true"></i></span><div><h3>İnkaya Mağarası</h3><p>Yelki'de, Kocadağ'ın doğu yamacında kuru mağara: 222 m uzunluk, girişin 30 m altına iner; sıcaklık girişte 18 °C, içeride 22 °C. Kireçtaşında fay hatları boyunca oluşmuş; kült alanı.</p></div></div>
+                        <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-campground" aria-hidden="true"></i></span><div><h3>Tahtacı kültürü</h3><p>1845 kayıtlarında Kilizman ve Çamlı'da Tahtacı toplulukları; bugün Yaka'da Tahtacı Kültür Merkezi bulunuyor.</p></div></div>
+                        <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-water" aria-hidden="true"></i></span><div><h3>Termal miras</h3><p>Gülbahçe Ilıcası (Urla) ve Agamemnon kaplıcaları (Balçova) bölgesel karşılaştırma için incelendi; Güzelbahçe sınırı dışındadır.</p></div></div>
+                        <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-oil-can" aria-hidden="true"></i></span><div><h3>Zeytinyağı geleneği</h3><p>Klazomenai'deki antik zeytinyağı işliği bölgesel bağlamdır; Kilizman'daki zeytinyağı fabrikasının 1908'de modernleştirildiği kayıtlıdır.</p></div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Kültür ve Turizm Bakanlığı, Tabiat Varlıklarını Koruma Genel Müdürlüğü, Özbay ve diğ. (2024), Berber ve Saygı (2013). İlçedeki tescilli varlıklar için <a href="havza-koruma.html#kultur">Havza ve Koruma</a>.</p>
+                </div>
+            </div>
+
+            <!-- 6. Uzman görüşü -->
+            <div class="bolum-baslik" id="gorus">
+                <div class="ikon ton-mavi" aria-hidden="true"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Bir Şehir Plancısının Gözünden</h2>
+                    <p>Güzelbahçe Belediyesi'nde görevli bir şehir ve bölge plancısıyla yapılan görüşmeden</p>
+                </div>
+            </div>
+            <div class="alinti-izgarasi alt-bosluk-k">
+                <figure class="alinti-karti ton-mavi">
+                    <blockquote>Güzelyalı'ya sığamayanlar Balçova'ya gitti, Balçova'ya sığamayanlar Narlıdere'ye gitti, Narlıdere'ye sığamayanlar ise Güzelbahçe'ye geldi.</blockquote>
+                    <figcaption>Merkezden dışa taşan büyüme</figcaption>
+                </figure>
+                <figure class="alinti-karti ton-mor">
+                    <blockquote>Akşamları burası adeta bir otel ilçesi gibi kullanılıyor; sosyal hayata ayrılabilecek pek fazla yer yok.</blockquote>
+                    <figcaption>Yatakhane ilçe</figcaption>
+                </figure>
+                <figure class="alinti-karti ton-yesil">
+                    <blockquote>Tarım alanı olarak mı devam edilecek yoksa konuta mı evrilecekti; ne yazık ki tamamen konuta evrilmiş durumda.</blockquote>
+                    <figcaption>Tarım ile konut arasındaki yol ayrımı</figcaption>
+                </figure>
+                <figure class="alinti-karti ton-amber">
+                    <blockquote>Güzelbahçe'nin kesinlikle bir sembole ihtiyacı var.</blockquote>
+                    <figcaption>Simge yapı eksikliği</figcaption>
+                </figure>
+            </div>
+            <div class="card alt-bosluk-k">
+                <h2><i class="fa-solid fa-list-check renk-mavi ikon-bosluk" aria-hidden="true"></i>Görüşmeden Öne Çıkan Başlıklar</h2>
+                <div class="etiket-listesi">
+                    <span>Tarihsel olarak oturmuş bir kimlik eksikliği</span><span>Beklenen Güzelbahçe–Urla gelişimi yerine ucuz konut stoku nedeniyle Seferihisar'a yöneliş</span><span>Deniz kıyısı daha çok duyusal bir tercih; deniz ulaşımı kullanılmıyor</span><span>Deprem kaygısı ve yeni konut stokuyla "trend" yerleşim</span><span>Gündüz etkinliklerinin azlığı</span><span>Arazinin imara açılma beklentisiyle tarımın gerilemesi</span><span>Balıkçıların uzak sulara yönelmesi</span><span>Kalıcı değil, kullanıma dönük planlama</span>
+                </div>
+                <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Alıntılar görüşmenin Türkçe özgün metninden aynen alınmış kesitlerdir; görüşler kişiye aittir ve kurumsal bir değerlendirme değildir.</p>
+            </div>
+
+            <div class="kaynak-notu">
+                <p>Veri Kaynağı: Araştırma grubunun "Spatial Formation, Urban History and Morphology" ile "Location and Urban Identity" raporları (Kasım 2026) · Berber ve Saygı (2013), Tarih Öncesinden Günümüze Güzelbahçe Tarihi · Pınar (2012) · Koparal (2011) · Etlacakuş (2025) · Klein Goldewijk (2017), HYDE 3.2.1 · İZKA ve DEÜ (2013) · İZKA (2023) · TÜİK · MEB (2026) · İzmir Kent Rehberi · ESHOT açık veri · OpenStreetMap katkıcıları · Walters Art Museum · David Rumsey Map Collection · SALT Araştırma</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/kent-tarihi.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/arama.js"></script>
+</body>
+</html>
