@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kriz ve Dayanıklılık | İzmir Güzelbahçe Veri Portalı</title>
+    <meta name="description" content="Güzelbahçe'nin su, enerji, gıda, atık, iklim, biyoçeşitlilik, afet ve yangın kırılganlıkları ile kentsel dayanıklılık kapasitesi.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
+    <script src="js/dil-en.js"></script>
+    <script src="js/dil.js"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="index.html" class="brand" aria-label="İzmir Güzelbahçe Veri Portalı – Genel Bakış"><span class="marka-metin"><span class="marka-ust">İzmir Güzelbahçe</span><span class="marka-ad">Veri Portalı</span></span></a>
+        <nav aria-label="Sayfalar">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-grup">İlçe Profili</li>
+            <li class="nav-item">
+                <a href="kent-tarihi.html" class="nav-link">
+                    <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+                    Kent Tarihi ve Kimlik
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="mekansal-yapi.html" class="nav-link">
+                    <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+                    Mekânsal Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="ekonomi.html" class="nav-link">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    Ekonomik Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dogal-yapi.html" class="nav-link">
+                    <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+                    Doğal Yapı ve Afet
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havza-koruma.html" class="nav-link">
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    Havza ve Koruma
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kriz-dayaniklilik.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
+                    Kriz ve Dayanıklılık
+                </a>
+            </li>
+            <li class="nav-grup">Ulaşım</li>
+            <li class="nav-item">
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
+                    Otoparklar
+                </a>
+            </li>
+            <li class="nav-grup">Altyapı</li>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                    İZSU Su Kaynakları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="atiksu.html" class="nav-link">
+                    <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+                    Atık Su
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kati-atik.html" class="nav-link">
+                    <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                    Katı Atık
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                    Elektrik Altyapısı
+                </a>
+            </li>
+            <li class="nav-grup">3B ve Senaryo</li>
+            <li class="nav-item">
+                <a href="3b.html" class="nav-link">
+                    <i class="fa-solid fa-cube" aria-hidden="true"></i>
+                    3B Modeller <span class="rozet-yeni">Yeni</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="senaryo.html" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                    Senaryo Laboratuvarı <span class="rozet-deneme">Deneme</span>
+                </a>
+            </li>
+            <li class="nav-grup">Planlama</li>
+            <li class="nav-item">
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                    Planlanan Projeler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                    İşbirliklerimiz
+                </a>
+            </li>
+        </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="icerik" tabindex="-1">
+        <div id="kriz-dayaniklilik" class="tab-pane active">
+            <header>
+                <h1>Kriz ve Dayanıklılık</h1>
+                <p class="subtitle">Su, enerji, gıda, atık, iklim, biyoçeşitlilik, afet ve yangın: kırılganlıklar, birbirine bağlı sistemler ve dayanıklılık kapasitesi</p>
+            </header>
+
+            <div class="stats-row dar-kartlar">
+                <div class="stat-card ton-su">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-water" aria-hidden="true"></i></div>
+                    <div class="stat-label">Tahtalı Barajı Doluluğu</div>
+                    <div class="stat-value">&lt;%20</div>
+                    <div class="stat-change ton-su">2025 başı · son 10 yılda belirgin düşüş (İZSU)</div>
+                </div>
+                <div class="stat-card ton-amber">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-sun" aria-hidden="true"></i></div>
+                    <div class="stat-label">Yaz Su Tüketimi</div>
+                    <div class="stat-value">+%93,9</div>
+                    <div class="stat-change ton-amber">Kış 179.078 → yaz 347.244 m³/ay</div>
+                </div>
+                <div class="stat-card ton-yesil">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-people-roof" aria-hidden="true"></i></div>
+                    <div class="stat-label">Afet Toplanma Alanı</div>
+                    <div class="stat-value">64</div>
+                    <div class="stat-change ton-yesil">189.851 m² · 75.940 kişi kapasite (2021)</div>
+                </div>
+                <div class="stat-card ton-mor">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-temperature-half" aria-hidden="true"></i></div>
+                    <div class="stat-label">İklim Kırılganlık Endeksi</div>
+                    <div class="stat-value">0,104</div>
+                    <div class="stat-change ton-mor">Orta grup · Konak 0,684 (İBB SECAP)</div>
+                </div>
+            </div>
+
+            <nav class="sayfa-ici-menu" aria-label="Bu sayfadaki bölümler">
+                <a href="#ag" class="ton-mavi"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i>Bağımlılık ağı</a>
+                <a href="#su" class="ton-su"><i class="fa-solid fa-droplet" aria-hidden="true"></i>Su</a>
+                <a href="#enerji" class="ton-sari"><i class="fa-solid fa-bolt" aria-hidden="true"></i>Enerji</a>
+                <a href="#gida" class="ton-yesil"><i class="fa-solid fa-basket-shopping" aria-hidden="true"></i>Gıda</a>
+                <a href="#atik" class="ton-turuncu"><i class="fa-solid fa-recycle" aria-hidden="true"></i>Atık</a>
+                <a href="#iklim" class="ton-amber"><i class="fa-solid fa-temperature-arrow-up" aria-hidden="true"></i>İklim</a>
+                <a href="#afet" class="ton-kirmizi"><i class="fa-solid fa-house-crack" aria-hidden="true"></i>Afet</a>
+                <a href="#yangin" class="ton-pembe"><i class="fa-solid fa-fire" aria-hidden="true"></i>Yangın</a>
+                <a href="#oncelikler" class="ton-mor"><i class="fa-solid fa-list-check" aria-hidden="true"></i>Öncelikler</a>
+            </nav>
+
+            <!-- 0. Bağımlılık ağı -->
+            <div class="bolum-baslik" id="ag">
+                <div class="ikon ton-mavi" aria-hidden="true"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Sistemler Arası Bağımlılık Ağı</h2>
+                    <p>Bir sistemdeki kesinti diğerlerine nasıl aktarılır? Bir sisteme tıklayın: etkilediği ve etkilendiği bağlantılar öne çıkar</p>
+                </div>
+            </div>
+            <div class="bag-agi alt-bosluk-k" id="bagAgi">
+                <div class="ba-cizim">
+                    <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"></svg>
+                    <button type="button" class="ba-dugum ton-amber" data-dugum="iklim" aria-pressed="false"><span class="bd-daire"><i class="fa-solid fa-temperature-arrow-up" aria-hidden="true"></i></span><span class="bd-ad">İklim</span></button>
+                    <button type="button" class="ba-dugum ton-sari" data-dugum="enerji" aria-pressed="false"><span class="bd-daire"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span><span class="bd-ad">Enerji</span></button>
+                    <button type="button" class="ba-dugum ton-su" data-dugum="su" aria-pressed="false"><span class="bd-daire"><i class="fa-solid fa-droplet" aria-hidden="true"></i></span><span class="bd-ad">Su</span></button>
+                    <button type="button" class="ba-dugum ton-yesil" data-dugum="gida" aria-pressed="false"><span class="bd-daire"><i class="fa-solid fa-basket-shopping" aria-hidden="true"></i></span><span class="bd-ad">Gıda</span></button>
+                    <button type="button" class="ba-dugum ton-mavi" data-dugum="ulasim" aria-pressed="false"><span class="bd-daire"><i class="fa-solid fa-road" aria-hidden="true"></i></span><span class="bd-ad">Ulaşım</span></button>
+                    <button type="button" class="ba-dugum ton-kirmizi" data-dugum="afet" aria-pressed="false"><span class="bd-daire"><i class="fa-solid fa-house-crack" aria-hidden="true"></i></span><span class="bd-ad">Afet</span></button>
+                    <button type="button" class="ba-dugum ton-turuncu" data-dugum="atik" aria-pressed="false"><span class="bd-daire"><i class="fa-solid fa-recycle" aria-hidden="true"></i></span><span class="bd-ad">Atık</span></button>
+                    <button type="button" class="ba-dugum ton-yesil" data-dugum="ekosistem" aria-pressed="false"><span class="bd-daire"><i class="fa-solid fa-tree" aria-hidden="true"></i></span><span class="bd-ad">Ekosistem</span></button>
+                    <button type="button" class="ba-dugum ton-pembe" data-dugum="yangin" aria-pressed="false"><span class="bd-daire"><i class="fa-solid fa-fire" aria-hidden="true"></i></span><span class="bd-ad">Yangın</span></button>
+                </div>
+                <div class="ba-panel" aria-live="polite">
+                    <div class="ba-detay ton-amber" data-dugum="iklim">
+                        <h3 class="bp-baslik"><i class="fa-solid fa-temperature-arrow-up" aria-hidden="true"></i>İklim</h3>
+                        <div><div class="bp-etiket">Kırılganlık</div><p>Bitki örtüsü ilçeye görece serinlik kazandırıyor; ancak kıyı şeridi deniz seviyesi yükselmesine ve taşkına yüksek düzeyde maruz.</p></div>
+                        <div><div class="bp-etiket">Planlama önceliği</div><p>Ekolojik serinletme işlevlerini korurken kuraklığa, kamusal alanlardaki sıcaklığa ve kıyıdaki kesintilere hazırlanmak.</p></div>
+                        <div><div class="bp-etiket">Etkilediği</div><ul><li><span>Su:</span> kuraklık ve yaz zirvesi; RCP8.5'te 2091–2100 için +3,9–5,3 °C</li><li><span>Enerji:</span> sıcak hava dalgası ve kuraklık üretimi ve iletimi etkileyebilir</li><li><span>Gıda:</span> kiraz ve zeytin dona ve sıcaklık dalgalanmalarına duyarlı</li><li><span>Yangın:</span> iklim değişikliği yangın riskini daha geniş alanlara yayıyor</li></ul></div>
+                        <div><div class="bp-etiket">Etkilendiği</div><ul><li><span>Ekosistem:</span> doğal alanlar serin ada etkisi yaratıyor</li></ul></div>
+                    </div>
+                    <div class="ba-detay ton-sari" data-dugum="enerji" hidden>
+                        <h3 class="bp-baslik"><i class="fa-solid fa-bolt" aria-hidden="true"></i>Enerji</h3>
+                        <div><div class="bp-etiket">Kırılganlık</div><p>Elektrik arzı, ulaşım ve su pompalama birbirine bağlı; ilçe sınırında işletmedeki rüzgâr türbini yok, en yakın santral Urla'da.</p></div>
+                        <div><div class="bp-etiket">Planlama önceliği</div><p>Yerel enerji envanteri, çatıların güneş enerjisine uygunluk analizi ve kritik tesisler için yedek enerji değerlendirmesi.</p></div>
+                        <div><div class="bp-etiket">Etkilediği</div><ul><li><span>Su:</span> kuyu ve pompa istasyonları elektriğe bağlı; kesinti su hizmetini etkiler</li></ul></div>
+                        <div><div class="bp-etiket">Etkilendiği</div><ul><li><span>İklim:</span> sıcak hava dalgası ve kuraklık üretimi ve iletimi etkileyebilir</li></ul></div>
+                    </div>
+                    <div class="ba-detay ton-su" data-dugum="su" hidden>
+                        <h3 class="bp-baslik"><i class="fa-solid fa-droplet" aria-hidden="true"></i>Su</h3>
+                        <div><div class="bp-etiket">Kırılganlık</div><p>Metropol şebekesine bağımlılık ve belirgin yaz zirvesi; havzadaki 42 yeraltı suyu kütlesinin 31'i kötü durumda.</p></div>
+                        <div><div class="bp-etiket">Planlama önceliği</div><p>Dere koridorlarını korumak, yeraltı suyu kullanımını izlemek, kaçınılabilir yaz talebini azaltmak ve ilçe su bütçesi hazırlamak.</p></div>
+                        <div><div class="bp-etiket">Etkilediği</div><ul><li><span>Gıda:</span> sulama kuyu ve derelere bağlı; yazın su azalınca üreticiler ürün seçimini değiştiriyor</li><li><span>Ekosistem:</span> dere ağı iç yamaçları kıyıya bağlayan ekolojik koridor</li></ul></div>
+                        <div><div class="bp-etiket">Etkilendiği</div><ul><li><span>Enerji:</span> kuyu ve pompa istasyonları elektriğe bağlı</li><li><span>İklim:</span> kuraklık ve yükselen sıcaklıklar</li></ul></div>
+                    </div>
+                    <div class="ba-detay ton-yesil" data-dugum="gida" hidden>
+                        <h3 class="bp-baslik"><i class="fa-solid fa-basket-shopping" aria-hidden="true"></i>Gıda</h3>
+                        <div><div class="bp-etiket">Kırılganlık</div><p>Pazar tedariki büyük ölçüde hale bağlı; yerel üretim tarım arazisine, sulamaya ve bitki sağlığına bağımlı.</p></div>
+                        <div><div class="bp-etiket">Planlama önceliği</div><p>Üretken arazinin korunması ve geniş tedarik ağlarına güvenilir bağlantı; satın alınabilirlik, depolama ve tüketim verisinin güçlendirilmesi.</p></div>
+                        <div><div class="bp-etiket">Etkilendiği</div><ul><li><span>Su:</span> sulama suyu yazın azalıyor</li><li><span>Ulaşım:</span> İzmir–Çeşme Otoyolu ve Mithatpaşa Caddesi tedarik hatları</li><li><span>İklim:</span> don ve sıcaklık dalgalanmaları</li></ul></div>
+                    </div>
+                    <div class="ba-detay ton-mavi" data-dugum="ulasim" hidden>
+                        <h3 class="bp-baslik"><i class="fa-solid fa-road" aria-hidden="true"></i>Ulaşım</h3>
+                        <div><div class="bp-etiket">Kırılganlık</div><p>İzmir–Çeşme Otoyolu ve Mithatpaşa Caddesi gıda ve acil durum lojistiğinin ana arterleri; olası tıkanma noktaları var.</p></div>
+                        <div><div class="bp-etiket">Planlama önceliği</div><p>Alternatif tahliye ve itfaiye erişim güzergâhları; ikincil acil durum düğümleri.</p></div>
+                        <div><div class="bp-etiket">Etkilediği</div><ul><li><span>Gıda:</span> tedarik hatları ve acil dağıtım</li><li><span>Atık:</span> atık Urla Aktarma İstasyonu üzerinden ilçe dışında bertaraf ediliyor</li></ul></div>
+                        <div><div class="bp-etiket">Etkilendiği</div><ul><li><span>Afet:</span> deprem köprü, otoyol ve bağlantı yollarında hasar riski taşır</li></ul></div>
+                    </div>
+                    <div class="ba-detay ton-kirmizi" data-dugum="afet" hidden>
+                        <h3 class="bp-baslik"><i class="fa-solid fa-house-crack" aria-hidden="true"></i>Afet</h3>
+                        <div><div class="bp-etiket">Kırılganlık</div><p>Kıyı yerleşim koridoru, dere geçişleri ve yamaç bağlantıları farklı tehlike bileşimleri oluşturuyor; kırsal cepler 500 m toplanma alanı erişiminin dışında kalabiliyor.</p></div>
+                        <div><div class="bp-etiket">Planlama önceliği</div><p>Tehlikelerin temel kent işlevlerini nerede kesebileceğini yerel ölçekte belirlemek; geçiş kuşaklarında ikincil acil durum düğümleri kurmak.</p></div>
+                        <div><div class="bp-etiket">Etkilediği</div><ul><li><span>Ulaşım:</span> köprü, otoyol ve bağlantı yolu hasarı</li></ul></div>
+                    </div>
+                    <div class="ba-detay ton-turuncu" data-dugum="atik" hidden>
+                        <h3 class="bp-baslik"><i class="fa-solid fa-recycle" aria-hidden="true"></i>Atık</h3>
+                        <div><div class="bp-etiket">Kırılganlık</div><p>Yerel toplama ile ilçe dışındaki aktarma ve bertaraf tesisleri birbirine bağımlı; organik ve hacimli atık ile atık ilaç henüz yönetilemiyor.</p></div>
+                        <div><div class="bp-etiket">Planlama önceliği</div><p>İzlenebilir atık akışları, güvenilir yedek varış noktaları ve kaynakta ayrıştırma.</p></div>
+                        <div><div class="bp-etiket">Etkilediği</div><ul><li><span>Ekosistem:</span> hafriyat ve inşaat atığı sahaları ağır araç, toz ve gürültüyle tarım ve ekolojik alanlara baskı yapabilir</li></ul></div>
+                        <div><div class="bp-etiket">Etkilendiği</div><ul><li><span>Ulaşım:</span> aktarma istasyonuna taşıma</li></ul></div>
+                    </div>
+                    <div class="ba-detay ton-yesil" data-dugum="ekosistem" hidden>
+                        <h3 class="bp-baslik"><i class="fa-solid fa-tree" aria-hidden="true"></i>Ekosistem</h3>
+                        <div><div class="bp-etiket">Kırılganlık</div><p>Orman, tarım, dere ve kıyı habitatları arasındaki bağlantılar parçalanma baskısı altında.</p></div>
+                        <div><div class="bp-etiket">Planlama önceliği</div><p>Yeni yapılaşmadan önce habitat sürekliliğini korumak; tür önceliklerini doğrulanmış yerel kayıtlarla belirlemek.</p></div>
+                        <div><div class="bp-etiket">Etkilediği</div><ul><li><span>İklim:</span> bitki örtüsü serin ada etkisi yaratıyor</li></ul></div>
+                        <div><div class="bp-etiket">Etkilendiği</div><ul><li><span>Yangın:</span> orman–yerleşim ara yüzü</li><li><span>Su:</span> dere koridorları</li><li><span>Atık:</span> hafriyat sahalarının baskısı</li></ul></div>
+                    </div>
+                    <div class="ba-detay ton-pembe" data-dugum="yangin" hidden>
+                        <h3 class="bp-baslik"><i class="fa-solid fa-fire" aria-hidden="true"></i>Yangın</h3>
+                        <div><div class="bp-etiket">Kırılganlık</div><p>Orman lekeleri ile yerleşimler arasındaki ara yüz; ilçede yüksek ve çok yüksek orman yangını riskli alanlar var.</p></div>
+                        <div><div class="bp-etiket">Planlama önceliği</div><p>Tahliye alternatifleri, itfaiye erişimi ve ekolojik işlevi koruyan bitki örtüsü yönetimi.</p></div>
+                        <div><div class="bp-etiket">Etkilediği</div><ul><li><span>Ekosistem:</span> habitat sürekliliği</li></ul></div>
+                        <div><div class="bp-etiket">Etkilendiği</div><ul><li><span>İklim:</span> sıcak ve kurak dönemler</li></ul></div>
+                    </div>
+                    <div class="ba-lejant"><span>Etkilediği</span><span class="giren">Etkilendiği</span></div>
+                </div>
+            </div>
+            <p class="kucuk-not alt-bosluk-k"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Bağlantılar araştırma grubunun her sistem için yazdığı "Güzelbahçe sentezi" bölümlerinden ve rapordaki verilerden derlendi; nicel bir risk modeli değildir.</p>
+
+            <!-- 1. Su -->
+            <div class="bolum-baslik" id="su">
+                <div class="ikon ton-su" aria-hidden="true"><i class="fa-solid fa-droplet" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Su Kaynakları ve Su Güvenliği</h2>
+                    <p>Metropol şebekesine bağımlılık, yaz zirvesi, havzadaki yeraltı suyu baskısı ve iklim projeksiyonları</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card">
+                    <h2><i class="fa-solid fa-faucet-drip renk-su ikon-bosluk" aria-hidden="true"></i>İçme Suyu ve Havza Durumu</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-su"><div class="deger">%53</div><div class="etiket">İzmir içme suyunda yeraltı suyu payı · %47 baraj ve gölet</div></div>
+                        <div class="mini-ist ton-su"><div class="deger">%62</div><div class="etiket">Tahtalı'nın metropoldeki yüzey suyu ihtiyacındaki payı</div></div>
+                        <div class="mini-ist ton-kirmizi"><div class="deger">31 / 42</div><div class="etiket">havzada kötü durumdaki yeraltı suyu kütlesi</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">%27,36</div><div class="etiket">şebekedeki fiziki su kaybı</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İZSU (2024–2025), SYGM (2018). Havzadaki yüzey su kütlelerinin %38'i kötü, %9'u zayıf durumda; ilçenin tamamı Küçük Menderes Havzası'nda. Ayrıntı için <a href="havza-koruma.html#su-kutleleri">Havza ve Koruma</a> ve <a href="izsu.html">İZSU</a>.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Havzada Sektörel Yeraltı Suyu Kullanımı, 2024</h2>
+                    <div class="chart-container y-300"><canvas id="yeraltiSektorChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>DSİ 2. Bölge Müdürlüğü (2025), hm³/yıl. Tarımın baskın payı havzayı kuraklığa karşı kırılgan kılıyor.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>İklim Projeksiyonları, 2091–2100</h2>
+                    <div class="chart-container y-250"><canvas id="sicaklikProjChart"></canvas></div>
+                    <div class="chart-container y-200 ust-bosluk-k"><canvas id="yagisProjChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Havza için üç modelin aralığı. Yağış değişiminin yönü modellere göre farklılaştığından tek bir kesin tahmin olarak sunulmadı.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-sun renk-amber ikon-bosluk" aria-hidden="true"></i>Yaz Zirvesi</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-mavi"><div class="deger">179.078 m³</div><div class="etiket">kış aylık ortalaması</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">347.244 m³</div><div class="etiket">yaz aylık ortalaması · +%93,9</div></div>
+                        <div class="mini-ist ton-su"><div class="deger">≈ 221 L</div><div class="etiket">kişi başı günlük tüketim</div></div>
+                    </div>
+                    <h3 class="kart-alt-baslik">Su projeleri ve kısıtlar</h3>
+                    <div class="simge-izgarasi">
+                        <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-ban" aria-hidden="true"></i></span><div><h3>Çamlı Barajı</h3><p>Güzelbahçe ve Urla'da 300.000 kişiye yılda 21,5 milyon m³ içme suyu için tasarlandı; havzadaki Efemçukuru Altın Madeni'nin kirlilik riski nedeniyle uygulanamadı.</p></div></div>
+                        <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-faucet" aria-hidden="true"></i></span><div><h3>Gölet sulaması</h3><p>Güzelbahçe gölet sulama projesi (95 ha net, 109 ha brüt) proje aşamasında; tarım özel kuyulara, artezyenlere ve derelere dayanıyor.</p></div></div>
+                        <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></span><div><h3>Yasal sınırlar</h3><p>İzmir Körfezi alt havzasının kısıtlı bölümünde yeraltı suyu tahsisi ve derin kuyu yasak (Resmî Gazete, 5 Mayıs 2018). Yelki'de zeytinlikteki go-kart pisti onayı yargı kararıyla durduruldu.</p></div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İZSU 2023 tüketim verisi (38.044 kişi, yılda 3,06 milyon m³), TMMOB (2024), Yıldızgrup Planlama (2020).</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-comments renk-yesil ikon-bosluk" aria-hidden="true"></i>Saha Görüşmeleri: Suyun Üretime Etkisi</h2>
+                    <div class="gorusme-izgarasi">
+                        <div class="gorusme-karti ton-su"><span class="gk-kod">G2 · Çamtepe</span><h3>Kuru tarım</h3><dl><dt>Yöntem</dt><dd>Üzüm susuz; elma ve armut dereden borular ve depoyla damla sulama</dd><dt>Gözlem</dt><dd>Bazı üretim alanlarında sulama suyu yok</dd></dl></div>
+                        <div class="gorusme-karti ton-amber"><span class="gk-kod">G3 · Yelki</span><h3>Ürün seçimi değişiyor</h3><dl><dt>Yöntem</dt><dd>Dere yatağındaki kuyulardan elektrikli pompa</dd><dt>Gözlem</dt><dd>Yazın su seviyesi düşüyor; patlıcan ve biber ekilmiyor. En kurak aylar Haziran–Eylül.</dd></dl></div>
+                        <div class="gorusme-karti ton-kirmizi"><span class="gk-kod">G5 · Siteler</span><h3>Daha derin kuyular</h3><dl><dt>Yöntem</dt><dd>Artezyen kuyu</dd><dt>Gözlem</dt><dd>Kuyular eskisinden daha derine açılmak zorunda</dd></dl></div>
+                        <div class="gorusme-karti ton-yesil"><span class="gk-kod">G6 · Yelki</span><h3>Damla sulama ve susuz bamya</h3><dl><dt>Yöntem</dt><dd>Kuyu suyu, damla sulama; toprağı işlemeden yabani ot biçme</dd><dt>Gözlem</dt><dd>Kınalı bamya hiç sulanmadan yetişiyor</dd></dl></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubunun Güzelbahçe pazarında ve Yelki'de yaptığı görüşmeler (29 Eylül ve 10 Ekim 2026). Kodlar katılımcıları anonimleştirir.</p>
+                </div>
+            </div>
+
+            <!-- 2. Enerji -->
+            <div class="bolum-baslik" id="enerji">
+                <div class="ikon ton-sari" aria-hidden="true"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Enerji ve Emisyonlar</h2>
+                    <p>Güneş potansiyeli, bölgesel enerji altyapısı ve İzmir'in sera gazı envanteri</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Aylık Güneş Işınımı (kWh/m²·gün)</h2>
+                    <div class="chart-container y-300"><canvas id="isinimChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Yatay yüzeye düşen günlük toplam ışınımın aylık ortalaması (EİE, GEPA). Güzelbahçe İzmir ortalamasına çok yakın; Haziran'da 6,54.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-solar-panel renk-sari ikon-bosluk" aria-hidden="true"></i>Dağıtık Üretim Potansiyeli</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-sari"><div class="deger">1.450–1.550</div><div class="etiket">kWh/yıl, 1 kWp çatı paneli</div></div>
+                        <div class="mini-ist ton-sari"><div class="deger">≈ 15.000</div><div class="etiket">kWh/yıl, 10 kWp villa çatısı</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">17 MW</div><div class="etiket">Urla RES · 6 türbin</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">Düşük</div><div class="etiket">enerji yoksulluğu düzeyi</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>10 kWp örneği rapordaki hesaptır <span class="not-rozeti hesap">hesap</span>. İlçe sınırında işletmedeki rüzgâr türbini yok; Urla RES'in lisans alanı Güzelbahçe sırtlarına uzanıyor. 154 kV iletim hatları güney sırtlardan geçiyor; 59,79 km'lik 380 kV Çeşme Havza–Uzundere hattı projesi ilçeyi kapsıyor. SECAP'e göre ilçedeki enerji tüketiminin %35–40'ı ulaşımdan.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>İzmir Sera Gazı Envanteri, 2024 (tCO₂e)</h2>
+                    <div class="chart-container y-300"><canvas id="emisyonChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Sanayi ve havacılık hariç; toplam 15.784.303 tCO₂e (İBB SECAP, 2025). Sanayi ve havacılık dahil toplam 24.227.118 tCO₂e.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>İzmir'in İklim Nötr Yolu (tCO₂e)</h2>
+                    <div class="chart-container y-300"><canvas id="emisyonYoluChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>2018'de kişi başına 3,51 tCO₂e. Hedef: 2030'a kadar %40 azaltım, 2050'de iklim nötr; 2050 emisyonunun yaklaşık %80'i azaltılıp kalan %20'si yutak ve dengeleme ile nötrlenecek.</p>
+                </div>
+            </div>
+
+            <!-- 3. Gıda -->
+            <div class="bolum-baslik" id="gida">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-basket-shopping" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Gıda Üretimi ve Tedarik Zinciri</h2>
+                    <p>Tarım deseni, bitki sağlığı, pazar tedariki ve kriz anında gıda lojistiği</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Tarım Alanının Ürün Gruplarına Dağılımı (%)</h2>
+                    <div class="chart-container y-300"><canvas id="tarimDagilimChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İZKA (2021), TÜİK verisi. Meyvede mandalina başı çekiyor, ardından zeytin geliyor; tahıllarda sorgum, fiğ ve buğday, sebzede marul, domates ve salatalık öne çıkıyor.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Turunçgil Nematodu: Güzelbahçe Bahçeleri</h2>
+                    <div class="chart-container y-300"><canvas id="nematodChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Satsuma mandalina bahçelerinde 100 g topraktaki birey sayısı (Almas, 2013; Emre, 2014). Ortalama 880; yalnızca bir bahçe 1.600'lük ekonomik zarar eşiğini aşıyor. İzmir'deki 178 bahçede bulaşıklık %89,33, Güzelbahçe örneklerinde %100.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Çiftçi Kayıt Sistemi'ne Kayıtlı Çiftçi</h2>
+                    <div class="chart-container y-250"><canvas id="cksChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İZKA (2021). İzmir ulusal sıralamada kiraz ve zeytinde 1., kestane, incir ve mandalinada 2. (TÜİK, 2024).</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Mahallelerin İlçe Merkezine Uzaklığı (km)</h2>
+                    <div class="chart-container y-250"><canvas id="uzaklikChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Diğer sekiz mahalle merkezde. İlçe merkezinin İzmir il merkezine yol uzaklığı yaklaşık 28 km.</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-store renk-yesil ikon-bosluk" aria-hidden="true"></i>Pazar Tedarik Zinciri: İki Yol</h2>
+                    <div class="gorusme-izgarasi">
+                        <div class="gorusme-karti ton-mavi"><span class="gk-kod">G1 · Hal</span><h3>Pazardan pazara</h3><dl><dt>Sıklık</dt><dd>Haftada 7 gün; 2 gün Güzelbahçe, diğer günler Zeytinalanı, Gülbahçe ve Seferihisar</dd><dt>Satılmayan</dt><dd>Ertesi gün başka pazarda</dd></dl></div>
+                        <div class="gorusme-karti ton-mavi"><span class="gk-kod">G4 · Hal</span><h3>Bozulabilir ürün kaybı</h3><dl><dt>Sıklık</dt><dd>Haftada 4 gün</dd><dt>Satılmayan</dt><dd>Patates, soğan 1–2 gün daha; diğerleri atılıyor</dd></dl></div>
+                        <div class="gorusme-karti ton-yesil"><span class="gk-kod">G2 · Üretici</span><h3>Doğrudan satış</h3><dl><dt>Sıklık</dt><dd>Haftada 1 gün</dd><dt>Kaynak</dt><dd>Kendi üretimi, Çamtepe</dd></dl></div>
+                        <div class="gorusme-karti ton-yesil"><span class="gk-kod">G3 · Üretici</span><h3>İşleyerek değerlendirme</h3><dl><dt>Sıklık</dt><dd>Haftada 1 gün</dd><dt>Satılmayan</dt><dd>Salça, kurutma ya da komşularla paylaşma</dd></dl></div>
+                        <div class="gorusme-karti ton-yesil"><span class="gk-kod">G5 · Üretici</span><h3>Hane ölçeğinde koruma</h3><dl><dt>Sıklık</dt><dd>Haftada 1 gün</dd><dt>Satılmayan</dt><dd>Kurutma ya da komşularla paylaşma</dd></dl></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Beş tezgâhtan ikisi halden alıyor, üçü kendi ürününü satıyor. G1'e göre pazar esnafının yaklaşık %90'ı halden alıyor (katılımcı gözlemi). Pandemide de halden tedarik sürdü; olağanüstü durumlarda hal daha seyrek açılabiliyor. Yerel üreticiler dayanışmayla iki haftada bir perşembe 17.30–18.30 arasında doğrudan satış buluşması düzenliyor; belediye kış için Atatürk Kültür Merkezi altındaki kapalı pazar yerini tahsis etti.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-truck-medical renk-kirmizi ikon-bosluk" aria-hidden="true"></i>Kriz Anında Gıda ve Barınma</h2>
+                    <div class="simge-izgarasi">
+                        <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-warehouse" aria-hidden="true"></i></span><div><h3>Acil dağıtım merkezleri</h3><p>Yalı ve Yelki kapalı pazar yerleri sahra mutfağı, Kızılay sıcak yemek noktası ve kuru gıda paketleme merkezine dönüştürülebilir.</p></div></div>
+                        <div class="simge-karti ton-mavi"><span class="sk-simge"><i class="fa-solid fa-road" aria-hidden="true"></i></span><div><h3>Lojistik arterler</h3><p>İzmir–Çeşme Otoyolu ve Mithatpaşa Caddesi ana tedarik hatları; tıkanma noktaları kritik.</p></div></div>
+                    </div>
+                    <div class="tablo-kaydir ust-bosluk-k">
+                        <table class="veri-tablosu">
+                            <thead><tr><th scope="col">Geçici barınma alanı</th><th scope="col" class="sayi">Alan</th><th scope="col" class="sayi">Çadır / konteyner</th><th scope="col" class="sayi">Kişi</th></tr></thead>
+                            <tbody>
+                                <tr><td class="kaynak-adi">Güzelbahçe Spor Kulübü futbol sahası</td><td class="sayi">9.000 m²</td><td class="sayi">90</td><td class="sayi">360</td></tr>
+                                <tr><td class="kaynak-adi">Yelki Stadyumu</td><td class="sayi">8.000 m²</td><td class="sayi">80</td><td class="sayi">320</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İzmir AFAD (2025); araştırma grubunun kriz lojistiği değerlendirmesi.</p>
+                </div>
+            </div>
+
+            <!-- 4. Atık -->
+            <div class="bolum-baslik" id="atik">
+                <div class="ikon ton-turuncu" aria-hidden="true"><i class="fa-solid fa-recycle" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Atık Sistemi ve İstenmeyen Arazi Kullanımları</h2>
+                    <p>Ayrı toplama, mahalle toplama günleri ve Yelki'deki hafriyat sahası · Toplama–aktarma–bertaraf zinciri için <a href="kati-atik.html">Katı Atık</a></p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Ayrı Toplanan Atıklar, 2025 (kg)</h2>
+                    <div class="chart-container y-300"><canvas id="ayriAtikChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe Belediyesi 2025 faaliyet raporu. Organik atık, yeniden kullanılamayan hacimli atık ve atık ilaç henüz yönetilemiyor; piller yılda iki kez TAP aracılığıyla geri dönüşüme gönderiliyor.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Yelki Çalıcası Hafriyat Sahası (ton)</h2>
+                    <div class="chart-container y-300"><canvas id="hafriyatChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İZBETON işletmesindeki Güzelbahçe–Yelki-2 hafriyat ve inşaat-yıkıntı atığı geri kazanım tesisi (TMMOB, 2024; İBB, 2025). Metropol ölçeğindeki çevresel yükün ilçeye dağılımı sorusunu gündeme getiriyor.</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-calendar-week renk-turuncu ikon-bosluk" aria-hidden="true"></i>Bahçe Atığı ve Hacimli Eşya Toplama Günleri</h2>
+                    <div class="hafta-takvimi">
+                        <div class="ton-turuncu"><span class="ht-gun">Pazartesi</span><span class="ht-mah">Yelki</span><span class="ht-mah">Siteler</span></div>
+                        <div class="ton-turuncu"><span class="ht-gun">Salı</span><span class="ht-mah">Maltepe</span><span class="ht-mah">Mustafa Kemal Paşa</span></div>
+                        <div class="ton-turuncu"><span class="ht-gun">Çarşamba</span><span class="ht-mah">Yalı</span><span class="ht-mah">Çamlı</span><span class="ht-ek">ve siteler</span></div>
+                        <div class="ton-turuncu"><span class="ht-gun">Perşembe</span><span class="ht-mah">Atatürk</span><span class="ht-ek">ve siteler</span></div>
+                        <div class="ton-turuncu"><span class="ht-gun">Cuma</span><span class="ht-mah">Kahramandere</span></div>
+                        <div class="ton-turuncu"><span class="ht-gun">Cumartesi</span><span class="ht-mah">Çelebi</span><span class="ht-mah">Yaka</span></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe Belediyesi, 10 mahallede uygulanan toplama günleri: bahçe atıkları, kullanılmayan ev eşyaları ve kaçak dökülen moloz için.</p>
+                </div>
+                <figure class="galeri-karti full-width">
+                    <figcaption><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Atık Kaynakları ve Toplama Noktaları</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/kd-atik-noktalari.jpg')">
+                        <img src="gorseller/kd-atik-noktalari.jpg" alt="Güzelbahçe'de ayrı atık konteynerleri, cam, elektronik atık ve pil, inşaat atığı, tıbbi atık ve tarımsal ilaç atığı riski noktaları; 1:25.000 ölçekli harita" width="1302" height="921" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; altlık OpenStreetMap. Toplama noktaları kuzeydeki kentleşmiş alanda yoğunlaşıyor; güneyde daha dağınık kaynaklar ve tarımsal atık riskleri görülüyor.</p>
+                    </div>
+                </figure>
+            </div>
+
+            <!-- 5. İklim -->
+            <div class="bolum-baslik" id="iklim">
+                <div class="ikon ton-amber" aria-hidden="true"><i class="fa-solid fa-temperature-arrow-up" aria-hidden="true"></i></div>
+                <div>
+                    <h2>İklim Krizi ve Biyoçeşitlilik</h2>
+                    <p>Yağış rejimi, iklim kırılganlık endeksi, İzmir'in iklim tehlikeleri ve gözlenen türler</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Uzun Yıllar Aylık Yağış (mm)</h2>
+                    <div class="chart-container y-300"><canvas id="yagisChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İzmir Meteoroloji Bölge Müdürlüğü (2023). Yıllık toplam: Güzelbahçe 655,9 mm (7 yıllık gözlem), Konak 669,8, Bornova 605,1, Karşıyaka 501,1 mm. Temmuz–Ağustos neredeyse kurak.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>İklim Değişikliği Kırılganlık Endeksi</h2>
+                    <div class="chart-container y-300"><canvas id="kirilganlikChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İBB SECAP (2025); nüfus, taşkın yoğunluğu, orman yangını yoğunluğu ve NDVI'nin normalize değerlerinden. Güzelbahçe orta grupta; bileşenler aşağıdaki tabloda.</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-table renk-amber ikon-bosluk" aria-hidden="true"></i>Endeksin Bileşenleri (normalize)</h2>
+                    <div class="tablo-kaydir">
+                        <table class="veri-tablosu">
+                            <thead><tr><th scope="col">İlçe</th><th scope="col" class="sayi">Nüfus</th><th scope="col" class="sayi">Taşkın</th><th scope="col" class="sayi">Orman yangını</th><th scope="col" class="sayi">NDVI</th><th scope="col" class="sayi">Endeks</th><th scope="col">Grup</th></tr></thead>
+                            <tbody>
+                                <tr><td class="kaynak-adi">Konak</td><td class="sayi">0,607</td><td class="sayi">1,000</td><td class="sayi">0,208</td><td class="sayi">0,922</td><td class="sayi"><strong>0,684</strong></td><td>Yüksek</td></tr>
+                                <tr><td class="kaynak-adi">Bornova</td><td class="sayi">0,854</td><td class="sayi">0,512</td><td class="sayi">0,313</td><td class="sayi">0,429</td><td class="sayi"><strong>0,527</strong></td><td>Yüksek</td></tr>
+                                <tr><td class="kaynak-adi">Karşıyaka</td><td class="sayi">0,645</td><td class="sayi">0,348</td><td class="sayi">0,357</td><td class="sayi">0,602</td><td class="sayi"><strong>0,488</strong></td><td>Yüksek</td></tr>
+                                <tr><td class="kaynak-adi">Seferihisar</td><td class="sayi">0,096</td><td class="sayi">0,350</td><td class="sayi">0,123</td><td class="sayi">0,429</td><td class="sayi"><strong>0,250</strong></td><td>Yüksek</td></tr>
+                                <tr><td class="kaynak-adi">Güzelbahçe</td><td class="sayi">0,052</td><td class="sayi">0,043</td><td class="sayi">0,110</td><td class="sayi">0,210</td><td class="sayi"><strong>0,104</strong></td><td>Orta</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Değerler ve gruplar kaynakta verildiği gibidir.</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-temperature-low renk-su ikon-bosluk" aria-hidden="true"></i>Serin Ada, Ama Açık Kıyı</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-kirmizi"><div class="deger">38–46 °C</div><div class="etiket">İzmir'deki ısı adalarında sıcaklık</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">−%71</div><div class="etiket">Ağustos 2026 Ege yağışı, uzun yıllara göre (3,2 mm)</div></div>
+                        <div class="mini-ist ton-kirmizi"><div class="deger">29,5 °C</div><div class="etiket">İzmir Ağustos 2026 ortalaması · uzun yıllar 27,7 °C</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe, Narlıdere ve Balçova görece düşük yapılaşma ve geniş doğal bitki örtüsü sayesinde serin kalıyor; buna karşın Güzelbahçe kıyısı deniz seviyesi yükselmesi ve taşkına en çok maruz kesimler arasında (Cangüzel, 2022). Ağustos 2026 yağışı Ağustos 2025'e (7,9 mm) göre %60 daha az (MGM).</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-triangle-exclamation renk-amber ikon-bosluk" aria-hidden="true"></i>İzmir'de İklim Tehlikelerinin Risk Düzeyi</h2>
+                    <div class="risk-izgarasi">
+                        <div class="risk-ogesi ton-kirmizi"><span class="ro-duzey">Yüksek</span><strong>Aşırı sıcak ve sıcak hava dalgaları</strong><span class="ro-etki">Yaşlılar, çocuklar, kronik hastalar ve açık havada çalışanlar</span></div>
+                        <div class="risk-ogesi ton-kirmizi"><span class="ro-duzey">Yüksek</span><strong>Kentsel ısı adası</strong><span class="ro-etki">Geçirimsiz yüzeyleri yoğun merkez ilçeler</span></div>
+                        <div class="risk-ogesi ton-kirmizi"><span class="ro-duzey">Yüksek</span><strong>Kuraklık ve su stresi</strong><span class="ro-etki">Tarım üreticileri, kırsal yerleşimler, suya bağımlı sektörler</span></div>
+                        <div class="risk-ogesi ton-kirmizi"><span class="ro-duzey">Yüksek</span><strong>Ani ve yoğun yağış</strong><span class="ro-etki">Yoğun yapılaşmış alanlar ve altyapı sistemleri</span></div>
+                        <div class="risk-ogesi ton-kirmizi"><span class="ro-duzey">Yüksek</span><strong>Sel ve taşkın</strong><span class="ro-etki">Dere yatakları çevresindeki yerleşimler ve altyapı</span></div>
+                        <div class="risk-ogesi ton-kirmizi"><span class="ro-duzey">Yüksek</span><strong>Orman yangınları</strong><span class="ro-etki">Orman–yerleşim ara yüzündeki nüfus, tarım ve ormancılık</span></div>
+                        <div class="risk-ogesi ton-amber"><span class="ro-duzey">Orta</span><strong>Kıyı taşkını</strong><span class="ro-etki">Kıyı ilçeleri ve turizm; su basması ve erozyon</span></div>
+                        <div class="risk-ogesi ton-amber"><span class="ro-duzey">Orta</span><strong>Fırtına ve kuvvetli rüzgâr</strong><span class="ro-etki">Balıkçılık, turizm ve enerji altyapısı</span></div>
+                        <div class="risk-ogesi ton-sari"><span class="ro-duzey">Düşük–Orta</span><strong>Heyelan</strong><span class="ro-etki">Eğimli alanlarda yollar ve kırsal altyapı</span></div>
+                        <div class="risk-ogesi ton-yesil"><span class="ro-duzey">Düşük</span><strong>Aşırı soğuk</strong><span class="ro-etki">Yalnızca kırılgan gruplar için</span></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İzmir Büyükşehir Belediyesi (2025), il ölçeğinde değerlendirme; mahallelere doğrudan aktarılmamalıdır.</p>
+                </div>
+            </div>
+            <h2 class="ara-baslik">Güzelbahçe'de gözlenen türler</h2>
+            <div class="simge-izgarasi dort-sutun alt-bosluk-k">
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-dove" aria-hidden="true"></i></span><div><h3>Kumru</h3><span class="latince">Streptopelia decaocto</span></div></div>
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-feather" aria-hidden="true"></i></span><div><h3>Karabaşlı ötleğen</h3><span class="latince">Sylvia atricapilla</span></div></div>
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i></span><div><h3>Karabatak</h3><span class="latince">Phalacrocorax carbo</span></div></div>
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-shield" aria-hidden="true"></i></span><div><h3>Mahmuzlu tosbağa</h3><span class="latince">Testudo graeca</span></div></div>
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-dragon" aria-hidden="true"></i></span><div><h3>Akdeniz geko</h3><span class="latince">Hemidactylus turcicus</span></div></div>
+                <div class="simge-karti ton-pembe"><span class="sk-simge"><i class="fa-solid fa-bug" aria-hidden="true"></i></span><div><h3>Erik kırlangıçkuyruğu</h3><span class="latince">Iphiclides podalirius</span></div></div>
+                <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-tree" aria-hidden="true"></i></span><div><h3>Kocayemiş</h3><span class="latince">Arbutus unedo</span></div></div>
+                <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-spa" aria-hidden="true"></i></span><div><h3>Dağ lalesi</h3><span class="latince">Anemone coronaria</span></div></div>
+            </div>
+            <p class="kucuk-not alt-bosluk-k"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>iNaturalist (2026) gözlemleri; Güzelbahçe–Küçükkaya yolu ve Olivelo/Yelki. Payamlı ve Küçükkaya, Kızıldağlar "kadim üretim havzası"nda: 500 m'nin üstünde bağlar, altında zeytinlikler yoğunlaşıyor (Doğa Derneği, 2022). İzmir genelinde 158'i endemik 1.938 bitki taksonu ve 23 familyadan 54 memeli türü kayıtlı.</p>
+
+            <!-- 6. Afet -->
+            <div class="bolum-baslik" id="afet">
+                <div class="ikon ton-kirmizi" aria-hidden="true"><i class="fa-solid fa-house-crack" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Afet Riskleri ve Dayanıklılık Kapasitesi</h2>
+                    <p>İzmir'in tehlike profili, toplanma alanları ve sosyal kırılganlık · Fay hatları ve deprem için <a href="dogal-yapi.html#deprem">Doğal Yapı ve Afet</a></p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>İzmir'de Afet Tehlikelerinin Dağılımı (%)</h2>
+                    <div class="chart-container y-400"><canvas id="afetDagilimChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>AFAD ve İzmir AFAD (2021). İzmir Fayı karada yaklaşık 40 km uzunlukta; Pınarbaşı'ndan Üçkuyular'a, oradan Balçova ve Narlıdere üzerinden Güzelbahçe'ye uzanıyor (Sözbilir, 2008).</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-people-roof renk-yesil ikon-bosluk" aria-hidden="true"></i>Toplanma Alanları</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-yesil"><div class="deger">64</div><div class="etiket">toplanma alanı (2021)</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">189.851 m²</div><div class="etiket">toplam alan</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">75.940</div><div class="etiket">kişi kapasite</div></div>
+                        <div class="mini-ist ton-mavi"><div class="deger">4,99 m²</div><div class="etiket">kişi başına alan (2024)</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İzmir AFAD; İZPA (2025). Kişi başı alan temel standartları karşılıyor; ancak kıyı ve topoğrafik geçişlerdeki kırsal ve yarı kırsal cepler 500 m yürüme erişiminin dışında kalıyor. Güçlü yer hareketi istasyonu (3516) Belediye Kapalı Spor Salonu'nda.</p>
+                </div>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Toplanma Alanlarının Dağılımı</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/kd-toplanma-alanlari.jpg')">
+                        <img src="gorseller/kd-toplanma-alanlari.jpg" alt="Güzelbahçe'de afet toplanma alanlarının nokta gösterimi; noktalar kıyı ve otoyol çevresinde yoğunlaşıyor" width="1600" height="831" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; Google Earth Pro, 1:50.000.</p>
+                    </div>
+                </figure>
+                <div class="card chart-card">
+                    <h2>Sosyal Kırılganlık Faktör Endeksleri</h2>
+                    <div class="chart-container y-300"><canvas id="sosyalKirilganlikChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Ortakavak (2019), İzmir ilçeleri. 1. faktör: eğitim, hizmet sınıfı, kırsal nüfus, okuryazar olmayan, dul, boşanmış ve engelli nüfus · 2. faktör: hane büyüklüğü, 15 yaş altı, 65 yaş üstü, mülteci · 3. faktör: nüfus yoğunluğu, işsiz ve kadın nüfus · 4. faktör: aile sağlığı merkezi sayısı. Endeksin yorumu kaynak çalışmaya aittir.</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-cloud-bolt renk-kirmizi ikon-bosluk" aria-hidden="true"></i>Kayıtlı Meteorolojik Olaylar</h2>
+                    <div class="simge-izgarasi">
+                        <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-cloud-meatball" aria-hidden="true"></i></span><div><h3>11 Şubat 2021 dolusu</h3><p>Çeşme'de hortuma yol açan koşullar Urla ve Güzelbahçe dahil birçok ilçede yumurta büyüklüğünde doluya neden oldu.</p></div></div>
+                        <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-sun-plant-wilt" aria-hidden="true"></i></span><div><h3>1988–1994 kuraklığı</h3><p>İzmir'de kaydedilen en uzun kuraklık dönemi; 3–5 yıllık kurak dönemler görülebiliyor.</p></div></div>
+                        <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-fire-flame-curved" aria-hidden="true"></i></span><div><h3>18 Ağustos 2019</h3><p>Sıcak hava dalgasında Karabağlar'da başlayan yangın günlerce sürdü; kentin kayıtlı en büyük orman yangınlarından.</p></div></div>
+                        <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-mountain" aria-hidden="true"></i></span><div><h3>Su erozyonu</h3><p>İzmir'de su erozyonunun %63,15'i tarım arazilerinde, %24,01'i meralarda, %5,25'i ormanlarda.</p></div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İzmir 2. Bölge Meteoroloji Müdürlüğü (2024); Tarım ve Orman Bakanlığı, Çölleşme ve Erozyonla Mücadele Genel Müdürlüğü.</p>
+                </div>
+            </div>
+
+            <!-- 7. Yangın -->
+            <div class="bolum-baslik" id="yangin">
+                <div class="ikon ton-pembe" aria-hidden="true"><i class="fa-solid fa-fire" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Orman Yangını ve Kentsel Yangın</h2>
+                    <p>Orman alanları güneyde ve doğuda, yerleşimler kuzeydeki kıyı bandında: ara yüz önceliklidir</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Müdahale Edilen Kentsel Yangınlar, 2023</h2>
+                    <div class="chart-container y-300"><canvas id="yanginChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İzmir Büyükşehir Belediyesi İtfaiye Dairesi (2024); kaynaktaki karşılaştırma ilçeleri.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-tree-city renk-pembe ikon-bosluk" aria-hidden="true"></i>Orman–Yerleşim Ara Yüzü</h2>
+                    <p class="kart-aciklama">İlçede yüksek ve çok yüksek orman yangını riskli alanlar bulunuyor (İBB ve İZKA yangın risk analizi). Yerel maruziyet; yapıların konumuna, bitki örtüsünün sürekliliğine, yol erişimine ve müdahale kapasitesine bağlı. Kentsel yangınlar orman yangını geçmişinden ayrı değerlendirilmeli, olası zincirleme kesintiler üzerinden ilişkilendirilmeli.</p>
+                    <div class="etiket-listesi"><span>Tahliye alternatifleri</span><span>İtfaiye erişimi</span><span>Bitki örtüsü yönetimi</span><span>Ekolojik ve iklimsel işlevlerin korunması</span></div>
+                </div>
+            </div>
+
+            <!-- 8. Öncelikler -->
+            <div class="bolum-baslik" id="oncelikler">
+                <div class="ikon ton-mor" aria-hidden="true"><i class="fa-solid fa-list-check" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Dayanıklılık İçin Planlama Öncelikleri</h2>
+                    <p>Raporun sistem sentezlerinden: çevre koruma, altyapı sürekliliği, afet riskinin azaltılması ve mekânsal planlama birlikte ele alınmalı</p>
+                </div>
+            </div>
+            <div class="simge-izgarasi alt-bosluk-k">
+                <div class="simge-karti ton-su"><span class="sk-simge"><i class="fa-solid fa-water" aria-hidden="true"></i></span><div><h3>İlçe su bütçesi</h3><p>Kendi kendine yeterlilik ya da açık iddiasından önce su dengesi hesaplanmalı.</p></div></div>
+                <div class="simge-karti ton-sari"><span class="sk-simge"><i class="fa-solid fa-car-battery" aria-hidden="true"></i></span><div><h3>Kritik tesislerde yedek enerji</h3><p>Pompa istasyonları ve acil durum tesisleri için kesinti senaryoları.</p></div></div>
+                <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span><div><h3>Üretken arazinin korunması</h3><p>Tarımı güvenilir su varlığıyla uyumlu hâle getirmek.</p></div></div>
+                <div class="simge-karti ton-turuncu"><span class="sk-simge"><i class="fa-solid fa-route" aria-hidden="true"></i></span><div><h3>İzlenebilir atık akışları</h3><p>Yedek varış noktaları ve kaynakta ayrıştırma.</p></div></div>
+                <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-person-shelter" aria-hidden="true"></i></span><div><h3>İkincil acil durum düğümleri</h3><p>500 m erişimin dışındaki kırsal ve yarı kırsal ceplerde.</p></div></div>
+                <div class="simge-karti ton-pembe"><span class="sk-simge"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></span><div><h3>Tahliye ve itfaiye erişimi</h3><p>Orman–yerleşim ara yüzünde alternatif güzergâhlar.</p></div></div>
+                <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-temperature-low" aria-hidden="true"></i></span><div><h3>Ekolojik serinletme</h3><p>Yeşil alanların ve dere koridorlarının sürekliliği.</p></div></div>
+                <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-users-viewfinder" aria-hidden="true"></i></span><div><h3>Katılım ve şeffaflık</h3><p>İstenmeyen arazi kullanımlarında doğrulanmış etki kanıtı ve etkilenen toplulukların katılımı.</p></div></div>
+            </div>
+
+            <div class="kaynak-notu">
+                <p>Veri Kaynağı: Araştırma grubunun "Crises, Vulnerabilities, Disasters and Resilience" raporu (Kasım 2026) · İZSU · DSİ 2. Bölge Müdürlüğü · SYGM Küçük Menderes Havza Yönetim ve Kuraklık Yönetim Planları · EİE GEPA · İBB SECAP (2025) · İZKA (2021) · TÜİK · Almas (2013), Emre (2014) · İzmir AFAD (2021, 2025) · İZPA (2025) · Güzelbahçe Belediyesi 2025 faaliyet raporu · TMMOB ÇMO İzmir Şubesi (2019, 2024) · Çevre, Şehircilik ve İklim Değişikliği Bakanlığı · MGM · Cangüzel (2022) · Ortakavak (2019) · İBB İtfaiye Dairesi (2024) · iNaturalist · Doğa Derneği (2022) · Saha görüşmeleri (Eylül–Ekim 2026)</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/kriz-dayaniklilik.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/arama.js"></script>
+</body>
+</html>

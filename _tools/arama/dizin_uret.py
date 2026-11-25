@@ -10,8 +10,9 @@ os.chdir(kok)
 # Yan menüdeki adlar ve simgeler (sıra = gösterim sırası)
 SAYFALAR = [
     ('index.html', 'Genel Bakış', 'fa-house'), ('kavramsal.html', 'Diyagramlar', 'fa-network-wired'),
+    ('kent-tarihi.html', 'Kent Tarihi ve Kimlik', 'fa-landmark'), ('mekansal-yapi.html', 'Mekânsal Yapı', 'fa-map-location-dot'),
     ('ekonomi.html', 'Ekonomik Yapı', 'fa-chart-line'), ('dogal-yapi.html', 'Doğal Yapı ve Afet', 'fa-mountain'),
-    ('havza-koruma.html', 'Havza ve Koruma', 'fa-leaf'), ('havalimani.html', 'Adnan Menderes', 'fa-plane-departure'),
+    ('havza-koruma.html', 'Havza ve Koruma', 'fa-leaf'), ('kriz-dayaniklilik.html', 'Kriz ve Dayanıklılık', 'fa-shield-heart'), ('havalimani.html', 'Adnan Menderes', 'fa-plane-departure'),
     ('eshot.html', 'ESHOT', 'fa-bus'), ('dolmus.html', 'Dolmuş', 'fa-van-shuttle'), ('tramvay.html', 'Tramvay', 'fa-train-tram'),
     ('izban.html', 'İZBAN', 'fa-train'), ('vapur.html', 'Vapur (İzdeniz)', 'fa-ship'), ('metro.html', 'İzmir Metro', 'fa-subway'),
     ('karsilastirma.html', 'Ulaşım Karşılaştırması', 'fa-chart-pie'), ('kgm.html', 'KGM Karayolları', 'fa-road'),

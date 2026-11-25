@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mekânsal Yapı | İzmir Güzelbahçe Veri Portalı</title>
+    <meta name="description" content="Güzelbahçe'nin arazi deseni, 2002–2026 makroformu, mahalle yapısı, kırsal alanlar, otoyolun biçimlendirdiği morfoloji ve sosyal donatılar.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/tema.js"></script>
+    <script src="js/dil-en.js"></script>
+    <script src="js/dil.js"></script>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230f172a%22/%3E%3Cpath d=%22M7 23h18M9 23V13l7-4 7 4v10M13 23v-5h6v5%22 stroke=%22%2338bdf8%22 stroke-width=%222%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <a href="index.html" class="brand" aria-label="İzmir Güzelbahçe Veri Portalı – Genel Bakış"><span class="marka-metin"><span class="marka-ust">İzmir Güzelbahçe</span><span class="marka-ad">Veri Portalı</span></span></a>
+        <nav aria-label="Sayfalar">
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="index.html" class="nav-link">
+                    <i class="fa-solid fa-house" aria-hidden="true"></i>
+                    Genel Bakış
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kavramsal.html" class="nav-link">
+                    <i class="fa-solid fa-network-wired" aria-hidden="true"></i>
+                    Diyagramlar
+                </a>
+            </li>
+            <li class="nav-grup">İlçe Profili</li>
+            <li class="nav-item">
+                <a href="kent-tarihi.html" class="nav-link">
+                    <i class="fa-solid fa-landmark" aria-hidden="true"></i>
+                    Kent Tarihi ve Kimlik
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="mekansal-yapi.html" class="nav-link active" aria-current="page">
+                    <i class="fa-solid fa-map-location-dot" aria-hidden="true"></i>
+                    Mekânsal Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="ekonomi.html" class="nav-link">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    Ekonomik Yapı
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dogal-yapi.html" class="nav-link">
+                    <i class="fa-solid fa-mountain" aria-hidden="true"></i>
+                    Doğal Yapı ve Afet
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="havza-koruma.html" class="nav-link">
+                    <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+                    Havza ve Koruma
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kriz-dayaniklilik.html" class="nav-link">
+                    <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
+                    Kriz ve Dayanıklılık
+                </a>
+            </li>
+            <li class="nav-grup">Ulaşım</li>
+            <li class="nav-item">
+                <a href="havalimani.html" class="nav-link">
+                    <i class="fa-solid fa-plane-departure" aria-hidden="true"></i>
+                    Adnan Menderes
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="eshot.html" class="nav-link">
+                    <i class="fa-solid fa-bus" aria-hidden="true"></i>
+                    ESHOT
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="dolmus.html" class="nav-link">
+                    <i class="fa-solid fa-van-shuttle" aria-hidden="true"></i>
+                    Dolmuş
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="tramvay.html" class="nav-link">
+                    <i class="fa-solid fa-train-tram" aria-hidden="true"></i>
+                    Tramvay
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="izban.html" class="nav-link">
+                    <i class="fa-solid fa-train" aria-hidden="true"></i>
+                    İZBAN
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="vapur.html" class="nav-link">
+                    <i class="fa-solid fa-ship" aria-hidden="true"></i>
+                    Vapur (İzdeniz)
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="metro.html" class="nav-link">
+                    <i class="fa-solid fa-subway" aria-hidden="true"></i>
+                    İzmir Metro
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="karsilastirma.html" class="nav-link">
+                    <i class="fa-solid fa-chart-pie" aria-hidden="true"></i>
+                    Ulaşım Karşılaştırması
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kgm.html" class="nav-link">
+                    <i class="fa-solid fa-road" aria-hidden="true"></i>
+                    KGM Karayolları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="otoparklar.html" class="nav-link">
+                    <i class="fa-solid fa-square-parking" aria-hidden="true"></i>
+                    Otoparklar
+                </a>
+            </li>
+            <li class="nav-grup">Altyapı</li>
+            <li class="nav-item">
+                <a href="izsu.html" class="nav-link">
+                    <i class="fa-solid fa-droplet" aria-hidden="true"></i>
+                    İZSU Su Kaynakları
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="atiksu.html" class="nav-link">
+                    <i class="fa-solid fa-house-flood-water" aria-hidden="true"></i>
+                    Atık Su
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="kati-atik.html" class="nav-link">
+                    <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+                    Katı Atık
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="elektrik.html" class="nav-link">
+                    <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+                    Elektrik Altyapısı
+                </a>
+            </li>
+            <li class="nav-grup">3B ve Senaryo</li>
+            <li class="nav-item">
+                <a href="3b.html" class="nav-link">
+                    <i class="fa-solid fa-cube" aria-hidden="true"></i>
+                    3B Modeller <span class="rozet-yeni">Yeni</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="senaryo.html" class="nav-link" target="_blank" rel="noopener">
+                    <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                    Senaryo Laboratuvarı <span class="rozet-deneme">Deneme</span>
+                </a>
+            </li>
+            <li class="nav-grup">Planlama</li>
+            <li class="nav-item">
+                <a href="planlanan-projeler.html" class="nav-link">
+                    <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                    Planlanan Projeler
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="isbirlikleri.html" class="nav-link">
+                    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+                    İşbirliklerimiz
+                </a>
+            </li>
+        </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="icerik" tabindex="-1">
+        <div id="mekansal-yapi" class="tab-pane active">
+            <header>
+                <h1>Mekânsal Yapı ve Makroform</h1>
+                <p class="subtitle">Arazi deseni, kıyı bandı ve iç akslar boyunca büyüme, mahalle yapısı, kırsal alanlar, otoyolun biçimlendirdiği morfoloji ve sosyal donatılar</p>
+            </header>
+
+            <div class="stats-row dar-kartlar">
+                <div class="stat-card ton-mor">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-city" aria-hidden="true"></i></div>
+                    <div class="stat-label">Kentleşme Oranı</div>
+                    <div class="stat-value">%92</div>
+                    <div class="stat-change ton-mor">Nüfus sınıflamasına göre; yapılaşmış alan payı değil (İZKA, 2021)</div>
+                </div>
+                <div class="stat-card ton-amber">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-expand" aria-hidden="true"></i></div>
+                    <div class="stat-label">Kentsel Doku, 1963–2005</div>
+                    <div class="stat-value">730 ha</div>
+                    <div class="stat-change ton-amber">1963'te 142,59 ha · +%411,96</div>
+                </div>
+                <div class="stat-card ton-yesil">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-people-arrows" aria-hidden="true"></i></div>
+                    <div class="stat-label">Yoğunluk Farkı</div>
+                    <div class="stat-value">44,6 kat</div>
+                    <div class="stat-change ton-yesil">Seyrek kentsel 2.006 · yakın kırsal 45 kişi/km²</div>
+                </div>
+                <div class="stat-card ton-mavi">
+                    <div class="stat-ikon" aria-hidden="true"><i class="fa-solid fa-file-signature" aria-hidden="true"></i></div>
+                    <div class="stat-label">Yeni Yapı İzni, 2025</div>
+                    <div class="stat-value">156</div>
+                    <div class="stat-change ton-mavi">214 iskân belgesi · 15 plan değişikliği incelendi</div>
+                </div>
+            </div>
+
+            <nav class="sayfa-ici-menu" aria-label="Bu sayfadaki bölümler">
+                <a href="#arazi" class="ton-yesil"><i class="fa-solid fa-map" aria-hidden="true"></i>Arazi deseni</a>
+                <a href="#makroform" class="ton-amber"><i class="fa-solid fa-draw-polygon" aria-hidden="true"></i>Makroform</a>
+                <a href="#mahalleler" class="ton-mor"><i class="fa-solid fa-house-user" aria-hidden="true"></i>Mahalleler</a>
+                <a href="#kirsal" class="ton-turuncu"><i class="fa-solid fa-tractor" aria-hidden="true"></i>Kırsal yapı</a>
+                <a href="#morfoloji" class="ton-kirmizi"><i class="fa-solid fa-road" aria-hidden="true"></i>Morfoloji</a>
+                <a href="#donatilar" class="ton-mavi"><i class="fa-solid fa-school" aria-hidden="true"></i>Sosyal donatı</a>
+            </nav>
+
+            <!-- 1. Arazi deseni -->
+            <div class="bolum-baslik" id="arazi">
+                <div class="ikon ton-yesil" aria-hidden="true"><i class="fa-solid fa-map" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Genel Arazi Deseni</h2>
+                    <p>Yerleşim, tarım ve doğal alanların birlikte oluşturduğu desen · Mevcut kullanım ile plan kararları ayrı tutuldu</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-map" aria-hidden="true"></i> Kavramsal Arazi Kullanım Şeması</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/mk-kavramsal-arazi.jpg')">
+                        <img src="gorseller/mk-kavramsal-arazi.jpg" alt="Güzelbahçe kavramsal arazi kullanım şeması: konut alanları, ticari koridorlar, tarım alanları, doğal bitki örtüsü, küçük sanayi ve ana ulaşım aksları" width="1448" height="1086" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu. Kavramsal şemadır; sınırlar gösterge niteliğindedir ve parsel tabanlı değildir.</p>
+                    </div>
+                </figure>
+                <div class="card chart-card">
+                    <h2>Yarımada Stratejisinde Arazi Kategorileri (ha)</h2>
+                    <div class="chart-container y-300"><canvas id="araziKategoriChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İZKA (2014), s. 90, Tablo 2.31; paylar 8.560,76 ha toplamına göre <span class="not-rozeti hesap">hesap</span>. 5403 sayılı Kanun kapsamındaki arazi, fiilen işlenen tarım alanıyla eş tutulmamalıdır.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-seedling renk-yesil ikon-bosluk" aria-hidden="true"></i>Arazi Envanteri, Aralık 2025</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-yesil"><div class="deger">2.498 ha</div><div class="etiket">orman ve fundalık · %30,26</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">928,70 ha</div><div class="etiket">işlenebilir arazi · %11,25</div></div>
+                        <div class="mini-ist ton-sari"><div class="deger">102,92 ha</div><div class="etiket">çayır ve mera · %1,25</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İzmir İl Tarım ve Orman Müdürlüğü kuruluş brifingi; paylar 8.256 ha ilçe toplamına göre <span class="not-rozeti hesap">hesap</span>. İki kaynak farklı toplam alan ve sınıflama kullandığından aradaki farklar arazi kaybı olarak yorumlanmadı.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-file-lines renk-mavi ikon-bosluk" aria-hidden="true"></i>Belediye Kayıtları, 2025</h2>
+                    <div class="tablo-kaydir">
+                        <table class="veri-tablosu">
+                            <thead><tr><th scope="col">Gösterge</th><th scope="col" class="sayi">Değer</th><th scope="col">Yorum</th></tr></thead>
+                            <tbody>
+                                <tr><td class="kaynak-adi">Yeni yapı ruhsatı</td><td class="sayi">156</td><td>Ruhsat; tamamlanmış bina değil</td></tr>
+                                <tr><td class="kaynak-adi">Yapı kullanma izni</td><td class="sayi">214</td><td>Belge; konut sayısı değil</td></tr>
+                                <tr><td class="kaynak-adi">Mecliste incelenen plan</td><td class="sayi">15</td><td>Plan değişikliği</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe Belediyesi 2025 faaliyet raporu. Çamlı uygulama imar planı, İBB Meclisi'nin 16 Ağustos 2024 tarihli 830 sayılı kararıyla değişikliklerle onaylandı.</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-arrows-left-right renk-amber ikon-bosluk" aria-hidden="true"></i>Kıyıdan İç Kesime Dört Karakter Alanı</h2>
+                    <div class="karakter-seridi">
+                        <div class="ton-su"><span class="ks-sira">1 · Kıyı</span><h3>Kıyı ve mevcut kentsel doku</h3><p>Konut, hizmet ve ticaret</p><div class="ks-yorum">Mevcut kullanımların yoğunlaşması</div></div>
+                        <div class="ton-mor"><span class="ks-sira">2 · Geçiş</span><h3>Yelki–Yaka geçiş kuşağı</h3><p>Yeni konut gelişimi ve karma kullanım</p><div class="ks-yorum">Kentsel genişleme ve dönüşüm baskısı</div></div>
+                        <div class="ton-amber"><span class="ks-sira">3 · Kırsal</span><h3>Çamlı–Payamlı–Küçükkaya</h3><p>Kırsal yerleşim ve üretim</p><div class="ks-yorum">Tarım arazisinin sürekliliği</div></div>
+                        <div class="ton-yesil"><span class="ks-sira">4 · Yamaçlar</span><h3>Eğimli iç alanlar</h3><p>Doğal bitki örtüsü ve zeytinlikler</p><div class="ks-yorum">Ekolojik eşikler ve parçalanma riski</div></div>
+                    </div>
+                    <div class="ks-ok" aria-hidden="true"><span>Körfez</span><span></span><span>İç kesim</span></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubunun analitik sentezi; kesin mahalle, imar ya da mülkiyet sınırı değildir.</p>
+                </div>
+            </div>
+
+            <!-- 2. Makroform -->
+            <div class="bolum-baslik" id="makroform">
+                <div class="ikon ton-amber" aria-hidden="true"><i class="fa-solid fa-draw-polygon" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Kentsel Makroform, 2002–2026</h2>
+                    <p>Kıyı bandı boyunca süreklilik, Yelki ve Kahramandere çevresinde iç kesime yayılan parçalı büyüme</p>
+                </div>
+            </div>
+            <div class="zaman-kaydirici alt-bosluk-k" id="yerlesimKaydirici">
+                <div class="zk-sahne" tabindex="0" role="button" aria-label="Görüntüyü büyüt">
+                    <img class="etkin" src="gorseller/mk-yerlesim-2002.jpg" alt="Güzelbahçe 2002 yorumlanmış yerleşim alanı" width="1534" height="863" data-yil="2002">
+                    <img src="gorseller/mk-yerlesim-2006.jpg" alt="Güzelbahçe 2006 yorumlanmış yerleşim alanı" width="1534" height="863" data-yil="2006" loading="lazy">
+                    <img src="gorseller/mk-yerlesim-2012.jpg" alt="Güzelbahçe 2012 yorumlanmış yerleşim alanı" width="1534" height="863" data-yil="2012" loading="lazy">
+                    <img src="gorseller/mk-yerlesim-2016.jpg" alt="Güzelbahçe 2016 yorumlanmış yerleşim alanı" width="1534" height="863" data-yil="2016" loading="lazy">
+                    <img src="gorseller/mk-yerlesim-2021.jpg" alt="Güzelbahçe 2021 yorumlanmış yerleşim alanı" width="1534" height="863" data-yil="2021" loading="lazy">
+                    <img src="gorseller/mk-yerlesim-2026.jpg" alt="Güzelbahçe 2026 yorumlanmış yerleşim alanı" width="1534" height="863" data-yil="2026" loading="lazy">
+                    <span class="zk-yil" aria-live="polite">2002</span>
+                </div>
+                <div class="zk-denetim">
+                    <button type="button" class="zk-oynat" aria-label="Oynat"><i class="fa-solid fa-play" aria-hidden="true"></i></button>
+                    <div class="zk-ray">
+                        <input type="range" min="0" max="5" step="1" value="0" aria-label="Yıl seçimi" aria-valuetext="2002">
+                        <div class="zk-yillar" aria-hidden="true"><span class="etkin">2002</span><span>2006</span><span>2012</span><span>2016</span><span>2021</span><span>2026</span></div>
+                    </div>
+                </div>
+                <p class="kucuk-not ust-bosluk-k"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; Google Earth görüntülerinden görsel yorum. Kadastral ya da kesin arazi kullanım sınırı değildir; görüntü tarihleri, ölçek ve sayısallaştırma tutarlılığı doğrulanmadan alan (ha) ve büyüme hızı hesaplanmadı.</p>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Kentsel Doku ve Parçalanma, 1963–2005</h2>
+                    <div class="chart-container y-300"><canvas id="kentselDokuChart"></canvas></div>
+                    <div class="mini-istatistik ust-bosluk-k">
+                        <div class="mini-ist ton-amber"><div class="deger">7,92 → 3,70 ha</div><div class="etiket">ortalama kentsel leke büyüklüğü</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">−1.954,51 ha</div><div class="etiket">maki alanı, 1963–2005</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Coşkun Hepcan ve diğ. (2015), s. 359, Tablo 5. Lekeler arazi örtüsü lekeleridir, kadastro parseli değildir. Makideki azalma tümüyle kentleşmeye dönüştüğünü göstermez.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Tarım ve Zeytinlik Payları (%)</h2>
+                    <div class="chart-container y-300"><canvas id="peyzajPayChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Akademik çalışmanın sınıflamasındaki paylar (Coşkun Hepcan ve diğ., 2015); 2026 kullanımı ya da yeni ölçüm değildir.</p>
+                </div>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Gelişim Katmanları ve Akslar, 2002–2017</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/mk-gelisim-katmanlari.jpg')">
+                        <img src="gorseller/mk-gelisim-katmanlari.jpg" alt="2002, 2005, 2008, 2011, 2014 ve 2017 gelişim katmanları ile ana arter yol; kıyıdan Yelki'ye uzanan büyüme" width="980" height="686" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Partigöç ve Tarhan (2018), Şekil 6, s. 409; doi:10.5194/isprs-archives-XLII-3-W4-405-2018; CC BY 4.0. Kıyı, Yelki, Kahramandere, Yaka ve Maltepe çevresinde gelişim.</p>
+                    </div>
+                </figure>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-clone" aria-hidden="true"></i> Yerleşim Alanlarının Karşılaştırması, 2002–2026</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/mk-yerlesim-bilesik.jpg')">
+                        <img src="gorseller/mk-yerlesim-bilesik.jpg" alt="2002, 2006, 2012, 2016, 2021 ve 2026 yerleşim alanlarının farklı renklerle üst üste gösterildiği bileşik harita" width="1600" height="1111" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu. Renkler gözlem yıllarını ayırır; çakışmalar kesin yapım tarihini ya da yıllık alan değişimini göstermez.</p>
+                    </div>
+                </figure>
+            </div>
+
+            <!-- 3. Mahalleler -->
+            <div class="bolum-baslik" id="mahalleler">
+                <div class="ikon ton-mor" aria-hidden="true"><i class="fa-solid fa-house-user" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Mahalle Yapısı</h2>
+                    <p>12 mahalle: 8 seyrek kentsel, 4 yakın kırsal (İZKA, 2021) · Mahalle nüfusları ve plan notlarındaki parsel koşulları</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Mahallelere Göre Nüfus, 2023</h2>
+                    <div class="chart-container y-400"><canvas id="mahalleNufusChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe Belediyesi SAGEP raporu, s. 31–32; toplam 38.044 kişi. Renkler İZKA (2021) kentsel–kırsal sınıflamasını gösterir.</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-people-arrows renk-mor ikon-bosluk" aria-hidden="true"></i>Kentsel ve Kırsal Mahalleler</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-mor"><div class="deger">2.006</div><div class="etiket">kişi/km², seyrek kentsel ortalama</div></div>
+                        <div class="mini-ist ton-yesil"><div class="deger">45</div><div class="etiket">kişi/km², yakın kırsal ortalama</div></div>
+                    </div>
+                    <h3 class="kart-alt-baslik">Seyrek kentsel (8)</h3>
+                    <div class="etiket-listesi"><span>Atatürk</span><span>Çelebi</span><span>Kahramandere</span><span>Maltepe</span><span>Mustafa Kemal Paşa</span><span>Siteler</span><span>Yalı</span><span>Yelki</span></div>
+                    <h3 class="kart-alt-baslik">Yakın kırsal (4)</h3>
+                    <div class="etiket-listesi"><span>Çamlı</span><span>Küçükkaya</span><span>Payamlı</span><span>Yaka</span></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>İZKA (2021), s. 103. Yoğun kentsel ve uzak kırsal sınıfta mahalle yok. Çalışmanın %92 kentleşme oranı nüfus sınıflamasına dayanır, yapılaşmış alan payı değildir.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Plan Notlarında En Küçük Parsel Büyüklüğü (m²)</h2>
+                    <div class="chart-container y-300"><canvas id="parselChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe Belediyesi genel plan lejant notları, s. 4, 12–13. Parsel büyüklüğü tek başına yoğunluğu belirlemez; TAKS, KAKS ve diğer koşullar da gerekir.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Kırsal Plan Alanlarında Yapılaşma Koşulları</h2>
+                    <div class="chart-container y-300"><canvas id="taksKaksChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Mevzii imar planı notları. İlk set ikincinin 3 katıdır <span class="not-rozeti hesap">hesap</span>; bu fark gözlenen yoğunluğu değil, planlanan koşulları gösterir.</p>
+                </div>
+            </div>
+
+            <!-- 4. Kırsal yapı -->
+            <div class="bolum-baslik" id="kirsal">
+                <div class="ikon ton-turuncu" aria-hidden="true"><i class="fa-solid fa-tractor" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Kırsal Alanların Mekânsal Yapısı</h2>
+                    <p>Yerleşim dokusu, üretim alanları ve fiziksel kısıtlar · Zeytin, mandalina, kesme çiçek ve hayvancılık</p>
+                </div>
+            </div>
+            <div class="mini-istatistik genis alti-li alt-bosluk-k">
+                <div class="mini-ist ton-turuncu"><div class="deger">426</div><div class="etiket">büyükbaş, 2024</div></div>
+                <div class="mini-ist ton-turuncu"><div class="deger">14.052</div><div class="etiket">koyun ve keçi, 2024</div></div>
+                <div class="mini-ist ton-amber"><div class="deger">21.745</div><div class="etiket">kanatlı, 2024</div></div>
+                <div class="mini-ist ton-sari"><div class="deger">2.796</div><div class="etiket">arılı kovan, 2024</div></div>
+                <div class="mini-ist ton-su"><div class="deger">3 / 119</div><div class="etiket">su ürünleri kooperatifi / üye</div></div>
+                <div class="mini-ist ton-yesil"><div class="deger">2 / 118</div><div class="etiket">tarımsal kalkınma kooperatifi / üye</div></div>
+            </div>
+            <div class="card alt-bosluk-k">
+                <h2><i class="fa-solid fa-triangle-exclamation renk-turuncu ikon-bosluk" aria-hidden="true"></i>Plan Notlarındaki Fiziksel Kısıtlar</h2>
+                <div class="tablo-kaydir">
+                    <table class="veri-tablosu">
+                        <thead><tr><th scope="col">Plan alanı</th><th scope="col">Belgelenen koşul</th><th scope="col">Mekânsal sonuç</th></tr></thead>
+                        <tbody>
+                            <tr><td class="kaynak-adi">Çamlı 101–104 adalar</td><td>Kocadere yatağı korunur; yapı üst şevden en az 5 m çekilir</td><td>Dere koridoru yapı alanını sınırlar</td></tr>
+                            <tr><td class="kaynak-adi">Çamlı 185–186 parseller</td><td>Enerji hattı güvenlik ve salınım koridorunda yapı yapılmaz</td><td>Doğrusal altyapı yapı yerini kısıtlar</td></tr>
+                            <tr><td class="kaynak-adi">Küçükkaya 374 parsel</td><td>Çamlı Barajı havzası ve kısa mesafeli koruma alanıyla ilişki</td><td>Su koruma koşulları kullanımı sınırlar</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe Belediyesi mevzii imar planı notları. Koşullar yalnızca adı geçen plan alanlarına özgüdür; ilçe geneli koruma sınırı değildir. Hayvan ve kooperatif sayıları: İzmir İl Tarım ve Orman Müdürlüğü (2025).</p>
+            </div>
+
+            <!-- 5. Morfoloji -->
+            <div class="bolum-baslik" id="morfoloji">
+                <div class="ikon ton-kirmizi" aria-hidden="true"><i class="fa-solid fa-road" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Otoyol, Sıçramalı Gelişme ve Kapalı Siteler</h2>
+                    <p>İzmir–Çeşme Otoyolu makroformu biçimlendiren temel "mekânsal eşik" · Araştırma grubunun morfoloji analizi</p>
+                </div>
+            </div>
+            <div class="akis alt-bosluk-k">
+                <div class="akis-adim ton-amber"><span class="ak-ikon"><i class="fa-solid fa-umbrella-beach" aria-hidden="true"></i></span><span class="ak-ust">Otoyol öncesi</span><span class="ak-deger">Sayfiye karakteri</span><span class="ak-alt">Dar yerel yollar; yazlık konutlar ve küçük ölçekli tarım</span></div>
+                <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="akis-adim ton-kirmizi"><span class="ak-ikon"><i class="fa-solid fa-road" aria-hidden="true"></i></span><span class="ak-ust">1984–1997</span><span class="ak-deger">İzmir–Çeşme Otoyolu</span><span class="ak-alt">Kent dokusunu ikiye bölen ama gelişmeyi hızlandıran koridor</span></div>
+                <div class="akis-ok" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="akis-adim ton-mor"><span class="ak-ikon"><i class="fa-solid fa-car" aria-hidden="true"></i></span><span class="ak-ust">Otoyol sonrası</span><span class="ak-deger">Kalıcı konut</span><span class="ak-alt">Kısalan yolculuk süresi; Narlıdere'den Urla'ya otomobile bağımlı sürekli saçaklanma</span></div>
+            </div>
+            <div class="izgara-iki">
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-road" aria-hidden="true"></i> Otoyol Çevresindeki Gelişme</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/mk-otoyol-etki.jpg')">
+                        <img src="gorseller/mk-otoyol-etki.jpg" alt="İzmir–Çeşme Otoyolu sarı çizgiyle, otoyol çevresindeki gelişme turuncu alanla, güney yamaçlardaki saçaklanma kırmızı alanlarla işaretli uydu görüntüsü" width="1377" height="887" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; Google Earth. Sarı: otoyol; turuncu: otoyol çevresindeki gelişme; kırmızı: kentsel saçaklanma.</p>
+                    </div>
+                </figure>
+                <div class="card">
+                    <h2><i class="fa-solid fa-diagram-project renk-kirmizi ikon-bosluk" aria-hidden="true"></i>Morfolojinin Üç Örüntüsü</h2>
+                    <div class="simge-izgarasi">
+                        <div class="simge-karti ton-amber"><span class="sk-simge"><i class="fa-solid fa-circle-nodes" aria-hidden="true"></i></span><div><h3>Düğüm odaklı yoğunlaşma</h3><p>Kahramandere ve Yaka, otoyol bağlantısına doğrudan erişim nedeniyle lüks konut, özel okul ve ticaretin toplandığı yeni bir alt merkeze dönüştü.</p></div></div>
+                        <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-shuffle" aria-hidden="true"></i></span><div><h3>Sıçramalı gelişme</h3><p>Güney ve güneybatı yamaçlarında aradaki orman ve tarım alanlarını atlayan parçalı yerleşimler; otomobil bağımlılığını ve altyapı maliyetini artırır, ekolojik koridorları böler.</p></div></div>
+                        <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span><div><h3>Kapalı siteler</h3><p>Yelki çevresinde duvar, giriş kontrolü ve özel güvenlikle kentten ayrılan "adacıklar": fiziksel ve sosyo-mekânsal ayrışma.</p></div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Harvey, Şengül, Çilingir ile Velibeyoğlu ve Saygı (2006) çerçevesinde araştırma grubunun yorumu.</p>
+                </div>
+            </div>
+
+            <!-- 6. Sosyal donatı -->
+            <div class="bolum-baslik" id="donatilar">
+                <div class="ikon ton-mavi" aria-hidden="true"><i class="fa-solid fa-school" aria-hidden="true"></i></div>
+                <div>
+                    <h2>Sosyal Donatı Alanları</h2>
+                    <p>Eğitim ve sağlık tesisleri, plan koşulları ve geniş alan gerektiren kullanımlar</p>
+                </div>
+            </div>
+            <div class="izgara-iki">
+                <div class="card chart-card">
+                    <h2>Okul Türleri: Resmî ve Özel</h2>
+                    <div class="chart-container y-300"><canvas id="okulTurChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe İlçe Millî Eğitim Müdürlüğü 2024–2028 Stratejik Planı, Tablo 11–12; anasınıfları (7 resmî, 10 özel) hariç.</p>
+                </div>
+                <div class="card chart-card">
+                    <h2>Listelenen Kurumlarda Öğretmen Sayısı</h2>
+                    <div class="chart-container y-300"><canvas id="ogretmenChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>19 resmî ve 29 özel kurum; toplam 1.524 öğretmen <span class="not-rozeti hesap">hesap</span>. Kaynak: İlçe MEM kurum ve öğretmen envanteri.</p>
+                </div>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-circle-dot" aria-hidden="true"></i> Eğitim Kurumlarının Birleşik Kapsama Şeması</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/mk-egitim-kapsama.jpg')">
+                        <img src="gorseller/mk-egitim-kapsama.jpg" alt="Anaokulu, ilkokul, ortaokul ve liselerin 500 m, 1.000 m ve 2.500 m düz çizgi kapsama daireleri" width="1800" height="1273" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; 37 okul. İlkokul 500 m, ortaokul 1.000 m, lise 2.500 m yarıçap. Şematik düz çizgi kapsamadır; gerçek yürüme erişimini ya da yolculuk süresini ölçmez.</p>
+                    </div>
+                </figure>
+                <figure class="galeri-karti">
+                    <figcaption><i class="fa-solid fa-fire" aria-hidden="true"></i> Okullar ve Kentleşme Etkisi</figcaption>
+                    <div class="interactive-image-container" onclick="openImageModal('gorseller/mk-okul-yogunluk.jpg')">
+                        <img src="gorseller/mk-okul-yogunluk.jpg" alt="Resmî ve özel okullar, dershaneler ve anaokullarının yoğunluk haritası; otoyol çevresinde yüksek kentleşme etkisi" width="1379" height="770" loading="lazy">
+                        <div class="image-overlay"><i class="fa-solid fa-expand" aria-hidden="true"></i> Büyüt</div>
+                    </div>
+                    <div class="gorsel-not">
+                        <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Araştırma grubu; Google Maps, İlçe MEM ve Endeksa. Eğitim tesisleri Kahramandere ve Yaka gibi otoyol bağlantılarına yakın kesimlerde kümeleniyor.</p>
+                    </div>
+                </figure>
+                <div class="card chart-card">
+                    <h2>Kamu Sağlık Personeli (65)</h2>
+                    <div class="chart-container y-250"><canvas id="saglikPersonelChart"></canvas></div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Güzelbahçe Belediyesi SAGEP raporu, s. 43–44 (kurumsal kadro tablosu).</p>
+                </div>
+                <div class="card">
+                    <h2><i class="fa-solid fa-hospital renk-kirmizi ikon-bosluk" aria-hidden="true"></i>Semt Polikliniği</h2>
+                    <div class="mini-istatistik genis">
+                        <div class="mini-ist ton-kirmizi"><div class="deger">7</div><div class="etiket">uzman hekim</div></div>
+                        <div class="mini-ist ton-kirmizi"><div class="deger">2</div><div class="etiket">pratisyen hekim</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">50–80</div><div class="etiket">acilde günlük hasta</div></div>
+                        <div class="mini-ist ton-amber"><div class="deger">300–350</div><div class="etiket">6 poliklinikte günlük hasta</div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Poliklinikte yataklı servis yok; acil birimi ve geleneksel ve tamamlayıcı tıp (GETAT) birimi var. Hastalar Güzelbahçe, Urla ve İzmir'in diğer kesimlerinden geliyor. Rapordaki sevk şemasına göre ileri bakım için Urla Devlet Hastanesi ve Dokuz Eylül Üniversitesi Hastanesi'ne yönlendiriliyor.</p>
+                </div>
+                <div class="card full-width">
+                    <h2><i class="fa-solid fa-building-flag renk-mavi ikon-bosluk" aria-hidden="true"></i>Geniş Alan Gerektiren Kullanımlar ve Plan Koşulları</h2>
+                    <div class="simge-izgarasi">
+                        <div class="simge-karti ton-yesil"><span class="sk-simge"><i class="fa-solid fa-person-military-rifle" aria-hidden="true"></i></span><div><h3>Askerî eğitim kampüsü</h3><p>Döneme göre ortalama 1.000 öğrenci ve 100 personel. Öğrenciler izinlerde ilçe merkezindeki esnafı kullanıyor; tören dönemlerinde aileler yerel otellerde kalıyor.</p></div></div>
+                        <div class="simge-karti ton-mor"><span class="sk-simge"><i class="fa-solid fa-building-columns" aria-hidden="true"></i></span><div><h3>İzmir Ekonomi Üniversitesi</h3><p>Yaka'da 22 hektarlık Güzelbahçe kampüsü yapım aşamasında. Ticarete ve hizmetlere etkisi bugün için bir beklentidir.</p></div></div>
+                        <div class="simge-karti ton-mavi"><span class="sk-simge"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i></span><div><h3>Eğitim ve kamu tesisleri</h3><p>Plan notlarında en çok 2 kat.</p></div></div>
+                        <div class="simge-karti ton-kirmizi"><span class="sk-simge"><i class="fa-solid fa-ruler-vertical" aria-hidden="true"></i></span><div><h3>Sağlık ve kamu tesisleri</h3><p>KAKS en çok 0,50; yapı yüksekliği en çok 6,80 m. Yeşil alanlardaki kapalı kullanımlarda KAKS 0,01.</p></div></div>
+                    </div>
+                    <p class="kucuk-not"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>Kurum görüşmesi ve saha gözlemleri (2026), Güzelbahçe genel plan lejant notları. Akşam zirvesinde Güzelbahçe–Narlıdere–Fahrettin Altay yönünde tek şeritli ana yol nedeniyle sık sık yoğunluk yaşanıyor.</p>
+                </div>
+            </div>
+
+            <div class="kaynak-notu">
+                <p>Veri Kaynağı: Araştırma grubunun "Residential, Employment and Production Areas · Spatial Structure" (Makroform 2026) ve "Spatial Formation, Urban History and Morphology" raporları · İZKA (2014, 2021, 2023) · Coşkun Hepcan ve diğ. (2015) · Partigöç ve Tarhan (2018) · İzmir İl Tarım ve Orman Müdürlüğü (2025) · Güzelbahçe Belediyesi 2025 faaliyet raporu, SAGEP raporu ve plan notları · İBB Meclis kararları · Güzelbahçe İlçe MEM 2024–2028 Stratejik Planı · Google Earth</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/chart-config.js"></script>
+    <script src="js/mekansal-yapi.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/arama.js"></script>
+</body>
+</html>

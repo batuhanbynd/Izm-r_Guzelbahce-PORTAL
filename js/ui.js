@@ -320,7 +320,8 @@
 
     const SECICI = '.tab-pane > header, .stats-row > *, .sayfa-ici-menu, .bolum-baslik, .bolum-ust, .card, .info-card, .galeri-karti, .tablo-kutu, ' +
         '.kpi, .servis-karti, .simge-karti, .zaman-cizelgesi > li, .bant-listesi > li, .akis-adim, .mini-istatistik > .mini-ist, ' +
-        '.vitrin-3b, .giris-ust > *, .kaynak-notu, .sira-yatay > li, .ro-satir > *, .cz-olay, .cz-yil, .harita-figur, .collab-card';
+        '.vitrin-3b, .giris-ust > *, .kaynak-notu, .sira-yatay > li, .ro-satir > *, .cz-olay, .cz-yil, .harita-figur, .collab-card, ' +
+        '.alinti-karti, .risk-ogesi, .gorusme-karti, .karakter-seridi > div, .hafta-takvimi > div, .harita-gezgini, .zaman-kaydirici, .bag-agi';
     const EK = '.cift-zaman';
     const SAYAC = '.stat-value, .kpi-deger, .mini-ist .deger, .ss-deger, .sb-deger, .vk-sayi';
     const acilis = performance.now();
